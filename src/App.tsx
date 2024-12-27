@@ -1,7 +1,8 @@
-import { Box, Container, HStack, List, VStack } from "@chakra-ui/react"
+import { Box, Center, Container, HStack, List, VStack } from "@chakra-ui/react"
 import { LuCheck } from "react-icons/lu"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
+import { GolemDisplay } from "./GolemDisplay";
 
 function App() {
 
@@ -37,12 +38,13 @@ function App() {
   ]
 
   return (
-    <Container display={"grid"}>
-      <HStack>
-        <SelectableList items={inputColumnItems} h="full"></SelectableList>
-        <SelectableList items={column2ListItems} h="full"></SelectableList>
+    <Center display={"grid"}>
+      <HStack minW={"100%"}>
+        <SelectableList minW={"160px"} items={inputColumnItems} h="full"></SelectableList>
+        <SelectableList minW={"160px"} items={column2ListItems} h="full"></SelectableList>
+        <GolemDisplay selections={{}}/>
       </HStack>
-    </Container>    
+    </Center>    
   )
 }
 
