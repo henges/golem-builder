@@ -1,8 +1,24 @@
 import { ComponentProps, useEffect, useMemo, useState } from "react"
 import { Color, loadAndModifyImage } from "./helpers";
 import { Image } from "@chakra-ui/react";
+import { ExportRender } from "./ExportTypes";
 
 const basePath = "assets/Textures/";
+
+const parseColorString = (c: string) => {
+
+    if (c.length != 7 || c[0] != '#') {
+        throw new Error(`malformed color string ${c}`);
+    }
+    const cut = c.substring(1);
+    const ret: Color = {
+        r: parseInt(cut.slice(0, 2), 16),
+        g: parseInt(cut.slice(2, 4), 16),
+        b: parseInt(cut.slice(4, 6), 16),
+        a: 255
+    }
+    return ret;
+}
 
 const qudColorMap = Object.entries({
     "r": "#a64a2e",
@@ -28,19 +44,14 @@ const qudColorMap = Object.entries({
     return agg;
 },{});
 
-const parseColorString = (c: string) => {
+const parseQudColourString = (mainColour: string, detailColour?: string): [Color, Color] => {
 
-    if (c.length != 7 || c[0] != '#') {
-        throw new Error(`malformed color string ${c}`);
+    let [_, main, detail] = mainColour.match(/&(\w)(?:\^(\w))?/) || [undefined, "Y", "K"];
+
+    if (detailColour) {
+        return [qudColorMap[main], qudColorMap[detailColour]]
     }
-    const cut = c.substring(1);
-    const ret: Color = {
-        r: parseInt(cut.slice(0, 2)),
-        g: parseInt(cut.slice(2, 4)),
-        b: parseInt(cut.slice(4, 6)),
-        a: 255
-    }
-    return ret;
+    return [qudColorMap[main], qudColorMap[detail]];
 }
 
 const isMainColor = (c: Color): boolean => {
@@ -52,10 +63,10 @@ const isDetailColor = (c: Color): boolean => {
 }
 
 export interface QudSpriteRendererProps extends ComponentProps<typeof Image> {
-    img: string
+    sprite: ExportRender
 }
 
-export const QudSpriteRenderer = ({img, ...props}: QudSpriteRendererProps) => {
+export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) => {
 
     const canvas = useMemo(() => {
         return document.createElement("canvas");
@@ -63,22 +74,25 @@ export const QudSpriteRenderer = ({img, ...props}: QudSpriteRendererProps) => {
 
     const [currentImage, setCurrentImage] = useState<string>("");
 
-    const setImage = async (path: string) => {
+    const setImage = async (sprite: ExportRender) => {
 
-        const url = await loadAndModifyImage(basePath+path, (c) => {
+        const [main, detail] = parseQudColourString(sprite.mainColour, sprite.detailColour);
+        console.dir({sprite: sprite.tile, inMain: sprite.mainColour, inDetail: sprite.detailColour, main: main, detail: detail})
+
+        const url = await loadAndModifyImage(basePath+sprite.tile, (c) => {
             if (isMainColor(c)) {
-                return {r: 255, g: 255, b: 255, a: 255}
+                return main;
             } else if (isDetailColor(c)) {
-                return {r: 0, g: 0, b: 0, a: 255}
+                return detail;
             }
-            return {r: 128, g: 128, b: 128, a: 255}
+            return {r: 32, g: 32, b: 32, a: 255}
         }, canvas);
         setCurrentImage(url);
     }
 
     useEffect(() => {
-        setImage(img);
-    }, [img]);
+        setImage(sprite);
+    }, [sprite]);
 
     return <Image src={currentImage} imageRendering={"pixelated"} {...props}/>
     

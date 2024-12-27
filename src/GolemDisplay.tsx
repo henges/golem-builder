@@ -2,9 +2,11 @@ import { Center, Image, VStack } from "@chakra-ui/react";
 import { GolemSelections } from "./Types";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
+import { GolemBody } from "./ExportTypes";
 
 
 export interface GolemDisplayProps {
+    bodySelection?: GolemBody
     selections: GolemSelections
 }
 
@@ -31,7 +33,7 @@ type Mutation = {
     showLevel: boolean
 }
 
-export const GolemDisplay = ({selections}: GolemDisplayProps) => {
+export const GolemDisplay = ({selections, bodySelection}: GolemDisplayProps) => {
 
     const computeAttrsFromSelections = (s: GolemSelections) => {
 
@@ -43,7 +45,7 @@ export const GolemDisplay = ({selections}: GolemDisplayProps) => {
     return (
         <Center>
             <VStack>
-                <QudSpriteRenderer img={selections.body?.image || "Creatures/sw_golem_oddity.png"} minH={"96px"}/>
+                <QudSpriteRenderer sprite={bodySelection?.body.render || {displayName: "", tile: "Creatures/sw_golem_oddity.png", mainColour: "Y", detailColour: "K"}} minH={"96px"}/>
             </VStack>
         </Center>
     )
