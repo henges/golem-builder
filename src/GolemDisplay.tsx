@@ -1,4 +1,4 @@
-import { Center, Image, VStack } from "@chakra-ui/react";
+import { Center, VStack } from "@chakra-ui/react";
 import { GolemSelections } from "./Types";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";

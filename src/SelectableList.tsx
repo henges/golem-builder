@@ -48,7 +48,3 @@ export const SelectableList = ({items, ...listProps}: SelectableListProps) => {
     )
 
 }
-
-
-<>
-</>

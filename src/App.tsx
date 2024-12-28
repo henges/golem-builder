@@ -1,4 +1,4 @@
-import { Box, Center, Container, HStack, List, VStack } from "@chakra-ui/react"
+import { Box, Center, Container, Grid, GridItem, HStack, List, VStack } from "@chakra-ui/react"
 import { LuCheck } from "react-icons/lu"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
@@ -46,13 +46,15 @@ function App() {
   ]
 
   return (
-    <Center display={"grid"}>
-      <HStack minW={"100%"}>
-        <SelectableList minW={"160px"} items={inputColumnItems} h="full"></SelectableList>
-        <SelectableList maxH={"160px"} overflowY="auto" minW={"160px"} items={column2ListItems} h="full"></SelectableList>
-        <GolemDisplay selections={{}} bodySelection={bodySelection}/>
-      </HStack>
-    </Center>    
+    <Container h={"100vh"} p="4" /*display={"grid"}*/>
+      <Grid maxW="100%" h="100%" templateColumns="repeat(3, 1fr)" gap="6">
+        <SelectableList overflow="scroll" items={inputColumnItems}/>
+        <SelectableList overflow="scroll" items={column2ListItems}/>
+        <Center>
+          <GolemDisplay selections={{}} bodySelection={bodySelection}/>
+        </Center>
+      </Grid>
+    </Container>
   )
 }
 

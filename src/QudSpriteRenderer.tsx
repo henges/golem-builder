@@ -55,11 +55,17 @@ const parseQudColourString = (mainColour: string, detailColour?: string): [Color
 }
 
 const isMainColor = (c: Color): boolean => {
-    return c.r === c.b && c.r === c.g && c.r === 0 && c.a == 255;
+    return c.r === c.b && 
+        c.r === c.g && 
+        c.r === 0 && 
+        c.a == 255;
 }
 
 const isDetailColor = (c: Color): boolean => {
-    return c.r === c.b && c.r === c.g && c.r === 255 && c.a == 255;
+    return c.r === c.b && 
+        c.r === c.g && 
+        c.r === 255 && 
+        c.a == 255;
 }
 
 export interface QudSpriteRendererProps extends ComponentProps<typeof Image> {
@@ -74,24 +80,24 @@ export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) =>
 
     const [currentImage, setCurrentImage] = useState<string>("");
 
-    const setImage = async (sprite: ExportRender) => {
+    const getImageUrl = async (sprite: ExportRender) => {
 
         const [main, detail] = parseQudColourString(sprite.mainColour, sprite.detailColour);
-        console.dir({sprite: sprite.tile, inMain: sprite.mainColour, inDetail: sprite.detailColour, main: main, detail: detail})
-
-        const url = await loadAndModifyImage(basePath+sprite.tile, (c) => {
+        return await loadAndModifyImage(basePath+sprite.tile, (c) => {
             if (isMainColor(c)) {
                 return main;
             } else if (isDetailColor(c)) {
                 return detail;
             }
-            return {r: 32, g: 32, b: 32, a: 255}
+            return {r: 32, g: 32, b: 32, a: 0}
         }, canvas);
-        setCurrentImage(url);
     }
 
     useEffect(() => {
-        setImage(sprite);
+        let cancelled = false;
+
+        getImageUrl(sprite).then((url) => {if (!cancelled) {setCurrentImage(url)}});
+        return () => {cancelled = true;}
     }, [sprite]);
 
     return <Image src={currentImage} imageRendering={"pixelated"} {...props}/>
