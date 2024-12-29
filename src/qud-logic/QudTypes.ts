@@ -1,3 +1,5 @@
+import { DefaultStat, Stat, ValueStat } from "./Stat"
+
 export interface QudObjectProperties {
     physics: QudPhysics
     attributes: QudAttributes
@@ -7,57 +9,57 @@ export interface QudObjectProperties {
 export const DefaultQudObjectProperties = (): QudObjectProperties => {
     return {
         physics: {
-            level: 0,
-            hp: "",
-            av: "",
-            dv: "",
-            quickness: "",
-            moveSpeed: "",
-            ma: "",
-            xp: "",
-            xpValue: "",
+            level: DefaultStat(),
+            hp: DefaultStat(),
+            av: DefaultStat(),
+            dv: DefaultStat(),
+            quickness: DefaultStat(),
+            moveSpeed: DefaultStat(),
+            ma: DefaultStat(),
+            xp: DefaultStat(),
+            xpValue: DefaultStat(),
         },
         attributes: {
-            strength: "",
-            agility: "",
-            toughness: "",
-            intelligence: "",
-            willpower: "",
-            ego: "",
+            strength: DefaultStat(),
+            agility: DefaultStat(),
+            toughness: DefaultStat(),
+            intelligence: DefaultStat(),
+            willpower: DefaultStat(),
+            ego: DefaultStat(),
         },
         resistances: {
-            heat: "",
-            cold: "",
-            acid: "",
-            electric: ""
+            heat: DefaultStat(),
+            cold: DefaultStat(),
+            acid: DefaultStat(),
+            electric: DefaultStat()
         }
     }
 }
 
 export interface QudPhysics {
-    level: number
-    hp: string
-    av: string
-    dv: string
-    quickness: string
-    moveSpeed: string
-    ma: string
-    xp: string
-    xpValue: string
+    level: ValueStat
+    hp: Stat
+    av: Stat
+    dv: Stat
+    quickness: Stat
+    moveSpeed: Stat
+    ma: Stat
+    xp: Stat
+    xpValue: Stat
 }
 
 export interface QudAttributes {
-    strength: string
-    agility: string
-    toughness: string
-    intelligence: string
-    willpower: string
-    ego: string
+    strength: Stat
+    agility: Stat
+    toughness: Stat
+    intelligence: Stat
+    willpower: Stat
+    ego: Stat
 }
 
 export interface QudResistances {
-    heat: string
-    cold: string
-    acid: string
-    electric: string
+    heat: Stat
+    cold: Stat
+    acid: Stat
+    electric: Stat
 }

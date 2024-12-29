@@ -4,7 +4,8 @@ import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { GolemBody } from "./ExportTypes";
 import { DefaultQudObjectProperties, QudAttributes, QudPhysics, QudResistances } from "./qud-logic/QudTypes";
-import { ProcessStat } from "./qud-logic/Stat";
+import { BoostStat, FormatStat, IncrementStat, NewValueStat, ProcessStat } from "./qud-logic/Stat";
+import { GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 
 
 export interface GolemDisplayProps {
@@ -27,7 +28,7 @@ export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
         const levelVal = parseInt(level.value);
         for (const stat of bodySelection.body.stats) {
             if (stat.name === "Level") {
-                ret.physics.level = levelVal;
+                ret.physics.level = NewValueStat(level.value);
                 continue;
             }
             const result = ProcessStat(levelVal, stat);
@@ -35,7 +36,7 @@ export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
                 // TODO: there are more - check if we need them.
                 case "Hitpoints": ret.physics.hp = result; break;
                 case "AV": ret.physics.av = result; break;
-                case "DV": ret.physics.av = result; break;
+                case "DV": ret.physics.dv = result; break;
                 case "Strength": ret.attributes.strength = result; break;
                 case "Agility": ret.attributes.agility = result; break;
                 case "Toughness": ret.attributes.toughness = result; break;
@@ -54,6 +55,10 @@ export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
             }
         }
         console.log(ret);
+        
+        IncrementStat(ret.physics.av, 10);
+        BoostStat(ret.attributes.strength, 3);
+        BoostStat(ret.attributes.toughness, 2);
         return ret;
     }
 
@@ -64,16 +69,21 @@ export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
     const statDisplay = stats === null ? null : (
     <>
         <VStack>
-            <Text>Level: {stats.physics.level}</Text>
+            <Text>Level: {FormatStat(stats.physics.level)}</Text>
             <HStack>
-                <Text>Strength: {stats.attributes.strength}</Text>
-                <Text>Agility: {stats.attributes.agility}</Text>
-                <Text>Toughness: {stats.attributes.toughness}</Text>
+                <Text>♥ HP: {FormatStat(stats.physics.hp)}</Text>
+                <Text>◆ AV: {FormatStat(stats.physics.av)}</Text>
+                <Text>○ DV: {FormatStat(stats.physics.dv)}</Text>
+                </HStack>
+            <HStack>
+                <Text>Strength: {FormatStat(stats.attributes.strength)}</Text>
+                <Text>Agility: {FormatStat(stats.attributes.agility)}</Text>
+                <Text>Toughness: {FormatStat(stats.attributes.toughness)}</Text>
             </HStack>
             <HStack>
-                <Text>Intelligence: {stats.attributes.intelligence}</Text>
-                <Text>Willpower: {stats.attributes.willpower}</Text>
-                <Text>Ego: {stats.attributes.ego}</Text>
+                <Text>Intelligence: {FormatStat(stats.attributes.intelligence)}</Text>
+                <Text>Willpower: {FormatStat(stats.attributes.willpower)}</Text>
+                <Text>Ego: {FormatStat(stats.attributes.ego)}</Text>
             </HStack>
         </VStack>
     </>)
@@ -84,6 +94,7 @@ export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
                 <QudSpriteRenderer sprite={bodySelection?.body.render || {displayName: "", tile: "Creatures/sw_golem_oddity.png", mainColour: "Y", detailColour: "K"}} minH={"96px"}/>
                 <Text>{bodySelection?.body.render.displayName || "golem oddity"}</Text>
                 {statDisplay}
+                {GetBodySpecialPropertiesElement(bodySelection)}
             </VStack>
         </Center>
     )

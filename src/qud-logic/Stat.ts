@@ -1,19 +1,101 @@
 import { ExportStat } from "../ExportTypes";
 
-export const ProcessStat = (level: number, stat: ExportStat) => {
+export const DefaultStat = (): ValueStat => {
+    return {type: "VALUE", value: 0}
+}
+
+export type Stat = ValueStat | RangeStat;
+
+export type BaseStat = {
+    // name: string
+    type: "VALUE" | "RANGE"
+}
+
+export type ValueStat = BaseStat & {
+    type: "VALUE"
+    value: number
+}
+export type RangeStat = BaseStat & {
+    type: "RANGE"
+    low: number
+    high: number
+}
+
+export interface StatDefinition {
+    name: string,
+    type: "SVALUE" | "STATIC",
+    value: string
+    min: number
+    max: number
+    sValue?: string
+    boost?: string
+}
+
+export const IncrementStat = (s: Stat, inc: number) => {
+    switch (s.type) {
+        case "VALUE": {
+            s.value += inc;
+            return;
+        }
+        case "RANGE": {
+            s.low += inc;
+            s.high += inc;
+            return;
+        }
+    }
+}
+
+export const BoostStat = (s: Stat, boost: string | number) => {
+
+    switch (s.type) {
+        case "VALUE": {
+            s.value = BoostStatValue(s.value, boost);
+            return;
+        }
+        case "RANGE": {
+            s.low = BoostStatValue(s.low, boost);
+            s.high = BoostStatValue(s.high, boost);
+            return;
+        }
+    }
+}
+
+export const FormatStat = (s: Stat): string => {
+    switch (s.type) {
+        case "VALUE": return s.value.toString();
+        case "RANGE": return `${s.low}-${s.high}`;
+    }
+}
+
+export const ProcessStat = (level: number, stat: StatDefinition): Stat => {
 
     switch (stat.type) {
-        case "STATIC": return stat.value;
+        case "STATIC": return NewValueStat(stat.value);
         case "SVALUE": return ProcessSValue(level, stat);
     }
 }
 
-const ProcessSValue = (level: number, stat: ExportStat) => {
+const numberise = (val: string | number): number => {
+    if (typeof(val) === "string") {
+        return parseInt(val);
+    } 
+    return val;
+}
+
+export const NewValueStat = (/*name: string,*/ val: string | number) => {
+    return {/*name: name, */type: "VALUE" as const, value: numberise(val)};
+}
+
+const rangeStat = (name: string, low: string|number, high: string|number) => {
+    return {name: name, type: "RANGE" as const, low: numberise(low), high: numberise(high)};
+}
+
+const ProcessSValue = (level: number, stat: StatDefinition) => {
 
     const t = level/5+1;
     const sValue = stat.sValue!;
     if (sValue == "*XP") {
-        return (level / 2 * 50).toString();
+        return NewValueStat(/*stat.name, */level / 2 * 50);
     }
     else {
         let valueMin = 0;
@@ -63,19 +145,27 @@ const ProcessSValue = (level: number, stat: ExportStat) => {
             }
             const [low, high] = GetLowAndHighRolls(dice);
             valueMin += low;
-            valueMin += high;
+            valueMax += high;
         }
         if (stat.boost) {
-            const boostVal = parseInt(stat.boost);
-            const mult = boostVal > 0 ? 0.25 : 0.2;
-            valueMin += Math.ceil(valueMin * mult * boostVal);
-            valueMax += Math.ceil(valueMax * mult * boostVal);
+            valueMin = BoostStatValue(valueMin, stat.boost)
+            valueMax = BoostStatValue(valueMax, stat.boost)
         }
-        console.log(stat.min, stat.max);
         const finalValueMin = Constrain(stat, Math.min(valueMin, valueMax));
         const finalValueMax = Constrain(stat, Math.max(valueMin, valueMax));
-        return `${finalValueMin}-${finalValueMax}`;
+        if (finalValueMin === finalValueMax) {
+            return NewValueStat(finalValueMin);
+        }
+
+        return rangeStat(stat.name, finalValueMin, finalValueMax);
     }
+}
+
+const BoostStatValue = (v: number, boost: string | number): number => {
+
+    let boostVal = numberise(boost);
+    const mult = boostVal > 0 ? 0.25 : 0.2;
+    return v += Math.ceil(v * mult * boostVal);
 }
 
 const Constrain = (stat: ExportStat, val: number): number => {

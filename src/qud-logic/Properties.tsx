@@ -20,9 +20,9 @@ const FormatMutation = (m: ExportMutation) => {
     return `${m.name}${m.showLevel && m.level ? ` ${m.level}` : ""}`;
 }
 
-export const GetBodySpecialPropertiesElement = (g: GolemBody) => {
+export const GetBodySpecialPropertiesElement = (g?: GolemBody) => {
 
-    if (!BodyHasSpecialProperties(g)) {
+    if (!g || !BodyHasSpecialProperties(g)) {
         return null;
     }
     return (
