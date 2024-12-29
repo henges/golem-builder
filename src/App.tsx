@@ -51,7 +51,7 @@ function App() {
         <SelectableList overflow="scroll" items={inputColumnItems}/>
         <SelectableList overflow="scroll" items={column2ListItems}/>
         <Center>
-          <GolemDisplay selections={{}} bodySelection={bodySelection}/>
+          <GolemDisplay bodySelection={bodySelection}/>
         </Center>
       </Grid>
     </Container>
