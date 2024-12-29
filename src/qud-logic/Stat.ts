@@ -35,7 +35,7 @@ export const GetStatAverage = (s: Stat): number => {
             return s.value;
         }
         case "RANGE": {
-            return s.low+s.high/2;
+            return Math.floor((s.low+s.high)/2);
         }
     }
 }
@@ -66,6 +66,13 @@ export const BoostStat = (s: Stat, boost: string | number) => {
             s.high = BoostStatValue(s.high, boost);
             return;
         }
+    }
+}
+
+export const FormatMoveSpeed = (s: Stat): string => {
+    switch (s.type) {
+        case "VALUE": return (100 - s.value + 100).toString();
+        case "RANGE": return `${(100 - s.low + 100)}-${(100 - s.high + 100)}`;
     }
 }
 

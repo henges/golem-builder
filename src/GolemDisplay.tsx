@@ -1,11 +1,9 @@
 import { Center, VStack, Text, HStack } from "@chakra-ui/react";
-import { GolemSelections } from "./Types";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { GolemBody } from "./ExportTypes";
-import { DefaultQudObjectProperties, QudAttributes, QudPhysics, QudResistances } from "./qud-logic/QudTypes";
-import { BoostStat, FormatStat, IncrementStat, NewValueStat, ProcessStat } from "./qud-logic/Stat";
-import { GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
+import { ApplyGolemBodySelection, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 
 
 export interface GolemDisplayProps {
@@ -18,47 +16,8 @@ export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
         if (!bodySelection) {
             return null;
         }
-        const ret = DefaultQudObjectProperties();
-
-        const level = bodySelection.body.stats.find(v => v.name === "Level");
-        if (!level) {
-            console.log(`No level for body selection ${bodySelection.body.id}`);
-            return null;
-        }
-        const levelVal = parseInt(level.value);
-        for (const stat of bodySelection.body.stats) {
-            if (stat.name === "Level") {
-                ret.physics.level = NewValueStat(level.value);
-                continue;
-            }
-            const result = ProcessStat(levelVal, stat);
-            switch (stat.name) {
-                // TODO: there are more - check if we need them.
-                case "Hitpoints": ret.physics.hp = result; break;
-                case "AV": ret.physics.av = result; break;
-                case "DV": ret.physics.dv = result; break;
-                case "Strength": ret.attributes.strength = result; break;
-                case "Agility": ret.attributes.agility = result; break;
-                case "Toughness": ret.attributes.toughness = result; break;
-                case "Intelligence": ret.attributes.intelligence = result; break;
-                case "Willpower": ret.attributes.willpower = result; break;
-                case "Ego": ret.attributes.ego = result; break;
-                case "Speed": ret.physics.quickness = result; break;
-                case "MoveSpeed": ret.physics.moveSpeed = result; break;
-                case "XP": ret.physics.xp = result; break;
-                case "XPValue": ret.physics.xpValue = result; break;
-                case "MA": ret.physics.ma = result; break;
-                case "HeatResistance": ret.resistances.heat = result; break;
-                case "ColdResistance": ret.resistances.cold = result; break;
-                case "ElectricResistance": ret.resistances.electric = result; break;
-                case "AcidResistance": ret.resistances.acid = result; break;
-            }
-        }
-        console.log(ret);
-        
-        IncrementStat(ret.physics.av, 10);
-        BoostStat(ret.attributes.strength, 3);
-        BoostStat(ret.attributes.toughness, 2);
+        const ret = ComputeQudObjectProperties(bodySelection.body);
+        ApplyGolemBodySelection(ret);
         return ret;
     }
 
@@ -74,6 +33,8 @@ export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
                 <Text>♥ HP: {FormatStat(stats.physics.hp)}</Text>
                 <Text>◆ AV: {FormatStat(stats.physics.av)}</Text>
                 <Text>○ DV: {FormatStat(stats.physics.dv)}</Text>
+                <Text>QN: {FormatStat(stats.physics.quickness)}</Text>
+                <Text>MV: {FormatMoveSpeed(stats.physics.moveSpeed)}</Text>
                 </HStack>
             <HStack>
                 <Text>Strength: {FormatStat(stats.attributes.strength)}</Text>
