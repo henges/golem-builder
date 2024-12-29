@@ -44,7 +44,8 @@ export type ExportStat = {
 export type ExportMutation = {
     name: string,
     level: string,
-    showLevel: boolean
+    showLevel: boolean,
+    defect: boolean
 }
 
 export type ExportRender = {

@@ -1,11 +1,11 @@
-import { Box, Center, Container, Grid, GridItem, HStack, List, VStack } from "@chakra-ui/react"
-import { LuCheck } from "react-icons/lu"
+import { Center, Container, Grid } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemDataStore } from "./stores/GolemDataStore";
-import { shallow, useShallow } from "zustand/shallow";
+import { useShallow } from "zustand/shallow";
 import { GolemBody } from "./ExportTypes";
+import { GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 
 function App() {
 
@@ -15,11 +15,16 @@ function App() {
 
   const [bodySelection, setBodySelection] = useState<GolemBody>();
 
-  const bodyListItems: SelectableListItem[] = useMemo(() => {
+  const bodyListItems = useMemo<SelectableListItem[]>(() => {
     return Object.values(golemData.bodies)
-      .map(b => ({name: b.body.render.displayName, onSelect: () => {
-        setBodySelection(b);
-      }}));
+      .map(b => (
+        {
+          name: b.body.render.displayName, 
+          more: GetBodySpecialPropertiesElement(b),
+          onSelect: () => {
+            setBodySelection(b);
+          }
+        }));
   }, [ready, golemData]);
 
   const inputColumnItems: SelectableListItem[] = useMemo(() => [

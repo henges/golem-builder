@@ -1,9 +1,10 @@
 import { Box, List } from "@chakra-ui/react"
-import { useState } from "react"
-import { LuCheck, LuSquare, LuSquareCheck, LuSquareDashed } from "react-icons/lu"
+import React, { useState } from "react"
+import { LuSquare, LuSquareCheck } from "react-icons/lu"
 
 export interface SelectableListItem {
     name: string    
+    more?: React.ReactNode
     onSelect?: () => void
 }
 
@@ -40,7 +41,9 @@ export const SelectableList = ({items, ...listProps}: SelectableListProps) => {
                         </List.Indicator>
                         <Box>
                             {li.name}
+                            {li.more}
                         </Box>
+
                     </List.Item>
                 )
             })}

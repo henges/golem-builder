@@ -17,6 +17,6 @@ export const useGolemDataStore = create<GolemStore>((set) => {
     load().then((r) => set({ready: true, data: r}));
     return {
         ready: false,
-        data: {bodies: {}}
+        data: {bodies: {}, mutations: {}}
     }
 });
