@@ -1,5 +1,3 @@
-import { ExportStat } from "../ExportTypes";
-
 export const DefaultStat = (): ValueStat => {
     return {type: "VALUE", value: 0}
 }
@@ -25,10 +23,21 @@ export interface StatDefinition {
     name: string,
     type: "SVALUE" | "STATIC",
     value: string
-    min: number
-    max: number
+    min: number | string
+    max: number | string
     sValue?: string
     boost?: string
+}
+
+export const GetStatAverage = (s: Stat): number => {
+    switch (s.type) {
+        case "VALUE": {
+            return s.value;
+        }
+        case "RANGE": {
+            return s.low+s.high/2;
+        }
+    }
 }
 
 export const IncrementStat = (s: Stat, inc: number) => {
@@ -168,9 +177,9 @@ const BoostStatValue = (v: number, boost: string | number): number => {
     return v += Math.ceil(v * mult * boostVal);
 }
 
-const Constrain = (stat: ExportStat, val: number): number => {
+const Constrain = (stat: StatDefinition, val: number): number => {
 
-    return Math.min(stat.max, Math.max(stat.min, val))
+    return Math.min(numberise(stat.max), Math.max(numberise(stat.min), val))
 }
 
 const dieRegex = /(?<count>\d+)d?(?<dieSize>\d)?(?<modOp>[+-])?(?<mod>\d+)?/;
