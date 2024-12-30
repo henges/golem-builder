@@ -4,6 +4,7 @@ import { ExportObject, GolemBody } from "./ExportTypes";
 import { Box, VStack, Text, Grid, GridItem } from "@chakra-ui/react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { Tooltip } from "./components/ui/tooltip";
+import { applyQudShader } from "./Colours";
 
 const conjugate = (s: string, count: number) => {
 
@@ -33,7 +34,7 @@ export const GolemVariantSelection = () => {
     }
 
     const exportObjectToDisplay = (prov: ExportObject) => {
-        return  <Tooltip content={prov.render.displayName} openDelay={100} closeDelay={100}>
+        return  <Tooltip content={applyQudShader(prov.render.displayName)} openDelay={100} closeDelay={100}>
             <QudSpriteRenderer w="16px" h="24px" display={"inline"} sprite={prov.render}/>
         </Tooltip>
     }

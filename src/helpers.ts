@@ -1,9 +1,4 @@
-export type Color = {
-  r: number;
-  g: number;
-  b: number;
-  a: number;
-};
+import { Color } from "./Colours";
 
 export const loadAndModifyImage = async (
   imageUrl: string,
