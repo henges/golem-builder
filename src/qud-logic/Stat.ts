@@ -29,6 +29,53 @@ export interface StatDefinition {
     boost?: string
 }
 
+export type Modifier = Stat;
+
+export const GetModified = (s: Stat, m: Modifier): Stat => {
+    switch (s.type) {
+        case "VALUE": {
+            switch (m.type) {
+                case "VALUE": {
+                    return NewValueStat(s.value+m.value);
+                }
+                case "RANGE": {
+                    return rangeStat(s.value+m.low, s.value+m.high);
+                }
+            }
+        }
+        case "RANGE": {
+            switch (m.type) {
+                case "VALUE": {
+                    return rangeStat(s.low+m.value, s.high+m.value);
+                }
+                case "RANGE": {
+                    return rangeStat(s.low+m.low, s.low+m.high);
+                }
+            }
+        }
+    }
+}
+
+export const GetModifier = (s: Stat): Modifier => {
+    switch (s.type) {
+        case "VALUE": {
+            return {
+                type: "VALUE",
+                value: computeModifier(s.value)
+            };
+        }
+        case "RANGE": {
+            return {
+                type: "RANGE",
+                low: computeModifier(s.low),
+                high: computeModifier(s.high),
+            };
+        }
+    }
+}
+
+const computeModifier = (v: number) => Math.floor((v-16)*0.5);
+
 export const GetStatAverage = (s: Stat): number => {
     switch (s.type) {
         case "VALUE": {
@@ -102,8 +149,8 @@ export const NewValueStat = (/*name: string,*/ val: string | number) => {
     return {/*name: name, */type: "VALUE" as const, value: numberise(val)};
 }
 
-const rangeStat = (name: string, low: string|number, high: string|number) => {
-    return {name: name, type: "RANGE" as const, low: numberise(low), high: numberise(high)};
+const rangeStat = (low: string|number, high: string|number) => {
+    return {type: "RANGE" as const, low: numberise(low), high: numberise(high)};
 }
 
 const ProcessSValue = (level: number, stat: StatDefinition) => {
@@ -173,7 +220,7 @@ const ProcessSValue = (level: number, stat: StatDefinition) => {
             return NewValueStat(finalValueMin);
         }
 
-        return rangeStat(stat.name, finalValueMin, finalValueMax);
+        return rangeStat(finalValueMin, finalValueMax);
     }
 }
 

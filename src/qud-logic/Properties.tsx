@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import { ExportGolem, ExportMutation, GolemBody } from "../ExportTypes";
 import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
-import { BoostStat, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat } from "./Stat";
+import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat } from "./Stat";
 
 const BodyHasSpecialProperties = (g: GolemBody) => {
     return g.body.mutations.length > 0 || g.body.skills.length > 0 || g.body.flags.mentalShield;
@@ -62,6 +62,13 @@ export const ApplyGolemBodySelection = (props: QudObjectProperties) => {
 
 export const ApplyStandardModifiers = (props: QudObjectProperties) => {
 
+    // Base DV is 6
+    IncrementStat(props.physics.dv, 6); 
+    // DV is modified by agility mod
+    props.physics.dv = GetModified(props.physics.dv, GetModifier(props.attributes.agility));
+    // Base MA is 4
+    IncrementStat(props.physics.ma, 4);
+    props.physics.ma = GetModified(props.physics.ma, GetModifier(props.attributes.willpower));
 }
 
 const GetBodyInterestingStats = (g: GolemBody) => {
@@ -78,7 +85,7 @@ const GetBodyInterestingStats = (g: GolemBody) => {
             ret.push(`${v>0?"+":""}${v} ${name}`);
         }
     }
-    const checkAttribute = (s: Stat, name: string, veryLow: number, low: number, high: number, veryHigh: number) => {
+    const determineStatCategory = (s: Stat, name: string, veryLow: number, low: number, high: number, veryHigh: number) => {
         const v = GetStatAverage(s);
         const formatted = s.type === "VALUE" ? `(${v})` : `(avg ${v})`;
         if (v <= veryLow) {
@@ -91,17 +98,23 @@ const GetBodyInterestingStats = (g: GolemBody) => {
             ret.push(`High ${name} ${formatted}`)
         }
     }
+    determineStatCategory(props.attributes.strength, "Strength", 10, 18, 50, 70);
+    determineStatCategory(props.attributes.agility, "Agility", 10, 18, 50, 70);
+    determineStatCategory(props.attributes.toughness, "Toughness", 10, 18, 50, 70);
+
+    determineStatCategory(props.attributes.intelligence, "Intelligence", 9, 15, 30, 50);
+    determineStatCategory(props.attributes.willpower, "Willpower", 9, 15, 30, 50);
+    determineStatCategory(props.attributes.ego, "Ego", 9, 15, 30, 50);
+
     interestingIfNotEqual(props.physics.av, "AV", 10);
     interestingIfNotEqual(props.physics.dv, "DV", 0);
     interestingIfNotEqual(props.physics.quickness, "Quickness", 100);
     interestingIfNotEqual(props.physics.moveSpeed, "Move Speed", 100, (v) => 100-v);
-    checkAttribute(props.attributes.strength, "Strength", 10, 18, 50, 70);
-    checkAttribute(props.attributes.agility, "Agility", 10, 18, 50, 70);
-    checkAttribute(props.attributes.toughness, "Toughness", 10, 18, 50, 70);
 
-    checkAttribute(props.attributes.intelligence, "Intelligence", 10, 15, 50, 70);
-    checkAttribute(props.attributes.willpower, "Willpower", 10, 15, 50, 70);
-    checkAttribute(props.attributes.ego, "Ego", 10, 15, 50, 70);
+    interestingIfNotEqual(props.resistances.heat, "Heat Resist", 0);
+    interestingIfNotEqual(props.resistances.cold, "Cold Resist", 0);
+    interestingIfNotEqual(props.resistances.acid, "Acid Resist", 0);
+    interestingIfNotEqual(props.resistances.electric, "Electric Resist", 0);
     // props.attributes.
     return ret;
 }
