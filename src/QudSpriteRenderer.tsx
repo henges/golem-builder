@@ -20,6 +20,11 @@ const parseColorString = (c: string) => {
     return ret;
 }
 
+const formatColor = (c: Color) => {
+
+    return `#${c.r.toString(16)}${c.g.toString(16)}${c.b.toString(16)}`
+}
+
 const qudColorMap = Object.entries({
     "r": "#a64a2e",
     "R": "#d74200",
@@ -46,13 +51,17 @@ const qudColorMap = Object.entries({
 
 const parseQudColourString = (mainColour: string, detailColour?: string): [Color, Color] => {
 
-    let [_, main, detail] = mainColour.match(/&(\w)(?:\^(\w))?/) || [undefined, "Y", "K"];
+    let [_, main, detail] = mainColour?.match(/&(\w)(?:\^(\w))?/) || [undefined, "Y", "K"];
+    [main, detail] = [main || "Y", detail || "K"];
 
     if (detailColour) {
         return [qudColorMap[main], qudColorMap[detailColour]]
     }
     return [qudColorMap[main], qudColorMap[detail]];
 }
+
+// use by sw_tortoise.bmp
+const altDetailColor = parseColorString("#7B6529");
 
 const isMainColor = (c: Color): boolean => {
     return c.r === c.b && 
@@ -62,10 +71,15 @@ const isMainColor = (c: Color): boolean => {
 }
 
 const isDetailColor = (c: Color): boolean => {
-    return c.r === c.b && 
+    return (c.r === c.b && 
         c.r === c.g && 
         c.r === 255 && 
-        c.a == 255;
+        c.a == 255) || (
+        c.r == altDetailColor.r &&
+        c.g == altDetailColor.g &&
+        c.b == altDetailColor.b &&
+        c.a == 255
+    );
 }
 
 export interface QudSpriteRendererProps extends ComponentProps<typeof Image> {
@@ -82,7 +96,9 @@ export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) =>
 
     const getImageUrl = async (sprite: ExportRender) => {
 
+        console.log(`Colour string for sprite ${sprite.tile}: main ${sprite.mainColour}, detail ${sprite.detailColour}`)
         const [main, detail] = parseQudColourString(sprite.mainColour, sprite.detailColour);
+        console.log(`Resolved colours for sprite ${sprite.tile}: main ${formatColor(main)}, detail ${formatColor(detail)}`)
         return await loadAndModifyImage(basePath+sprite.tile, (c) => {
             if (isMainColor(c)) {
                 return main;

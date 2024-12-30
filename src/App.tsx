@@ -1,4 +1,4 @@
-import { Center, Container, Grid } from "@chakra-ui/react"
+import { Center, Container, Grid, GridItem } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
@@ -49,12 +49,16 @@ function App() {
 
   return (
     <Container h={"100vh"} p="4" /*display={"grid"}*/>
-      <Grid maxW="100%" h="100%" templateColumns="repeat(3, 1fr)" gap="6">
-        <SelectableList overflow="scroll" items={inputColumnItems}/>
-        <SelectableList overflow="scroll" items={column2ListItems}/>
-        <Center>
-          <GolemDisplay/>
-        </Center>
+      <Grid maxW="100%" h="100%" templateColumns="repeat(5, 1fr)" gap="6">
+        <GridItem overflow="scroll">
+          <SelectableList overflow="scroll" items={inputColumnItems}/>
+        </GridItem>
+        <GridItem colSpan={2} overflow="scroll">
+          <SelectableList overflow="scroll" items={column2ListItems}/>
+        </GridItem>
+        <GridItem colSpan={2} display="flex">
+            <GolemDisplay/>
+        </GridItem>
       </Grid>
     </Container>
   )
