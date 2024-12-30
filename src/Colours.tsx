@@ -1,5 +1,6 @@
 import React from "react";
 import {Text} from '@chakra-ui/react';
+import { QudShader } from "./ShaderData";
 
 export type Color = {
     r: number;
@@ -28,6 +29,8 @@ export const formatColor = (c: Color) => {
     return `#${c.r.toString(16)}${c.g.toString(16)}${c.b.toString(16)}`
 }
 
+type ColorAction = (s: string) => React.ReactNode;
+
 export const qudHexColorMap: Record<string, string> = {
     "r": "#a64a2e",
     "R": "#d74200",
@@ -48,6 +51,35 @@ export const qudHexColorMap: Record<string, string> = {
     "y": "#b1c9c3",
     "Y": "#ffffff"
 };
+
+const basicColourAction = (s: string, hexCode: string) => {
+
+    return <Text as="span" color={hexCode}>{s}</Text>
+}
+
+const shaderAction = (originalString: string, s: string, shader: QudShader): React.ReactNode => {
+
+    switch (shader.type) {
+        case "solid": {
+            return basicColourAction(s, qudHexColorMap[shader.pattern[0]]);
+        }
+        case "sequence": {
+            const ret = [];
+            for (let i = 0; i < s.length; i++) {
+                ret.push(basicColourAction(s[i], qudHexColorMap[shader.pattern[i%shader.pattern.length]]));
+            }
+            return ret;
+        }
+    }
+
+}
+
+export const qudColorActionMap = Object.entries(qudHexColorMap).reduce((agg: Record<string, ColorAction>, [k,v]) => { 
+    agg[k] = (s: string) => {
+        return basicColourAction(s, v);
+    };
+    return agg;
+},{});
 
 export const qudColorMap = Object.entries(qudHexColorMap).reduce((agg: Record<string, Color>, [k,v]) => { 
     agg[k] = parseColorString(v);
@@ -158,7 +190,6 @@ const newMarkupTextNode = (s: string) => {
         text: s
     }
 }
-
 
 const parseText = (text: string, pos: number, parent: MarkupControlNode) => {
   let startIndex = pos;
