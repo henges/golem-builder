@@ -2,27 +2,24 @@ import { Center, Container, Grid } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
-import { useGolemDataStore } from "./stores/GolemDataStore";
+import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
-import { GolemBody } from "./ExportTypes";
 import { GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 
 function App() {
 
-  const [ready, golemData] = useGolemDataStore(useShallow((s) => [s.ready, s.data]));
+  const [ready, golemData, setBodySelection] = useGolemStore(useShallow((s) => [s.ready, s.data, s.setBodySelection]));
 
   const [column2ListItems, setColumn2ListItems] = useState<SelectableListItem[]>([]);
 
-  const [bodySelection, setBodySelection] = useState<GolemBody>();
-
   const bodyListItems = useMemo<SelectableListItem[]>(() => {
-    return Object.values(golemData.bodies)
-      .map(b => (
+    return Object.entries(golemData.bodies)
+      .map(([k, b]) => (
         {
           name: b.body.render.displayName, 
-          more: GetBodySpecialPropertiesElement(b),
+          more: GetBodySpecialPropertiesElement(b.body),
           onSelect: () => {
-            setBodySelection(b);
+            setBodySelection(k);
           }
         }));
   }, [ready, golemData]);
@@ -56,7 +53,7 @@ function App() {
         <SelectableList overflow="scroll" items={inputColumnItems}/>
         <SelectableList overflow="scroll" items={column2ListItems}/>
         <Center>
-          <GolemDisplay bodySelection={bodySelection}/>
+          <GolemDisplay/>
         </Center>
       </Grid>
     </Container>

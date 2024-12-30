@@ -1,30 +1,37 @@
 import { Center, VStack, Text, HStack } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
-import { GolemBody } from "./ExportTypes";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
 import { ApplyGolemBodySelection, ApplyStandardModifiers, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { useGolemStore } from "./stores/GolemStore";
+import { useShallow } from "zustand/shallow";
+import { GolemBody } from "./ExportTypes";
+import { GolemVariantSelection } from "./GolemVariantSelection";
 
+export const GolemDisplay = () => {
 
-export interface GolemDisplayProps {
-    bodySelection?: GolemBody
-}
+    const [bodySelection] = useGolemStore(useShallow(s => [s.bodySelection]));
 
-export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
-
-    const computeStatsFromSelections = () => {
-        if (!bodySelection) {
-            return null;
-        }
-        const ret = ComputeQudObjectProperties(bodySelection.body);
+    const computeStatsFromSelections = (b: GolemBody) => {
+        const ret = ComputeQudObjectProperties(b.body);
         ApplyGolemBodySelection(ret);
         ApplyStandardModifiers(ret);
         return ret;
     }
 
     const stats = useMemo(() => {
-        return computeStatsFromSelections();
+        if (!bodySelection) {
+            return null;
+        }
+        return computeStatsFromSelections(bodySelection);
     }, [bodySelection]);
+
+    const getBodyRender = () => {
+        if (bodySelection) {
+            return bodySelection.body.render
+        }
+        return {displayName: "golem oddity", tile: "Creatures/sw_golem_oddity.png", mainColour: "Y", detailColour: "K"};
+    }
 
     const statDisplay = stats === null ? null : (
     <>
@@ -62,10 +69,11 @@ export const GolemDisplay = ({bodySelection}: GolemDisplayProps) => {
     return (
         <Center>
             <VStack>
-                <QudSpriteRenderer sprite={bodySelection?.body.render || {displayName: "", tile: "Creatures/sw_golem_oddity.png", mainColour: "Y", detailColour: "K"}} minH={"96px"}/>
-                <Text>{bodySelection?.body.render.displayName || "golem oddity"}</Text>
+                <QudSpriteRenderer sprite={getBodyRender()} minH={"96px"}/>
+                <Text>{getBodyRender().displayName}</Text>
                 {statDisplay}
-                {GetBodySpecialPropertiesElement(bodySelection)}
+                {GetBodySpecialPropertiesElement(bodySelection?.body)}
+                <GolemVariantSelection/>
             </VStack>
         </Center>
     )

@@ -1,10 +1,10 @@
 import { Box, Text } from "@chakra-ui/react";
-import { ExportGolem, ExportMutation, GolemBody } from "../ExportTypes";
+import { ExportGolem, ExportMutation } from "../ExportTypes";
 import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat } from "./Stat";
 
-const BodyHasSpecialProperties = (g: GolemBody) => {
-    return g.body.mutations.length > 0 || g.body.skills.length > 0 || g.body.flags.mentalShield;
+const BodyHasSpecialProperties = (g: ExportGolem) => {
+    return g.mutations.length > 0 || g.skills.length > 0 || g.flags.mentalShield;
 }
 
 const FormatMutation = (m: ExportMutation) => {
@@ -71,9 +71,9 @@ export const ApplyStandardModifiers = (props: QudObjectProperties) => {
     props.physics.ma = GetModified(props.physics.ma, GetModifier(props.attributes.willpower));
 }
 
-const GetBodyInterestingStats = (g: GolemBody) => {
+const GetBodyInterestingStats = (g: ExportGolem) => {
 
-    const props = ComputeQudObjectProperties(g.body);
+    const props = ComputeQudObjectProperties(g);
     ApplyGolemBodySelection(props);
     const ret: string[] = [];
     const interestingIfNotEqual = (s: Stat, name: string, ifNotEqual: number, format?: (v: number) => number) => {
@@ -98,13 +98,6 @@ const GetBodyInterestingStats = (g: GolemBody) => {
             ret.push(`High ${name} ${formatted}`)
         }
     }
-    determineStatCategory(props.attributes.strength, "Strength", 10, 18, 50, 70);
-    determineStatCategory(props.attributes.agility, "Agility", 10, 18, 50, 70);
-    determineStatCategory(props.attributes.toughness, "Toughness", 10, 18, 50, 70);
-
-    determineStatCategory(props.attributes.intelligence, "Intelligence", 9, 15, 30, 50);
-    determineStatCategory(props.attributes.willpower, "Willpower", 9, 15, 30, 50);
-    determineStatCategory(props.attributes.ego, "Ego", 9, 15, 30, 50);
 
     interestingIfNotEqual(props.physics.av, "AV", 10);
     interestingIfNotEqual(props.physics.dv, "DV", 0);
@@ -115,11 +108,19 @@ const GetBodyInterestingStats = (g: GolemBody) => {
     interestingIfNotEqual(props.resistances.cold, "Cold Resist", 0);
     interestingIfNotEqual(props.resistances.acid, "Acid Resist", 0);
     interestingIfNotEqual(props.resistances.electric, "Electric Resist", 0);
+
+    determineStatCategory(props.attributes.strength, "Strength", 10, 18, 50, 70);
+    determineStatCategory(props.attributes.agility, "Agility", 10, 18, 50, 70);
+    determineStatCategory(props.attributes.toughness, "Toughness", 10, 18, 50, 70);
+
+    determineStatCategory(props.attributes.intelligence, "Intelligence", 9, 15, 30, 50);
+    determineStatCategory(props.attributes.willpower, "Willpower", 9, 15, 30, 50);
+    determineStatCategory(props.attributes.ego, "Ego", 9, 15, 30, 50);
     // props.attributes.
     return ret;
 }
 
-export const GetBodySpecialPropertiesElement = (g?: GolemBody) => {
+export const GetBodySpecialPropertiesElement = (g?: ExportGolem) => {
 
     if (!g) {
         return null;
@@ -131,14 +132,13 @@ export const GetBodySpecialPropertiesElement = (g?: GolemBody) => {
     }
     return (
     <Box>
-        {/* {g.body.mutations.length === 0 ? null : g.body.mutations.map(m => {<Text>{FormatMutation(m)}</Text>})} */}
-        {g.body.mutations.length === 0 ? null : 
-            <Text>Mutations: {g.body.mutations.map(m => FormatMutation(m)).join(", ")}</Text>
+        {g.mutations.length === 0 ? null : 
+            <Text>Mutations: {g.mutations.map(m => FormatMutation(m)).join(", ")}</Text>
         }
-        {g.body.skills.length === 0 ? null : 
-            <Text>Skills: {g.body.skills.join(", ")}</Text>
+        {g.skills.length === 0 ? null : 
+            <Text>Skills: {g.skills.join(", ")}</Text>
         }
-        {!g.body.flags.mentalShield ? null : 
+        {!g.flags.mentalShield ? null : 
             <Text>Has a mental shield</Text>
         }
         {interestingStats.map(is => (<Text>{is}</Text>))}

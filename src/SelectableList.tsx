@@ -10,6 +10,7 @@ export interface SelectableListItem {
 
 export interface SelectableListProps extends List.RootProps {
     items: SelectableListItem[]
+    isSelected?: (i: SelectableListItem) => boolean;
 }
 
 export const SelectableList = ({items, ...listProps}: SelectableListProps) => {
