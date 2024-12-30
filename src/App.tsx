@@ -1,14 +1,15 @@
-import { Center, Container, Grid, GridItem } from "@chakra-ui/react"
+import { Center, Container, Grid, GridItem, Text } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { applyQudShader } from "./Colours";
 
 function App() {
 
-  const [ready, golemData, setBodySelection] = useGolemStore(useShallow((s) => [s.ready, s.data, s.setBodySelection]));
+  const [ready, golemData, exportData, setBodySelection] = useGolemStore(useShallow((s) => [s.ready, s.processedData, s.exportData, s.setBodySelection]));
 
   const [column2ListItems, setColumn2ListItems] = useState<SelectableListItem[]>([]);
 
@@ -24,6 +25,17 @@ function App() {
         }));
   }, [ready, golemData]);
 
+  const catalystListItems = useMemo<SelectableListItem[]>(() => {
+    return Object.entries(exportData.Catalysts)
+      .map(([k, b]) => (
+        {
+          name: applyQudShader(exportData.Liquids[k].name), 
+          more: b.map(e => (<Text>{e.UnitDescription}</Text>)),
+          onSelect: () => {
+          }
+        }));
+  }, [ready, golemData]);
+
   const inputColumnItems: SelectableListItem[] = useMemo(() => [
     {
       name: "body",
@@ -32,11 +44,26 @@ function App() {
       }
     }, 
     {
+      name: "catalyst",
+      onSelect: () => {
+        setColumn2ListItems(catalystListItems);
+      }
+    }, 
+    {
+      name: "atzmus"
+    }, 
+    {
+      name: "armament"
+    },
+    {
       name: "incantation",
       onSelect: () => {
         setColumn2ListItems(incantationListItems);
       }
-    }
+    }, 
+    {
+      name: "hamsa"
+    },
   ], [bodyListItems]);
 
   const incantationListItems: SelectableListItem[] = [

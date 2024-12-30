@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { LuSquare, LuSquareCheck } from "react-icons/lu"
 
 export interface SelectableListItem {
-    name: string    
+    name: React.ReactNode
     more?: React.ReactNode
     onSelect?: () => void
 }

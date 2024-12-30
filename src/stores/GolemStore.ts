@@ -1,11 +1,19 @@
 import { create } from 'zustand'
 import { GolemBody, GolemData } from '../ExportTypes';
+import { ExportData } from '../ExportData';
+
+const get = async <T>(path: string) => {
+    
+    const data = await fetch(path);
+    const json = await data.json();
+    return json as T;
+}
 
 const load = async () => {
 
-    const data = await fetch("assets/golem.json");
-    const json = await data.json();
-    return json as GolemData;
+    const golemData = await get<GolemData>("assets/golem.json");
+    const exportData = await get<ExportData>("assets/qud-export-data.json");
+    return [golemData, exportData] as const;
 }
 
 export type GolemSelectionStore = {
@@ -17,11 +25,12 @@ export type GolemSelectionStore = {
 
 type GolemStore = GolemSelectionStore & {
     ready: boolean,
-    data: GolemData
+    processedData: GolemData
+    exportData: ExportData
 }
 
 export const useGolemStore = create<GolemStore>((set, get) => {
-    load().then((r) => set({ready: true, data: r}));
+    load().then(([p, e]) => set({ready: true, processedData: p, exportData: e}));
     return {
         bodySelectionId: "",
         bodySelection: undefined,
@@ -30,9 +39,10 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             if (!get().ready) {
                 return;
             }
-            set({bodySelectionId: s, bodySelection: get().data.bodies[s]})
+            set({bodySelectionId: s, bodySelection: get().processedData.bodies[s]})
         },
         ready: false,
-        data: {bodies: {}, mutations: {}}
+        processedData: {bodies: {}, mutations: {}},
+        exportData: {Liquids: {}, Catalysts: {}, Incantations: {}, Hamsas: {}}
     }
 });

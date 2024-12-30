@@ -1,6 +1,6 @@
 import React from "react";
 import {Text} from '@chakra-ui/react';
-import { QudShader } from "./ShaderData";
+import { QudShader, textShaders } from "./ShaderData";
 
 export type Color = {
     r: number;
@@ -57,7 +57,7 @@ const basicColourAction = (s: string, hexCode: string) => {
     return <Text as="span" color={hexCode}>{s}</Text>
 }
 
-const shaderAction = (originalString: string, s: string, shader: QudShader): React.ReactNode => {
+const shaderAction = (s: string, shader: QudShader): React.ReactNode => {
 
     switch (shader.type) {
         case "solid": {
@@ -70,16 +70,44 @@ const shaderAction = (originalString: string, s: string, shader: QudShader): Rea
             }
             return ret;
         }
+        case "alternation": {
+            const ret = [];
+            for (let i = 0; i < s.length; i++) {
+                //         return new char?(this.Colors[totalPos * this.Colors.Length / totalLen]);
+                ret.push(basicColourAction(s[i], qudHexColorMap[shader.pattern[i*shader.pattern.length/s.length]]));
+            }
+            return ret;
+        }
+        case "bordered": {
+            const ret = [];
+            for (let i = 0; i < s.length; i++) {
+                if (i === 0 || i === s.length-1) {
+                    ret.push(basicColourAction(s[i], qudHexColorMap[shader.pattern[1]]));
+                } else {
+                    ret.push(basicColourAction(s[i], qudHexColorMap[shader.pattern[0]]));
+                }
+            }
+            return ret;
+        }
     }
 
 }
 
-export const qudColorActionMap = Object.entries(qudHexColorMap).reduce((agg: Record<string, ColorAction>, [k,v]) => { 
+export const qudBasicColorActionMap = Object.entries(qudHexColorMap).reduce((agg: Record<string, ColorAction>, [k,v]) => { 
     agg[k] = (s: string) => {
         return basicColourAction(s, v);
     };
     return agg;
 },{});
+
+export const qudShaderActionMap = Object.entries(textShaders).reduce((agg: Record<string, ColorAction>, [k,v]) => { 
+    agg[k] = (s: string) => {
+        return shaderAction(s, v);
+    };
+    return agg;
+},{});
+
+export const qudColorActionMap = Object.assign({}, qudBasicColorActionMap, qudShaderActionMap);
 
 export const qudColorMap = Object.entries(qudHexColorMap).reduce((agg: Record<string, Color>, [k,v]) => { 
     agg[k] = parseColorString(v);
@@ -146,12 +174,12 @@ const applyMarkupInner = (node: MarkupNode, action: string | null): React.ReactN
 }
 
 const applyAction = (text: string, action: string) => {
-    const act = qudHexColorMap[action];
+    const act = qudColorActionMap[action];
     if (!act){
         console.log(`No matching action found for ${action}`);
         return text;
     }
-    return <Text as="span" color={act}>{text}</Text>
+    return act(text);
 }
 
 export const parseMarkup = (s: string) => {

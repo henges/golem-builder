@@ -67,7 +67,7 @@ export const GolemDisplay = ({...props}: ComponentProps<typeof VStack>) => {
     </>)
 
     return (
-        <Center>
+        <Center width="100%">
             <VStack>
                 <QudSpriteRenderer sprite={getBodyRender()} minH={"96px"}/>
                 <Text>{getBodyRender().displayName}</Text>
