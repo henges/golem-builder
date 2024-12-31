@@ -1,4 +1,4 @@
-import { Center, Container, Grid, GridItem, Text } from "@chakra-ui/react"
+import { Box, Center, Container, Grid, GridItem, Text } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
@@ -35,6 +35,21 @@ function App() {
             setCatalystSelection(k);
           }
         }));
+  }, [ready, exportData]);
+
+  const atmuzListItems = useMemo<SelectableListItem[]>(() => {
+    return Object.entries(golemData.atzmuses.effects)
+      .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
+      .map(([k, b]) => (
+        {
+          name: k, 
+          more: (<Box>
+            <Text>{applyQudShader(b.anyCertainSource ? "{{g|Can be guaranteed}}" : "{{r|Can't be guaranteed}}")}</Text>
+            <Text>{applyQudShader(`{{brainbrine|${b.granters.length} possible sources}}`)}</Text>
+          </Box>),
+          onSelect: () => {
+          }
+        }));
   }, [ready, golemData]);
 
   const inputColumnItems: SelectableListItem[] = useMemo(() => [
@@ -51,7 +66,10 @@ function App() {
       }
     }, 
     {
-      name: "atzmus"
+      name: "atzmus",
+      onSelect: () => {
+        setColumn2ListItems(atmuzListItems);
+      }
     }, 
     {
       name: "armament"

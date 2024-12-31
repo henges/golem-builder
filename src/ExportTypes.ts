@@ -1,5 +1,6 @@
 export type GolemData = {
     bodies: Record<string, GolemBody>
+    atzmuses: ExportAtzmusData
 }
 
 export type GolemBody = {
@@ -56,4 +57,35 @@ export type ExportRender = {
     tile: string
     mainColour: string
     detailColour: string
+}
+
+export type ExportAtzmusData = {
+    effects: Record<string, AtzmusEffect>;
+    granters: Record<string, ExportObjectAtzmus>;
+}
+
+export type BaseAtzmus = {
+    granters: AtzmusGranter[];
+    anyCertainSource: boolean;
+}
+
+export type AtzmusEffect = AtzmusMutationGrant | AtzmusAttributeGrant;
+
+export type AtzmusMutationGrant = BaseAtzmus & {
+    type: "MUTATION";
+    mutation: ExportMutation;
+}
+
+export type AtzmusAttributeGrant = BaseAtzmus & {
+    type: "ATTRIBUTE";
+    attribute: string;
+}
+
+export type AtzmusGranter = {
+    id: string
+    certain: boolean
+}
+
+export type ExportObjectAtzmus = ExportObject & {
+    grants: ExportMutation[] | string[];
 }

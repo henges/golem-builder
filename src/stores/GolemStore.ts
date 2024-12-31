@@ -54,7 +54,7 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             set({catalystSelectionId: s, catalystSelection: get().exportData.Catalysts[s]})
         },
         ready: false,
-        processedData: {bodies: {}, mutations: {}},
+        processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}},
         exportData: {Liquids: {}, Catalysts: {}, Incantations: {}, Hamsas: {}}
     }
 });
