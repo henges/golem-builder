@@ -65,7 +65,6 @@ export type ExportAtzmusData = {
 }
 
 export type BaseAtzmus = {
-    granters: AtzmusGranter[];
     anyCertainSource: boolean;
 }
 
@@ -73,12 +72,15 @@ export type AtzmusEffect = AtzmusMutationGrant | AtzmusAttributeGrant;
 
 export type AtzmusMutationGrant = BaseAtzmus & {
     type: "MUTATION";
-    mutation: ExportMutation;
+    possibleLevels: Record<string, boolean>; // value === can be guaranteed
+    mutationName: string;
+    grantersByLevel: Record<string, AtzmusGranter[]>;
 }
 
 export type AtzmusAttributeGrant = BaseAtzmus & {
     type: "ATTRIBUTE";
     attribute: string;
+    granters: AtzmusGranter[];
 }
 
 export type AtzmusGranter = {

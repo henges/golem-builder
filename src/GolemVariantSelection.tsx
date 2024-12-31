@@ -5,14 +5,8 @@ import { Box, VStack, Text, Grid, GridItem } from "@chakra-ui/react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { Tooltip } from "./components/ui/tooltip";
 import { applyQudShader } from "./Colours";
+import { Pluralise } from "./helpers";
 
-const conjugate = (s: string, count: number) => {
-
-    if (s === "Foot" && count > 1) {
-        return "Feet"
-    }
-    return s+(count>1?"s":"");
-}
 
 export const GolemVariantSelection = () => {
 
@@ -30,7 +24,7 @@ export const GolemVariantSelection = () => {
             }
             return agg;
         }, {})
-        return Object.entries(limbCountMap).sort(([k1], [k2]) => k1.localeCompare(k2)).map(([k,v]) => `${v} ${conjugate(k,v)}`).join(", ");
+        return Object.entries(limbCountMap).sort(([k1], [k2]) => k1.localeCompare(k2)).map(([k,v]) => `${v} ${Pluralise(k,v)}`).join(", ");
     }
 
     const exportObjectToDisplay = (prov: ExportObject) => {

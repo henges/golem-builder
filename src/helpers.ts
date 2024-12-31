@@ -1,5 +1,13 @@
 import { Color } from "./Colours";
 
+export const Pluralise = (s: string, count: number) => {
+
+    if (s === "Foot" && count > 1) {
+        return "Feet"
+    }
+    return s+(count>1?"s":"");
+}
+
 export const loadAndModifyImage = async (
   imageUrl: string,
   f: (c: Color) => Color,

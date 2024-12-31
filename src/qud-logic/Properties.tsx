@@ -1,8 +1,10 @@
 import { Box, Text } from "@chakra-ui/react";
-import { ExportGolem, ExportMutation } from "../ExportTypes";
+import { AtzmusEffect, ExportGolem, ExportMutation } from "../ExportTypes";
 import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat, IncrementPercent } from "./Stat";
 import { GameObjectUnit } from "./GameObjectUnit";
+import { applyQudShader } from "../Colours";
+import { Pluralise } from "../helpers";
 
 const BodyHasSpecialProperties = (g: QudObjectProperties) => {
     return g.mutations.length > 0 || g.skills.length > 0 || 
@@ -189,6 +191,32 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
             }
         }
 
+    }
+}
+
+export interface AtzmusListElementProps {
+    effect: AtzmusEffect
+}
+
+export const AtzmusListElement = ({effect}: AtzmusListElementProps) => {
+
+    switch (effect.type) {
+        case "ATTRIBUTE": return (<Box>
+            {/* <Text>{applyQudShader(b.anyCertainSource ? "{{g|Can be guaranteed}}" : "{{r|Can't be guaranteed}}")}</Text> */}
+            <Text>{applyQudShader(`{{g|${effect.granters.length} possible ${Pluralise("source", effect.granters.length)}}}`)}</Text>
+        </Box>)
+        case "MUTATION": {
+
+            const allPossibleLevels = Object.keys(effect.possibleLevels);
+            const guaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => v).map(([k,v]) => k);
+            const nonGuaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => !v).map(([k,v]) => k);
+
+            return (<Box>
+                <Text>{applyQudShader(`{{g|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)}</Text>
+                {guaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{g|Can be guaranteed at ${Pluralise("level", guaranteeableLevels.length)} ${guaranteeableLevels.join(", ")}}}`)}</Text>}
+                {nonGuaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{r|Can't be guaranteed at ${Pluralise("level", nonGuaranteeableLevels.length)} ${nonGuaranteeableLevels.join(", ")}}}`)}</Text>}
+            </Box>)
+        }
     }
 }
 

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
-import { BuildGolemBody, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { BuildGolemBody, AtzmusListElement, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
 
 function App() {
@@ -43,10 +43,7 @@ function App() {
       .map(([k, b]) => (
         {
           name: k, 
-          more: (<Box>
-            <Text>{applyQudShader(b.anyCertainSource ? "{{g|Can be guaranteed}}" : "{{r|Can't be guaranteed}}")}</Text>
-            <Text>{applyQudShader(`{{brainbrine|${b.granters.length} possible sources}}`)}</Text>
-          </Box>),
+          more: (<AtzmusListElement effect={b}/>),
           onSelect: () => {
           }
         }));

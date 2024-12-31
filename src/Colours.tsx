@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cloneElement } from "react";
 import {Text} from '@chakra-ui/react';
 import { QudShader, textShaders } from "./ShaderData";
 
@@ -147,10 +147,17 @@ export const isDetailColor = (c: Color): boolean => {
     );
 }
 
+const simpleMarkupRegexp = /^\{\{(?<shader>\w+)\|(?<text>\w+)\}\}$/;
+
 export const applyQudShader = (s: string): React.ReactNode => {
+    const simpleMatch = s.match(simpleMarkupRegexp);
+    if (simpleMatch) {
+        return applyMarkupInner(newMarkupTextNode(simpleMatch.groups!["text"]), simpleMatch.groups!["shader"]);
+    }
 
     const markup = parseMarkup(s);
     return applyMarkup(markup);
+    return s;
 }
 
 export const applyMarkup = (root: MarkupControlNode): React.ReactNode => {
