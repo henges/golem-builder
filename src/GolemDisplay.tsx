@@ -2,20 +2,22 @@ import { Center, VStack, Text, HStack } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
-import { ApplyGolemBodySelection, ApplyStandardModifiers, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { ApplyGameObjectUnits, ApplyGolemBodySelection, ApplyStandardModifiers, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { GolemBody } from "./ExportTypes";
 import { GolemVariantSelection } from "./GolemVariantSelection";
+import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
 
 export const GolemDisplay = () => {
 
-    const [bodySelection] = useGolemStore(useShallow(s => [s.bodySelection]));
+    const [bodySelection, catalystSelection] = useGolemStore(useShallow(s => [s.bodySelection, s.catalystSelection]));
 
-    const computeStatsFromSelections = (b: GolemBody) => {
+    const computeStatsFromSelections = (b: GolemBody, catalyst: GameObjectUnit[]) => {
         const ret = ComputeQudObjectProperties(b.body);
         ApplyGolemBodySelection(ret);
         ApplyStandardModifiers(ret);
+        ApplyGameObjectUnits(ret, catalyst);
         return ret;
     }
 
@@ -23,8 +25,8 @@ export const GolemDisplay = () => {
         if (!bodySelection) {
             return null;
         }
-        return computeStatsFromSelections(bodySelection);
-    }, [bodySelection]);
+        return computeStatsFromSelections(bodySelection, catalystSelection);
+    }, [bodySelection, catalystSelection]);
 
     const getBodyRender = () => {
         if (bodySelection) {

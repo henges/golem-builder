@@ -9,7 +9,7 @@ import { applyQudShader } from "./Colours";
 
 function App() {
 
-  const [ready, golemData, exportData, setBodySelection] = useGolemStore(useShallow((s) => [s.ready, s.processedData, s.exportData, s.setBodySelection]));
+  const [ready, golemData, exportData, setBodySelection, setCatalystSelection] = useGolemStore(useShallow((s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection]));
 
   const [column2ListItems, setColumn2ListItems] = useState<SelectableListItem[]>([]);
 
@@ -31,7 +31,9 @@ function App() {
         {
           name: applyQudShader(exportData.Liquids[k].name), 
           more: b.map(e => (<Text>{e.UnitDescription}</Text>)),
-          onSelect: () => {}
+          onSelect: () => {
+            setCatalystSelection(k);
+          }
         }));
   }, [ready, golemData]);
 

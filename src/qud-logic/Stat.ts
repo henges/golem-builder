@@ -87,6 +87,20 @@ export const GetStatAverage = (s: Stat): number => {
     }
 }
 
+export const IncrementPercent = (s: Stat, pct: number) => {
+    switch (s.type) {
+        case "VALUE": {
+            s.value += (s.value*pct);
+            return;
+        }
+        case "RANGE": {
+            s.low += (s.low*pct);
+            s.high += (s.high*pct);
+            return;
+        }
+    }
+}
+
 export const IncrementStat = (s: Stat, inc: number) => {
     switch (s.type) {
         case "VALUE": {

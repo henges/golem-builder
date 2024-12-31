@@ -1,7 +1,8 @@
 import { Box, Text } from "@chakra-ui/react";
 import { ExportGolem, ExportMutation } from "../ExportTypes";
 import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
-import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat } from "./Stat";
+import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat, IncrementPercent } from "./Stat";
+import { GameObjectUnit } from "./GameObjectUnit";
 
 const BodyHasSpecialProperties = (g: ExportGolem) => {
     return g.mutations.length > 0 || g.skills.length > 0 || 
@@ -52,6 +53,9 @@ export const ComputeQudObjectProperties = (body: ExportGolem): QudObjectProperti
             case "AcidResistance": ret.resistances.acid = result; break;
         }
     }
+
+    ret.mutations.push(...body.mutations);
+    ret.skills.push(...body.skills);
     return ret;
 }
 
@@ -71,6 +75,119 @@ export const ApplyStandardModifiers = (props: QudObjectProperties) => {
     // Base MA is 4
     IncrementStat(props.physics.ma, 4);
     props.physics.ma = GetModified(props.physics.ma, GetModifier(props.attributes.willpower));
+}
+
+export const FindStat = (props: QudObjectProperties, statName: string) => {
+
+    switch (statName) {
+        case "Hitpoints": return props.physics.hp;
+        case "AV": return props.physics.av;
+        case "DV": return props.physics.dv;
+        case "Strength": return props.attributes.strength;
+        case "Agility": return props.attributes.agility;
+        case "Toughness": return props.attributes.toughness;
+        case "Intelligence": return props.attributes.intelligence;
+        case "Willpower": return props.attributes.willpower;
+        case "Ego": return props.attributes.ego;
+        case "Speed": return props.physics.quickness;
+        case "MoveSpeed": return props.physics.moveSpeed;
+        case "XP": return props.physics.xp;
+        case "XPValue": return props.physics.xpValue;
+        case "MA": return props.physics.ma;
+        case "HeatResistance": return props.resistances.heat;
+        case "ColdResistance": return props.resistances.cold;
+        case "ElectricResistance": return props.resistances.electric;
+        case "AcidResistance": return props.resistances.acid;
+    }
+}
+
+export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObjectUnit[], skipPushDescription?: boolean) => {
+
+    let appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(s);
+
+    for (const unit of units) {
+        console.log(unit)
+        switch (unit.UnitType) {
+            case "GameObjectAttributeUnit": {
+                const stat = FindStat(props, unit.Attribute);
+                if (stat) {
+                    if (unit.Percent) {
+                        IncrementPercent(stat, unit.Value/100);
+                    } else {
+                        IncrementStat(stat, unit.Value);
+                    }
+                } else {
+                    appendDescription(unit.UnitDescription);
+                }
+                break;
+            }
+            case "GameObjectBodyPartUnit": {
+                let name = unit.Type;
+                if (name === "Random") {
+                    name = "random"
+                };
+                appendDescription(`Extra ${name} slot`);
+                break;
+            }
+            case "GameObjectExperienceUnit": {
+                // Nothing uses the 'experience' property currently AFAIK
+                props.physics.level.value += unit.Levels;
+                appendDescription(unit.UnitDescription);
+                break;
+            }
+            case "GameObjectMutationUnit": {
+                let found = false;
+                for (const mut of props.mutations) {
+                    if (mut.name === unit.Name) {
+                        const lv = parseInt(mut.level || "0");
+                        mut.level = (lv+unit.Level).toString();
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    break;
+                }
+                props.mutations.push({name: unit.Name, level: unit.Level.toString(), showLevel: unit.ShouldShowLevel, defect: false})
+                break;
+            }
+            // case "GameObjectPlaceholderUnit": just a placeholder
+            // case "GameObjectRelicUnit": never actually used
+            case "GameObjectReputationUnit": { 
+                appendDescription("+1000 reputation with factions the depicted creature is a member of");
+                break;
+            }
+            case "GameObjectSaveModifierUnit": {
+                for (const immunity of props.specialProperties.saveImmunities) {
+                    if (immunity === unit.Vs) {
+                        break;
+                    }
+                } 
+                props.specialProperties.saveImmunities.push(unit.Vs);
+                break;
+            }
+            case "GameObjectUnitAggregate":
+            case "GameObjectUnitSet": {
+                ApplyGameObjectUnits(props, unit.Units, false);
+                break;
+            }
+            // these use the default
+            case "GameObjectBaetylUnit":
+            case "GameObjectCloneUnit":
+            case "GameObjectCyberneticsUnit":
+            case "GameObjectGolemQuestRandomUnit":
+            case "GameObjectMetachromeUnit": 
+            case "GameObjectPartUnit": // TODO implement this one
+            case "GameObjectSecretUnit":
+            case "GameObjectSkillUnit": // TODO implement this one
+            case "GameObjectTieredArmorUnit":
+            default: {
+                appendDescription(unit.UnitDescription);
+                break;
+            }
+        }
+
+    }
 }
 
 const GetBodyInterestingStats = (g: ExportGolem) => {
@@ -122,6 +239,13 @@ const GetBodyInterestingStats = (g: ExportGolem) => {
     return ret;
 }
 
+const saveModToDisplayName: Record<string, string> = {
+    "Move": "forced movement",
+    "Slip": "slipping",
+    "Disease": "disease",
+    "Overdosing": "overdosing",
+}
+
 export const GetBodySpecialPropertiesElement = (g?: ExportGolem) => {
 
     if (!g) {
@@ -144,7 +268,7 @@ export const GetBodySpecialPropertiesElement = (g?: ExportGolem) => {
             <Text>Has a mental shield</Text>
         }
         {g.specialProperties.saveImmunities.length === 0 ? null :  
-            g.specialProperties.saveImmunities.map(s => <Text>Immune to {s}</Text>) 
+            g.specialProperties.saveImmunities.map(s => <Text>Immune to {saveModToDisplayName[s]}</Text>) 
         }
         {g.specialProperties.refractLightChance === 0 ? null :  
             <Text>{g.specialProperties.refractLightChance}% chance to reflect light-based attacks</Text>

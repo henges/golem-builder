@@ -1,3 +1,4 @@
+import { ExportMutation } from "../ExportTypes"
 import { DefaultStat, Stat, ValueStat } from "./Stat"
 
 export interface QudObjectProperties {
@@ -5,6 +6,9 @@ export interface QudObjectProperties {
     attributes: QudAttributes
     resistances: QudResistances
     specialProperties: QudSpecialProperties
+    mutations: ExportMutation[]
+    skills: QudShortSkill[]
+    stringProperties: string[]
 }
 
 export const DefaultQudObjectProperties = (): QudObjectProperties => {
@@ -39,7 +43,10 @@ export const DefaultQudObjectProperties = (): QudObjectProperties => {
             saveImmunities: [],
             carryCapacityIncrease: 0,
             refractLightChance: 0
-        }
+        },
+        mutations: [],
+        skills: [],
+        stringProperties: []
     }
 }
 
@@ -77,3 +84,11 @@ export interface QudSpecialProperties {
     carryCapacityIncrease: number
     refractLightChance: number
 }
+
+export interface QudShortMutation {
+    name: string
+    level: number
+    showLevel: boolean
+}
+
+export type QudShortSkill = string;
