@@ -40,6 +40,6 @@ export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) =>
         return () => {cancelled = true;}
     }, [sprite]);
 
-    return <Image src={currentImage} imageRendering={"pixelated"} {...props}/>
+    return <Image src={currentImage} minH="24px" minW="16px" imageRendering={"pixelated"} {...props}/>
     
 }

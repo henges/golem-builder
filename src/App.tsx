@@ -43,7 +43,7 @@ function App() {
       .map(([k, b]) => (
         {
           name: k, 
-          more: (<AtzmusListElement effect={b}/>),
+          more: (<AtzmusListElement effect={b} granters={golemData.atzmuses.granters}/>),
           onSelect: () => {
           }
         }));
