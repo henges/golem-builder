@@ -1,7 +1,7 @@
 import { create } from 'zustand'
-import { GolemBody, GolemData } from '../ExportTypes';
+import { ExportMutation, GolemBody, GolemData } from '../ExportTypes';
 import { ExportData } from '../ExportData';
-import { GameObjectUnit } from '../qud-logic/GameObjectUnit';
+import { ConditionalGameObjectUnitGroup, GameObjectAttributeUnit, GameObjectMutationUnit, GameObjectUnit } from '../qud-logic/GameObjectUnit';
 
 const get = async <T>(path: string) => {
     
@@ -22,15 +22,46 @@ export type GolemSelectionStore = {
     bodySelection: GolemBody | undefined
     catalystSelectionId: string
     catalystSelection: GameObjectUnit[]
+    atzmusSelectionId: string
+    atzmusSelection: ConditionalGameObjectUnitGroup
     bodyVariant: number
     setBodySelection: (s: string) => void
     setCatalystSelection: (s: string) => void
+    setAtzmusSelection: (s: string) => void
 }
 
 type GolemStore = GolemSelectionStore & {
     ready: boolean,
     processedData: GolemData
     exportData: ExportData
+}
+
+const atzmusGrantsToGameObjectUnits = (grants: string[] | ExportMutation[]): ConditionalGameObjectUnitGroup => {
+
+    if (grants.length === 0) {
+        return {certain: false, units: []};
+    }
+    if (typeof grants[0] === "string") {
+        const units: GameObjectAttributeUnit[] = (grants as string[]).map(g => ({
+            UnitDescription: `+5 ${g}`,
+            UnitType: "GameObjectAttributeUnit",
+            Attribute: g,
+            Value: 5,
+            Percent: false
+        }))
+        return {certain: units.length === 1, units: units}
+    } else {
+        const units: GameObjectMutationUnit[] = (grants as ExportMutation[]).map(g => ({
+            UnitDescription: `${g.name} ${g.level}`,
+            UnitType: "GameObjectMutationUnit",
+            Class: null,
+            Name: g.name,
+            Level: parseInt(g.level || "1") || 1,
+            Enhance: true,
+            ShouldShowLevel: g.showLevel
+        }))
+        return {certain: units.length === 1, units: units}
+    }
 }
 
 export const useGolemStore = create<GolemStore>((set, get) => {
@@ -41,6 +72,8 @@ export const useGolemStore = create<GolemStore>((set, get) => {
         bodyVariant: 0,
         catalystSelectionId: "",
         catalystSelection: [],
+        atzmusSelectionId: "",
+        atzmusSelection: {certain: false, units: []},
         setBodySelection: (s) => {
             if (!get().ready) {
                 return;
@@ -52,6 +85,12 @@ export const useGolemStore = create<GolemStore>((set, get) => {
                 return;
             }
             set({catalystSelectionId: s, catalystSelection: get().exportData.Catalysts[s]})
+        },
+        setAtzmusSelection: (s) => {
+            if (!get().ready) {
+                return;
+            }
+            set({atzmusSelectionId: s, atzmusSelection: atzmusGrantsToGameObjectUnits(get().processedData.atzmuses.granters[s].grants)})
         },
         ready: false,
         processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}},

@@ -1,3 +1,8 @@
+export type ConditionalGameObjectUnitGroup = {
+    certain: boolean
+    units: GameObjectUnit[]
+}
+
 export type GameObjectUnit = GameObjectAttributeUnit |
     GameObjectBaetylUnit |
     GameObjectBodyPartUnit |

@@ -1,11 +1,12 @@
 import { Box, Text } from "@chakra-ui/react";
-import { AtzmusEffect, ExportGolem, ExportMutation, ExportObjectAtzmus } from "../ExportTypes";
+import { AtzmusEffect, AtzmusGranter, ExportGolem, ExportMutation, ExportObjectAtzmus } from "../ExportTypes";
 import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat, IncrementPercent } from "./Stat";
-import { GameObjectUnit } from "./GameObjectUnit";
+import { ConditionalGameObjectUnitGroup, GameObjectUnit } from "./GameObjectUnit";
 import { applyQudShader } from "../Colours";
 import { Pluralise } from "../helpers";
 import { QudSpriteRenderer } from "../QudSpriteRenderer";
+import { SelectableListItem } from "../SelectableList";
 
 const BodyHasSpecialProperties = (g: QudObjectProperties) => {
     return g.mutations.length > 0 || g.skills.length > 0 || 
@@ -105,6 +106,15 @@ export const FindStat = (props: QudObjectProperties, statName: string) => {
     }
 }
 
+export const ApplyConditionalGameObjectUnits = (props: QudObjectProperties, conditional: ConditionalGameObjectUnitGroup) => {
+
+    if (conditional.certain) {
+        ApplyGameObjectUnits(props, conditional.units);
+    } else {
+        props.stringProperties.push(conditional.units.map(u => u.UnitDescription).join(" OR\n"))
+    }
+}
+
 export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObjectUnit[], skipPushDescription?: boolean) => {
 
     const appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(s);
@@ -196,8 +206,81 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
 }
 
 export interface AtzmusListElementProps {
+    name: string
     effect: AtzmusEffect
     granters: Record<string, ExportObjectAtzmus>
+    showModal: (a: ExportObjectAtzmus[]) => void;
+    setSelection: (a: string) => void;
+}
+
+export const CreateAtzmusListElement = ({name, effect, granters, showModal, setSelection}: AtzmusListElementProps) => {
+
+    const base: SelectableListItem = {name: name};
+    switch (effect.type) {
+        case "ATTRIBUTE": {
+            
+            base.more = (<Box>
+                <Text>{applyQudShader(`{{g|${effect.granters.length} possible ${Pluralise("source", effect.granters.length)}}}`)}</Text>
+            </Box>)
+            base.onSelect = () => {showModal(effect.granters.map(g => granters[g.id]))}
+            return base;
+        }
+        case "MUTATION": {
+
+            const allPossibleLevels = Object.keys(effect.possibleLevels);
+            const guaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => v).map(([k,v]) => k);
+            const nonGuaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => !v).map(([k,v]) => k);
+            const possibleGrantersCountByLevel = Object.entries(effect.grantersByLevel).reduce((agg: Record<string, number>, [k, v]) => {
+                agg[k] = v.length;
+                return agg;
+            }, {});
+            const allPossibleGrantersCount = Object.values(possibleGrantersCountByLevel).reduce((agg, e) => agg+e, 0)
+            const possibleGranters = Object.values(effect.grantersByLevel).flat().map(g => granters[g.id]);
+
+            if (allPossibleLevels.length === guaranteeableLevels.length) {
+                if (allPossibleGrantersCount === 1) {
+                    const granter = granters[Object.values(effect.grantersByLevel).flat()[0].id];
+                    base.onSelect = () => {setSelection(granter.id)}
+                    base.more = (<Box>
+                            <Text>{applyQudShader(`{{g|Guaranteeable at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)},{" "}
+                            {"only granted by "}<QudSpriteRenderer display="inline" sprite={granter.render}/>{" "}{applyQudShader(granter.render.displayName)}</Text>
+                        </Box>)
+                    return base;
+                }
+
+                base.onSelect = () => {showModal(possibleGranters)};
+                base.more = (<Box>
+                    <Text>{applyQudShader(`{{g|Guaranteeable at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)},{" "}
+                        {applyQudShader(`{{O|${allPossibleGrantersCount} possible ${Pluralise("source", allPossibleGrantersCount)}}}`)}</Text>
+                </Box>)
+                return base;
+            } else if (allPossibleLevels.length === nonGuaranteeableLevels.length) {
+                if (allPossibleGrantersCount === 1) {
+                    const granter = granters[Object.values(effect.grantersByLevel).flat()[0].id];
+                    base.onSelect = () => {setSelection(granter.id)}
+                    base.more = (<Box>
+                        <Text>{applyQudShader(`{{r|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}, can't be guaranteed}}`)},{" "} 
+                            {"only granted by "}<QudSpriteRenderer display="inline" sprite={granter.render}/>{" "}{applyQudShader(granter.render.displayName)}</Text>
+                    </Box>)
+                    return base;
+                }
+                base.onSelect = () => {showModal(possibleGranters)};
+                base.more = (<Box>
+                    <Text>{applyQudShader(`{{r|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}, can't be guaranteed}}`)},{" "} 
+                    {applyQudShader(`{{O|${allPossibleGrantersCount} possible ${Pluralise("source", allPossibleGrantersCount)}}}`)}</Text>
+                    </Box>)
+                return base;
+            }
+
+            base.onSelect = () => {showModal(possibleGranters)};
+            base.more = (<Box>
+                <Text>{applyQudShader(`{{g|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)}</Text>
+                {guaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{g|Can be guaranteed at ${Pluralise("level", guaranteeableLevels.length)} ${guaranteeableLevels.map(g => `{{g|${g}}} {{O|(${possibleGrantersCountByLevel[g]})}}`).join(", ")}}}`)}</Text>}
+                {nonGuaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{r|Can't be guaranteed at ${Pluralise("level", nonGuaranteeableLevels.length)}}} ${nonGuaranteeableLevels.map(g => `{{r|${g}}} {{O|(${possibleGrantersCountByLevel[g]})}}`).join(", ")}`)}</Text>}
+            </Box>)
+            return base;
+        }
+    }
 }
 
 export const AtzmusListElement = ({effect, granters}: AtzmusListElementProps) => {
