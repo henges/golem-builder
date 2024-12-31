@@ -31,8 +31,7 @@ function App() {
         {
           name: applyQudShader(exportData.Liquids[k].name), 
           more: b.map(e => (<Text>{e.UnitDescription}</Text>)),
-          onSelect: () => {
-          }
+          onSelect: () => {}
         }));
   }, [ready, golemData]);
 

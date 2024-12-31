@@ -19,11 +19,14 @@ export type ExportGolem = ExportObject & {
     mutations: ExportMutation[]
     anatomy: ExportBodyPart[]
     skills: string[]
-    flags: ExportGolemFlags
+    specialProperties: ExportGolemSpecialProperties
 }
 
-export type ExportGolemFlags = {
+export type ExportGolemSpecialProperties = {
     mentalShield: boolean
+    saveImmunities: string[]
+    carryCapacityIncrease: number
+    refractLightChance: number
 }
 
 export type ExportBodyPart = {

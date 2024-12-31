@@ -4,7 +4,9 @@ import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat } from "./Stat";
 
 const BodyHasSpecialProperties = (g: ExportGolem) => {
-    return g.mutations.length > 0 || g.skills.length > 0 || g.flags.mentalShield;
+    return g.mutations.length > 0 || g.skills.length > 0 || 
+        g.specialProperties.mentalShield || g.specialProperties.saveImmunities.length > 0 || g.specialProperties.carryCapacityIncrease > 0 ||
+        g.specialProperties.refractLightChance > 0;
 }
 
 const FormatMutation = (m: ExportMutation) => {
@@ -138,8 +140,17 @@ export const GetBodySpecialPropertiesElement = (g?: ExportGolem) => {
         {g.skills.length === 0 ? null : 
             <Text>Skills: {g.skills.join(", ")}</Text>
         }
-        {!g.flags.mentalShield ? null : 
+        {!g.specialProperties.mentalShield ? null : 
             <Text>Has a mental shield</Text>
+        }
+        {g.specialProperties.saveImmunities.length === 0 ? null :  
+            g.specialProperties.saveImmunities.map(s => <Text>Immune to {s}</Text>) 
+        }
+        {g.specialProperties.refractLightChance === 0 ? null :  
+            <Text>{g.specialProperties.refractLightChance}% chance to reflect light-based attacks</Text>
+        }
+        {g.specialProperties.carryCapacityIncrease === 0 ? null :  
+            <Text>+{g.specialProperties.carryCapacityIncrease}% carry capacity</Text>
         }
         {interestingStats.map(is => (<Text>{is}</Text>))}
     </Box>
