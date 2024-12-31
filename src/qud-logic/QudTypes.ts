@@ -4,6 +4,7 @@ export interface QudObjectProperties {
     physics: QudPhysics
     attributes: QudAttributes
     resistances: QudResistances
+    specialProperties: QudSpecialProperties
 }
 
 export const DefaultQudObjectProperties = (): QudObjectProperties => {
@@ -32,6 +33,12 @@ export const DefaultQudObjectProperties = (): QudObjectProperties => {
             cold: DefaultStat(),
             acid: DefaultStat(),
             electric: DefaultStat()
+        },
+        specialProperties: {
+            mentalShield: false,
+            saveImmunities: [],
+            carryCapacityIncrease: 0,
+            refractLightChance: 0
         }
     }
 }
@@ -62,4 +69,11 @@ export interface QudResistances {
     cold: Stat
     acid: Stat
     electric: Stat
+}
+
+export interface QudSpecialProperties {
+    mentalShield: boolean
+    saveImmunities: string[]
+    carryCapacityIncrease: number
+    refractLightChance: number
 }

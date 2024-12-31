@@ -1,3 +1,5 @@
+import { GameObjectUnit } from "./qud-logic/GameObjectUnit"
+
 export type ExportData = {
     Liquids: Liquids
     Catalysts: Effects
@@ -13,9 +15,4 @@ export type Liquid = {
     id: string
     name: string
     colors: string[]
-}
-
-export type GameObjectUnit = {
-    UnitType: string
-    UnitDescription: string
 }

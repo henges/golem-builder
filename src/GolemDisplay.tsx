@@ -1,5 +1,5 @@
 import { Center, VStack, Text, HStack } from "@chakra-ui/react";
-import { ComponentProps, useMemo } from "react";
+import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
 import { ApplyGolemBodySelection, ApplyStandardModifiers, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
@@ -8,7 +8,7 @@ import { useShallow } from "zustand/shallow";
 import { GolemBody } from "./ExportTypes";
 import { GolemVariantSelection } from "./GolemVariantSelection";
 
-export const GolemDisplay = ({...props}: ComponentProps<typeof VStack>) => {
+export const GolemDisplay = () => {
 
     const [bodySelection] = useGolemStore(useShallow(s => [s.bodySelection]));
 

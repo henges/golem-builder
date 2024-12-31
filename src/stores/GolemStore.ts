@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { GolemBody, GolemData } from '../ExportTypes';
 import { ExportData } from '../ExportData';
+import { GameObjectUnit } from '../qud-logic/GameObjectUnit';
 
 const get = async <T>(path: string) => {
     
@@ -19,8 +20,11 @@ const load = async () => {
 export type GolemSelectionStore = {
     bodySelectionId: string
     bodySelection: GolemBody | undefined
+    catalystSelectionId: string
+    catalystSelection: GameObjectUnit[]
     bodyVariant: number
     setBodySelection: (s: string) => void
+    setCatalystSelection: (s: string) => void
 }
 
 type GolemStore = GolemSelectionStore & {
@@ -35,11 +39,19 @@ export const useGolemStore = create<GolemStore>((set, get) => {
         bodySelectionId: "",
         bodySelection: undefined,
         bodyVariant: 0,
+        catalystSelectionId: "",
+        catalystSelection: [],
         setBodySelection: (s) => {
             if (!get().ready) {
                 return;
             }
             set({bodySelectionId: s, bodySelection: get().processedData.bodies[s]})
+        },
+        setCatalystSelection: (s) => {
+            if (!get().ready) {
+                return;
+            }
+            set({catalystSelectionId: s, catalystSelection: get().exportData.Catalysts[s]})
         },
         ready: false,
         processedData: {bodies: {}, mutations: {}},
