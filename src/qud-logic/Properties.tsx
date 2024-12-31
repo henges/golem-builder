@@ -4,10 +4,10 @@ import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat, IncrementPercent } from "./Stat";
 import { GameObjectUnit } from "./GameObjectUnit";
 
-const BodyHasSpecialProperties = (g: ExportGolem) => {
+const BodyHasSpecialProperties = (g: QudObjectProperties) => {
     return g.mutations.length > 0 || g.skills.length > 0 || 
         g.specialProperties.mentalShield || g.specialProperties.saveImmunities.length > 0 || g.specialProperties.carryCapacityIncrease > 0 ||
-        g.specialProperties.refractLightChance > 0;
+        g.specialProperties.refractLightChance > 0 || g.stringProperties.length > 0;
 }
 
 const FormatMutation = (m: ExportMutation) => {
@@ -56,6 +56,7 @@ export const ComputeQudObjectProperties = (body: ExportGolem): QudObjectProperti
 
     ret.mutations.push(...body.mutations);
     ret.skills.push(...body.skills);
+    ret.specialProperties = structuredClone(body.specialProperties);
     return ret;
 }
 
@@ -103,7 +104,7 @@ export const FindStat = (props: QudObjectProperties, statName: string) => {
 
 export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObjectUnit[], skipPushDescription?: boolean) => {
 
-    let appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(s);
+    const appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(s);
 
     for (const unit of units) {
         console.log(unit)
@@ -168,7 +169,8 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
             }
             case "GameObjectUnitAggregate":
             case "GameObjectUnitSet": {
-                ApplyGameObjectUnits(props, unit.Units, false);
+                ApplyGameObjectUnits(props, unit.Units, true);
+                appendDescription(unit.UnitDescription);
                 break;
             }
             // these use the default
@@ -190,10 +192,8 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
     }
 }
 
-const GetBodyInterestingStats = (g: ExportGolem) => {
+const GetBodyInterestingStats = (props: QudObjectProperties) => {
 
-    const props = ComputeQudObjectProperties(g);
-    ApplyGolemBodySelection(props);
     const ret: string[] = [];
     const interestingIfNotEqual = (s: Stat, name: string, ifNotEqual: number, format?: (v: number) => number) => {
         if (s.type === "VALUE" && s.value !== ifNotEqual) {
@@ -244,17 +244,28 @@ const saveModToDisplayName: Record<string, string> = {
     "Slip": "slipping",
     "Disease": "disease",
     "Overdosing": "overdosing",
+    "Stuck": "becoming stuck"
 }
 
-export const GetBodySpecialPropertiesElement = (g?: ExportGolem) => {
+export const BuildGolemBody = (g?: ExportGolem) => {
+    if (!g) {
+        return undefined;
+    }
+
+    const props = ComputeQudObjectProperties(g);
+    ApplyGolemBodySelection(props);
+    return props;
+}
+
+export const GetBodySpecialPropertiesElement = (g?: QudObjectProperties) => {
 
     if (!g) {
-        return null;
+        return undefined;
     }
     const hasSpecialProperties = BodyHasSpecialProperties(g);
     const interestingStats = GetBodyInterestingStats(g);
     if (!hasSpecialProperties && interestingStats.length === 0) {
-        return null;
+        return undefined;
     }
     return (
     <Box>
@@ -275,6 +286,9 @@ export const GetBodySpecialPropertiesElement = (g?: ExportGolem) => {
         }
         {g.specialProperties.carryCapacityIncrease === 0 ? null :  
             <Text>+{g.specialProperties.carryCapacityIncrease}% carry capacity</Text>
+        }
+        {g.stringProperties.length === 0 ? null :  
+            g.stringProperties.map(s => <Text>{s}</Text>) 
         }
         {interestingStats.map(is => (<Text>{is}</Text>))}
     </Box>

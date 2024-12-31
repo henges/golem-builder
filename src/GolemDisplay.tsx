@@ -2,7 +2,7 @@ import { Center, VStack, Text, HStack } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
-import { ApplyGameObjectUnits, ApplyGolemBodySelection, ApplyStandardModifiers, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { ApplyGameObjectUnits, ApplyGolemBodySelection, ApplyStandardModifiers, BuildGolemBody, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { GolemBody } from "./ExportTypes";
@@ -74,7 +74,7 @@ export const GolemDisplay = () => {
                 <QudSpriteRenderer sprite={getBodyRender()} minH={"96px"}/>
                 <Text>{getBodyRender().displayName}</Text>
                 {statDisplay}
-                {GetBodySpecialPropertiesElement(bodySelection?.body)}
+                {GetBodySpecialPropertiesElement(stats || undefined)}
                 <GolemVariantSelection/>
             </VStack>
         </Center>

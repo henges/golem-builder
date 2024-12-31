@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
-import { GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { BuildGolemBody, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       .map(([k, b]) => (
         {
           name: b.body.render.displayName, 
-          more: GetBodySpecialPropertiesElement(b.body),
+          more: GetBodySpecialPropertiesElement(BuildGolemBody(b.body)),
           onSelect: () => {
             setBodySelection(k);
           }
