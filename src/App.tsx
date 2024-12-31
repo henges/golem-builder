@@ -37,7 +37,7 @@ function App() {
         }));
   }, [ready, exportData]);
 
-  const atmuzListItems = useMemo<SelectableListItem[]>(() => {
+  const atzmusListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(golemData.atzmuses.effects)
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
       .map(([k, b]) => (
@@ -65,7 +65,7 @@ function App() {
     {
       name: "atzmus",
       onSelect: () => {
-        setColumn2ListItems(atmuzListItems);
+        setColumn2ListItems(atzmusListItems);
       }
     }, 
     {

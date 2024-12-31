@@ -210,11 +210,28 @@ export const AtzmusListElement = ({effect}: AtzmusListElementProps) => {
             const allPossibleLevels = Object.keys(effect.possibleLevels);
             const guaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => v).map(([k,v]) => k);
             const nonGuaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => !v).map(([k,v]) => k);
+            const possibleGrantersCountByLevel = Object.entries(effect.grantersByLevel).reduce((agg: Record<string, number>, [k, v]) => {
+                agg[k] = v.length;
+                return agg;
+            }, {});
+            const allPossibleGrantersCount = Object.values(possibleGrantersCountByLevel).reduce((agg, e) => agg+e, 0)
+
+            if (allPossibleLevels.length === guaranteeableLevels.length) {
+                return (<Box>
+                    <Text>{applyQudShader(`{{g|Guaranteeable at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)},{" "}
+                        {applyQudShader(`{{O|${allPossibleGrantersCount} possible ${Pluralise("source", allPossibleGrantersCount)}}}`)}</Text>
+            </Box>)
+            } else if (allPossibleLevels.length === nonGuaranteeableLevels.length) {
+                return (<Box>
+                    <Text>{applyQudShader(`{{r|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}, can't be guaranteed}}`)},{" "} 
+                    {applyQudShader(`{{O|${allPossibleGrantersCount} possible ${Pluralise("source", allPossibleGrantersCount)}}}`)}</Text>
+                    </Box>)
+            }
 
             return (<Box>
                 <Text>{applyQudShader(`{{g|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)}</Text>
-                {guaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{g|Can be guaranteed at ${Pluralise("level", guaranteeableLevels.length)} ${guaranteeableLevels.join(", ")}}}`)}</Text>}
-                {nonGuaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{r|Can't be guaranteed at ${Pluralise("level", nonGuaranteeableLevels.length)} ${nonGuaranteeableLevels.join(", ")}}}`)}</Text>}
+                {guaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{g|Can be guaranteed at ${Pluralise("level", guaranteeableLevels.length)} ${guaranteeableLevels.map(g => `{{g|${g}}} {{O|(${possibleGrantersCountByLevel[g]})}}`).join(", ")}}}`)}</Text>}
+                {nonGuaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{r|Can't be guaranteed at ${Pluralise("level", nonGuaranteeableLevels.length)}}} ${nonGuaranteeableLevels.map(g => `{{r|${g}}} {{O|(${possibleGrantersCountByLevel[g]})}}`).join(", ")}`)}</Text>}
             </Box>)
         }
     }

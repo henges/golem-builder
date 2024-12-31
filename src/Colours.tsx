@@ -107,7 +107,7 @@ export const qudShaderActionMap = Object.entries(textShaders).reduce((agg: Recor
     return agg;
 },{});
 
-export const qudColorActionMap = Object.assign({}, qudBasicColorActionMap, qudShaderActionMap);
+export const qudColorActionMap = Object.assign({}, qudShaderActionMap, qudBasicColorActionMap);
 
 export const qudColorMap = Object.entries(qudHexColorMap).reduce((agg: Record<string, Color>, [k,v]) => { 
     agg[k] = parseColorString(v);
