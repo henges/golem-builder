@@ -79,7 +79,7 @@ export const WeaponToGameObjectUnits = (weapon: ExportObjectWeapon): GameObjectU
         Skill: weapon.skill,
         Power: "*",
     }, {
-        UnitDescription: `Has metachrome limbs`,
+        UnitDescription: `Has {{metachrome|metachrome}} limbs`,
         UnitType: "GameObjectMetachromeUnit",
         Skill: weapon.skill,
     }]
@@ -393,7 +393,7 @@ export const GetBodySpecialPropertiesElement = (g?: QudObjectProperties) => {
             <Text>+{g.specialProperties.carryCapacityIncrease}% carry capacity</Text>
         }
         {g.stringProperties.length === 0 ? null :  
-            g.stringProperties.map(s => <Text>{s}</Text>) 
+            g.stringProperties.map(s => <Text>{applyQudShader(s)}</Text>) 
         }
         {interestingStats.map(is => (<Text>{is}</Text>))}
     </Box>
