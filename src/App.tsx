@@ -1,4 +1,4 @@
-import { Box, Center, Container, Grid, GridItem, Text } from "@chakra-ui/react"
+import { Box, Center, Container, Grid, GridItem, List, ListItem, Text } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
@@ -12,8 +12,8 @@ import { QudSpriteRenderer } from "./QudSpriteRenderer";
 
 function App() {
 
-  const [ready, golemData, exportData, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection] = useGolemStore(useShallow(
-    (s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection]));
+  const [ready, golemData, exportData, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection] = useGolemStore(useShallow(
+    (s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection]));
 
   const [column2ListItems, setColumn2ListItems] = useState<SelectableListItem[]>([]);
   const [atzmusModalOpen, setAtzmusModalOpen] = useState<boolean>(false);
@@ -64,6 +64,20 @@ function App() {
         }));
   }, [ready, golemData]);
 
+  const incantationListItems = useMemo<SelectableListItem[]>(() => {
+    return Object.entries(exportData.Incantations)
+      .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
+      .filter(([k,b]) => golemData.muralCategories[k])
+      .map(([k, b]) => (
+        {
+          name: (<Text>{b.map(gou => gou.UnitDescription).join(", ")}</Text>), 
+          more: (<List.Root>{golemData.muralCategories[k].map(c => (<ListItem key={c}>{c}</ListItem>))}</List.Root>),
+          onSelect: () => {
+            setIncantationSelection(k);
+          }
+        }));
+  }, [ready, golemData, exportData]);
+
   const [atzmusSourcePickerContents, setAtzmusSourcePickerContents] = useState<ExportObjectAtzmus[]>([]);
 
   const inputColumnItems: SelectableListItem[] = useMemo(() => [
@@ -101,14 +115,6 @@ function App() {
       name: "hamsa"
     },
   ], [bodyListItems]);
-
-  const incantationListItems: SelectableListItem[] = [
-    {
-      name: "share effects of sultan mask"
-    }, {
-      name: "share effects of sultan mask 2"
-    }
-  ]
 
   return (
     <Container h={"100vh"} p="4" /*display={"grid"}*/>

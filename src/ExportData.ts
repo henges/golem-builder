@@ -3,7 +3,7 @@ import { GameObjectUnit } from "./qud-logic/GameObjectUnit"
 export type ExportData = {
     Liquids: Liquids
     Catalysts: Effects
-    Incantations: object
+    Incantations: Effects
     Hamsas: object
 }
 

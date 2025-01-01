@@ -2,6 +2,7 @@ export type GolemData = {
     bodies: Record<string, GolemBody>
     atzmuses: ExportAtzmusData
     weapons: Record<string, ExportObjectWeapon>
+    muralCategories: Record<string, string[]>
 }
 
 export type GolemBody = {

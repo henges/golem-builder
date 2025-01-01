@@ -11,15 +11,17 @@ import { ConditionalGameObjectUnitGroup, GameObjectUnit } from "./qud-logic/Game
 
 export const GolemDisplay = () => {
 
-    const [bodySelection, catalystSelection, atzmusSelection, weaponSelection] = useGolemStore(useShallow(s => [s.bodySelection, s.catalystSelection, s.atzmusSelection, s.weaponSelection]));
+    const [bodySelection, catalystSelection, atzmusSelection, weaponSelection, incantationSelection] = useGolemStore(useShallow(s => 
+        [s.bodySelection, s.catalystSelection, s.atzmusSelection, s.weaponSelection, s.incantationSelection]));
 
-    const computeStatsFromSelections = (b: GolemBody, catalyst: GameObjectUnit[], atzmus: ConditionalGameObjectUnitGroup, weapon: GameObjectUnit[]) => {
+    const computeStatsFromSelections = (b: GolemBody, catalyst: GameObjectUnit[], atzmus: ConditionalGameObjectUnitGroup, weapon: GameObjectUnit[], incantation: GameObjectUnit[]) => {
         const ret = ComputeQudObjectProperties(b.body);
         ApplyGolemBodySelection(ret);
         ApplyStandardModifiers(ret);
         ApplyGameObjectUnits(ret, catalyst);
         ApplyConditionalGameObjectUnits(ret, atzmus);
         ApplyGameObjectUnits(ret, weapon);
+        ApplyGameObjectUnits(ret, incantation);
         return ret;
     }
 
@@ -27,8 +29,8 @@ export const GolemDisplay = () => {
         if (!bodySelection) {
             return null;
         }
-        return computeStatsFromSelections(bodySelection, catalystSelection, atzmusSelection, weaponSelection);
-    }, [bodySelection, catalystSelection, atzmusSelection, weaponSelection]);
+        return computeStatsFromSelections(bodySelection, catalystSelection, atzmusSelection, weaponSelection, incantationSelection);
+    }, [bodySelection, catalystSelection, atzmusSelection, weaponSelection, incantationSelection]);
 
     const getBodyRender = () => {
         if (bodySelection) {

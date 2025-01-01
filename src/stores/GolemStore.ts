@@ -21,17 +21,20 @@ const load = async () => {
 export type GolemSelectionStore = {
     bodySelectionId: string
     bodySelection: GolemBody | undefined
+    bodyVariant: number
     catalystSelectionId: string
     catalystSelection: GameObjectUnit[]
     atzmusSelectionId: string
     atzmusSelection: ConditionalGameObjectUnitGroup
     weaponSelectionId: string
     weaponSelection: GameObjectUnit[]
-    bodyVariant: number
+    incantationSelectionId: string
+    incantationSelection: GameObjectUnit[]
     setBodySelection: (s: string) => void
     setCatalystSelection: (s: string) => void
     setAtzmusSelection: (s: string) => void
     setWeaponSelection: (s: string) => void
+    setIncantationSelection: (s: string) => void
 }
 
 type GolemStore = GolemSelectionStore & {
@@ -80,6 +83,8 @@ export const useGolemStore = create<GolemStore>((set, get) => {
         atzmusSelection: {certain: false, units: []},
         weaponSelectionId: "",
         weaponSelection: [],
+        incantationSelectionId: "",
+        incantationSelection: [],
         setBodySelection: (s) => {
             if (!get().ready) {
                 return;
@@ -104,8 +109,14 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             }
             set({weaponSelectionId: s, weaponSelection: WeaponToGameObjectUnits(get().processedData.weapons[s])})
         },
+        setIncantationSelection: (s) => {
+            if (!get().ready) {
+                return;
+            }
+            set({incantationSelectionId: s, incantationSelection: get().exportData.Incantations[s]})
+        },
         ready: false,
-        processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}},
+        processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}, muralCategories: {}},
         exportData: {Liquids: {}, Catalysts: {}, Incantations: {}, Hamsas: {}}
     }
 });
