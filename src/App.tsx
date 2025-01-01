@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
-import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits } from "./qud-logic/Properties";
+import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
 import { AtzmusSourcePicker } from "./AtzmusSourcePicker";
 import { ExportObjectAtzmus } from "./ExportTypes";
@@ -78,6 +78,16 @@ function App() {
         }));
   }, [ready, golemData, exportData]);
 
+  const hamsaListItems = useMemo<SelectableListItem[]>(() => {
+    return Object.entries(exportData.Hamsas)
+      .filter(([k, b]) => b.length > 0 && golemData.hamsas.tagToSource[k])
+      .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
+      .map(([k, b]) => CreateHamsaListElement({name: b.flatMap(gou => gou.UnitDescription.split("\n")).join(", "), granters: golemData.hamsas.tagToSource[k], allGranters: golemData.hamsas.sources, showModal: (a) => {
+        // setAtzmusSourcePickerContents(a);
+        setAtzmusModalOpen(true);
+      }, setSelection: (s) => setAtzmusSelection(s)}));
+  }, [ready, golemData]);
+
   const [atzmusSourcePickerContents, setAtzmusSourcePickerContents] = useState<ExportObjectAtzmus[]>([]);
 
   const inputColumnItems: SelectableListItem[] = useMemo(() => [
@@ -112,7 +122,10 @@ function App() {
       }
     }, 
     {
-      name: "hamsa"
+      name: "hamsa",
+      onSelect: () => {
+        setColumn2ListItems(hamsaListItems);
+      }
     },
   ], [bodyListItems]);
 

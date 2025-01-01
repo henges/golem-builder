@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import { AtzmusEffect, ExportGolem, ExportMutation, ExportObjectAtzmus, ExportObjectWeapon } from "../ExportTypes";
+import { AtzmusEffect, ExportGolem, ExportMutation, ExportObjectAtzmus, ExportObjectHamsa, ExportObjectWeapon } from "../ExportTypes";
 import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat, IncrementPercent } from "./Stat";
 import { ConditionalGameObjectUnitGroup, GameObjectUnit } from "./GameObjectUnit";
@@ -295,6 +295,65 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
             return base;
         }
     }
+}
+
+
+export interface HamsaListElementProps {
+    name: string
+    granters: string[]
+    allGranters: Record<string, ExportObjectHamsa>
+    showModal: (a: ExportObjectHamsa[]) => void;
+    setSelection: (a: string) => void;
+}
+
+export const CreateHamsaListElement = ({name, granters, allGranters, showModal, setSelection}: HamsaListElementProps) => {
+
+    const base: SelectableListItem = {name: name};
+    const nonGuaranteeableGranters = granters.filter(g => allGranters[g].semanticTags.length !== 1);
+    const guaranteedGranters = granters.filter(g => allGranters[g].semanticTags.length === 1);
+    const granterRenders = granters.map(g => allGranters[g]);
+
+    if (granters.length === guaranteedGranters.length) {
+        if (granters.length === 1) {
+            const granter = granterRenders[0];
+            base.onSelect = () => {setSelection(granter.id)}
+            base.more = (<Box>
+                    <Text>{applyQudShader(`{{g|Guaranteed}}`)},{" "}
+                    {"only granted by "}<QudSpriteRenderer display="inline" sprite={granter.render}/>{" "}{applyQudShader(granter.render.displayName)}</Text>
+                </Box>)
+            return base;
+        }
+
+        base.onSelect = () => {showModal(granterRenders)};
+        base.more = (<Box>
+            <Text>{applyQudShader(`{{g|Guaranteed}}`)},{" "}
+                {applyQudShader(`{{O|${granterRenders.length} possible ${Pluralise("source", granterRenders.length)}}}`)}</Text>
+        </Box>)
+        return base;
+    } else if (granters.length === nonGuaranteeableGranters.length) {
+        if (granters.length === 1) {
+            const granter = granterRenders[0];
+            base.onSelect = () => {setSelection(granter.id)}
+            base.more = (<Box>
+                <Text>{applyQudShader(`{{r|Can't be guaranteed}}`)},{" "} 
+                    {"only granted by "}<QudSpriteRenderer display="inline" sprite={granter.render}/>{" "}{applyQudShader(granter.render.displayName)}</Text>
+            </Box>)
+            return base;
+        }
+        base.onSelect = () => {showModal(granterRenders)};
+        base.more = (<Box>
+            <Text>{applyQudShader(`{{r|Can't be guaranteed}}`)},{" "} 
+                {applyQudShader(`{{O|${granterRenders.length} possible ${Pluralise("source", granterRenders.length)}}}`)}</Text>
+            </Box>)
+        return base;
+    }
+
+    base.onSelect = () => {showModal(granterRenders)};
+    base.more = (<Box>
+        {<Text>{applyQudShader(`{{g|Can be guaranteed}}`)}</Text>}
+        {<Text>{applyQudShader(`{{O|${granterRenders.length} possible ${Pluralise("source", granterRenders.length)}}}`)}</Text>}
+    </Box>)
+    return base;
 }
 
 const GetBodyInterestingStats = (props: QudObjectProperties) => {

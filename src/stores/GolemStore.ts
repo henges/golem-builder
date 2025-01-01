@@ -116,7 +116,7 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             set({incantationSelectionId: s, incantationSelection: get().exportData.Incantations[s]})
         },
         ready: false,
-        processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}, muralCategories: {}},
+        processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}, muralCategories: {}, hamsas: {tagToSource: {}, sources: {}}},
         exportData: {Liquids: {}, Catalysts: {}, Incantations: {}, Hamsas: {}}
     }
 });

@@ -3,6 +3,16 @@ export type GolemData = {
     atzmuses: ExportAtzmusData
     weapons: Record<string, ExportObjectWeapon>
     muralCategories: Record<string, string[]>
+    hamsas: ExportHamsaData
+}
+
+export type ExportHamsaData = {
+    tagToSource: Record<string, string[]>
+    sources: Record<string, ExportObjectHamsa>;
+}
+
+export type ExportObjectHamsa = ExportObject & {
+    semanticTags: string[]
 }
 
 export type GolemBody = {

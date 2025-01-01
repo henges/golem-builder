@@ -4,7 +4,7 @@ export type ExportData = {
     Liquids: Liquids
     Catalysts: Effects
     Incantations: Effects
-    Hamsas: object
+    Hamsas: Effects
 }
 
 export type Liquids = Record<string, Liquid>;
