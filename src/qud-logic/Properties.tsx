@@ -8,6 +8,7 @@ import { Pluralise } from "../helpers";
 import { QudSpriteRenderer } from "../QudSpriteRenderer";
 import { SelectableListItem } from "../SelectableList";
 import { Effects } from "../ExportData";
+import { QudInlineSprite } from "../QudInlineSprite";
 
 const BodyHasSpecialProperties = (g: QudObjectProperties) => {
     return g.mutations.length > 0 || g.skills.length > 0 || 
@@ -238,11 +239,16 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
     switch (effect.type) {
         case "ATTRIBUTE": {
             
-            const gs = effect.granters.filter(g => g.certain).map(g => granters[g.id]);
+            const certains = effect.granters.filter(g => g.certain).map(g => granters[g.id]);
+            certains.sort((e1, e2) => e1.grants.length - e2.grants.length);
+            const uncertains = effect.granters.filter(g => !g.certain).map(g => granters[g.id]);
+            uncertains.sort((e1, e2) => e1.grants.length - e2.grants.length);
+            const list = [...certains, ...uncertains];
+
             base.more = (<Box>
-                <Text>{applyQudShader(`{{g|${gs.length} possible ${Pluralise("source", gs.length)}}}`)}</Text>
+                <Text>{applyQudShader(`{{g|${list.length} possible ${Pluralise("source", list.length)}}}`)}</Text>
             </Box>)
-            base.onSelect = () => {showModal(gs)}
+            base.onSelect = () => {showModal(list)}
             return base;
         }
         case "MUTATION": {
@@ -256,6 +262,7 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
             }, {});
             const allPossibleGrantersCount = Object.values(possibleGrantersCountByLevel).reduce((agg, e) => agg+e, 0)
             const possibleGranters = Object.values(effect.grantersByLevel).flat().map(g => granters[g.id]);
+            possibleGranters.sort((e1, e2) => e1.grants.length - e2.grants.length);
 
             if (allPossibleLevels.length === guaranteeableLevels.length) {
                 if (allPossibleGrantersCount === 1) {
@@ -263,7 +270,7 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
                     base.onSelect = () => {setSelection(granter.id)}
                     base.more = (<Box>
                             <Text>{applyQudShader(`{{g|Guaranteeable at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)},{" "}
-                            {"only granted by "}<QudSpriteRenderer display="inline" sprite={granter.render}/>{" "}{applyQudShader(granter.render.displayName)}</Text>
+                            {"only granted by "}<QudInlineSprite sprite={granter.render}/></Text>
                         </Box>)
                     return base;
                 }
@@ -280,7 +287,7 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
                     base.onSelect = () => {setSelection(granter.id)}
                     base.more = (<Box>
                         <Text>{applyQudShader(`{{r|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}, can't be guaranteed}}`)},{" "} 
-                            {"only granted by "}<QudSpriteRenderer display="inline" sprite={granter.render}/>{" "}{applyQudShader(granter.render.displayName)}</Text>
+                            {"only granted by "}<QudInlineSprite sprite={granter.render}/></Text>
                     </Box>)
                     return base;
                 }

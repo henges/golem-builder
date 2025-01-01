@@ -1,4 +1,4 @@
-import { Button, Grid, IconButton, Text, VStack } from "@chakra-ui/react";
+import { Button, Grid, Text, VStack } from "@chakra-ui/react";
 import { DialogRoot, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionTrigger, DialogCloseTrigger } from "./components/ui/dialog"
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { ExportRender } from "./ExportTypes";

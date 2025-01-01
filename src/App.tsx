@@ -49,8 +49,8 @@ function App() {
       .map(([k, b]) => CreateAtzmusListElement({name: k, effect: b, granters: golemData.atzmuses.granters, showModal: (a) => {
         setSourcePickerTitle("Select an atzmus source");
         setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => (
-          <List.Root minW={"100%"} textAlign={e.grants.length === 1 ? "center" : "left"}>
-            {e.grants.filter(g => typeof(g) === "string").map((s, i, a) => <ListItem>{s}{i === a.length-1 ? "" : " OR"}</ListItem>)}
+          <List.Root listStyleType={"none"} minW={"100%"} textAlign={e.grants.length === 1 ? "center" : "left"}>
+            {e.grants.filter(g => typeof(g) === "string").map((s, i, a) => <ListItem>{"+5 "}{s}{i === a.length-1 ? "" : " OR"}</ListItem>)}
             {e.grants.filter(g => typeof(g) === "object").map((g, i, a) => (<ListItem>{g.name} {g.level}{i === a.length-1 ? "" : " OR"}</ListItem>))}
           </List.Root>
         )})));
@@ -124,7 +124,7 @@ function App() {
             .flatMap(gous => gous.map(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "))
             .filter(d => d.length > 0);
           return (
-            <List.Root minW={"100%"} textAlign={items.length === 1 ? "center" : "left"}>
+            <List.Root listStyleType={"none"} minW={"100%"} textAlign={items.length === 1 ? "center" : "left"}>
               {items.map((d, i, a) => (<ListItem>{d}{i === a.length-1 ? "" : " OR"}</ListItem>))} 
             </List.Root>
           ) 
