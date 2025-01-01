@@ -1,4 +1,4 @@
-import { VStack, Text, HStack } from "@chakra-ui/react";
+import { VStack, Text, HStack, Grid } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
@@ -44,37 +44,40 @@ export const GolemDisplay = () => {
     <>
         <VStack>
             <Text>Level: {FormatStat(stats.physics.level)}</Text>
-            <HStack>
+            <Grid templateColumns={"repeat(3, 1fr)"} templateRows={"repeat(2, 1fr)"} textAlign={"left"}>
+            {/* <HStack> */}
                 <Text>♥ HP: {FormatStat(stats.physics.hp)}</Text>
+                {/* <Text>♥ HP: {FormatStat(stats.physics.hp)}</Text> */}
                 <Text>◆ AV: {FormatStat(stats.physics.av)}</Text>
                 <Text>○ DV: {FormatStat(stats.physics.dv)}</Text>
+                <Text>MA: {FormatStat(stats.physics.ma)}</Text>
                 <Text>QN: {FormatStat(stats.physics.quickness)}</Text>
                 <Text>MV: {FormatMoveSpeed(stats.physics.moveSpeed)}</Text>
-                <Text>MA: {FormatStat(stats.physics.ma)}</Text>
+            {/* </HStack> */}
+            </Grid>
+            <HStack>
+                <Text>STR: {FormatStat(stats.attributes.strength)}</Text>
+                <Text>AGI: {FormatStat(stats.attributes.agility)}</Text>
+                <Text>TOU: {FormatStat(stats.attributes.toughness)}</Text>
             </HStack>
             <HStack>
-                <Text>Strength: {FormatStat(stats.attributes.strength)}</Text>
-                <Text>Agility: {FormatStat(stats.attributes.agility)}</Text>
-                <Text>Toughness: {FormatStat(stats.attributes.toughness)}</Text>
+                <Text>INT: {FormatStat(stats.attributes.intelligence)}</Text>
+                <Text>WIL: {FormatStat(stats.attributes.willpower)}</Text>
+                <Text>EGO: {FormatStat(stats.attributes.ego)}</Text>
             </HStack>
             <HStack>
-                <Text>Intelligence: {FormatStat(stats.attributes.intelligence)}</Text>
-                <Text>Willpower: {FormatStat(stats.attributes.willpower)}</Text>
-                <Text>Ego: {FormatStat(stats.attributes.ego)}</Text>
+                <Text>HR: {FormatStat(stats.resistances.heat)}</Text>
+                <Text>CR: {FormatStat(stats.resistances.cold)}</Text>
             </HStack>
             <HStack>
-                <Text>Heat Resist: {FormatStat(stats.resistances.heat)}</Text>
-                <Text>Cold Resist: {FormatStat(stats.resistances.cold)}</Text>
-            </HStack>
-            <HStack>
-                <Text>Acid Resist: {FormatStat(stats.resistances.acid)}</Text>
-                <Text>Electric Resist: {FormatStat(stats.resistances.electric)}</Text>
+                <Text>AR: {FormatStat(stats.resistances.acid)}</Text>
+                <Text>ER: {FormatStat(stats.resistances.electric)}</Text>
             </HStack>
         </VStack>
     </>)
 
     return (
-        <VStack width="100%" overflow="auto">
+        <VStack width="100%" p={4} overflow="auto">
             <QudSpriteRenderer sprite={getBodyRender()} minH={"96px"}/>
             <Text>{getBodyRender().displayName}</Text>
             {statDisplay}

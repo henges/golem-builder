@@ -1,7 +1,7 @@
 import { useShallow } from "zustand/shallow";
 import { useGolemStore } from "./stores/GolemStore";
 import { ExportObject, GolemBody } from "./ExportTypes";
-import { VStack, Grid, GridItem } from "@chakra-ui/react";
+import { VStack, Grid, GridItem, useBreakpointValue } from "@chakra-ui/react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { Tooltip } from "./components/ui/tooltip";
 import { applyQudShader } from "./Colours";
@@ -11,6 +11,7 @@ import { Pluralise } from "./helpers";
 export const GolemVariantSelection = () => {
 
     const [bodySelection] = useGolemStore(useShallow(s => [s.bodySelection]));
+    const smallScreen = useBreakpointValue({ base: true, md: false });
 
     const parseLimbPattern = (p: string[]) => {
         if (p.length === 1 && p[0] === "*RANDOM*") {
@@ -123,7 +124,7 @@ export const GolemVariantSelection = () => {
                 agg[v].push(model);
                 return agg;
             }, b.patterns.map(_ => [])); // create a 2d array with same length as # of patterns
-            return <Grid templateColumns="repeat(2, 1fr)" gap="8">
+            return <Grid templateColumns={ `repeat(${smallScreen ? 1: 2}, 1fr)`} gap="8">
                 {b.patterns.map((p, i) => <GridItem>{singlePatternDisplay(p, patternToModels[i])}</GridItem>)}
             </Grid>
         }
