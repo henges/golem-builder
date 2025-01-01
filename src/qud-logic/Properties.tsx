@@ -59,7 +59,7 @@ export const ComputeQudObjectProperties = (body: ExportGolem): QudObjectProperti
         }
     }
 
-    ret.mutations.push(...body.mutations);
+    ret.mutations.push(...body.mutations.map(m => structuredClone(m)));
     ret.skills.push(...body.skills);
     ret.specialProperties = structuredClone(body.specialProperties);
     return ret;
@@ -137,7 +137,6 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
     const appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(FormatGameObjectUnitDescription(s));
 
     for (const unit of units) {
-        console.log(unit)
         switch (unit.UnitType) {
             case "GameObjectAttributeUnit": {
                 const stat = FindStat(props, unit.Attribute);
