@@ -203,10 +203,10 @@ function App() {
   const toggleCollapse = () => setIsOpen(!isOpen);
 
   return (
-    <Container h={"100vh"} p="4" /*display={"grid"}*/>
+    <Container h={"100vh"} p="2" pt="2" /*display={"grid"}*/>
       <Grid h="100%" templateRows={`repeat(${isCollapsibleEnabled ? 10 : 9}, 1fr)`}>
         <GridItem h="100%" rowSpan={9}>
-          <Grid maxW="100%" h="100%" templateColumns={`repeat(${isCollapsibleEnabled ? 4 : 5}, 1fr)`} gap="6">
+          <Grid maxW="100%" h="100%" templateColumns={`repeat(${isCollapsibleEnabled ? 4 : 5}, 1fr)`} gap="3">
               {isCollapsibleEnabled ? (
                   <>
                     {isOpen && (
@@ -228,8 +228,8 @@ function App() {
                             items={inputColumnItems}
                           />
                           <VStack marginTop="auto">
-                            <Button onClick={resetSelections}>Reset</Button>
-                            <Button onClick={toggleCollapse}>Close</Button>
+                            <Button variant={"outline"} onClick={resetSelections}>Reset</Button>
+                            <Button variant={"outline"} onClick={toggleCollapse}>Close</Button>
                           </VStack>
                         </VStack>
                       </Box>
@@ -243,9 +243,9 @@ function App() {
                       overflow="auto"
                       items={inputColumnItems}
                     />
-                    <VStack marginTop="auto">
-                      <Button onClick={resetSelections}>Reset</Button>
-                    </VStack>
+                    <Center marginTop="auto">
+                      <Button variant={"outline"} onClick={resetSelections}>Reset</Button>
+                    </Center>
                   </VStack>
                 </GridItem>
                 )}
@@ -259,8 +259,8 @@ function App() {
         </GridItem>
         {isCollapsibleEnabled ? 
         <Center>
-          <Button onClick={toggleCollapse}>
-            {isOpen ? "" : "Other options"}
+          <Button variant={"outline"} onClick={toggleCollapse}>
+            {isOpen ? "" : "Selections"}
           </Button>
         </Center> : null}
       </Grid>

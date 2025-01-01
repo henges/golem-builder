@@ -77,7 +77,7 @@ export const GolemDisplay = () => {
     </>)
 
     return (
-        <VStack width="100%" p={4} overflow="auto">
+        <VStack width="100%" p={2} overflow="auto">
             <QudSpriteRenderer sprite={getBodyRender()} minH={"96px"}/>
             <Text>{getBodyRender().displayName}</Text>
             {statDisplay}
