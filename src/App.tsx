@@ -4,16 +4,15 @@ import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
-import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement } from "./qud-logic/Properties";
+import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement, FormatGameObjectUnitDescription } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
 import { SourcePicker, SourcePickerContent } from "./SourcePicker";
-import { ExportObjectAtzmus } from "./ExportTypes";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 
 function App() {
 
-  const [ready, golemData, exportData, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection] = useGolemStore(useShallow(
-    (s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection]));
+  const [ready, golemData, exportData, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection] = useGolemStore(useShallow(
+    (s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection]));
 
   const [column2ListItems, setColumn2ListItems] = useState<SelectableListItem[]>([]);
 
@@ -88,20 +87,20 @@ function App() {
     return Object.entries(exportData.Hamsas)
       .filter(([k, b]) => b.length > 0 && golemData.hamsas.tagToSource[k])
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
-      .map(([k, b]) => CreateHamsaListElement({name: b.flatMap(gou => gou.UnitDescription.split("\n")).join(", "), granters: golemData.hamsas.tagToSource[k], allGranters: golemData.hamsas.sources, showModal: (a) => {
+      .map(([k, b]) => CreateHamsaListElement({name: b.flatMap(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "), effects: exportData.Hamsas, granters: golemData.hamsas.tagToSource[k], allGranters: golemData.hamsas.sources, showModal: (a) => {
         setSourcePickerTitle("Select a hamsa source");
         setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => (
           [
             <Text>{e.semanticTags
                 .map(t => exportData.Hamsas[t] || [])
-                .flatMap(gous => gous.map(gou => gou.UnitDescription.split("\n")).join(", "))
+                .flatMap(gous => gous.map(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "))
                 .filter(d => d.length > 0)
                 .join(" OR ")}</Text> 
           ]
         )})));
-        setSourcePickerAction(() => (s: string) => s !== undefined);
+        setSourcePickerAction(() => (s: string) => s !== undefined && setHamsaSelection(s));
         setSourcePickerOpen(true);
-      }, setSelection: (s) => {}}));
+      }, setSelection: (s) => setHamsaSelection(s)}));
   }, [ready, golemData]);
 
   const [sourcePickerTitle, setSourcePickerTitle] = useState<string>("");

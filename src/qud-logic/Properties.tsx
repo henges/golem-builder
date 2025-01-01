@@ -7,6 +7,7 @@ import { applyQudShader } from "../Colours";
 import { Pluralise } from "../helpers";
 import { QudSpriteRenderer } from "../QudSpriteRenderer";
 import { SelectableListItem } from "../SelectableList";
+import { Effects } from "../ExportData";
 
 const BodyHasSpecialProperties = (g: QudObjectProperties) => {
     return g.mutations.length > 0 || g.skills.length > 0 || 
@@ -129,9 +130,11 @@ export const ApplyConditionalGameObjectUnits = (props: QudObjectProperties, cond
     }
 }
 
+export const FormatGameObjectUnitDescription = (s: string) => s.split("\n").join(", ");
+
 export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObjectUnit[], skipPushDescription?: boolean) => {
 
-    const appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(s);
+    const appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(FormatGameObjectUnitDescription(s));
 
     for (const unit of units) {
         console.log(unit)
@@ -301,16 +304,23 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
 export interface HamsaListElementProps {
     name: string
     granters: string[]
+    effects: Effects,
     allGranters: Record<string, ExportObjectHamsa>
     showModal: (a: ExportObjectHamsa[]) => void;
     setSelection: (a: string) => void;
 }
 
-export const CreateHamsaListElement = ({name, granters, allGranters, showModal, setSelection}: HamsaListElementProps) => {
+export const GetValidHamsaEffectsForObj = (selected: ExportObjectHamsa, hamsas: Effects) => {
+
+    return selected.semanticTags.map(t => hamsas[t]).flat().filter(t => t !== undefined);
+}
+
+export const CreateHamsaListElement = ({name, granters, effects, allGranters, showModal, setSelection}: HamsaListElementProps) => {
 
     const base: SelectableListItem = {name: name};
-    const nonGuaranteeableGranters = granters.filter(g => allGranters[g].semanticTags.length !== 1);
-    const guaranteedGranters = granters.filter(g => allGranters[g].semanticTags.length === 1);
+    const granterHamsaEffects = granters.map(g => GetValidHamsaEffectsForObj(allGranters[g], effects));
+    const nonGuaranteeableGranters = granterHamsaEffects.filter(g => g.length !== 1);
+    const guaranteedGranters = granterHamsaEffects.filter(g => g.length === 1);
     const granterRenders = granters.map(g => allGranters[g]);
 
     if (granters.length === guaranteedGranters.length) {
