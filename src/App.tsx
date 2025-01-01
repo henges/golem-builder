@@ -4,17 +4,18 @@ import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
-import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement, FormatGameObjectUnitDescription } from "./qud-logic/Properties";
+import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement, FormatGameObjectUnitDescription, GetSelectionEffectKey } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
 import { SourcePicker, SourcePickerContent } from "./SourcePicker";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
+import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
 
 function App() {
 
-  const [ready, golemData, exportData, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection] = useGolemStore(useShallow(
-    (s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection]));
+  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection] = useGolemStore(useShallow(
+    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection]));
 
-  const [column2ListItems, setColumn2ListItems] = useState<SelectableListItem[]>([]);
+  const [column2ListItems, setColumn2ListItems] = useState<string>("empty");
 
   const bodyListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(golemData.bodies)
@@ -24,9 +25,10 @@ function App() {
           more: GetBodySpecialPropertiesElement(BuildGolemBody(b.body)),
           onSelect: () => {
             setBodySelection(k);
-          }
+          },
+          isSelected: bodySelectionId === k
         }));
-  }, [ready, golemData]);
+  }, [ready, golemData, bodySelectionId]);
 
   const catalystListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(exportData.Catalysts)
@@ -36,9 +38,10 @@ function App() {
           more: b.map(e => (<Text>{e.UnitDescription}</Text>)),
           onSelect: () => {
             setCatalystSelection(k);
-          }
+          },
+          isSelected: k === catalystSelectionId
         }));
-  }, [ready, exportData]);
+  }, [ready, exportData, catalystSelectionId]);
 
   const atzmusListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(golemData.atzmuses.effects)
@@ -47,14 +50,14 @@ function App() {
         setSourcePickerTitle("Select an atzmus source");
         setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => (
           <List.Root minW={"100%"} textAlign={e.grants.length === 1 ? "center" : "left"}>
-            {e.grants.filter(g => typeof(g) === "string").map(s => <ListItem>{s}</ListItem>)}
-            {e.grants.filter(g => typeof(g) === "object").map(g => (<ListItem>{g.name} {g.level}</ListItem>))}
+            {e.grants.filter(g => typeof(g) === "string").map((s, i, a) => <ListItem>{s}{i === a.length-1 ? "" : " OR"}</ListItem>)}
+            {e.grants.filter(g => typeof(g) === "object").map((g, i, a) => (<ListItem>{g.name} {g.level}{i === a.length-1 ? "" : " OR"}</ListItem>))}
           </List.Root>
         )})));
-        setSourcePickerAction(() => (s: string) => s !== undefined && setAtzmusSelection(s));
+        setSourcePickerAction(() => (s: string) => s !== undefined && setAtzmusSelection(k, s));
         setSourcePickerOpen(true);
-      }, setSelection: (s) => setAtzmusSelection(s)}));
-  }, [ready, golemData]);
+      }, setSelection: (s) => setAtzmusSelection(k, s), isSelected: atzmusSelectionEffectId == k}));
+  }, [ready, golemData, atzmusSelectionEffectId]);
 
   const weaponListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(golemData.weapons)
@@ -65,29 +68,55 @@ function App() {
           more: (<Text>{WeaponToGameObjectUnits(b)[0].UnitDescription}</Text>),
           onSelect: () => {
             setWeaponSelection(k);
-          }
+          },
+          isSelected: weaponSelectionId === k
         }));
-  }, [ready, golemData]);
+  }, [ready, golemData, weaponSelectionId]);
 
   const incantationListItems = useMemo<SelectableListItem[]>(() => {
-    return Object.entries(exportData.Incantations)
+    const effectsById = Object.entries(exportData.Incantations)
+      .filter(([k, b]) => b.length > 0 && golemData.muralCategories[k]?.length > 0)
+      .reduce((agg: Record<string, {effects: GameObjectUnit[], muralCategories: string[], sources: string[]}>, [k, b]) => {
+        const sources = golemData.muralCategories[k];
+        const key = GetSelectionEffectKey(b);
+        if (!agg[key]) {
+          agg[key] = {effects: [...b], muralCategories: [], sources: []};
+        }
+        agg[key].muralCategories.push(k);
+        agg[key].sources.push(...sources);
+        return agg;
+      }, {});
+    console.log(effectsById);
+
+    return Object.entries(effectsById)
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
-      .filter(([k,_b]) => golemData.muralCategories[k])
       .map(([k, b]) => (
         {
-          name: (<Text>{b.map(gou => gou.UnitDescription).join(", ")}</Text>), 
-          more: (<List.Root>{golemData.muralCategories[k].map(c => (<ListItem key={c}>{c}</ListItem>))}</List.Root>),
+          name: (<Text>{k}</Text>), 
+          more: (<List.Root>{b.sources.map(c => (<ListItem key={c}>{c}</ListItem>))}</List.Root>),
           onSelect: () => {
-            setIncantationSelection(k);
-          }
+            setIncantationSelection(k, b.muralCategories[0]);
+          },
+          isSelected: incantationSelectionId === k
         }));
-  }, [ready, golemData, exportData]);
+  }, [ready, golemData, exportData, incantationSelectionId]);
 
   const hamsaListItems = useMemo<SelectableListItem[]>(() => {
-    return Object.entries(exportData.Hamsas)
-      .filter(([k, b]) => b.length > 0 && golemData.hamsas.tagToSource[k])
+    const effectsById = Object.entries(exportData.Hamsas)
+      .filter(([k, b]) => b.length > 0 && golemData.hamsas.tagToSource[k]?.length > 0)
+      .reduce((agg: Record<string, {effects: GameObjectUnit[], sources: string[]}>, [k, b]) => {
+        const sources = golemData.hamsas.tagToSource[k];
+        const key = GetSelectionEffectKey(b);
+        if (!agg[key]) {
+          agg[key] = {effects: [...b], sources: []};
+        }
+        agg[key].sources.push(...sources);
+        return agg;
+      }, {});
+
+    return Object.entries(effectsById)
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
-      .map(([k, b]) => CreateHamsaListElement({name: b.flatMap(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "), effects: exportData.Hamsas, granters: golemData.hamsas.tagToSource[k], allGranters: golemData.hamsas.sources, showModal: (a) => {
+      .map(([k, b]) => CreateHamsaListElement({name: k, effects: exportData.Hamsas, granters: b.sources, allGranters: golemData.hamsas.sources, showModal: (a) => {
         setSourcePickerTitle("Select a hamsa source");
         setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => {
           const items = e.semanticTags
@@ -96,58 +125,23 @@ function App() {
             .filter(d => d.length > 0);
           return (
             <List.Root minW={"100%"} textAlign={items.length === 1 ? "center" : "left"}>
-              {items.map(d => (<ListItem>{d}</ListItem>))} 
+              {items.map((d, i, a) => (<ListItem>{d}{i === a.length-1 ? "" : " OR"}</ListItem>))} 
             </List.Root>
           ) 
         } })));
-        setSourcePickerAction(() => (s: string) => s !== undefined && setHamsaSelection(s));
+        setSourcePickerAction(() => (s: string) => s !== undefined && setHamsaSelection(k, s));
         setSourcePickerOpen(true);
-      }, setSelection: (s) => setHamsaSelection(s)}));
-  }, [ready, golemData]);
+      }, setSelection: (s) => setHamsaSelection(k, s), isSelected: hamsaSelectionEffectId === k}));
+  }, [ready, golemData, hamsaSelectionEffectId]);
 
   const [sourcePickerTitle, setSourcePickerTitle] = useState<string>("");
   const [sourcePickerAction, setSourcePickerAction] = useState<(s: string | undefined) => void>(() => {});
   const [sourcePickerContents, setSourcePickerContents] = useState<SourcePickerContent[]>([]);
   const [sourcePickerOpen, setSourcePickerOpen] = useState<boolean>(false);
 
-  const inputColumnItems: SelectableListItem[] = useMemo(() => [
-    {
-      name: "body",
-      onSelect: () => {
-        setColumn2ListItems(bodyListItems);
-      }
-    }, 
-    {
-      name: "catalyst",
-      onSelect: () => {
-        setColumn2ListItems(catalystListItems);
-      }
-    }, 
-    {
-      name: "atzmus",
-      onSelect: () => {
-        setColumn2ListItems(atzmusListItems);
-      }
-    }, 
-    {
-      name: "armament",
-      onSelect: () => {
-        setColumn2ListItems(weaponListItems);
-      }
-    },
-    {
-      name: "incantation",
-      onSelect: () => {
-        setColumn2ListItems(incantationListItems);
-      }
-    }, 
-    {
-      name: "hamsa",
-      onSelect: () => {
-        setColumn2ListItems(hamsaListItems);
-      }
-    },
-  ], [bodyListItems, catalystListItems, atzmusListItems, weaponListItems, incantationListItems, hamsaListItems]);
+  const lists: Record<string, SelectableListItem[]> = {"body": bodyListItems, "catalyst": catalystListItems, "atzmus": atzmusListItems, "armament": weaponListItems, "incantation": incantationListItems, "hamsa": hamsaListItems};
+
+  const inputColumnItems: SelectableListItem[] = Object.keys(lists).map(k => ({name: k, onSelect: () => {setColumn2ListItems(k)}, isSelected: column2ListItems === k}))
 
   return (
     <Container h={"100vh"} p="4" /*display={"grid"}*/>
@@ -156,7 +150,7 @@ function App() {
           <SelectableList overflow="scroll" items={inputColumnItems}/>
         </GridItem>
         <GridItem colSpan={2} overflow="scroll">
-          <SelectableList overflow="scroll" items={column2ListItems}/>
+          <SelectableList overflow="scroll" items={lists[column2ListItems] || []}/>
         </GridItem>
         <GridItem colSpan={2} display="flex">
             <GolemDisplay/>

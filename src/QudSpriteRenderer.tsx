@@ -22,8 +22,8 @@ export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) =>
 
     const getImageUrl = async (sprite: ExportRender) => {
 
-        const perfId = `render-${sprite.tile}-${Math.floor(Math.random()*1000)}`;
-        console.time(perfId)
+        // const perfId = `render-${sprite.tile}-${Math.floor(Math.random()*1000)}`;
+        // console.time(perfId)
 
         // console.log(`Colour string for sprite ${sprite.tile}: main ${sprite.mainColour}, detail ${sprite.detailColour}`)
         const [main, detail] = parseQudColourString(sprite.mainColour, sprite.detailColour);
@@ -39,7 +39,7 @@ export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) =>
             return {r: 32, g: 32, b: 32, a: 0}
         });
 
-        console.timeEnd(perfId);
+        // console.timeEnd(perfId);
         return res;
     }
 

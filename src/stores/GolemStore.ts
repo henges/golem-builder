@@ -24,20 +24,22 @@ export type GolemSelectionStore = {
     bodyVariant: number
     catalystSelectionId: string
     catalystSelection: GameObjectUnit[]
-    atzmusSelectionId: string
+    atzmusSelectionEffectId: string
+    atzmusSelectionSourceId: string
     atzmusSelection: ConditionalGameObjectUnitGroup
     weaponSelectionId: string
     weaponSelection: GameObjectUnit[]
     incantationSelectionId: string
     incantationSelection: GameObjectUnit[]
-    hamsaSelectionId: string
+    hamsaSelectionEffectId: string
+    hamsaSelectionSourceId: string
     hamsaSelection: ConditionalGameObjectUnitGroup
     setBodySelection: (s: string) => void
     setCatalystSelection: (s: string) => void
-    setAtzmusSelection: (s: string) => void
+    setAtzmusSelection: (effect: string, source: string) => void
     setWeaponSelection: (s: string) => void
-    setIncantationSelection: (s: string) => void
-    setHamsaSelection: (s: string) => void
+    setIncantationSelection: (effect: string, source: string) => void
+    setHamsaSelection: (effect: string, source: string) => void
 }
 
 type GolemStore = GolemSelectionStore & {
@@ -88,13 +90,15 @@ export const useGolemStore = create<GolemStore>((set, get) => {
         bodyVariant: 0,
         catalystSelectionId: "",
         catalystSelection: [],
-        atzmusSelectionId: "",
+        atzmusSelectionEffectId: "",
+        atzmusSelectionSourceId: "",
         atzmusSelection: {certain: false, units: []},
         weaponSelectionId: "",
         weaponSelection: [],
         incantationSelectionId: "",
         incantationSelection: [],
-        hamsaSelectionId: "",
+        hamsaSelectionEffectId: "",
+        hamsaSelectionSourceId: "",
         hamsaSelection: {certain: false, units: []},
         setBodySelection: (s) => {
             if (!get().ready) {
@@ -108,11 +112,11 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             }
             set({catalystSelectionId: s, catalystSelection: get().exportData.Catalysts[s]})
         },
-        setAtzmusSelection: (s) => {
+        setAtzmusSelection: (effect: string, source: string) => {
             if (!get().ready) {
                 return;
             }
-            set({atzmusSelectionId: s, atzmusSelection: atzmusGrantsToGameObjectUnits(get().processedData.atzmuses.granters[s].grants)})
+            set({atzmusSelectionEffectId: effect, atzmusSelectionSourceId: source, atzmusSelection: atzmusGrantsToGameObjectUnits(get().processedData.atzmuses.granters[source].grants)})
         },
         setWeaponSelection: (s) => {
             if (!get().ready) {
@@ -120,17 +124,17 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             }
             set({weaponSelectionId: s, weaponSelection: WeaponToGameObjectUnits(get().processedData.weapons[s])})
         },
-        setIncantationSelection: (s) => {
+        setIncantationSelection: (effect: string, category: string) => {
             if (!get().ready) {
                 return;
             }
-            set({incantationSelectionId: s, incantationSelection: get().exportData.Incantations[s]})
+            set({incantationSelectionId: effect, incantationSelection: get().exportData.Incantations[category]})
         },
-        setHamsaSelection: (s) => {
+        setHamsaSelection: (effect: string, source: string) => {
             if (!get().ready) {
                 return;
             }
-            set({hamsaSelectionId: s, hamsaSelection: hamsaSelectionToGameObjectUnits(get().processedData.hamsas.sources[s], get().exportData.Hamsas)})
+            set({hamsaSelectionEffectId: effect, hamsaSelectionSourceId: source, hamsaSelection: hamsaSelectionToGameObjectUnits(get().processedData.hamsas.sources[source], get().exportData.Hamsas)})
         },
         ready: false,
         processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}, muralCategories: {}, hamsas: {tagToSource: {}, sources: {}}},

@@ -132,6 +132,8 @@ export const ApplyConditionalGameObjectUnits = (props: QudObjectProperties, cond
 
 export const FormatGameObjectUnitDescription = (s: string) => s.split("\n").join(", ");
 
+export const GetSelectionEffectKey = (gous: GameObjectUnit[]) => gous.map(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", ")
+
 export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObjectUnit[], skipPushDescription?: boolean) => {
 
     const appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(FormatGameObjectUnitDescription(s));
@@ -227,11 +229,12 @@ export interface AtzmusListElementProps {
     granters: Record<string, ExportObjectAtzmus>
     showModal: (a: ExportObjectAtzmus[]) => void;
     setSelection: (a: string) => void;
+    isSelected: boolean
 }
 
-export const CreateAtzmusListElement = ({name, effect, granters, showModal, setSelection}: AtzmusListElementProps) => {
+export const CreateAtzmusListElement = ({name, effect, granters, showModal, setSelection, isSelected}: AtzmusListElementProps) => {
 
-    const base: SelectableListItem = {name: name};
+    const base: SelectableListItem = {name: name, isSelected: isSelected};
     switch (effect.type) {
         case "ATTRIBUTE": {
             
@@ -308,6 +311,7 @@ export interface HamsaListElementProps {
     allGranters: Record<string, ExportObjectHamsa>
     showModal: (a: ExportObjectHamsa[]) => void;
     setSelection: (a: string) => void;
+    isSelected: boolean;
 }
 
 export const GetValidHamsaEffectsForObj = (selected: ExportObjectHamsa, hamsas: Effects) => {
@@ -315,9 +319,9 @@ export const GetValidHamsaEffectsForObj = (selected: ExportObjectHamsa, hamsas: 
     return selected.semanticTags.map(t => hamsas[t]).flat().filter(t => t !== undefined);
 }
 
-export const CreateHamsaListElement = ({name, granters, effects, allGranters, showModal, setSelection}: HamsaListElementProps) => {
+export const CreateHamsaListElement = ({name, granters, effects, allGranters, showModal, setSelection, isSelected}: HamsaListElementProps) => {
 
-    const base: SelectableListItem = {name: name};
+    const base: SelectableListItem = {name: name, isSelected: isSelected};
     const granterHamsaEffects = granters.map(g => GetValidHamsaEffectsForObj(allGranters[g], effects));
     const nonGuaranteeableGranters = granterHamsaEffects.filter(g => g.length !== 1);
     const guaranteedGranters = granterHamsaEffects.filter(g => g.length === 1);
