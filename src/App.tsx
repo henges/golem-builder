@@ -6,7 +6,7 @@ import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
-import { AtzmusSourcePicker } from "./AtzmusSourcePicker";
+import { SourcePicker, SourcePickerContent } from "./SourcePicker";
 import { ExportObjectAtzmus } from "./ExportTypes";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 
@@ -16,7 +16,6 @@ function App() {
     (s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection]));
 
   const [column2ListItems, setColumn2ListItems] = useState<SelectableListItem[]>([]);
-  const [atzmusModalOpen, setAtzmusModalOpen] = useState<boolean>(false);
 
   const bodyListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(golemData.bodies)
@@ -46,8 +45,15 @@ function App() {
     return Object.entries(golemData.atzmuses.effects)
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
       .map(([k, b]) => CreateAtzmusListElement({name: k, effect: b, granters: golemData.atzmuses.granters, showModal: (a) => {
-        setAtzmusSourcePickerContents(a);
-        setAtzmusModalOpen(true);
+        setSourcePickerTitle("Select an atzmus source");
+        setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => (
+          [
+            e.grants.filter(g => typeof(g) === "string").map(s => <Text>{s}</Text>),
+            e.grants.filter(g => typeof(g) === "object").map(g => (<Text>{g.name} {g.level}</Text>))
+          ]
+        )})));
+        setSourcePickerAction(() => (s: string) => s !== undefined && setAtzmusSelection(s));
+        setSourcePickerOpen(true);
       }, setSelection: (s) => setAtzmusSelection(s)}));
   }, [ready, golemData]);
 
@@ -83,12 +89,25 @@ function App() {
       .filter(([k, b]) => b.length > 0 && golemData.hamsas.tagToSource[k])
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
       .map(([k, b]) => CreateHamsaListElement({name: b.flatMap(gou => gou.UnitDescription.split("\n")).join(", "), granters: golemData.hamsas.tagToSource[k], allGranters: golemData.hamsas.sources, showModal: (a) => {
-        // setAtzmusSourcePickerContents(a);
-        setAtzmusModalOpen(true);
-      }, setSelection: (s) => setAtzmusSelection(s)}));
+        setSourcePickerTitle("Select a hamsa source");
+        setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => (
+          [
+            <Text>{e.semanticTags
+                .map(t => exportData.Hamsas[t] || [])
+                .flatMap(gous => gous.map(gou => gou.UnitDescription.split("\n")).join(", "))
+                .filter(d => d.length > 0)
+                .join(" OR ")}</Text> 
+          ]
+        )})));
+        setSourcePickerAction(() => (s: string) => s !== undefined);
+        setSourcePickerOpen(true);
+      }, setSelection: (s) => {}}));
   }, [ready, golemData]);
 
-  const [atzmusSourcePickerContents, setAtzmusSourcePickerContents] = useState<ExportObjectAtzmus[]>([]);
+  const [sourcePickerTitle, setSourcePickerTitle] = useState<string>("");
+  const [sourcePickerAction, setSourcePickerAction] = useState<(s: string | undefined) => void>(() => {});
+  const [sourcePickerContents, setSourcePickerContents] = useState<SourcePickerContent[]>([]);
+  const [sourcePickerOpen, setSourcePickerOpen] = useState<boolean>(false);
 
   const inputColumnItems: SelectableListItem[] = useMemo(() => [
     {
@@ -142,7 +161,7 @@ function App() {
             <GolemDisplay/>
         </GridItem>
       </Grid>
-      <AtzmusSourcePicker open={atzmusModalOpen} setOpen={setAtzmusModalOpen} onSave={(a) => a !== undefined && setAtzmusSelection(a.id)} contents={atzmusSourcePickerContents}/>
+      <SourcePicker title={sourcePickerTitle} open={sourcePickerOpen} setOpen={setSourcePickerOpen} onSave={(a) => sourcePickerAction(a)} contents={sourcePickerContents}/>
     </Container>
   )
 }
