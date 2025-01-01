@@ -126,7 +126,7 @@ export const ApplyConditionalGameObjectUnits = (props: QudObjectProperties, cond
     if (conditional.certain) {
         ApplyGameObjectUnits(props, conditional.units);
     } else {
-        props.stringProperties.push(conditional.units.map(u => u.UnitDescription).join(" OR\n"))
+        props.stringProperties.push(conditional.units.map(u => FormatGameObjectUnitDescription(u.UnitDescription)).join(" OR\n"))
     }
 }
 

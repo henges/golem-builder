@@ -28,7 +28,6 @@ export const SourcePicker = ({open, title, setOpen, onSave, contents}: AtzmusSou
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
-            {/* <DialogTitle>Select an atzmus source</DialogTitle> */}
           </DialogHeader>
           <DialogBody>
             <Grid templateColumns={"repeat(5, 1fr)"} gap="4" justifyItems={"center"}>
