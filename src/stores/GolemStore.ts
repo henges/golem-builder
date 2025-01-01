@@ -40,6 +40,7 @@ export type GolemSelectionStore = {
     setWeaponSelection: (s: string) => void
     setIncantationSelection: (effect: string, source: string) => void
     setHamsaSelection: (effect: string, source: string) => void
+    resetSelections: () => void
 }
 
 type GolemStore = GolemSelectionStore & {
@@ -82,24 +83,28 @@ const hamsaSelectionToGameObjectUnits = (selected: ExportObjectHamsa, hamsas: Ef
     return {certain: units.length === 1, units: units};
 }
 
+const defaultSelectionState = () => ({
+    bodySelectionId: "",
+    bodySelection: undefined,
+    bodyVariant: 0,
+    catalystSelectionId: "",
+    catalystSelection: [],
+    atzmusSelectionEffectId: "",
+    atzmusSelectionSourceId: "",
+    atzmusSelection: {certain: false, units: []},
+    weaponSelectionId: "",
+    weaponSelection: [],
+    incantationSelectionId: "",
+    incantationSelection: [],
+    hamsaSelectionEffectId: "",
+    hamsaSelectionSourceId: "",
+    hamsaSelection: {certain: false, units: []}
+});
+
 export const useGolemStore = create<GolemStore>((set, get) => {
     load().then(([p, e]) => set({ready: true, processedData: p, exportData: e}));
     return {
-        bodySelectionId: "",
-        bodySelection: undefined,
-        bodyVariant: 0,
-        catalystSelectionId: "",
-        catalystSelection: [],
-        atzmusSelectionEffectId: "",
-        atzmusSelectionSourceId: "",
-        atzmusSelection: {certain: false, units: []},
-        weaponSelectionId: "",
-        weaponSelection: [],
-        incantationSelectionId: "",
-        incantationSelection: [],
-        hamsaSelectionEffectId: "",
-        hamsaSelectionSourceId: "",
-        hamsaSelection: {certain: false, units: []},
+        ...defaultSelectionState(),
         setBodySelection: (s) => {
             if (!get().ready) {
                 return;
@@ -136,6 +141,7 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             }
             set({hamsaSelectionEffectId: effect, hamsaSelectionSourceId: source, hamsaSelection: hamsaSelectionToGameObjectUnits(get().processedData.hamsas.sources[source], get().exportData.Hamsas)})
         },
+        resetSelections: () => {set({...defaultSelectionState()})},
         ready: false,
         processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}, muralCategories: {}, hamsas: {tagToSource: {}, sources: {}}},
         exportData: {Liquids: {}, Catalysts: {}, Incantations: {}, Hamsas: {}}

@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem, List, ListItem, Text } from "@chakra-ui/react"
+import { Box, Button, Container, Grid, GridItem, List, ListItem, Text, VStack } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
@@ -12,8 +12,8 @@ import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
 
 function App() {
 
-  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection] = useGolemStore(useShallow(
-    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection]));
+  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections] = useGolemStore(useShallow(
+    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections]));
 
   const [column2ListItems, setColumn2ListItems] = useState<string>("empty");
 
@@ -147,7 +147,12 @@ function App() {
     <Container h={"100vh"} p="4" /*display={"grid"}*/>
       <Grid maxW="100%" h="100%" templateColumns="repeat(5, 1fr)" gap="6">
         <GridItem overflow="scroll">
-          <SelectableList overflow="scroll" items={inputColumnItems}/>
+          <VStack h="100%">
+            <SelectableList overflow="scroll" items={inputColumnItems}/>
+            <Box marginTop="auto">
+              <Button onClick={resetSelections}>Reset</Button>
+            </Box>
+          </VStack>
         </GridItem>
         <GridItem colSpan={2} overflow="scroll">
           <SelectableList overflow="scroll" items={lists[column2ListItems] || []}/>
