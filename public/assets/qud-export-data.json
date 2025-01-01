@@ -1648,12 +1648,12 @@
     ],
     "Figurine": [
       {
-        "Faction": "Snapjaws",
+        "Faction": "*creaturefaction*",
         "Type": "Figurine",
         "Value": 1000,
         "Silent": false,
         "UnitType": "GameObjectReputationUnit",
-        "UnitDescription": "+1000 reputation with snapjaws"
+        "UnitDescription": "+1000 reputation with *creaturefaction*"
       }
     ],
     "Explosive": [

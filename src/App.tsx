@@ -1,6 +1,6 @@
-import { Box, Button, Container, Grid, GridItem, List, ListItem, Text, VStack } from "@chakra-ui/react"
+import { Button, Container, Grid, GridItem, List, ListItem, Text, VStack } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
@@ -13,8 +13,8 @@ import { QudInlineSprite } from "./QudInlineSprite";
 
 function App() {
 
-  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections] = useGolemStore(useShallow(
-    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections]));
+  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, hamsaSelectionSourceId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections, _getSelections] = useGolemStore(useShallow(
+    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.atzmusSelectionSourceId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.hamsaSelectionSourceId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections, s.getSelections]));
 
   const [column2ListItems, setColumn2ListItems] = useState<string>("empty");
 
@@ -141,8 +141,63 @@ function App() {
   const [sourcePickerOpen, setSourcePickerOpen] = useState<boolean>(false);
 
   const lists: Record<string, SelectableListItem[]> = {"body": bodyListItems, "catalyst": catalystListItems, "atzmus": atzmusListItems, "armament": weaponListItems, "incantation": incantationListItems, "hamsa": hamsaListItems};
+  const getListName: Record<string, () => React.ReactNode> = {
+    "body": () => {
+      if (!bodySelectionId) {
+        return "body"
+      }
+      return <>
+        body {"( "}<QudInlineSprite sprite={golemData.bodies[bodySelectionId].body.render}/>{")"}
+        </>
+    },
+    "catalyst": () => {
+      if (!catalystSelectionId) {
+        return "catalyst"
+      }
+      return <>
+        catalyst {"("}{applyQudShader(exportData.Liquids[catalystSelectionId].name)}{")"}
+        </>
+    },
+    "atzmus": () => {
+      if (!atzmusSelectionEffectId) {
+        return "atzmus"
+      }
+      return <>
+        atzmus {"("}{atzmusSelectionEffectId}{", from "}<QudInlineSprite sprite={golemData.atzmuses.granters[atzmusSelectionSourceId].render}/>{")"}
+        </>
+    },
+    "armament": () => {
+      if (!weaponSelectionId) {
+        return "armament"
+      }
+      return <>
+        armament {"("}<QudInlineSprite sprite={golemData.weapons[weaponSelectionId].render}/>{")"}
+        </>
+    },
+    "incantation": () => {
+      if (!incantationSelectionId) {
+        return "incantation"
+      }
+      return <>
+        incantation {"("}{incantationSelectionId}{")"}
+        </>
+    },
+    "hamsa": () => {
+      if (!hamsaSelectionEffectId) {
+        return "hamsa"
+      }
+      return <>
+        hamsa {"("}{hamsaSelectionEffectId}{", from "}<QudInlineSprite sprite={golemData.hamsas.sources[hamsaSelectionSourceId].render}/>{")"}
+        </>
+    },
+  }
 
-  const inputColumnItems: SelectableListItem[] = Object.keys(lists).map(k => ({name: k, onSelect: () => {setColumn2ListItems(k)}, isSelected: column2ListItems === k}))
+  const inputColumnItems: SelectableListItem[] = Object.keys(lists).map(k => ({name: getListName[k] ? getListName[k]() : k, onSelect: () => {setColumn2ListItems(k)}, isSelected: column2ListItems === k}))
+
+  // const logState = () => {
+
+  //   console.log(_getSelections())
+  // }
 
   return (
     <Container h={"100vh"} p="4" /*display={"grid"}*/>
@@ -150,9 +205,10 @@ function App() {
         <GridItem overflow="auto">
           <VStack h="100%">
             <SelectableList overflow="auto" items={inputColumnItems}/>
-            <Box marginTop="auto">
+            <VStack marginTop="auto">
+              {/* <Button onClick={logState}>Log State</Button> */}
               <Button onClick={resetSelections}>Reset</Button>
-            </Box>
+            </VStack>
           </VStack>
         </GridItem>
         <GridItem colSpan={2} overflow="auto">

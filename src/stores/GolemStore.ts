@@ -18,7 +18,18 @@ const load = async () => {
     return [golemData, exportData] as const;
 }
 
-export type GolemSelectionStore = {
+export type GolemSelectionStore = GolemSelections & {
+    setBodySelection: (s: string) => void
+    setCatalystSelection: (s: string) => void
+    setAtzmusSelection: (effect: string, source: string) => void
+    setWeaponSelection: (s: string) => void
+    setIncantationSelection: (effect: string, source: string) => void
+    setHamsaSelection: (effect: string, source: string) => void
+    resetSelections: () => void
+    getSelections: () => GolemSelections
+}
+
+export type GolemSelections = {
     bodySelectionId: string
     bodySelection: GolemBody | undefined
     bodyVariant: number
@@ -34,13 +45,6 @@ export type GolemSelectionStore = {
     hamsaSelectionEffectId: string
     hamsaSelectionSourceId: string
     hamsaSelection: ConditionalGameObjectUnitGroup
-    setBodySelection: (s: string) => void
-    setCatalystSelection: (s: string) => void
-    setAtzmusSelection: (effect: string, source: string) => void
-    setWeaponSelection: (s: string) => void
-    setIncantationSelection: (effect: string, source: string) => void
-    setHamsaSelection: (effect: string, source: string) => void
-    resetSelections: () => void
 }
 
 type GolemStore = GolemSelectionStore & {
@@ -142,6 +146,26 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             set({hamsaSelectionEffectId: effect, hamsaSelectionSourceId: source, hamsaSelection: hamsaSelectionToGameObjectUnits(get().processedData.hamsas.sources[source], get().exportData.Hamsas)})
         },
         resetSelections: () => {set({...defaultSelectionState()})},
+        getSelections: () => {
+            const state = get(); 
+            return {
+                bodySelectionId: state.bodySelectionId,
+                bodySelection: state.bodySelection,
+                bodyVariant: state.bodyVariant,
+                catalystSelectionId: state.catalystSelectionId,
+                catalystSelection: state.catalystSelection,
+                atzmusSelectionEffectId: state.atzmusSelectionEffectId,
+                atzmusSelectionSourceId: state.atzmusSelectionSourceId,
+                atzmusSelection: state.atzmusSelection,
+                weaponSelectionId: state.weaponSelectionId,
+                weaponSelection: state.weaponSelection,
+                incantationSelectionId: state.incantationSelectionId,
+                incantationSelection: state.incantationSelection,
+                hamsaSelectionEffectId: state.hamsaSelectionEffectId,
+                hamsaSelectionSourceId: state.hamsaSelectionSourceId,
+                hamsaSelection: state.hamsaSelection,
+            }
+        },
         ready: false,
         processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}, muralCategories: {}, hamsas: {tagToSource: {}, sources: {}}},
         exportData: {Liquids: {}, Catalysts: {}, Incantations: {}, Hamsas: {}}
