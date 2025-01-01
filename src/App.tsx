@@ -1,4 +1,4 @@
-import { Box, Button, Center, Collapsible, Container, Grid, GridItem, List, ListItem, Text, useBreakpointValue, VStack } from "@chakra-ui/react"
+import { Box, Button, Center, Container, Grid, GridItem, List, ListItem, Text, useBreakpointValue, VStack } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import React, { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
