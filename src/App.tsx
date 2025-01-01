@@ -9,6 +9,7 @@ import { applyQudShader } from "./Colours";
 import { SourcePicker, SourcePickerContent } from "./SourcePicker";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
+import { QudInlineSprite } from "./QudInlineSprite";
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
     return Object.entries(golemData.bodies)
       .map(([k, b]) => (
         {
-          name: b.body.render.displayName, 
+          name: (<QudInlineSprite sprite={b.body.render}/>), 
           more: GetBodySpecialPropertiesElement(BuildGolemBody(b.body)),
           onSelect: () => {
             setBodySelection(k);
@@ -146,18 +147,18 @@ function App() {
   return (
     <Container h={"100vh"} p="4" /*display={"grid"}*/>
       <Grid maxW="100%" h="100%" templateColumns="repeat(5, 1fr)" gap="6">
-        <GridItem overflow="scroll">
+        <GridItem overflow="auto">
           <VStack h="100%">
-            <SelectableList overflow="scroll" items={inputColumnItems}/>
+            <SelectableList overflow="auto" items={inputColumnItems}/>
             <Box marginTop="auto">
               <Button onClick={resetSelections}>Reset</Button>
             </Box>
           </VStack>
         </GridItem>
-        <GridItem colSpan={2} overflow="scroll">
-          <SelectableList overflow="scroll" items={lists[column2ListItems] || []}/>
+        <GridItem colSpan={2} overflow="auto">
+          <SelectableList overflow="auto" items={lists[column2ListItems] || []}/>
         </GridItem>
-        <GridItem colSpan={2} display="flex">
+        <GridItem colSpan={2} display="flex" overflow="auto">
             <GolemDisplay/>
         </GridItem>
       </Grid>

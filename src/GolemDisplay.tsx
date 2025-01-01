@@ -1,4 +1,4 @@
-import { Center, VStack, Text, HStack } from "@chakra-ui/react";
+import { VStack, Text, HStack } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
@@ -74,14 +74,12 @@ export const GolemDisplay = () => {
     </>)
 
     return (
-        <Center width="100%">
-            <VStack>
-                <QudSpriteRenderer sprite={getBodyRender()} minH={"96px"}/>
-                <Text>{getBodyRender().displayName}</Text>
-                {statDisplay}
-                {GetBodySpecialPropertiesElement(stats || undefined)}
-                <GolemVariantSelection/>
-            </VStack>
-        </Center>
+        <VStack width="100%" overflow="auto">
+            <QudSpriteRenderer sprite={getBodyRender()} minH={"96px"}/>
+            <Text>{getBodyRender().displayName}</Text>
+            {statDisplay}
+            {GetBodySpecialPropertiesElement(stats || undefined)}
+            <GolemVariantSelection/>
+        </VStack>
     )
 }
