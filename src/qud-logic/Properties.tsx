@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import { AtzmusEffect, AtzmusGranter, ExportGolem, ExportMutation, ExportObjectAtzmus } from "../ExportTypes";
+import { AtzmusEffect, ExportGolem, ExportMutation, ExportObjectAtzmus, ExportObjectWeapon } from "../ExportTypes";
 import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat, IncrementPercent } from "./Stat";
 import { ConditionalGameObjectUnitGroup, GameObjectUnit } from "./GameObjectUnit";
@@ -69,6 +69,20 @@ export const ApplyGolemBodySelection = (props: QudObjectProperties) => {
     IncrementStat(props.physics.av, 10);
     BoostStat(props.attributes.strength, 3);
     BoostStat(props.attributes.toughness, 2);
+}
+
+export const WeaponToGameObjectUnits = (weapon: ExportObjectWeapon): GameObjectUnit[] => {
+
+    return [{
+        UnitDescription: `Has every ${weapon.skill} skill`,
+        UnitType: "GameObjectSkillUnit",
+        Skill: weapon.skill,
+        Power: "*",
+    }, {
+        UnitDescription: `Has metachrome limbs`,
+        UnitType: "GameObjectMetachromeUnit",
+        Skill: weapon.skill,
+    }]
 }
 
 export const ApplyStandardModifiers = (props: QudObjectProperties) => {
@@ -279,60 +293,6 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
                 {nonGuaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{r|Can't be guaranteed at ${Pluralise("level", nonGuaranteeableLevels.length)}}} ${nonGuaranteeableLevels.map(g => `{{r|${g}}} {{O|(${possibleGrantersCountByLevel[g]})}}`).join(", ")}`)}</Text>}
             </Box>)
             return base;
-        }
-    }
-}
-
-export const AtzmusListElement = ({effect, granters}: AtzmusListElementProps) => {
-
-    switch (effect.type) {
-        case "ATTRIBUTE": return (<Box>
-            {/* <Text>{applyQudShader(b.anyCertainSource ? "{{g|Can be guaranteed}}" : "{{r|Can't be guaranteed}}")}</Text> */}
-            <Text>{applyQudShader(`{{g|${effect.granters.length} possible ${Pluralise("source", effect.granters.length)}}}`)}</Text>
-        </Box>)
-        case "MUTATION": {
-
-            const allPossibleLevels = Object.keys(effect.possibleLevels);
-            const guaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => v).map(([k,v]) => k);
-            const nonGuaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => !v).map(([k,v]) => k);
-            const possibleGrantersCountByLevel = Object.entries(effect.grantersByLevel).reduce((agg: Record<string, number>, [k, v]) => {
-                agg[k] = v.length;
-                return agg;
-            }, {});
-            const allPossibleGrantersCount = Object.values(possibleGrantersCountByLevel).reduce((agg, e) => agg+e, 0)
-
-            if (allPossibleLevels.length === guaranteeableLevels.length) {
-                if (allPossibleGrantersCount === 1) {
-                    const granter = granters[Object.values(effect.grantersByLevel).flat()[0].id];
-                    return (<Box>
-                            <Text>{applyQudShader(`{{g|Guaranteeable at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)},{" "}
-                            {"only granted by "}<QudSpriteRenderer display="inline" sprite={granter.render}/>{" "}{applyQudShader(granter.render.displayName)}</Text>
-                        </Box>)
-                }
-
-                return (<Box>
-                    <Text>{applyQudShader(`{{g|Guaranteeable at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)},{" "}
-                        {applyQudShader(`{{O|${allPossibleGrantersCount} possible ${Pluralise("source", allPossibleGrantersCount)}}}`)}</Text>
-                </Box>)
-            } else if (allPossibleLevels.length === nonGuaranteeableLevels.length) {
-                if (allPossibleGrantersCount === 1) {
-                    const granter = granters[Object.values(effect.grantersByLevel).flat()[0].id];
-                    return (<Box>
-                        <Text>{applyQudShader(`{{r|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}, can't be guaranteed}}`)},{" "} 
-                            {"only granted by "}<QudSpriteRenderer display="inline" sprite={granter.render}/>{" "}{applyQudShader(granter.render.displayName)}</Text>
-                    </Box>)
-                }
-                return (<Box>
-                    <Text>{applyQudShader(`{{r|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}, can't be guaranteed}}`)},{" "} 
-                    {applyQudShader(`{{O|${allPossibleGrantersCount} possible ${Pluralise("source", allPossibleGrantersCount)}}}`)}</Text>
-                    </Box>)
-            }
-
-            return (<Box>
-                <Text>{applyQudShader(`{{g|Available at ${Pluralise("level", allPossibleLevels.length)} ${allPossibleLevels.join(", ")}}}`)}</Text>
-                {guaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{g|Can be guaranteed at ${Pluralise("level", guaranteeableLevels.length)} ${guaranteeableLevels.map(g => `{{g|${g}}} {{O|(${possibleGrantersCountByLevel[g]})}}`).join(", ")}}}`)}</Text>}
-                {nonGuaranteeableLevels.length === 0 ? null : <Text>{applyQudShader(`{{r|Can't be guaranteed at ${Pluralise("level", nonGuaranteeableLevels.length)}}} ${nonGuaranteeableLevels.map(g => `{{r|${g}}} {{O|(${possibleGrantersCountByLevel[g]})}}`).join(", ")}`)}</Text>}
-            </Box>)
         }
     }
 }

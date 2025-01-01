@@ -2,7 +2,7 @@ import { Center, VStack, Text, HStack } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
-import { ApplyConditionalGameObjectUnits, ApplyGameObjectUnits, ApplyGolemBodySelection, ApplyStandardModifiers, BuildGolemBody, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { ApplyConditionalGameObjectUnits, ApplyGameObjectUnits, ApplyGolemBodySelection, ApplyStandardModifiers, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { GolemBody } from "./ExportTypes";
@@ -11,14 +11,15 @@ import { ConditionalGameObjectUnitGroup, GameObjectUnit } from "./qud-logic/Game
 
 export const GolemDisplay = () => {
 
-    const [bodySelection, catalystSelection, atzmusSelection] = useGolemStore(useShallow(s => [s.bodySelection, s.catalystSelection, s.atzmusSelection]));
+    const [bodySelection, catalystSelection, atzmusSelection, weaponSelection] = useGolemStore(useShallow(s => [s.bodySelection, s.catalystSelection, s.atzmusSelection, s.weaponSelection]));
 
-    const computeStatsFromSelections = (b: GolemBody, catalyst: GameObjectUnit[], atzmus: ConditionalGameObjectUnitGroup) => {
+    const computeStatsFromSelections = (b: GolemBody, catalyst: GameObjectUnit[], atzmus: ConditionalGameObjectUnitGroup, weapon: GameObjectUnit[]) => {
         const ret = ComputeQudObjectProperties(b.body);
         ApplyGolemBodySelection(ret);
         ApplyStandardModifiers(ret);
         ApplyGameObjectUnits(ret, catalyst);
         ApplyConditionalGameObjectUnits(ret, atzmus);
+        ApplyGameObjectUnits(ret, weapon);
         return ret;
     }
 
@@ -26,8 +27,8 @@ export const GolemDisplay = () => {
         if (!bodySelection) {
             return null;
         }
-        return computeStatsFromSelections(bodySelection, catalystSelection, atzmusSelection);
-    }, [bodySelection, catalystSelection, atzmusSelection]);
+        return computeStatsFromSelections(bodySelection, catalystSelection, atzmusSelection, weaponSelection);
+    }, [bodySelection, catalystSelection, atzmusSelection, weaponSelection]);
 
     const getBodyRender = () => {
         if (bodySelection) {

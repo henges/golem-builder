@@ -1,7 +1,8 @@
 import { create } from 'zustand'
-import { ExportMutation, GolemBody, GolemData } from '../ExportTypes';
+import { ExportMutation, ExportObjectWeapon, GolemBody, GolemData } from '../ExportTypes';
 import { ExportData } from '../ExportData';
 import { ConditionalGameObjectUnitGroup, GameObjectAttributeUnit, GameObjectMutationUnit, GameObjectUnit } from '../qud-logic/GameObjectUnit';
+import { WeaponToGameObjectUnits } from '../qud-logic/Properties';
 
 const get = async <T>(path: string) => {
     
@@ -24,10 +25,13 @@ export type GolemSelectionStore = {
     catalystSelection: GameObjectUnit[]
     atzmusSelectionId: string
     atzmusSelection: ConditionalGameObjectUnitGroup
+    weaponSelectionId: string
+    weaponSelection: GameObjectUnit[]
     bodyVariant: number
     setBodySelection: (s: string) => void
     setCatalystSelection: (s: string) => void
     setAtzmusSelection: (s: string) => void
+    setWeaponSelection: (s: string) => void
 }
 
 type GolemStore = GolemSelectionStore & {
@@ -74,6 +78,8 @@ export const useGolemStore = create<GolemStore>((set, get) => {
         catalystSelection: [],
         atzmusSelectionId: "",
         atzmusSelection: {certain: false, units: []},
+        weaponSelectionId: "",
+        weaponSelection: [],
         setBodySelection: (s) => {
             if (!get().ready) {
                 return;
@@ -92,8 +98,14 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             }
             set({atzmusSelectionId: s, atzmusSelection: atzmusGrantsToGameObjectUnits(get().processedData.atzmuses.granters[s].grants)})
         },
+        setWeaponSelection: (s) => {
+            if (!get().ready) {
+                return;
+            }
+            set({weaponSelectionId: s, weaponSelection: WeaponToGameObjectUnits(get().processedData.weapons[s])})
+        },
         ready: false,
-        processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}},
+        processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}},
         exportData: {Liquids: {}, Catalysts: {}, Incantations: {}, Hamsas: {}}
     }
 });

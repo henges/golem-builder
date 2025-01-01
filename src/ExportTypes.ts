@@ -1,6 +1,7 @@
 export type GolemData = {
     bodies: Record<string, GolemBody>
     atzmuses: ExportAtzmusData
+    weapons: Record<string, ExportObjectWeapon>
 }
 
 export type GolemBody = {
@@ -13,6 +14,10 @@ export type GolemBody = {
 export type ExportObject = {
     id: string
     render: ExportRender
+}
+
+export type ExportObjectWeapon = ExportObject & {
+    skill: string
 }
 
 export type ExportGolem = ExportObject & {

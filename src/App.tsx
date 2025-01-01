@@ -4,14 +4,16 @@ import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
-import { BuildGolemBody, AtzmusListElement, GetBodySpecialPropertiesElement, CreateAtzmusListElement } from "./qud-logic/Properties";
+import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
 import { AtzmusSourcePicker } from "./AtzmusSourcePicker";
 import { ExportObjectAtzmus } from "./ExportTypes";
+import { QudSpriteRenderer } from "./QudSpriteRenderer";
 
 function App() {
 
-  const [ready, golemData, exportData, setBodySelection, setCatalystSelection, setAtzmusSelection] = useGolemStore(useShallow((s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection]));
+  const [ready, golemData, exportData, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection] = useGolemStore(useShallow(
+    (s) => [s.ready, s.processedData, s.exportData, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection]));
 
   const [column2ListItems, setColumn2ListItems] = useState<SelectableListItem[]>([]);
   const [atzmusModalOpen, setAtzmusModalOpen] = useState<boolean>(false);
@@ -49,6 +51,19 @@ function App() {
       }, setSelection: (s) => setAtzmusSelection(s)}));
   }, [ready, golemData]);
 
+  const weaponListItems = useMemo<SelectableListItem[]>(() => {
+    return Object.entries(golemData.weapons)
+      .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
+      .map(([k, b]) => (
+        {
+          name: ([<QudSpriteRenderer display="inline" sprite={b.render}/>, " ", applyQudShader(b.render.displayName)]), 
+          more: (<Text>{WeaponToGameObjectUnits(b)[0].UnitDescription}</Text>),
+          onSelect: () => {
+            setWeaponSelection(k);
+          }
+        }));
+  }, [ready, golemData]);
+
   const [atzmusSourcePickerContents, setAtzmusSourcePickerContents] = useState<ExportObjectAtzmus[]>([]);
 
   const inputColumnItems: SelectableListItem[] = useMemo(() => [
@@ -71,7 +86,10 @@ function App() {
       }
     }, 
     {
-      name: "armament"
+      name: "armament",
+      onSelect: () => {
+        setColumn2ListItems(weaponListItems);
+      }
     },
     {
       name: "incantation",
