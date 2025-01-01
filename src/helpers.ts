@@ -57,3 +57,29 @@ export const loadAndModifyImage = async (
   // Create a new Image element with the modified data
   return canvas.toDataURL("image/png");
 };
+
+export const modifyImage = async (imageData: ImageData, canvas: HTMLCanvasElement, f: (c: Color) => Color) => {
+  canvas.height = imageData.height;
+  canvas.width = imageData.width;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    throw new Error("Canvas context could not be created");
+  }
+  const data = imageData.data;
+
+  // Modify the image data (example: invert colors)
+  for (let i = 0; i < data.length; i += 4) {
+    var c = f({r: data[i], g: data[i+1], b: data[i+2], a: data[i+3]})
+    data[i] = c.r;
+    data[i + 1] = c.g; 
+    data[i + 2] = c.b; 
+    data[i + 3] = c.a; 
+  }
+
+  // Put the modified image data back on the canvas
+  ctx.putImageData(imageData, 0, 0);
+
+  const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve));
+
+  return URL.createObjectURL(blob!);
+}

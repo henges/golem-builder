@@ -1,10 +1,10 @@
 import { ComponentProps, useEffect, useMemo, useState } from "react"
-import { loadAndModifyImage } from "./helpers";
+import { loadAndModifyImage, modifyImage } from "./helpers";
 import { Image } from "@chakra-ui/react";
 import { ExportRender } from "./ExportTypes";
 import { parseQudColourString, formatColor, isMainColor, isDetailColor } from "./Colours";
-
-const basePath = "assets/Textures/";
+import { useImageStore } from "./stores/ImageStore";
+import { useShallow } from "zustand/shallow";
 
 export interface QudSpriteRendererProps extends ComponentProps<typeof Image> {
     sprite: ExportRender
@@ -16,21 +16,31 @@ export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) =>
         return document.createElement("canvas");
     }, []);
 
+    const getImageData = useImageStore(useShallow(s => s.getImageData));
+
     const [currentImage, setCurrentImage] = useState<string>("");
 
     const getImageUrl = async (sprite: ExportRender) => {
 
+        const perfId = `render-${sprite.tile}-${Math.floor(Math.random()*1000)}`;
+        console.time(perfId)
+
         // console.log(`Colour string for sprite ${sprite.tile}: main ${sprite.mainColour}, detail ${sprite.detailColour}`)
         const [main, detail] = parseQudColourString(sprite.mainColour, sprite.detailColour);
         // console.log(`Resolved colours for sprite ${sprite.tile}: main ${formatColor(main)}, detail ${formatColor(detail)}`)
-        return await loadAndModifyImage(basePath+sprite.tile, (c) => {
+        const imgData = await getImageData(sprite.tile);
+
+        const res = await modifyImage(imgData, canvas, (c) => {
             if (isMainColor(c)) {
                 return main;
             } else if (isDetailColor(c)) {
                 return detail;
             }
             return {r: 32, g: 32, b: 32, a: 0}
-        }, canvas);
+        });
+
+        console.timeEnd(perfId);
+        return res;
     }
 
     useEffect(() => {
