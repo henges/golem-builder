@@ -87,7 +87,7 @@ function App() {
         agg[key].sources.push(...sources);
         return agg;
       }, {});
-    console.log(effectsById);
+    // console.log(effectsById);
 
     return Object.entries(effectsById)
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
@@ -204,7 +204,7 @@ function App() {
       <Grid maxW="100%" h="100%" templateColumns="repeat(5, 1fr)" gap="6">
         <GridItem overflow="auto">
           <VStack h="100%">
-            <SelectableList overflow="auto" items={inputColumnItems}/>
+            <SelectableList width="100%" overflow="auto" items={inputColumnItems}/>
             <VStack marginTop="auto">
               {/* <Button onClick={logState}>Log State</Button> */}
               <Button onClick={resetSelections}>Reset</Button>
