@@ -1,4 +1,4 @@
-import { Button, Grid, Text, VStack } from "@chakra-ui/react";
+import { Button, Grid, Text, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { DialogRoot, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionTrigger, DialogCloseTrigger } from "./components/ui/dialog"
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { ExportRender } from "./ExportTypes";
@@ -45,6 +45,8 @@ export const SourcePicker = ({open, title, setOpen, onSave, contents}: AtzmusSou
       }
     }, [open]);
 
+    const smallScreen = useBreakpointValue({ base: true, md: false });
+
     return (
       <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)} size="xl" scrollBehavior={"inside"}>
         <DialogContent>
@@ -52,7 +54,7 @@ export const SourcePicker = ({open, title, setOpen, onSave, contents}: AtzmusSou
             <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
           <DialogBody>
-            <Grid templateColumns={"repeat(5, 1fr)"} templateRows={"1fr min-content"} gap="4" justifyItems={"center"}>
+            <Grid templateColumns={`repeat(${smallScreen ? 3 : 5}, 1fr)`} templateRows={"1fr min-content"} gap="4" justifyItems={"center"}>
                 {contents.map(e => (<SourcePickerItem element={e} selected={e.id === selected} setSelected={setSelected}/>))}
             </Grid>
           </DialogBody>

@@ -1,4 +1,4 @@
-import { Button, Container, Grid, GridItem, List, ListItem, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, Center, Collapsible, Container, Grid, GridItem, List, ListItem, Text, useBreakpointValue, VStack } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import React, { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
@@ -192,31 +192,77 @@ function App() {
     },
   }
 
-  const inputColumnItems: SelectableListItem[] = Object.keys(lists).map(k => ({name: getListName[k] ? getListName[k]() : k, onSelect: () => {setColumn2ListItems(k)}, isSelected: column2ListItems === k}))
+  const inputColumnItems: SelectableListItem[] = Object.keys(lists).map(k => ({name: getListName[k] ? getListName[k]() : k, onSelect: () => {setIsOpen(false); setColumn2ListItems(k)}, isSelected: column2ListItems === k}))
 
   // const logState = () => {
 
   //   console.log(_getSelections())
   // }
+  const isCollapsibleEnabled = useBreakpointValue({ base: true, md: false });
+  const [isOpen, setIsOpen] = useState(true);
+  const toggleCollapse = () => setIsOpen(!isOpen);
 
   return (
     <Container h={"100vh"} p="4" /*display={"grid"}*/>
-      <Grid maxW="100%" h="100%" templateColumns="repeat(5, 1fr)" gap="6">
-        <GridItem overflow="auto">
-          <VStack h="100%">
-            <SelectableList width="100%" overflow="auto" items={inputColumnItems}/>
-            <VStack marginTop="auto">
-              {/* <Button onClick={logState}>Log State</Button> */}
-              <Button onClick={resetSelections}>Reset</Button>
-            </VStack>
-          </VStack>
+      <Grid h="100%" templateRows={`repeat(${isCollapsibleEnabled ? 10 : 9}, 1fr)`}>
+        <GridItem h="100%" rowSpan={9}>
+          <Grid maxW="100%" h="100%" templateColumns={`repeat(${isCollapsibleEnabled ? 4 : 5}, 1fr)`} gap="6">
+              {isCollapsibleEnabled ? (
+                  <>
+                    {isOpen && (
+                      <Box
+                        position="absolute"
+                        top="0"
+                        left="0"
+                        width="100vw"
+                        height="100vh"
+                        bg="black"
+                        zIndex="overlay"
+                        p="4"
+                        overflow="auto"
+                      >
+                        <VStack width="100%" h="100%">
+                          <SelectableList
+                            width="100%"
+                            overflow="auto"
+                            items={inputColumnItems}
+                          />
+                          <VStack marginTop="auto">
+                            <Button onClick={resetSelections}>Reset</Button>
+                            <Button onClick={toggleCollapse}>Close</Button>
+                          </VStack>
+                        </VStack>
+                      </Box>
+                    )}
+                  </>
+                ) : (
+                <GridItem overflow="auto">
+                  <VStack width="100%" overflow="auto" h="100%">
+                    <SelectableList
+                      width="100%"
+                      overflow="auto"
+                      items={inputColumnItems}
+                    />
+                    <VStack marginTop="auto">
+                      <Button onClick={resetSelections}>Reset</Button>
+                    </VStack>
+                  </VStack>
+                </GridItem>
+                )}
+            <GridItem colSpan={2} overflow="auto">
+              <SelectableList overflow="auto" items={lists[column2ListItems] || []}/>
+            </GridItem>
+            <GridItem colSpan={2} display="flex" overflow="auto">
+                <GolemDisplay/>
+            </GridItem>
+          </Grid>
         </GridItem>
-        <GridItem colSpan={2} overflow="auto">
-          <SelectableList overflow="auto" items={lists[column2ListItems] || []}/>
-        </GridItem>
-        <GridItem colSpan={2} display="flex" overflow="auto">
-            <GolemDisplay/>
-        </GridItem>
+        {isCollapsibleEnabled ? 
+        <Center>
+          <Button onClick={toggleCollapse}>
+            {isOpen ? "" : "Other options"}
+          </Button>
+        </Center> : null}
       </Grid>
       <SourcePicker title={sourcePickerTitle} open={sourcePickerOpen} setOpen={setSourcePickerOpen} onSave={(a) => sourcePickerAction(a)} contents={sourcePickerContents}/>
     </Container>
