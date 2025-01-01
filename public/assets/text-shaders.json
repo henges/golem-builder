@@ -1,0 +1,845 @@
+{
+  "hologram": {
+    "name": "hologram",
+    "type": "sequence",
+    "pattern": ["b", "B", "C", "c"]
+  },
+  "ydfreehold": {
+    "name": "ydfreehold",
+    "type": "sequence",
+    "pattern": ["r", "R", "k", "c", "C", "W", "W", "C", "c", "r", "R"]
+  },
+  "purple": { "name": "purple", "type": "sequence", "pattern": ["m"] },
+  "paisley": {
+    "name": "paisley",
+    "type": "sequence",
+    "pattern": ["m", "M", "Y", "M", "m"]
+  },
+  "biomech": {
+    "name": "biomech",
+    "type": "sequence",
+    "pattern": ["w", "w", "r", "r", "r", "w", "r", "r"]
+  },
+  "azure": { "name": "azure", "type": "sequence", "pattern": ["B"] },
+  "keybind": { "name": "keybind", "type": "sequence", "pattern": ["W"] },
+  "rainbow": {
+    "name": "rainbow",
+    "type": "alternation",
+    "pattern": ["r", "R", "W", "G", "B", "b", "m"]
+  },
+  "important": { "name": "important", "type": "sequence", "pattern": ["W"] },
+  "metamorphic": {
+    "name": "metamorphic",
+    "type": "sequence",
+    "pattern": ["y", "y", "y", "Y", "Y", "Y", "M", "M", "M", "m", "m", "m", "m"]
+  },
+  "transkinetic": {
+    "name": "transkinetic",
+    "type": "sequence",
+    "pattern": ["Y", "C", "C", "c", "y", "K", "K", "y", "R", "W", "W", "Y"]
+  },
+  "dark red": { "name": "dark red", "type": "sequence", "pattern": ["r"] },
+  "ubernostrum": {
+    "name": "ubernostrum",
+    "type": "sequence",
+    "pattern": ["c", "g", "G", "W", "w", "c", "C", "G", "g", "w", "W"]
+  },
+  "desert camouflage": {
+    "name": "desert camouflage",
+    "type": "sequence",
+    "pattern": ["w", "w", "W", "w", "K", "w", "w", "W", "W", "K"]
+  },
+  "rocket": {
+    "name": "rocket",
+    "type": "alternation",
+    "pattern": ["Y", "W", "R", "R", "r", "y"]
+  },
+  "rubbergum": {
+    "name": "rubbergum",
+    "type": "sequence",
+    "pattern": ["W", "W", "w", "w", "y", "y", "Y", "W", "W"]
+  },
+  "visage": {
+    "name": "visage",
+    "type": "sequence",
+    "pattern": ["R", "r", "b", "B", "Y", "y"]
+  },
+  "dark keybind": {
+    "name": "dark keybind",
+    "type": "sequence",
+    "pattern": ["w"]
+  },
+  "snail-encrusted": {
+    "name": "snail-encrusted",
+    "type": "sequence",
+    "pattern": ["w", "W", "Y", "y"]
+  },
+  "dreamsmoke": {
+    "name": "dreamsmoke",
+    "type": "sequence",
+    "pattern": ["b", "b", "b", "b", "y", "Y", "Y", "W", "w", "b", "b", "b"]
+  },
+  "polarized": {
+    "name": "polarized",
+    "type": "alternation",
+    "pattern": ["K", "y", "Y", "y", "K", "y", "Y", "y", "K"]
+  },
+  "ironshank": {
+    "name": "ironshank",
+    "type": "sequence",
+    "pattern": ["K", "y", "Y", "y"]
+  },
+  "gold": { "name": "gold", "type": "sequence", "pattern": ["W"] },
+  "dark fiery": {
+    "name": "dark fiery",
+    "type": "alternation",
+    "pattern": ["r", "R", "W", "R", "r"]
+  },
+  "bethsaida": {
+    "name": "bethsaida",
+    "type": "sequence",
+    "pattern": ["w", "W", "C", "c", "m", "c", "C", "W", "w"]
+  },
+  "filthy": {
+    "name": "filthy",
+    "type": "sequence",
+    "pattern": ["w", "w", "K", "w", "K", "w", "W"]
+  },
+  "sun": { "name": "sun", "type": "alternation", "pattern": ["W", "R", "W"] },
+  "pearly": {
+    "name": "pearly",
+    "type": "sequence",
+    "pattern": ["Y", "Y", "y"]
+  },
+  "cider": { "name": "cider", "type": "solid", "pattern": ["r"] },
+  "engraved": {
+    "name": "engraved",
+    "type": "sequence",
+    "pattern": ["Y", "y", "c", "C"]
+  },
+  "coated in plasma": {
+    "name": "coated in plasma",
+    "type": "sequence",
+    "pattern": [
+      "K",
+      "K",
+      "y",
+      "g",
+      "G",
+      "Y",
+      "k",
+      "Y",
+      "Y",
+      "k",
+      "Y",
+      "G",
+      "g",
+      "y",
+      "K",
+      "K"
+    ]
+  },
+  "gaslight": {
+    "name": "gaslight",
+    "type": "alternation",
+    "pattern": ["g", "g", "w", "W", "w", "g", "g"]
+  },
+  "entropic": {
+    "name": "entropic",
+    "type": "sequence",
+    "pattern": ["K", "K", "m", "K", "K", "K", "m", "m", "K", "K", "y"]
+  },
+  "neutronic": {
+    "name": "neutronic",
+    "type": "sequence",
+    "pattern": ["B", "b", "K", "y", "Y"]
+  },
+  "lanterned": {
+    "name": "lanterned",
+    "type": "alternation",
+    "pattern": ["y", "y", "y", "y", "Y", "W", "Y", "y", "y"]
+  },
+  "dark magenta": {
+    "name": "dark magenta",
+    "type": "sequence",
+    "pattern": ["m"]
+  },
+  "scarlet": { "name": "scarlet", "type": "sequence", "pattern": ["R"] },
+  "overloaded": {
+    "name": "overloaded",
+    "type": "alternation",
+    "pattern": ["y", "y", "w", "W", "R", "W", "w", "y", "y"]
+  },
+  "dark blue": { "name": "dark blue", "type": "sequence", "pattern": ["b"] },
+  "red": { "name": "red", "type": "sequence", "pattern": ["R"] },
+  "patchwork": {
+    "name": "patchwork",
+    "type": "sequence",
+    "pattern": ["W", "w", "r", "R", "W", "w", "b", "B", "W"]
+  },
+  "nanotech": {
+    "name": "nanotech",
+    "type": "sequence",
+    "pattern": ["K", "K", "y", "K"]
+  },
+  "brainbrine": {
+    "name": "brainbrine",
+    "type": "sequence",
+    "pattern": ["g", "g", "g", "w", "W", "W", "W", "w", "g", "g", "g"]
+  },
+  "teal": { "name": "teal", "type": "sequence", "pattern": ["c"] },
+  "bee": {
+    "name": "bee",
+    "type": "alternation",
+    "pattern": ["K", "w", "W", "Y", "W", "w", "K"]
+  },
+  "cryogenic": {
+    "name": "cryogenic",
+    "type": "sequence",
+    "pattern": ["Y", "C", "C", "Y", "c", "c", "K", "y", "Y"]
+  },
+  "eater": {
+    "name": "eater",
+    "type": "sequence",
+    "pattern": ["Y", "Y", "M", "Y", "Y", "Y"]
+  },
+  "C": { "name": "C", "type": "sequence", "pattern": ["C"] },
+  "B": { "name": "B", "type": "sequence", "pattern": ["B"] },
+  "G": { "name": "G", "type": "sequence", "pattern": ["G"] },
+  "dark orange": {
+    "name": "dark orange",
+    "type": "sequence",
+    "pattern": ["o"]
+  },
+  "feathered": {
+    "name": "feathered",
+    "type": "alternation",
+    "pattern": ["C", "B", "b", "g", "G", "g", "b", "B", "C"]
+  },
+  "K": { "name": "K", "type": "sequence", "pattern": ["K"] },
+  "M": { "name": "M", "type": "sequence", "pattern": ["M"] },
+  "O": { "name": "O", "type": "sequence", "pattern": ["O"] },
+  "internals": { "name": "internals", "type": "solid", "pattern": ["W"] },
+  "R": { "name": "R", "type": "sequence", "pattern": ["R"] },
+  "prismatic": {
+    "name": "prismatic",
+    "type": "sequence",
+    "pattern": ["r", "R", "W", "G", "B", "b", "m"]
+  },
+  "W": { "name": "W", "type": "sequence", "pattern": ["W"] },
+  "lovesickness": {
+    "name": "lovesickness",
+    "type": "sequence",
+    "pattern": ["r", "R", "M", "m", "r", "R", "M"]
+  },
+  "Y": { "name": "Y", "type": "sequence", "pattern": ["Y"] },
+  "fiery": { "name": "fiery", "type": "sequence", "pattern": ["R"] },
+  "urban camouflage": {
+    "name": "urban camouflage",
+    "type": "sequence",
+    "pattern": ["y", "y", "K", "y", "K", "y", "y", "K", "y", "K"]
+  },
+  "crimson": { "name": "crimson", "type": "sequence", "pattern": ["r"] },
+  "leopard": {
+    "name": "leopard",
+    "type": "sequence",
+    "pattern": ["W", "W", "w", "w", "W", "K", "K", "w", "w", "W", "W"]
+  },
+  "ehalcodon": {
+    "name": "ehalcodon",
+    "type": "sequence",
+    "pattern": ["y", "y", "Y", "Y", "m", "Y", "Y", "y", "y"]
+  },
+  "glittering": {
+    "name": "glittering",
+    "type": "sequence",
+    "pattern": ["K", "K", "y", "M", "y", "K", "K"]
+  },
+  "ghostly": {
+    "name": "ghostly",
+    "type": "alternation",
+    "pattern": ["Y", "Y", "y", "y", "K", "K"]
+  },
+  "palladium mesh": {
+    "name": "palladium mesh",
+    "type": "sequence",
+    "pattern": ["c", "c", "c", "c", "C", "W", "Y", "W", "C"]
+  },
+  "tarnished": {
+    "name": "tarnished",
+    "type": "sequence",
+    "pattern": ["G", "G", "g"]
+  },
+  "c": { "name": "c", "type": "sequence", "pattern": ["c"] },
+  "b": { "name": "b", "type": "sequence", "pattern": ["b"] },
+  "shimmering": {
+    "name": "shimmering",
+    "type": "sequence",
+    "pattern": ["Y", "Y", "y", "y", "K", "K", "y", "y"]
+  },
+  "qon": { "name": "qon", "type": "sequence", "pattern": ["m", "b", "B"] },
+  "g": { "name": "g", "type": "sequence", "pattern": ["g"] },
+  "lava": { "name": "lava", "type": "solid", "pattern": ["R"] },
+  "earth": {
+    "name": "earth",
+    "type": "sequence",
+    "pattern": ["b", "B", "W", "g", "G"]
+  },
+  "shugruith": {
+    "name": "shugruith",
+    "type": "sequence",
+    "pattern": ["K", "y", "W", "w", "m", "w", "W", "y", "K"]
+  },
+  "k": { "name": "k", "type": "sequence", "pattern": ["k"] },
+  "peridot": {
+    "name": "peridot",
+    "type": "sequence",
+    "pattern": ["G", "g", "w", "W", "Y", "W", "G"]
+  },
+  "m": { "name": "m", "type": "sequence", "pattern": ["m"] },
+  "agolgot": {
+    "name": "agolgot",
+    "type": "sequence",
+    "pattern": ["K", "g", "w", "m", "w", "g", "K"]
+  },
+  "o": { "name": "o", "type": "sequence", "pattern": ["o"] },
+  "nectar": {
+    "name": "nectar",
+    "type": "sequence",
+    "pattern": ["W", "w", "g", "G"]
+  },
+  "zetachrome": {
+    "name": "zetachrome",
+    "type": "alternation",
+    "pattern": ["m", "M", "Y", "C", "c", "c", "C", "Y", "M", "m"]
+  },
+  "watery": {
+    "name": "watery",
+    "type": "alternation",
+    "pattern": ["B", "C", "Y", "C", "B"]
+  },
+  "turbow": {
+    "name": "turbow",
+    "type": "sequence",
+    "pattern": ["K", "y", "Y", "Y", "R", "r"]
+  },
+  "r": { "name": "r", "type": "sequence", "pattern": ["r"] },
+  "plasma": {
+    "name": "plasma",
+    "type": "sequence",
+    "pattern": ["g", "G", "Y", "Y", "G", "g"]
+  },
+  "love": {
+    "name": "love",
+    "type": "sequence",
+    "pattern": ["Y", "R", "Y", "Y"]
+  },
+  "w": { "name": "w", "type": "sequence", "pattern": ["w"] },
+  "thermo": {
+    "name": "thermo",
+    "type": "sequence",
+    "pattern": ["R", "R", "r", "c", "b", "B", "B"]
+  },
+  "y": { "name": "y", "type": "sequence", "pattern": ["y"] },
+  "telemetric": {
+    "name": "telemetric",
+    "type": "alternation",
+    "pattern": ["K", "y", "c", "C", "Y", "W", "C", "c", "y", "K"]
+  },
+  "black": { "name": "black", "type": "sequence", "pattern": ["K"] },
+  "tartan": {
+    "name": "tartan",
+    "type": "sequence",
+    "pattern": ["y", "K", "g", "G", "K", "R", "r", "K", "y"]
+  },
+  "psychalflesh": {
+    "name": "psychalflesh",
+    "type": "sequence",
+    "pattern": [
+      "w",
+      "w",
+      "w",
+      "r",
+      "R",
+      "M",
+      "M",
+      "m",
+      "M",
+      "M",
+      "R",
+      "r",
+      "w",
+      "w",
+      "w",
+      "w"
+    ]
+  },
+  "yellow": { "name": "yellow", "type": "sequence", "pattern": ["W"] },
+  "mirrorshades": {
+    "name": "mirrorshades",
+    "type": "sequence",
+    "pattern": ["K", "y", "Y", "Y", "y", "K"]
+  },
+  "white": { "name": "white", "type": "sequence", "pattern": ["Y"] },
+  "sunset": {
+    "name": "sunset",
+    "type": "alternation",
+    "pattern": [
+      "b",
+      "B",
+      "B",
+      "M",
+      "m",
+      "r",
+      "R",
+      "W",
+      "C",
+      "C",
+      "W",
+      "R",
+      "r",
+      "m",
+      "M",
+      "B",
+      "B",
+      "b"
+    ]
+  },
+  "metachrome": {
+    "name": "metachrome",
+    "type": "alternation",
+    "pattern": ["w", "W", "Y", "C", "c", "c", "C", "Y", "W", "w"]
+  },
+  "sunslag": {
+    "name": "sunslag",
+    "type": "sequence",
+    "pattern": ["r", "W", "Y", "Y", "Y", "W", "r"]
+  },
+  "structural": {
+    "name": "structural",
+    "type": "alternation",
+    "pattern": ["Y", "y", "K", "y", "Y"]
+  },
+  "psymeridian": {
+    "name": "psymeridian",
+    "type": "sequence",
+    "pattern": [
+      "K",
+      "K",
+      "y",
+      "y",
+      "y",
+      "m",
+      "M",
+      "M",
+      "M",
+      "M",
+      "m",
+      "y",
+      "y",
+      "y",
+      "K",
+      "K"
+    ]
+  },
+  "starry": {
+    "name": "starry",
+    "type": "sequence",
+    "pattern": ["K", "Y", "K", "K", "Y", "K"]
+  },
+  "extradimensional": {
+    "name": "extradimensional",
+    "type": "alternation",
+    "pattern": [
+      "M",
+      "M",
+      "m",
+      "m",
+      "y",
+      "y",
+      "Y",
+      "Y",
+      "O",
+      "Y",
+      "Y",
+      "y",
+      "m",
+      "m",
+      "M",
+      "M"
+    ]
+  },
+  "sphynx": {
+    "name": "sphynx",
+    "type": "sequence",
+    "pattern": ["C", "c", "m", "M"]
+  },
+  "blaze": {
+    "name": "blaze",
+    "type": "sequence",
+    "pattern": ["r", "r", "R", "W", "Y"]
+  },
+  "putrid": { "name": "putrid", "type": "solid", "pattern": ["K"] },
+  "amorous": {
+    "name": "amorous",
+    "type": "alternation",
+    "pattern": ["r", "R", "M", "m"]
+  },
+  "spiked": { "name": "spiked", "type": "bordered", "pattern": ["R", "Y"] },
+  "spaser": {
+    "name": "spaser",
+    "type": "sequence",
+    "pattern": ["K", "g", "G", "G", "g", "K"]
+  },
+  "ninefold": { "name": "ninefold", "type": "bordered", "pattern": ["b", "B"] },
+  "slimy": { "name": "slimy", "type": "solid", "pattern": ["g"] },
+  "skulk": {
+    "name": "skulk",
+    "type": "sequence",
+    "pattern": ["b", "b", "B", "b", "b"]
+  },
+  "silvery": { "name": "silvery", "type": "sequence", "pattern": ["Y"] },
+  "magenta": { "name": "magenta", "type": "sequence", "pattern": ["M"] },
+  "mercurial": {
+    "name": "mercurial",
+    "type": "alternation",
+    "pattern": ["c", "c", "C", "W", "Y", "W", "C", "c", "c"]
+  },
+  "graffitied": {
+    "name": "graffitied",
+    "type": "sequence",
+    "pattern": ["R", "r", "w", "W", "Y", "y", "r", "R", "W", "w"]
+  },
+  "shemesh": {
+    "name": "shemesh",
+    "type": "sequence",
+    "pattern": ["r", "r", "R", "R", "W", "W", "Y"]
+  },
+  "soul": {
+    "name": "soul",
+    "type": "alternation",
+    "pattern": ["W", "w", "c", "C", "Y", "C", "c", "w", "W"]
+  },
+  "shade": {
+    "name": "shade",
+    "type": "sequence",
+    "pattern": ["y", "K", "c", "b", "B", "y", "C", "y", "K"]
+  },
+  "dark gray": { "name": "dark gray", "type": "sequence", "pattern": ["K"] },
+  "snakeskin": {
+    "name": "snakeskin",
+    "type": "sequence",
+    "pattern": ["g", "c", "C", "G"]
+  },
+  "rusty": { "name": "rusty", "type": "sequence", "pattern": ["r"] },
+  "playernotes": { "name": "playernotes", "type": "solid", "pattern": ["Y"] },
+  "green": { "name": "green", "type": "sequence", "pattern": ["G"] },
+  "fungicide": {
+    "name": "fungicide",
+    "type": "sequence",
+    "pattern": ["M", "M", "R", "r", "K", "r", "R"]
+  },
+  "scaled": {
+    "name": "scaled",
+    "type": "sequence",
+    "pattern": ["g", "G", "W", "w", "g", "G"]
+  },
+  "hotkey": { "name": "hotkey", "type": "solid", "pattern": ["W"] },
+  "gray": { "name": "gray", "type": "sequence", "pattern": ["y"] },
+  "jungle": {
+    "name": "jungle",
+    "type": "sequence",
+    "pattern": [
+      "g",
+      "g",
+      "w",
+      "G",
+      "g",
+      "m",
+      "g",
+      "w",
+      "w",
+      "K",
+      "g",
+      "m",
+      "G",
+      "G",
+      "w"
+    ]
+  },
+  "rules": { "name": "rules", "type": "solid", "pattern": ["C"] },
+  "cloning": {
+    "name": "cloning",
+    "type": "sequence",
+    "pattern": [
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      "M",
+      "Y",
+      "M",
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      "Y"
+    ]
+  },
+  "lacquered": {
+    "name": "lacquered",
+    "type": "sequence",
+    "pattern": ["Y", "y", "K", "y", "Y", "y", "K", "y", "Y", "y"]
+  },
+  "chiral": {
+    "name": "chiral",
+    "type": "sequence",
+    "pattern": ["B", "b", "c", "C", "M", "m", "k", "m", "M", "C", "c", "b"]
+  },
+  "refractive": {
+    "name": "refractive",
+    "type": "sequence",
+    "pattern": ["y", "Y"]
+  },
+  "bio": {
+    "name": "bio",
+    "type": "sequence",
+    "pattern": ["g", "G", "W", "M", "W", "G", "g", "g", "g", "g", "g"]
+  },
+  "icy": {
+    "name": "icy",
+    "type": "alternation",
+    "pattern": ["Y", "C", "B", "C", "Y"]
+  },
+  "arctic camouflage": {
+    "name": "arctic camouflage",
+    "type": "sequence",
+    "pattern": ["y", "y", "Y", "y", "K", "y", "y", "Y", "Y", "K"]
+  },
+  "spring-turret": {
+    "name": "spring-turret",
+    "type": "sequence",
+    "pattern": ["c", "c", "C", "C", "y", "y", "y", "y", "y", "C", "C", "c", "c"]
+  },
+  "glotrot": {
+    "name": "glotrot",
+    "type": "sequence",
+    "pattern": ["K", "K", "r", "R", "r"]
+  },
+  "psionic": {
+    "name": "psionic",
+    "type": "alternation",
+    "pattern": ["b", "B", "C", "c", "b", "B", "C"]
+  },
+  "plastifer": {
+    "name": "plastifer",
+    "type": "sequence",
+    "pattern": ["K", "y", "Y", "y"]
+  },
+  "crystalline": {
+    "name": "crystalline",
+    "type": "sequence",
+    "pattern": ["m", "m", "m", "b", "B", "Y", "B", "b", "m", "m", "m"]
+  },
+  "rermadon": {
+    "name": "rermadon",
+    "type": "sequence",
+    "pattern": ["Y", "G", "g", "m", "m", "g", "G", "Y"]
+  },
+  "resonance": {
+    "name": "resonance",
+    "type": "alternation",
+    "pattern": ["c", "c", "C", "C", "W", "C", "C", "c", "c"]
+  },
+  "crochide": {
+    "name": "crochide",
+    "type": "sequence",
+    "pattern": ["g", "g", "g", "g", "g", "G"]
+  },
+  "plaid": {
+    "name": "plaid",
+    "type": "sequence",
+    "pattern": ["g", "K", "G", "W", "G"]
+  },
+  "syphon": {
+    "name": "syphon",
+    "type": "sequence",
+    "pattern": ["c", "c", "c", "C", "W", "Y"]
+  },
+  "brown": { "name": "brown", "type": "sequence", "pattern": ["w"] },
+  "quantum": {
+    "name": "quantum",
+    "type": "sequence",
+    "pattern": ["m", "m", "m", "m", "m", "m", "m", "Y", "Y", "Y", "Y", "Y"]
+  },
+  "olive": {
+    "name": "olive",
+    "type": "sequence",
+    "pattern": ["g", "g", "G", "W", "w"]
+  },
+  "beylah": {
+    "name": "beylah",
+    "type": "sequence",
+    "pattern": ["B", "b", "g", "k", "W", "R", "r"]
+  },
+  "freezing": { "name": "freezing", "type": "sequence", "pattern": ["C"] },
+  "astral": {
+    "name": "astral",
+    "type": "alternation",
+    "pattern": ["Y", "y", "K", "y", "Y"]
+  },
+  "sparkling": {
+    "name": "sparkling",
+    "type": "sequence",
+    "pattern": ["y", "y", "Y"]
+  },
+  "nervous": {
+    "name": "nervous",
+    "type": "sequence",
+    "pattern": ["g", "g", "w", "W", "w", "g", "g"]
+  },
+  "nanoneuro": {
+    "name": "nanoneuro",
+    "type": "sequence",
+    "pattern": ["r", "R", "G", "g", "K", "K", "g", "G", "R", "r", "g"]
+  },
+  "horned": { "name": "horned", "type": "bordered", "pattern": ["y", "W"] },
+  "defoliant": {
+    "name": "defoliant",
+    "type": "sequence",
+    "pattern": ["W", "W", "G", "g", "K", "g", "G"]
+  },
+  "moon": {
+    "name": "moon",
+    "type": "sequence",
+    "pattern": ["b", "B", "C", "c"]
+  },
+  "sickly": {
+    "name": "sickly",
+    "type": "sequence",
+    "pattern": ["g", "r", "m", "w", "K", "G", "g", "c", "K"]
+  },
+  "painted": {
+    "name": "painted",
+    "type": "sequence",
+    "pattern": ["r", "R", "W", "w", "g", "G", "B"]
+  },
+  "kesil": {
+    "name": "kesil",
+    "type": "sequence",
+    "pattern": ["m", "m", "M", "Y", "y"]
+  },
+  "kaleidoslug": {
+    "name": "kaleidoslug",
+    "type": "sequence",
+    "pattern": ["K", "C", "y", "m", "M", "r", "c", "C", "Y", "y", "K"]
+  },
+  "dark cyan": { "name": "dark cyan", "type": "sequence", "pattern": ["c"] },
+  "dark green": { "name": "dark green", "type": "sequence", "pattern": ["g"] },
+  "radiant": {
+    "name": "radiant",
+    "type": "sequence",
+    "pattern": ["r", "W", "Y", "Y", "Y", "W", "r"]
+  },
+  "leafy": { "name": "leafy", "type": "sequence", "pattern": ["g", "g", "G"] },
+  "qas": { "name": "qas", "type": "sequence", "pattern": ["C", "c", "m"] },
+  "lah": { "name": "lah", "type": "sequence", "pattern": ["w", "W", "R", "r"] },
+  "issachari": {
+    "name": "issachari",
+    "type": "sequence",
+    "pattern": ["Y", "Y", "Y", "Y", "Y", "Y", "r"]
+  },
+  "normalish": {
+    "name": "normalish",
+    "type": "sequence",
+    "pattern": ["y", "y", "K", "y", "Y", "y", "y", "y", "K", "y", "Y"]
+  },
+  "illuminated": {
+    "name": "illuminated",
+    "type": "sequence",
+    "pattern": ["c", "c", "c", "C", "Y", "W", "Y", "C"]
+  },
+  "levant": {
+    "name": "levant",
+    "type": "sequence",
+    "pattern": ["r", "r", "y", "y", "Y", "Y"]
+  },
+  "emote": { "name": "emote", "type": "solid", "pattern": ["w"] },
+  "hypertractor": {
+    "name": "hypertractor",
+    "type": "sequence",
+    "pattern": ["r", "R", "W", "w", "c", "C", "B", "b"]
+  },
+  "great machine": {
+    "name": "great machine",
+    "type": "sequence",
+    "pattern": ["c", "c", "C", "Y", "W", "k", "W", "Y", "C", "c", "c", "c", "c"]
+  },
+  "normal": {
+    "name": "normal",
+    "type": "sequence",
+    "pattern": ["K", "K", "y", "y", "Y", "y", "y", "K", "K", "y", "K", "y", "Y"]
+  },
+  "forest": {
+    "name": "forest",
+    "type": "sequence",
+    "pattern": ["g", "g", "w", "G", "g", "g", "w", "w", "g", "G", "G", "w"]
+  },
+  "blue": { "name": "blue", "type": "sequence", "pattern": ["B"] },
+  "electrical": { "name": "electrical", "type": "sequence", "pattern": ["W"] },
+  "hypervelocity": {
+    "name": "hypervelocity",
+    "type": "alternation",
+    "pattern": ["r", "R", "W", "Y", "W", "R", "r"]
+  },
+  "dreamy": {
+    "name": "dreamy",
+    "type": "sequence",
+    "pattern": ["b", "b", "b", "B", "M", "k", "W", "M", "B", "b", "b", "b", "b"]
+  },
+  "crysteel": {
+    "name": "crysteel",
+    "type": "alternation",
+    "pattern": ["y", "y", "K", "g", "g", "K", "y", "y"]
+  },
+  "cloudy": {
+    "name": "cloudy",
+    "type": "sequence",
+    "pattern": ["y", "y", "Y", "y", "Y", "Y"]
+  },
+  "phase-harmonic": {
+    "name": "phase-harmonic",
+    "type": "sequence",
+    "pattern": ["Y", "y", "m", "y", "K"]
+  },
+  "camouflage": {
+    "name": "camouflage",
+    "type": "sequence",
+    "pattern": ["g", "g", "G", "g", "K", "g", "g", "G", "G", "K"]
+  },
+  "implanted": {
+    "name": "implanted",
+    "type": "sequence",
+    "pattern": ["r", "r", "r", "r", "r", "r", "r", "C"]
+  },
+  "auroral": {
+    "name": "auroral",
+    "type": "sequence",
+    "pattern": ["K", "g", "G", "Y", "G", "g", "K"]
+  },
+  "opalescent": {
+    "name": "opalescent",
+    "type": "sequence",
+    "pattern": ["Y", "y", "K", "K", "y", "Y"]
+  },
+  "orange": { "name": "orange", "type": "sequence", "pattern": ["O"] },
+  "otherpearl": {
+    "name": "otherpearl",
+    "type": "sequence",
+    "pattern": ["M", "m", "y", "Y", "O", "O", "Y", "y", "m", "M"]
+  },
+  "cyan": { "name": "cyan", "type": "sequence", "pattern": ["C"] }
+}

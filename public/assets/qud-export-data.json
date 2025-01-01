@@ -1,0 +1,1704 @@
+{
+  "Liquids": {
+    "acid": {
+      "id": "acid",
+      "name": "{{G|acid}}",
+      "colors": [
+        "G",
+        "g"
+      ]
+    },
+    "algae": {
+      "id": "algae",
+      "name": "{{g|algae}}",
+      "colors": [
+        "g",
+        "C"
+      ]
+    },
+    "asphalt": {
+      "id": "asphalt",
+      "name": "{{K|asphalt}}",
+      "colors": [
+        "K",
+        "y"
+      ]
+    },
+    "blood": {
+      "id": "blood",
+      "name": "{{r|blood}}",
+      "colors": [
+        "r",
+        "K"
+      ]
+    },
+    "brainbrine": {
+      "id": "brainbrine",
+      "name": "{{brainbrine|brain brine}}",
+      "colors": [
+        "g",
+        "W"
+      ]
+    },
+    "cider": {
+      "id": "cider",
+      "name": "{{cider|cider}}",
+      "colors": [
+        "w",
+        "r"
+      ]
+    },
+    "cloning": {
+      "id": "cloning",
+      "name": "{{cloning|cloning draught}}",
+      "colors": [
+        "Y",
+        "M"
+      ]
+    },
+    "convalessence": {
+      "id": "convalessence",
+      "name": "{{C|convalessence}}",
+      "colors": [
+        "C",
+        "Y"
+      ]
+    },
+    "gel": {
+      "id": "gel",
+      "name": "{{Y|gel}}",
+      "colors": [
+        "Y",
+        "y"
+      ]
+    },
+    "goo": {
+      "id": "goo",
+      "name": "{{G|green goo}}",
+      "colors": [
+        "G",
+        "Y"
+      ]
+    },
+    "honey": {
+      "id": "honey",
+      "name": "{{w|honey}}",
+      "colors": [
+        "w",
+        "W"
+      ]
+    },
+    "ink": {
+      "id": "ink",
+      "name": "{{K|ink}}",
+      "colors": [
+        "K",
+        "y"
+      ]
+    },
+    "lava": {
+      "id": "lava",
+      "name": "{{lava|lava}}",
+      "colors": [
+        "R",
+        "r",
+        "W"
+      ]
+    },
+    "neutronflux": {
+      "id": "neutronflux",
+      "name": "{{neutronic|neutron}} {{Y|flux}}",
+      "colors": [
+        "y",
+        "Y"
+      ]
+    },
+    "oil": {
+      "id": "oil",
+      "name": "{{K|oil}}",
+      "colors": [
+        "K",
+        "Y"
+      ]
+    },
+    "ooze": {
+      "id": "ooze",
+      "name": "{{K|black ooze}}",
+      "colors": [
+        "K",
+        "y"
+      ]
+    },
+    "proteangunk": {
+      "id": "proteangunk",
+      "name": "{{c|primordial soup}}",
+      "colors": [
+        "c",
+        "C"
+      ]
+    },
+    "putrid": {
+      "id": "putrid",
+      "name": "{{putrid|putrescence}}",
+      "colors": [
+        "K",
+        "g",
+        "w"
+      ]
+    },
+    "salt": {
+      "id": "salt",
+      "name": "{{Y|salt}}",
+      "colors": [
+        "y",
+        "Y"
+      ]
+    },
+    "sap": {
+      "id": "sap",
+      "name": "{{W|sap}}",
+      "colors": [
+        "W",
+        "Y"
+      ]
+    },
+    "slime": {
+      "id": "slime",
+      "name": "{{slimy|slime}}",
+      "colors": [
+        "g",
+        "w"
+      ]
+    },
+    "sludge": {
+      "id": "sludge",
+      "name": "{{w|brown sludge}}",
+      "colors": [
+        "w",
+        "Y"
+      ]
+    },
+    "sunslag": {
+      "id": "sunslag",
+      "name": "{{sunslag|sunslag}}",
+      "colors": [
+        "Y",
+        "W",
+        "R"
+      ]
+    },
+    "warmstatic": {
+      "id": "warmstatic",
+      "name": "{{Y|warm static}}",
+      "colors": [
+        "Y",
+        "y",
+        "K"
+      ]
+    },
+    "water": {
+      "id": "water",
+      "name": "{{B|water}}",
+      "colors": [
+        "B",
+        "y",
+        "Y",
+        "b"
+      ]
+    },
+    "wax": {
+      "id": "wax",
+      "name": "{{Y|molten wax}}",
+      "colors": [
+        "Y"
+      ]
+    },
+    "wine": {
+      "id": "wine",
+      "name": "{{m|wine}}",
+      "colors": [
+        "m",
+        "r"
+      ]
+    }
+  },
+  "Catalysts": {
+    "water": [
+      {
+        "Attribute": "Hitpoints",
+        "Value": 30,
+        "Percent": true,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+30% hit points"
+      }
+    ],
+    "salt": [
+      {
+        "Attribute": "Willpower",
+        "Value": 10,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+10 Willpower"
+      }
+    ],
+    "asphalt": [
+      {
+        "Vs": "Stuck",
+        "Value": 9999,
+        "UnitType": "GameObjectSaveModifierUnit",
+        "UnitDescription": "Immune to becoming stuck"
+      },
+      {
+        "Part": {
+          "PartType": "StickOnHit",
+          "Props": {
+            "Duration": "5",
+            "Chance": 100,
+            "SaveTarget": 15,
+            "SaveVs": "Stuck Restraint"
+          }
+        },
+        "Description": "Melee attacks cause enemies to get stuck",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Melee attacks cause enemies to get stuck"
+      }
+    ],
+    "lava": [
+      {
+        "Attribute": "HeatResistance",
+        "Value": 200,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+200 heat resistance"
+      },
+      {
+        "Part": {
+          "PartType": "AttackerElementalAmplifier",
+          "Props": {
+            "Attribute": "Heat",
+            "Amplification": 60
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+60% heat damage dealt"
+      }
+    ],
+    "slime": [
+      {
+        "Vs": "Slip",
+        "Value": 9999,
+        "UnitType": "GameObjectSaveModifierUnit",
+        "UnitDescription": "Immune to slipping"
+      },
+      {
+        "Part": {
+          "PartType": "ProneOnHit",
+          "Props": {
+            "Chance": 100,
+            "SaveTarget": 25,
+            "SaveVs": "Knockdown",
+            "SaveStat": "Strength",
+            "AttackerStat": null
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Melee attacks cause enemies to be knocked prone"
+      }
+    ],
+    "oil": [
+      {
+        "Vs": "Slip",
+        "Value": 9999,
+        "UnitType": "GameObjectSaveModifierUnit",
+        "UnitDescription": "Immune to slipping"
+      },
+      {
+        "Part": {
+          "PartType": "AttackerElementalAmplifier",
+          "Props": {
+            "Attribute": "Heat",
+            "Amplification": 60
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+60% heat damage dealt"
+      }
+    ],
+    "blood": [
+      {
+        "Part": {
+          "PartType": "VampiricWeapon",
+          "Props": {
+            "Chance": 100,
+            "Percent": "10",
+            "Reduction": null,
+            "Maximum": null,
+            "WorksInMelee": false,
+            "WorksThrown": false,
+            "WorksAsProjectile": false,
+            "WorksAsAttacker": true,
+            "RealityDistortionBased": false,
+            "RequiresLivingTarget": true
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Heal for 10% of damage dealt vs. organic creatures"
+      }
+    ],
+    "acid": [
+      {
+        "Attribute": "AcidResistance",
+        "Value": 200,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+200 acid resistance"
+      },
+      {
+        "Part": {
+          "PartType": "AttackerElementalAmplifier",
+          "Props": {
+            "Attribute": "Acid",
+            "Amplification": 75
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+75% acid damage dealt"
+      }
+    ],
+    "honey": [
+      {
+        "Name": "Regeneration",
+        "Class": null,
+        "Level": 5,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Regeneration at level 5"
+      },
+      {
+        "Part": {
+          "PartType": "StickOnHit",
+          "Props": {
+            "Duration": "5",
+            "Chance": 100,
+            "SaveTarget": 15,
+            "SaveVs": "Stuck Restraint"
+          }
+        },
+        "Description": "Melee attacks cause enemies to get stuck",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Melee attacks cause enemies to get stuck"
+      }
+    ],
+    "wine": [
+      {
+        "Name": "Confusion",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Confusion at level 10"
+      },
+      {
+        "Part": {
+          "PartType": "EffectResistance",
+          "Props": {
+            "Effects": [
+              "Confusion"
+            ],
+            "Chance": 100
+          }
+        },
+        "Description": "Immune to confusion",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Immune to confusion"
+      }
+    ],
+    "sludge": [
+      {
+        "Part": {
+          "PartType": "Galvanized",
+          "Props": {
+            "Inventory": false,
+            "Equipment": true
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Equipment immune to rusting"
+      },
+      {
+        "Part": {
+          "PartType": "RustOnHit",
+          "Props": {
+            "Chance": 100,
+            "Amount": "2-4",
+            "PreferPartType": "Hand",
+            "AffectInventory": false,
+            "AffectEquipment": true
+          }
+        },
+        "Description": "Melee attacks cause 2-4 equipped enemy items to rust, starting with held items",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Melee attacks cause 2-4 equipped enemy items to rust, starting with held items"
+      }
+    ],
+    "goo": [
+      {
+        "Part": {
+          "PartType": "EffectResistance",
+          "Props": {
+            "Effects": [
+              "Poison",
+              "PoisonGasPoison"
+            ],
+            "Chance": 100
+          }
+        },
+        "Description": "Immune to poison",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Immune to poison"
+      },
+      {
+        "Part": {
+          "PartType": "AttackerElementalAmplifier",
+          "Props": {
+            "Attribute": "Poison",
+            "Amplification": 100
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+100% poison damage dealt"
+      }
+    ],
+    "putrid": [
+      {
+        "Part": {
+          "PartType": "SapOnPenetration",
+          "Props": {
+            "Chance": 100,
+            "Stat": "Toughness",
+            "Amount": "1",
+            "NaturalOnly": false
+          }
+        },
+        "Description": "Melee attacks drain 1 Toughness",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Melee attacks drain 1 Toughness"
+      }
+    ],
+    "gel": [
+      {
+        "Units": [
+          {
+            "Attribute": "HeatResistance",
+            "Value": 50,
+            "Percent": false,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "+50 heat resistance"
+          },
+          {
+            "Attribute": "ColdResistance",
+            "Value": 50,
+            "Percent": false,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "+50 cold resistance"
+          },
+          {
+            "Attribute": "ElectricResistance",
+            "Value": 50,
+            "Percent": false,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "+50 electric resistance"
+          },
+          {
+            "Attribute": "AcidResistance",
+            "Value": 50,
+            "Percent": false,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "+50 acid resistance"
+          }
+        ],
+        "Description": "+50 to all resists",
+        "UnitType": "GameObjectUnitAggregate",
+        "UnitDescription": "+50 to all resists"
+      },
+      {
+        "Attribute": "AV",
+        "Value": 3,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+3 AV"
+      }
+    ],
+    "ooze": [
+      {
+        "Vs": "Disease",
+        "Value": 9999,
+        "UnitType": "GameObjectSaveModifierUnit",
+        "UnitDescription": "Immune to disease"
+      },
+      {
+        "Name": "Corrosive Gas Generation",
+        "Class": null,
+        "Level": 5,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Corrosive Gas Generation at level 5"
+      }
+    ],
+    "cider": [
+      {
+        "Attribute": "Speed",
+        "Value": 10,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+10 quickness"
+      },
+      {
+        "Name": "Confusion",
+        "Class": null,
+        "Level": 5,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Confusion at level 5"
+      }
+    ],
+    "convalessence": [
+      {
+        "Name": "Regeneration",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Regeneration at level 10"
+      }
+    ],
+    "neutronflux": [
+      {
+        "Part": {
+          "PartType": "DetonateOnHit",
+          "Props": {
+            "Damage": "1d6",
+            "Force": 1200,
+            "Chance": 5
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "5% chance melee attacks cause a small explosion"
+      }
+    ],
+    "cloning": [
+      {
+        "Units": [
+          {
+            "Attribute": "Hitpoints",
+            "Value": -66,
+            "Percent": true,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "-66% hit points"
+          },
+          {
+            "UnitType": "GameObjectCloneUnit",
+            "UnitDescription": "Spawns with a copy in a nearby cell"
+          }
+        ],
+        "Description": "Two golems, each with one-third HP",
+        "UnitType": "GameObjectUnitAggregate",
+        "UnitDescription": "Two golems, each with one-third HP"
+      }
+    ],
+    "wax": [
+      {
+        "Attribute": "HeatResistance",
+        "Value": 50,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+50 heat resistance"
+      },
+      {
+        "Part": {
+          "PartType": "AttackerElementalAmplifier",
+          "Props": {
+            "Attribute": "Heat",
+            "Amplification": 25
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+25% heat damage dealt"
+      },
+      {
+        "Part": {
+          "PartType": "StickOnHit",
+          "Props": {
+            "Duration": "5",
+            "Chance": 100,
+            "SaveTarget": 15,
+            "SaveVs": "Stuck Restraint"
+          }
+        },
+        "Description": "Melee attacks cause enemies to get stuck",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Melee attacks cause enemies to get stuck"
+      }
+    ],
+    "ink": [
+      {
+        "Vs": "Slip",
+        "Value": 9999,
+        "UnitType": "GameObjectSaveModifierUnit",
+        "UnitDescription": "Immune to slipping"
+      },
+      {
+        "Attribute": "SP",
+        "Value": 500,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+500 skill points"
+      }
+    ],
+    "sap": [
+      {
+        "Name": "Burgeoning",
+        "Class": null,
+        "Level": 5,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Burgeoning at level 5"
+      },
+      {
+        "Part": {
+          "PartType": "StickOnHit",
+          "Props": {
+            "Duration": "5",
+            "Chance": 100,
+            "SaveTarget": 15,
+            "SaveVs": "Stuck Restraint"
+          }
+        },
+        "Description": "Melee attacks cause enemies to get stuck",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Melee attacks cause enemies to get stuck"
+      }
+    ],
+    "brainbrine": [
+      {
+        "Attribute": "MP",
+        "Value": 6,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+6 mutation points"
+      }
+    ],
+    "algae": [
+      {
+        "Name": "Burgeoning",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Burgeoning at level 10"
+      }
+    ],
+    "sunslag": [
+      {
+        "Attribute": "Speed",
+        "Value": 15,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+15 quickness"
+      }
+    ],
+    "warmstatic": [
+      {
+        "SelectionID": "Catalyst",
+        "Description": null,
+        "Amount": 2,
+        "UnitType": "GameObjectGolemQuestRandomUnit",
+        "UnitDescription": "2 random effects"
+      }
+    ]
+  },
+  "Incantations": {
+    "IsBorn": [
+      {
+        "Attribute": "AP",
+        "Value": 6,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+6 attribute points"
+      }
+    ],
+    "HasInspiringExperience": [
+      {
+        "Experience": 0,
+        "Levels": 6,
+        "UnitType": "GameObjectExperienceUnit",
+        "UnitDescription": "+6 levels"
+      }
+    ],
+    "CommitsFolly": [
+      {
+        "Experience": 0,
+        "Levels": 6,
+        "UnitType": "GameObjectExperienceUnit",
+        "UnitDescription": "+6 levels"
+      }
+    ],
+    "EnduresHardship": [
+      {
+        "Experience": 0,
+        "Levels": 6,
+        "UnitType": "GameObjectExperienceUnit",
+        "UnitDescription": "+6 levels"
+      }
+    ],
+    "Treats": [
+      {
+        "Part": {
+          "PartType": "VehiclePairBonus",
+          "Props": {
+            "Stat": "Speed",
+            "Paired": 0,
+            "Unpaired": 15
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+15 quickness when you are unpaired with the golem"
+      }
+    ],
+    "Trysts": [
+      {
+        "Part": {
+          "PartType": "VehiclePairBonus",
+          "Props": {
+            "Stat": "Speed",
+            "Paired": 15,
+            "Unpaired": 0
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+15 quickness when you are paired with the golem"
+      }
+    ],
+    "CreatesSomething": [
+      {
+        "Tier": "4-7",
+        "Amount": 4,
+        "Gigantic": true,
+        "Equippable": true,
+        "UnitType": "GameObjectTieredArmorUnit",
+        "UnitDescription": "Spawns with 4 random pieces of gigantic, mid-to-high tier armor"
+      }
+    ],
+    "FindsObject": [
+      {
+        "Tier": "4-7",
+        "Amount": 4,
+        "Gigantic": true,
+        "Equippable": true,
+        "UnitType": "GameObjectTieredArmorUnit",
+        "UnitDescription": "Spawns with 4 random pieces of gigantic, mid-to-high tier armor"
+      }
+    ],
+    "WieldsItemInBattle": [
+      {
+        "Tier": "4-7",
+        "Amount": 4,
+        "Gigantic": true,
+        "Equippable": true,
+        "UnitType": "GameObjectTieredArmorUnit",
+        "UnitDescription": "Spawns with 4 random pieces of gigantic, mid-to-high tier armor"
+      }
+    ],
+    "WeirdThingHappens": [
+      {
+        "SelectionID": "Incantation",
+        "Description": null,
+        "Amount": 2,
+        "UnitType": "GameObjectGolemQuestRandomUnit",
+        "UnitDescription": "2 random effects"
+      }
+    ],
+    "BodyExperienceBad": [
+      {
+        "Units": [
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          },
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          },
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          }
+        ],
+        "Description": "3 random body parts",
+        "UnitType": "GameObjectUnitAggregate",
+        "UnitDescription": "3 random body parts"
+      }
+    ],
+    "BodyExperienceGood": [
+      {
+        "Units": [
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          },
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          },
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          }
+        ],
+        "Description": "3 random body parts",
+        "UnitType": "GameObjectUnitAggregate",
+        "UnitDescription": "3 random body parts"
+      }
+    ],
+    "BodyExperienceNeutral": [
+      {
+        "Units": [
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          },
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          },
+          {
+            "Type": "Random",
+            "Manager": "Golem::Incantation",
+            "InsertAfter": null,
+            "OrInsertBefore": null,
+            "Category": -1,
+            "Laterality": 0,
+            "Metachromed": true,
+            "UnitType": "GameObjectBodyPartUnit",
+            "UnitDescription": "Extra random slot"
+          }
+        ],
+        "Description": "3 random body parts",
+        "UnitType": "GameObjectUnitAggregate",
+        "UnitDescription": "3 random body parts"
+      }
+    ],
+    "VisitsLocation": [
+      {
+        "Attribute": "MoveSpeed",
+        "Value": -100,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+100 move speed"
+      }
+    ],
+    "DoesBureaucracy": [
+      {
+        "Attribute": "Intelligence",
+        "Value": 5,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+5 Intelligence"
+      },
+      {
+        "Attribute": "Willpower",
+        "Value": 5,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+5 Willpower"
+      },
+      {
+        "Attribute": "Ego",
+        "Value": 5,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+5 Ego"
+      }
+    ],
+    "LearnsSecret": [
+      {
+        "Amount": 20,
+        "UnitType": "GameObjectSecretUnit",
+        "UnitDescription": "Reveals 20 secrets on creation"
+      }
+    ],
+    "DoesSomethingRad": [
+      {
+        "Attribute": "Ego",
+        "Value": 10,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+10 Ego"
+      }
+    ],
+    "DoesSomethingHumble": [
+      {
+        "Attribute": "Ego",
+        "Value": -10,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "-10 Ego"
+      },
+      {
+        "Experience": 0,
+        "Levels": 12,
+        "UnitType": "GameObjectExperienceUnit",
+        "UnitDescription": "+12 levels"
+      }
+    ],
+    "DoesSomethingDestructive": [
+      {
+        "Part": {
+          "PartType": "DoubleEdge",
+          "Props": {
+            "Dealt": 20,
+            "Received": 10
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Take 10% more damage and deal 20% more damage"
+      }
+    ],
+    "BecomesLoved": [
+      {
+        "Part": {
+          "PartType": "AdjustingAura",
+          "Props": {
+            "AdjustSpec": "&Cmotivated|Stat:Speed:5|Mult:Hitpoints:20|Stat:Strength:3|Stat:Agility:3|Stat:Toughness:3|Stat:Intelligence:3|Stat:Willpower:3|Stat:Ego:3",
+            "Duration": 3,
+            "Radius": 4,
+            "TargetingInterval": 5,
+            "RequiresParty": true,
+            "AdjustSubject": false,
+            "AdjustLeader": false
+          }
+        },
+        "Description": "+5 quickness, +20% HP, and +3 to all attributes for nearby followers",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+5 quickness, +20% HP, and +3 to all attributes for nearby followers"
+      }
+    ],
+    "MeetsWithCounselors": [
+      {
+        "Part": {
+          "PartType": "AdjustingAura",
+          "Props": {
+            "AdjustSpec": "&Cmotivated|Stat:Speed:5|Mult:Hitpoints:20|Stat:Strength:3|Stat:Agility:3|Stat:Toughness:3|Stat:Intelligence:3|Stat:Willpower:3|Stat:Ego:3",
+            "Duration": 3,
+            "Radius": 4,
+            "TargetingInterval": 5,
+            "RequiresParty": true,
+            "AdjustSubject": false,
+            "AdjustLeader": false
+          }
+        },
+        "Description": "+5 quickness, +20% HP, and +3 to all attributes for nearby followers",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+5 quickness, +20% HP, and +3 to all attributes for nearby followers"
+      }
+    ],
+    "Slays": [
+      {
+        "Part": {
+          "PartType": "CriticalThreshold",
+          "Props": {
+            "Value": 2
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+10% chance to score critical hits"
+      }
+    ],
+    "Resists": [
+      {
+        "Units": [
+          {
+            "Attribute": "HeatResistance",
+            "Value": 75,
+            "Percent": false,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "+75 heat resistance"
+          },
+          {
+            "Attribute": "ColdResistance",
+            "Value": 75,
+            "Percent": false,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "+75 cold resistance"
+          },
+          {
+            "Attribute": "ElectricResistance",
+            "Value": 75,
+            "Percent": false,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "+75 electric resistance"
+          },
+          {
+            "Attribute": "AcidResistance",
+            "Value": 75,
+            "Percent": false,
+            "UnitType": "GameObjectAttributeUnit",
+            "UnitDescription": "+75 acid resistance"
+          }
+        ],
+        "Description": "+75 to all resists",
+        "UnitType": "GameObjectUnitAggregate",
+        "UnitDescription": "+75 to all resists"
+      }
+    ],
+    "AppeasesBaetyl": [
+      {
+        "Amount": "3",
+        "Tier": "7-8",
+        "Delay": true,
+        "UnitType": "GameObjectBaetylUnit",
+        "UnitDescription": "Spawns with 3 random baetyl rewards"
+      }
+    ],
+    "CrownedSultan": [
+      {
+        "Part": {
+          "PartType": "LeaderShiftShare",
+          "Props": {
+            "RequiresAncestor": null,
+            "RequiresPart": "SultanMask"
+          }
+        },
+        "Description": "Share effects of worn sultan mask",
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Share effects of worn sultan mask"
+      }
+    ],
+    "Dies": [
+      {
+        "Part": {
+          "PartType": "RestoreOnDeath",
+          "Props": {
+            "Cooldown": 0,
+            "Health": 50,
+            "Amount": 1,
+            "CurrentCooldown": 0
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Respawns once at 50% health"
+      }
+    ]
+  },
+  "Hamsas": {
+    "Melee": [
+      {
+        "Part": {
+          "PartType": "ReduceEnergyCosts",
+          "Props": {
+            "PercentageReduction": "15",
+            "LinearReduction": null,
+            "IncludeTypes": "Melee",
+            "ExcludeTypes": null,
+            "ScopeDescription": null,
+            "UsesChargePerTurn": false,
+            "UsesChargePerEffect": false,
+            "GenerateShortDescription": true
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Provides 15% reduction in the action costs of Melee actions."
+      }
+    ],
+    "Missile": [
+      {
+        "Part": {
+          "PartType": "ReduceEnergyCosts",
+          "Props": {
+            "PercentageReduction": "25",
+            "LinearReduction": null,
+            "IncludeTypes": "Missile",
+            "ExcludeTypes": "Throw",
+            "ScopeDescription": null,
+            "UsesChargePerTurn": false,
+            "UsesChargePerEffect": false,
+            "GenerateShortDescription": true
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Provides 25% reduction in the action costs of Missile actions, except for Throw ones."
+      }
+    ],
+    "Thrown": [
+      {
+        "Part": {
+          "PartType": "ReduceEnergyCosts",
+          "Props": {
+            "PercentageReduction": "50",
+            "LinearReduction": null,
+            "IncludeTypes": "Throw",
+            "ExcludeTypes": null,
+            "ScopeDescription": null,
+            "UsesChargePerTurn": false,
+            "UsesChargePerEffect": false,
+            "GenerateShortDescription": true
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Provides 50% reduction in the action costs of Throw actions."
+      }
+    ],
+    "Protection": [
+      {
+        "Attribute": "AV",
+        "Value": 6,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+6 AV"
+      }
+    ],
+    "Death": [
+      {
+        "Part": {
+          "PartType": "FungalFortitude",
+          "Props": {
+            "AVBonus": 1,
+            "ResistBonus": 4
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+1 AV per fungal infection\n+4 to all resists per fungal infection"
+      }
+    ],
+    "Cybernetics": [],
+    "Scholarly": [
+      {
+        "Attribute": "SP",
+        "Value": 800,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+800 skill points"
+      }
+    ],
+    "Tool": [
+      {
+        "Attribute": "SP",
+        "Value": 800,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+800 skill points"
+      }
+    ],
+    "DataDisk": [],
+    "Energy": [
+      {
+        "Name": "Electrical Generation",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Electrical Generation at level 10"
+      }
+    ],
+    "Conduit": [
+      {
+        "Name": "Electrical Generation",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Electrical Generation at level 10"
+      }
+    ],
+    "Power": [
+      {
+        "Name": "Electrical Generation",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Electrical Generation at level 10"
+      }
+    ],
+    "LightSource": [
+      {
+        "Name": "Light Manipulation",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Light Manipulation at level 10"
+      }
+    ],
+    "Medical": [
+      {
+        "Name": "Regeneration",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Regeneration at level 10"
+      }
+    ],
+    "Seating": [
+      {
+        "Name": "Regeneration",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Regeneration at level 10"
+      }
+    ],
+    "Scrap": [
+      {
+        "Name": "Psychometry",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Psychometry at level 10"
+      }
+    ],
+    "Precious": [
+      {
+        "Attribute": "Ego",
+        "Value": 8,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+8 Ego"
+      }
+    ],
+    "Music": [
+      {
+        "Attribute": "Ego",
+        "Value": 8,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+8 Ego"
+      }
+    ],
+    "Beauty": [
+      {
+        "Attribute": "Ego",
+        "Value": 8,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+8 Ego"
+      }
+    ],
+    "Trinket": [
+      {
+        "Attribute": "All",
+        "Value": 2,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+2 to all stats"
+      }
+    ],
+    "Storage": [
+      {
+        "Part": {
+          "PartType": "CarryBonus",
+          "Props": {
+            "Style": "Percent",
+            "Amount": 1000,
+            "BonusApplied": false
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+1000% carry capacity"
+      }
+    ],
+    "Tonic": [
+      {
+        "Vs": "Overdosing",
+        "Value": 9999,
+        "UnitType": "GameObjectSaveModifierUnit",
+        "UnitDescription": "Immune to overdosing"
+      }
+    ],
+    "Key": [
+      {
+        "Name": "Phasing",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Phasing at level 10"
+      }
+    ],
+    "Garbage": [
+      {
+        "Part": {
+          "PartType": "TrashOracle",
+          "Props": {
+            "Bonus": 0,
+            "Magnitude": 10
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "Chance to reveal secrets via Trash Divining increased by 10x"
+      }
+    ],
+    "Food": [
+      {
+        "Attribute": "Hitpoints",
+        "Value": 25,
+        "Percent": true,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+25% hit points"
+      }
+    ],
+    "Sleep": [
+      {
+        "Name": "Sleep Gas Generation",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Sleep Gas Generation at level 10"
+      }
+    ],
+    "Corrosion": [
+      {
+        "Name": "Corrosive Gas Generation",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Corrosive Gas Generation at level 10"
+      }
+    ],
+    "Poison": [
+      {
+        "Name": "Poison Gas Generation",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Poison Gas Generation at level 10"
+      }
+    ],
+    "Normality": [
+      {
+        "Name": null,
+        "Class": "NormalityGasGeneration",
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Normality Gas Generation at level 10"
+      }
+    ],
+    "Random": [
+      {
+        "SelectionID": "Hamsa",
+        "Description": null,
+        "Amount": 2,
+        "UnitType": "GameObjectGolemQuestRandomUnit",
+        "UnitDescription": "2 random effects"
+      }
+    ],
+    "Travel": [
+      {
+        "Name": "Teleportation",
+        "Class": null,
+        "Level": 6,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Teleportation at level 6"
+      }
+    ],
+    "Confusion": [
+      {
+        "Name": "Confusion",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Confusion at level 10"
+      }
+    ],
+    "Duplication": [
+      {
+        "Name": "Temporal Fugue",
+        "Class": null,
+        "Level": 6,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Temporal Fugue at level 6"
+      }
+    ],
+    "Movement": [
+      {
+        "Attribute": "MoveSpeed",
+        "Value": -50,
+        "Percent": false,
+        "UnitType": "GameObjectAttributeUnit",
+        "UnitDescription": "+50 move speed"
+      }
+    ],
+    "Floatation": [
+      {
+        "Type": "Floating Nearby",
+        "Manager": "Golem::Hamsa",
+        "InsertAfter": "Floating Nearby",
+        "OrInsertBefore": null,
+        "Category": -1,
+        "Laterality": 0,
+        "Metachromed": false,
+        "UnitType": "GameObjectBodyPartUnit",
+        "UnitDescription": "Extra Floating Nearby slot"
+      }
+    ],
+    "Maps": [
+      {
+        "Name": "Clairvoyance",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Clairvoyance at level 10"
+      }
+    ],
+    "Fire": [
+      {
+        "Part": {
+          "PartType": "ThermalAmp",
+          "Props": {
+            "HeatDamage": 75,
+            "ColdDamage": 0,
+            "ModifyHeat": 75,
+            "ModifyCold": 0
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+75% heat damage dealt\n+75% to the intensity of your heating effects"
+      }
+    ],
+    "Heat": [
+      {
+        "Part": {
+          "PartType": "ThermalAmp",
+          "Props": {
+            "HeatDamage": 75,
+            "ColdDamage": 0,
+            "ModifyHeat": 75,
+            "ModifyCold": 0
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+75% heat damage dealt\n+75% to the intensity of your heating effects"
+      }
+    ],
+    "Ice": [
+      {
+        "Part": {
+          "PartType": "ThermalAmp",
+          "Props": {
+            "HeatDamage": 0,
+            "ColdDamage": 75,
+            "ModifyHeat": 0,
+            "ModifyCold": 75
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+75% cold damage dealt\n+75% to the intensity of your cooling effects"
+      }
+    ],
+    "Cold": [
+      {
+        "Part": {
+          "PartType": "ThermalAmp",
+          "Props": {
+            "HeatDamage": 0,
+            "ColdDamage": 75,
+            "ModifyHeat": 0,
+            "ModifyCold": 75
+          }
+        },
+        "Description": null,
+        "UnitType": "GameObjectPartUnit",
+        "UnitDescription": "+75% cold damage dealt\n+75% to the intensity of your cooling effects"
+      }
+    ],
+    "Time": [
+      {
+        "Name": "Time Dilation",
+        "Class": null,
+        "Level": 8,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Time Dilation at level 8"
+      }
+    ],
+    "Flight": [
+      {
+        "Name": "Wings",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Wings at level 10"
+      }
+    ],
+    "Figurine": [
+      {
+        "Faction": "Snapjaws",
+        "Type": "Figurine",
+        "Value": 1000,
+        "Silent": false,
+        "UnitType": "GameObjectReputationUnit",
+        "UnitDescription": "+1000 reputation with snapjaws"
+      }
+    ],
+    "Explosive": [
+      {
+        "Name": "Stunning Force",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Stunning Force at level 10"
+      }
+    ],
+    "Stun": [
+      {
+        "Name": "Stunning Force",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Stunning Force at level 10"
+      }
+    ],
+    "Electromagnetic": [
+      {
+        "Name": "Electromagnetic Pulse",
+        "Class": null,
+        "Level": 10,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Electromagnetic Pulse at level 10"
+      }
+    ],
+    "Repulsive": [
+      {
+        "Name": "Socially Repugnant",
+        "Class": null,
+        "Level": 1,
+        "Enhance": true,
+        "ShouldShowLevel": true,
+        "UnitType": "GameObjectMutationUnit",
+        "UnitDescription": "Socially Repugnant at level 1"
+      }
+    ]
+  }
+}
