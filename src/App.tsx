@@ -1,4 +1,4 @@
-import { Box, Center, Container, Grid, GridItem, List, ListItem, Text } from "@chakra-ui/react"
+import { Container, Grid, GridItem, List, ListItem, Text } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
@@ -72,7 +72,7 @@ function App() {
   const incantationListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(exportData.Incantations)
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
-      .filter(([k,b]) => golemData.muralCategories[k])
+      .filter(([k,_b]) => golemData.muralCategories[k])
       .map(([k, b]) => (
         {
           name: (<Text>{b.map(gou => gou.UnitDescription).join(", ")}</Text>), 

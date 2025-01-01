@@ -7,7 +7,7 @@ export interface ImageStore {
     spritemap: Spritemap
     canvas: HTMLCanvasElement | null
     ready: boolean
-    data: Uint8ClampedArray<ArrayBufferLike>
+    data: Uint8ClampedArray
     width: number
     height: number
     getImageData: (s: string) => Promise<ImageData>
@@ -37,7 +37,7 @@ const load = async () => {
 
 const [spriteX, spriteY] = [16, 24];
 
-const getImageDataQuick = (x: number, y: number, outWidth: number, outHeight: number, width:number, d: Uint8ClampedArray<ArrayBufferLike>, ctx: string) => {
+const getImageDataQuick = (x: number, y: number, outWidth: number, outHeight: number, width:number, d: Uint8ClampedArray) => {
 	var arr = new Uint8ClampedArray(outWidth*outHeight*4);
     let bufIdx = 0;
     const yMax = outHeight+y;
@@ -82,7 +82,7 @@ export const useImageStore = create<ImageStore>((set, get) => {
         getImageData: async (s: string) => {
             await prom;
 
-            const {spritemap, data, width, height, ready} = get();
+            const {spritemap, data, width} = get();
             // if (!ready || spritemap === null || canvas === null) {
             //     return null;
             // }
@@ -90,7 +90,7 @@ export const useImageStore = create<ImageStore>((set, get) => {
                 throw new Error(`no spritemap entry for sprite ${s}`)
             }
             const {x, y} = spritemap[s];
-            const buf = getImageDataQuick(x*spriteX, y*spriteY, spriteX, spriteY, width, data, s);
+            const buf = getImageDataQuick(x*spriteX, y*spriteY, spriteX, spriteY, width, data);
 
             const ret = new ImageData(buf, spriteX, spriteY);
             return ret;

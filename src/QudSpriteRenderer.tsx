@@ -1,8 +1,8 @@
 import { ComponentProps, useEffect, useMemo, useState } from "react"
-import { loadAndModifyImage, modifyImage } from "./helpers";
+import { modifyImage } from "./helpers";
 import { Image } from "@chakra-ui/react";
 import { ExportRender } from "./ExportTypes";
-import { parseQudColourString, formatColor, isMainColor, isDetailColor } from "./Colours";
+import { parseQudColourString, isMainColor, isDetailColor } from "./Colours";
 import { useImageStore } from "./stores/ImageStore";
 import { useShallow } from "zustand/shallow";
 

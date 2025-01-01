@@ -1,4 +1,4 @@
-import React, { cloneElement } from "react";
+import React from "react";
 import {Text} from '@chakra-ui/react';
 import { QudShader, textShaders } from "./ShaderData";
 

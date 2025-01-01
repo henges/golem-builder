@@ -1,7 +1,7 @@
 import { useShallow } from "zustand/shallow";
 import { useGolemStore } from "./stores/GolemStore";
 import { ExportObject, GolemBody } from "./ExportTypes";
-import { Box, VStack, Text, Grid, GridItem } from "@chakra-ui/react";
+import { VStack, Grid, GridItem } from "@chakra-ui/react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { Tooltip } from "./components/ui/tooltip";
 import { applyQudShader } from "./Colours";

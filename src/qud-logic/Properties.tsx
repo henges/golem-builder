@@ -244,8 +244,8 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
         case "MUTATION": {
 
             const allPossibleLevels = Object.keys(effect.possibleLevels);
-            const guaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => v).map(([k,v]) => k);
-            const nonGuaranteeableLevels = Object.entries(effect.possibleLevels).filter(([k, v]) => !v).map(([k,v]) => k);
+            const guaranteeableLevels = Object.entries(effect.possibleLevels).filter(([_k, v]) => v).map(([k,_v]) => k);
+            const nonGuaranteeableLevels = Object.entries(effect.possibleLevels).filter(([_k, v]) => !v).map(([k,_v]) => k);
             const possibleGrantersCountByLevel = Object.entries(effect.grantersByLevel).reduce((agg: Record<string, number>, [k, v]) => {
                 agg[k] = v.length;
                 return agg;

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { ExportMutation, ExportObjectHamsa, ExportObjectWeapon, GolemBody, GolemData } from '../ExportTypes';
+import { ExportMutation, ExportObjectHamsa, GolemBody, GolemData } from '../ExportTypes';
 import { Effects, ExportData } from '../ExportData';
 import { ConditionalGameObjectUnitGroup, GameObjectAttributeUnit, GameObjectMutationUnit, GameObjectUnit } from '../qud-logic/GameObjectUnit';
 import { GetValidHamsaEffectsForObj, WeaponToGameObjectUnits } from '../qud-logic/Properties';
