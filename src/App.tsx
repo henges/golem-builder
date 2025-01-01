@@ -46,10 +46,10 @@ function App() {
       .map(([k, b]) => CreateAtzmusListElement({name: k, effect: b, granters: golemData.atzmuses.granters, showModal: (a) => {
         setSourcePickerTitle("Select an atzmus source");
         setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => (
-          [
-            e.grants.filter(g => typeof(g) === "string").map(s => <Text>{s}</Text>),
-            e.grants.filter(g => typeof(g) === "object").map(g => (<Text>{g.name} {g.level}</Text>))
-          ]
+          <List.Root minW={"100%"} textAlign={e.grants.length === 1 ? "center" : "left"}>
+            {e.grants.filter(g => typeof(g) === "string").map(s => <ListItem>{s}</ListItem>)}
+            {e.grants.filter(g => typeof(g) === "object").map(g => (<ListItem>{g.name} {g.level}</ListItem>))}
+          </List.Root>
         )})));
         setSourcePickerAction(() => (s: string) => s !== undefined && setAtzmusSelection(s));
         setSourcePickerOpen(true);
@@ -89,15 +89,17 @@ function App() {
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
       .map(([k, b]) => CreateHamsaListElement({name: b.flatMap(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "), effects: exportData.Hamsas, granters: golemData.hamsas.tagToSource[k], allGranters: golemData.hamsas.sources, showModal: (a) => {
         setSourcePickerTitle("Select a hamsa source");
-        setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => (
-          [
-            <Text>{e.semanticTags
-                .map(t => exportData.Hamsas[t] || [])
-                .flatMap(gous => gous.map(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "))
-                .filter(d => d.length > 0)
-                .join(" OR ")}</Text> 
-          ]
-        )})));
+        setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => {
+          const items = e.semanticTags
+            .map(t => exportData.Hamsas[t] || [])
+            .flatMap(gous => gous.map(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "))
+            .filter(d => d.length > 0);
+          return (
+            <List.Root minW={"100%"} textAlign={items.length === 1 ? "center" : "left"}>
+              {items.map(d => (<ListItem>{d}</ListItem>))} 
+            </List.Root>
+          ) 
+        } })));
         setSourcePickerAction(() => (s: string) => s !== undefined && setHamsaSelection(s));
         setSourcePickerOpen(true);
       }, setSelection: (s) => setHamsaSelection(s)}));
@@ -145,7 +147,7 @@ function App() {
         setColumn2ListItems(hamsaListItems);
       }
     },
-  ], [bodyListItems]);
+  ], [bodyListItems, catalystListItems, atzmusListItems, weaponListItems, incantationListItems, hamsaListItems]);
 
   return (
     <Container h={"100vh"} p="4" /*display={"grid"}*/>

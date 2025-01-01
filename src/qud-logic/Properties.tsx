@@ -235,10 +235,11 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
     switch (effect.type) {
         case "ATTRIBUTE": {
             
+            const gs = effect.granters.filter(g => g.certain).map(g => granters[g.id]);
             base.more = (<Box>
-                <Text>{applyQudShader(`{{g|${effect.granters.length} possible ${Pluralise("source", effect.granters.length)}}}`)}</Text>
+                <Text>{applyQudShader(`{{g|${gs.length} possible ${Pluralise("source", gs.length)}}}`)}</Text>
             </Box>)
-            base.onSelect = () => {showModal(effect.granters.map(g => granters[g.id]))}
+            base.onSelect = () => {showModal(gs)}
             return base;
         }
         case "MUTATION": {
@@ -391,6 +392,7 @@ const GetBodyInterestingStats = (props: QudObjectProperties) => {
         }
     }
 
+    interestingIfNotEqual(props.physics.hp, "HP", 500);
     interestingIfNotEqual(props.physics.av, "AV", 10);
     interestingIfNotEqual(props.physics.dv, "DV", 0);
     interestingIfNotEqual(props.physics.quickness, "Quickness", 100);

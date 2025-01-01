@@ -3,7 +3,7 @@ import { DialogRoot, DialogContent, DialogHeader, DialogTitle, DialogBody, Dialo
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { ExportRender } from "./ExportTypes";
 import { applyQudShader } from "./Colours";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface AtzmusSourcePickerProps {
   open: boolean;
@@ -19,27 +19,41 @@ export interface SourcePickerContent {
   more: () => React.ReactNode;
 }
 
+interface SourcePickerItemProps {
+  selected: boolean
+  element: SourcePickerContent
+  setSelected: (s: string) => void;
+}
+
+const SourcePickerItem = ({selected: isSelected, element, setSelected}: SourcePickerItemProps) => {
+  
+  return <VStack minW="100%" as="button" _hover={{ bg: isSelected ? "gray.500" : "gray.700" }} 
+    bg={isSelected ? "gray.500" : "none"} p="1" borderRadius={"md"} onClick={() => setSelected(element.id)}>
+    <QudSpriteRenderer minH="48px" sprite={element.render}/>
+    <Text>{applyQudShader(element.render.displayName)}</Text>
+    {element.more()}
+  </VStack>
+}
+
 export const SourcePicker = ({open, title, setOpen, onSave, contents}: AtzmusSourcePickerProps) => {
 
     const [selected, setSelected] = useState<string | undefined>();
 
+    useEffect(() => {
+      if (open) {
+        setSelected(undefined);
+      }
+    }, [open]);
+
     return (
-      <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)} size="lg" scrollBehavior={"inside"}>
+      <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)} size="xl" scrollBehavior={"inside"}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
           <DialogBody>
-            <Grid templateColumns={"repeat(5, 1fr)"} gap="4" justifyItems={"center"}>
-                {contents.map(e => (
-                    <VStack>
-                        <IconButton minH="max-content" _hover={{ bg: "gray.700" }} bg={e.id === selected ? "gray.500" : "none"} onClick={() => setSelected(e.id)}>
-                            <QudSpriteRenderer minH="48px" sprite={e.render}/>
-                        </IconButton>
-                        <Text>{applyQudShader(e.render.displayName)}</Text>
-                        {e.more()}
-                    </VStack>
-            ))}
+            <Grid templateColumns={"repeat(5, 1fr)"} templateRows={"1fr min-content"} gap="4" justifyItems={"center"}>
+                {contents.map(e => (<SourcePickerItem element={e} selected={e.id === selected} setSelected={setSelected}/>))}
             </Grid>
           </DialogBody>
           <DialogFooter>
