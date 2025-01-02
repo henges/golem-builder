@@ -1990,9 +1990,6 @@
           "Foot",
           "Foot",
           "Foot"
-        ],
-        [
-          "*RANDOM*"
         ]
       ],
       "patternMap": {
@@ -2002,8 +1999,8 @@
         "Deep Slumberling": 1,
         "Bears Cherub": 0,
         "Mechanical Bears Cherub": 0,
-        "Chairbear": 2,
-        "GritGateChairbear": 2,
+        "Chairbear": 1,
+        "GritGateChairbear": 1,
         "TutorialBear": 0
       }
     },
@@ -4446,7 +4443,7 @@
       ],
       "patterns": [
         [
-          "*RANDOM*"
+          "Body"
         ]
       ],
       "patternMap": {
@@ -14857,9 +14854,6 @@
           "Head"
         ],
         [
-          "*RANDOM*"
-        ],
-        [
           "Face"
         ],
         [
@@ -14881,17 +14875,17 @@
         "ClockworkBeetle": 0,
         "Glowmoth": 1,
         "Salthopper": 0,
-        "Agolfly": 2,
+        "Agolfly": 1,
         "Fire ant": 0,
         "Quillipede": 0,
         "Worker ant": 0,
         "Fire Ant Queen": 0,
         "Adiyy": 0,
-        "Agolzvuv": 3,
-        "Mirror Bug": 2,
+        "Agolzvuv": 2,
+        "Mirror Bug": 1,
         "Gamma Moth": 0,
-        "Insects Cherub": 2,
-        "Mechanical Insects Cherub": 2,
+        "Insects Cherub": 1,
+        "Mechanical Insects Cherub": 1,
         "TutorialClockworkBeetlePariah": 0
       }
     },
@@ -17590,7 +17584,7 @@
       "patternMap": {
         "Honey Skunk": 0,
         "Crypt Ferret": 0,
-        "Rhinox": 1,
+        "Rhinox": 0,
         "Monad": 1,
         "Star Kraken": 1,
         "CherubimSpawn1A": 1,
@@ -24738,9 +24732,6 @@
       ],
       "patterns": [
         [
-          "*RANDOM*"
-        ],
-        [
           "Body"
         ]
       ],
@@ -24750,8 +24741,8 @@
         "Addling Urchin": 0,
         "Junk Dollar": 0,
         "Yd Junk Dollar": 0,
-        "Urchins Cherub": 1,
-        "Mechanical Urchins Cherub": 1
+        "Urchins Cherub": 0,
+        "Mechanical Urchins Cherub": 0
       }
     },
     "Urshiib Golem": {
@@ -28843,9 +28834,6 @@
         ],
         [
           "Body"
-        ],
-        [
-          "*RANDOM*"
         ]
       ],
       "patternMap": {
@@ -28859,7 +28847,7 @@
         "Worm of the Earth": 0,
         "Agolmaggot": 0,
         "Girshworm": 1,
-        "Waveform Worm": 2,
+        "Waveform Worm": 1,
         "Bone Worm": 1,
         "Trining Lamprey": 0,
         "Saltwurm": 1,
@@ -43679,6 +43667,14 @@
         "Thistle Pitcher",
         "Boosterbot_Gun",
         "Lead Slug",
+        "Desert Rifle",
+        "Carbine",
+        "Chain Pistol",
+        "Sniper Rifle",
+        "Laser Rifle",
+        "Eigenrifle",
+        "Light Rail",
+        "Spaser Rifle",
         "Phase Cannon",
         "Short Bow",
         "Compound Bow",
@@ -43694,6 +43690,7 @@
         "Crysteel Arrow",
         "Flawless Crysteel Arrow",
         "Zetachrome Arrow",
+        "Grenade Launcher",
         "HE Missile",
         "Flamethrower",
         "Defoliant Gas Pump",
@@ -43705,13 +43702,20 @@
         "Semi-Automatic Pistol",
         "Grappling Gun",
         "Laser Pistol",
+        "Eigenpistol",
         "Arc Winder",
         "Nullray Pistol",
+        "Hand Rail",
+        "Di-Thermo Beam",
+        "Blood-Gradient Hand Vacuum",
+        "Spaser Pistol",
         "Space Inverter",
         "High-Voltage Arc Winder",
         "Psychal Fleshgun",
         "Longreach Grappling Gun",
         "Shotgun Shell",
+        "Pump Shotgun",
+        "Combat Shotgun",
         "Ruin of House Isner",
         "Clue_SplinteredWeaponHaft",
         "Clue_BloodyArrow"
@@ -43727,14 +43731,27 @@
         "Pestle",
         "Staff",
         "Walking Stick",
+        "Mace2",
+        "Warhammer2",
         "Steel War Hammer",
+        "Steel War Hammerth",
         "Steel Hammer",
         "Shillelagh",
         "Billowing Conch of the Aji",
+        "Amber-Tipped Staff",
+        "Cudgel3",
+        "Cudgel3th",
         "Cudgel4",
+        "Cudgel4th",
+        "Cudgel5",
+        "Cudgel5th",
         "Cudgel6",
+        "Cudgel6th",
         "Cudgel7",
+        "Cudgel7th",
         "Cudgel8",
+        "Cudgel8th",
+        "Maghammer",
         "Stun Rod",
         "Prayer Rod",
         "Syphon Baton",
@@ -43763,24 +43780,44 @@
         "Iron Vinereaper",
         "Battle Axe2",
         "Steel Battle Axe",
+        "Steel Battle Axeth",
         "Steel Hand Axe",
         "Opal-Pommeled Steel Axe",
         "Steel Vinereaper",
+        "Battle Axe3",
+        "Battle Axe3th",
         "Battle Axe4",
+        "Battle Axe4th",
+        "Battle Axe5",
+        "Battle Axe5th",
         "Battle Axe6",
+        "Battle Axe6th",
         "Battle Axe7",
+        "Battle Axe7th",
         "Battle Axe8",
+        "Battle Axe8th",
         "Stun Whip",
         "Leather Whip",
         "Long Sword",
+        "Two-Handed Sword",
         "Long Sword2",
+        "Long Sword2th",
         "Steel Long Sword",
+        "Steel Long Swordth",
+        "Long Sword3",
+        "Long Sword3th",
         "Long Sword4",
+        "Long Sword4th",
+        "Long Sword5",
+        "Long Sword5th",
         "Long Sword6",
+        "Long Sword6th",
         "Long Sword7",
+        "Long Sword7th",
         "Sharpened Polyp",
         "Ceremonial Khopesh",
         "Long Sword8",
+        "Long Sword8th",
         "Vibro Blade",
         "Shayna",
         "Ari",
@@ -43806,6 +43843,7 @@
         "FulleriteFist",
         "ForceKnife",
         "CrysteelFist",
+        "Nanopneumatic Jackhammer",
         "Clue_SplinteredWeaponHaft",
         "Clue_BloodyArrow"
       ],
@@ -43814,6 +43852,7 @@
         "Poison-tipped Spear",
         "Geomagnetic Disc",
         "ThrowingAxe",
+        "CastNet",
         "SleepGasGrenade1",
         "SleepGasGrenade2",
         "SleepGasGrenade3",
@@ -43920,6 +43959,7 @@
         "ElderFireBreatherGlandPaste",
         "Congealed Blaze",
         "Flamethrower",
+        "Di-Thermo Beam",
         "HeatGrenade1",
         "HeatGrenade2",
         "HeatGrenade3"
@@ -43947,6 +43987,7 @@
         "Compass Bracelet",
         "Precinct Navigator",
         "Displacer Bracelet",
+        "Ninefold Boots",
         "Blank Recoiler",
         "Joppa Recoiler",
         "Grit Gate Recoiler",
@@ -43969,6 +44010,7 @@
         "IceBreatherGlandPaste",
         "ElderIceBreatherGlandPaste",
         "CorrosiveBreatherGlandPaste",
+        "Di-Thermo Beam",
         "ColdGrenade1",
         "ColdGrenade2",
         "ColdGrenade3"
@@ -44049,7 +44091,9 @@
         "Sliced Bop Cheek",
         "Sandals of the River-Wives",
         "Elastyne Slippers",
-        "Yeshyrskin Slippers"
+        "Spring Boots",
+        "Yeshyrskin Slippers",
+        "Rocket Skates"
       ],
       "Random": [
         "Canned Have-It-All",
@@ -44073,6 +44117,12 @@
         "WedgeChest1",
         "Bottle",
         "Wide Bottle",
+        "Pitcher",
+        "Ewer",
+        "Jug",
+        "Long Jug",
+        "Recoming Water Jug",
+        "Melted Jug",
         "Spraybottle",
         "Oilskin",
         "Camel Bladder",
@@ -44085,28 +44135,43 @@
       ],
       "Contemporary": [
         "Waterskin",
+        "Catchbasin",
         "Canvas Folding Chair",
         "Bottle",
         "Wide Bottle",
+        "Pitcher",
+        "Ewer",
+        "Jug",
+        "Long Jug",
+        "Recoming Water Jug",
+        "Melted Jug",
+        "Hookah",
         "AppleSign1",
         "Club",
         "Wrench",
         "Pestle",
         "Staff",
         "Walking Stick",
+        "Mace2",
         "Shillelagh",
         "Dagger",
         "Battle Axe",
         "Hand Axe",
         "Iron Vinereaper",
         "Long Sword",
+        "Two-Handed Sword",
         "Sharpened Polyp",
+        "Desert Rifle",
         "Short Bow",
         "Compound Bow",
         "Dart Gun",
         "Borderlands Revolver",
+        "Pump Shotgun",
+        "Combat Shotgun",
         "Ruin of House Isner",
         "ThrowingAxe",
+        "CastNet",
+        "Studded Leather Armor",
         "Quilted Shawl",
         "Scarlet Shawl",
         "Wide-brimmed Hat",
@@ -44115,6 +44180,7 @@
         "Sandals",
         "Croccasins",
         "Sandals of the River-Wives",
+        "Steel Buckler",
         "StandaloneMarkovBook",
         "FocalCookbook",
         "BloodstainedSheaf",
@@ -44156,11 +44222,20 @@
         "Wire Strand",
         "Clue_BulgingWaterskin"
       ],
+      "Basic": [
+        "Catchbasin",
+        "Folding Cot",
+        "Hammock"
+      ],
+      "Water": [
+        "Catchbasin"
+      ],
       "InsideFurniture": [
         "Bedroll",
         "Folding Cot",
         "Hammock",
         "Canvas Folding Chair",
+        "Work Chair",
         "Chest",
         "FossilizedRemains",
         "RustLocker",
@@ -44170,6 +44245,7 @@
         "Gun Rack",
         "Armor Rack",
         "WedgeChest1",
+        "Hookah",
         "AppleSign1",
         "Clue_VillageStores"
       ],
@@ -44178,6 +44254,7 @@
         "Folding Cot",
         "Hammock",
         "Canvas Folding Chair",
+        "Work Chair",
         "Chest",
         "FossilizedRemains",
         "RustLocker",
@@ -44187,6 +44264,7 @@
         "Gun Rack",
         "Armor Rack",
         "WedgeChest1",
+        "Hookah",
         "AppleSign1",
         "Clue_VillageStores"
       ],
@@ -44195,6 +44273,7 @@
         "Folding Cot",
         "Hammock",
         "Canvas Folding Chair",
+        "Work Chair",
         "Chest",
         "FossilizedRemains",
         "RustLocker",
@@ -44206,19 +44285,38 @@
         "WedgeChest1",
         "Bottle",
         "Wide Bottle",
+        "Pitcher",
+        "Ewer",
+        "Jug",
+        "Long Jug",
+        "Recoming Water Jug",
+        "Melted Jug",
+        "Hookah",
         "AppleSign1",
         "Clue_VillageStores"
       ],
-      "Basic": [
-        "Folding Cot",
-        "Hammock"
-      ],
       "Seating": [
-        "Canvas Folding Chair"
+        "Canvas Folding Chair",
+        "Work Chair"
+      ],
+      "Professional": [
+        "Work Chair"
       ],
       "LiquidStorage": [
         "Bottle",
-        "Wide Bottle"
+        "Wide Bottle",
+        "Pitcher",
+        "Ewer",
+        "Jug",
+        "Long Jug",
+        "Recoming Water Jug",
+        "Melted Jug"
+      ],
+      "Luxury": [
+        "Hookah"
+      ],
+      "Centerpiece": [
+        "Hookah"
       ],
       "Maps": [
         "AppleSign1",
@@ -44234,12 +44332,25 @@
       ],
       "Historical": [
         "Cudgel8",
+        "Cudgel8th",
         "Dagger8",
         "Battle Axe8",
+        "Battle Axe8th",
         "Ceremonial Khopesh",
         "Long Sword8",
+        "Long Sword8th",
+        "Laser Rifle",
+        "Eigenrifle",
+        "Light Rail",
+        "Spaser Rifle",
         "Phase Cannon",
         "Laser Pistol",
+        "Eigenpistol",
+        "Hand Rail",
+        "Spaser Pistol",
+        "Zetachrome Apex",
+        "Zetachrome Gloves",
+        "Zetachrome Pumps",
         "Stopsvaalinn",
         "The Kesil Face",
         "The Shemesh Face",
@@ -44324,6 +44435,7 @@
       "Protection": [
         "Black Robes",
         "Ash-Stained Robes",
+        "Furs",
         "Woven Tunic",
         "Cloth Robe",
         "Wool Kilt",
@@ -44331,13 +44443,25 @@
         "Filthy Toga",
         "Leather Apron",
         "Cloth Overalls",
+        "Bark Armor",
+        "Leather Armor",
+        "Vine-Weave Tunic",
+        "Studded Leather Armor",
         "Pocketed Vest",
         "Sooty Smock",
         "Slate Frock",
         "Umber Frock",
+        "Ring Mail",
         "Elastyne Skin Suit",
+        "Patchwork Coat",
         "Slate Mantle",
         "Flexivest",
+        "Rubber Suit",
+        "Plastifer Jerkin",
+        "Plastifer Chem Vest",
+        "Leafy Vest",
+        "Nanoweave Vest",
+        "Gas Tumbler",
         "Quilted Shawl",
         "Worn Burnoose",
         "Albino Monkey Braid",
@@ -44345,27 +44469,51 @@
         "Leather Cloak",
         "Panther's Cloak",
         "Issachari Banner",
+        "Mechanical Wings",
+        "Nylon Bodypack",
         "Grassy Yurtmat",
+        "Ape Fur Cloak",
         "Portable Beehive",
         "Chrome Mantle",
         "Molly Netting",
+        "Ironweave Cloak",
         "Praetorian's Cloak",
+        "Gyrocopter Backpack",
+        "Banner of the Holy Rhombus",
         "Mercurial Cloak",
+        "Quartzfur Cloak",
+        "Strength Exo",
         "Rainboweave Cloak",
+        "Ogre Fur Cloak",
+        "Kaleidocera Cape",
+        "Palladium Mesh Tabard",
         "Witchwood Wreath",
         "Wide-brimmed Hat",
         "Gentling Collar",
         "Leather Cap",
         "Crimson Hood",
         "Knollworm Skull",
+        "Steel Helmet",
         "Elastyne Skull Cap",
+        "Electric Snail Shell",
         "Ape Fur Hat",
         "Square Cap",
+        "Chain Coif",
+        "Fork-Horned Helmet 3",
+        "Headlamp",
         "Miner's Helmet",
         "Plastifer Bonnet",
         "Leafy Helm",
+        "Ganglionic Teleprojector",
+        "Quartzfur Hat",
+        "Crysteel Coronet",
+        "Ogre Fur Hat",
+        "Flawless Crysteel Coronet",
         "Psychic Meridian",
+        "Enigma Cap",
+        "Zetachrome Apex",
         "Mental Aggregator",
+        "Psychodyne Helmet",
         "Issachari Sun Veil",
         "Smiling Sun Mask",
         "Frowning Moon Mask",
@@ -44373,12 +44521,15 @@
         "Gentling Mask",
         "Goggles",
         "Mirrorshades",
+        "Night-vision Goggles",
         "Vinewood Sap Mask",
+        "Gas Mask",
         "Telescopic Monocle",
         "Spectacles",
         "Polyhedral Rings",
         "Silver Rondure",
         "Telemetric Visor",
+        "VISAGE",
         "Night-Sight Interpolators",
         "Dream Rondure",
         "Dazzle Cheek",
@@ -44401,28 +44552,51 @@
         "Displacer Bracelet",
         "Ontological Anchor",
         "Tri-Hologram Bracelet",
+        "Transkinetic Cuffs",
         "Boar-skin gloves",
         "Leather Gloves",
+        "Steel Gauntlets",
         "Ulnar Stimulators",
         "Ape Fur Gloves",
         "Elastyne Gloves",
+        "Chain Gauntlets",
+        "Carbide Gauntlets",
         "Plastifer Gloves",
+        "Quartzfur Gloves",
+        "Crysteel Gauntlets",
+        "Ogre Fur Gloves",
+        "Flawless Crysteel Gauntlets",
+        "Kaleidocera Muffs",
         "Precision Nanon Fingers",
+        "Zetachrome Gloves",
+        "Leyline Puppeteers",
         "Leather Moccasins",
         "Sandals",
         "Croccasins",
         "Leather Boots",
         "Magnetized Boots",
         "Sandals of the River-Wives",
+        "Chain Boots",
+        "Steel Boots",
         "Elastyne Slippers",
+        "Carbide Boots",
+        "Spring Boots",
+        "Grease Boots",
         "Plastifer Sneakers",
         "Yeshyrskin Slippers",
         "Step Sowers",
+        "Rocket Skates",
+        "Crysteel Boots",
+        "Ninefold Boots",
+        "Flawless Crysteel Boots",
         "3D Cobblers",
         "Anti-Gravity Boots",
+        "Kaleidocera Krakows",
+        "Zetachrome Pumps",
         "Jeweled Sandals",
         "Light-Obfuscating Lens",
         "Point-Defense Drone",
+        "Chiral Rings",
         "Black Mote",
         "LightCircleAgolgot",
         "LightCircleBethsaida",
@@ -44431,11 +44605,20 @@
         "LightCircleRermadon",
         "LightCircleShugruith",
         "Wooden Buckler",
+        "Iron Buckler",
+        "Steel Buckler",
+        "Steel Shield",
+        "Carbide Shield",
+        "Fullerite Shield",
+        "Crysteel Shield",
+        "Flawless Crysteel Shield",
+        "Clay Pot",
         "Tread Guard",
         "Stopsvaalinn",
         "Kindrish",
         "SlogTrophy",
         "MurmurMask",
+        "Blackboard",
         "Cyclopean Prism",
         "TauHeadpiece",
         "Kah's Loop",
@@ -44446,10 +44629,16 @@
         "The Olive Face",
         "The Nil Face",
         "Otherpearl",
+        "EyelessCrabShell",
         "Clue_BloodyPatchOfFur",
         "Clue_LeatherScraps",
         "Clue_DiscardedBracer",
         "Clue_WornBracer"
+      ],
+      "Flight": [
+        "Mechanical Wings",
+        "Gyrocopter Backpack",
+        "Anti-Gravity Boots"
       ],
       "Floating": [
         "Portable Beehive",
@@ -44459,6 +44648,7 @@
         "Floating Glowsphere",
         "Quantum Mote",
         "Point-Defense Drone",
+        "Chiral Rings",
         "Black Mote",
         "LightCircleAgolgot",
         "LightCircleBethsaida",
@@ -44508,9 +44698,6 @@
         "HistoryofJoppaVol2",
         "Spray-a-Brain",
         "FactionDeed"
-      ],
-      "Flight": [
-        "Anti-Gravity Boots"
       ],
       "Repulsive": [
         "Repulsive Device"
@@ -44617,8 +44804,10 @@
         "Basic Toolkit",
         "Advanced Toolkit",
         "Pickaxe",
+        "Nanopneumatic Jackhammer",
         "Tattoo Gun",
         "TemplarPhylactery",
+        "Neuro Animator",
         "Droid Scrambler",
         "Fixit Spray",
         "Clue_LeatherworkingHammer",
@@ -44645,7 +44834,8 @@
         "Spiral Iron",
         "Bubble Level",
         "FoldingChair",
-        "PlasticTree"
+        "PlasticTree",
+        "Small Sphere of Negative Weight"
       ],
       "Key": [
         "Red Security Card",
@@ -46577,6 +46767,20 @@
           "Storage"
         ]
       },
+      "Catchbasin": {
+        "id": "Catchbasin",
+        "render": {
+          "displayName": "willowy catch basin",
+          "tile": "Items/sw_catchbasin.bmp",
+          "mainColour": "&y",
+          "detailColour": "B"
+        },
+        "semanticTags": [
+          "Basic",
+          "Water",
+          "Contemporary"
+        ]
+      },
       "Bedroll": {
         "id": "Bedroll",
         "render": {
@@ -46638,6 +46842,22 @@
           "Furniture",
           "Seating",
           "Contemporary"
+        ]
+      },
+      "Work Chair": {
+        "id": "Work Chair",
+        "render": {
+          "displayName": "willowy rolling chair",
+          "tile": "Items/sw_chair_work.bmp",
+          "mainColour": "&K",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "InsideFurniture",
+          "InsideWallFurniture",
+          "Furniture",
+          "Seating",
+          "Professional"
         ]
       },
       "Chest": {
@@ -46806,6 +47026,113 @@
           "Contemporary"
         ]
       },
+      "Pitcher": {
+        "id": "Pitcher",
+        "render": {
+          "displayName": "willowy clay pitcher",
+          "tile": "Items/sw_jug3.bmp",
+          "mainColour": "&w",
+          "detailColour": "k"
+        },
+        "semanticTags": [
+          "Storage",
+          "LiquidStorage",
+          "Furniture",
+          "Contemporary"
+        ]
+      },
+      "Ewer": {
+        "id": "Ewer",
+        "render": {
+          "displayName": "willowy ewer",
+          "tile": "Items/sw_jug4.bmp",
+          "mainColour": "&w",
+          "detailColour": "b"
+        },
+        "semanticTags": [
+          "Storage",
+          "LiquidStorage",
+          "Furniture",
+          "Contemporary"
+        ]
+      },
+      "Jug": {
+        "id": "Jug",
+        "render": {
+          "displayName": "willowy clay jug",
+          "tile": "Items/sw_jug5.bmp",
+          "mainColour": "&w",
+          "detailColour": "r"
+        },
+        "semanticTags": [
+          "Storage",
+          "LiquidStorage",
+          "Furniture",
+          "Contemporary"
+        ]
+      },
+      "Long Jug": {
+        "id": "Long Jug",
+        "render": {
+          "displayName": "willowy vessel",
+          "tile": "Items/sw_vase2.bmp",
+          "mainColour": "&w",
+          "detailColour": "m"
+        },
+        "semanticTags": [
+          "Storage",
+          "LiquidStorage",
+          "Furniture",
+          "Contemporary"
+        ]
+      },
+      "Recoming Water Jug": {
+        "id": "Recoming Water Jug",
+        "render": {
+          "displayName": "willowy vessel of the First Sip",
+          "tile": "Items/sw_vase2.bmp",
+          "mainColour": "&Y",
+          "detailColour": "B"
+        },
+        "semanticTags": [
+          "Storage",
+          "LiquidStorage",
+          "Furniture",
+          "Contemporary"
+        ]
+      },
+      "Melted Jug": {
+        "id": "Melted Jug",
+        "render": {
+          "displayName": "willowy cracked decorative vessel",
+          "tile": "Items/sw_vase_long_broken.bmp",
+          "mainColour": "&Y",
+          "detailColour": "B"
+        },
+        "semanticTags": [
+          "Storage",
+          "LiquidStorage",
+          "Furniture",
+          "Contemporary"
+        ]
+      },
+      "Hookah": {
+        "id": "Hookah",
+        "render": {
+          "displayName": "willowy hookah",
+          "tile": "Items/sw_hookah.bmp",
+          "mainColour": "&R",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "InsideFurniture",
+          "InsideWallFurniture",
+          "Furniture",
+          "Luxury",
+          "Centerpiece",
+          "Contemporary"
+        ]
+      },
       "AppleSign1": {
         "id": "AppleSign1",
         "render": {
@@ -46897,11 +47224,48 @@
           "Contemporary"
         ]
       },
+      "Mace2": {
+        "id": "Mace2",
+        "render": {
+          "displayName": "willowy {{w|bronze}} mace",
+          "tile": "Items/sw_cudgel_1.bmp",
+          "mainColour": "&w",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee",
+          "Contemporary"
+        ]
+      },
+      "Warhammer2": {
+        "id": "Warhammer2",
+        "render": {
+          "displayName": "willowy iron mace",
+          "tile": "Items/sw_cudgel_1.bmp",
+          "mainColour": "&y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Steel War Hammer": {
         "id": "Steel War Hammer",
         "render": {
           "displayName": "{{Y|steel}} war hammer",
           "tile": "Items/sw_cudgel_2.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Steel War Hammerth": {
+        "id": "Steel War Hammerth",
+        "render": {
+          "displayName": "willowy two-handed {{Y|steel}} war hammer",
+          "tile": "Items/sw_cudgel_3.bmp",
           "mainColour": "&Y",
           "detailColour": "y"
         },
@@ -46945,6 +47309,41 @@
           "Melee"
         ]
       },
+      "Amber-Tipped Staff": {
+        "id": "Amber-Tipped Staff",
+        "render": {
+          "displayName": "willowy amber-tipped staff",
+          "tile": "Items/sw_cudgel_12.bmp",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Cudgel3": {
+        "id": "Cudgel3",
+        "render": {
+          "displayName": "willowy {{b|carbide}} hammer",
+          "tile": "Items/sw_cudgel_2.bmp",
+          "mainColour": "&b",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Cudgel3th": {
+        "id": "Cudgel3th",
+        "render": {
+          "displayName": "willowy two-handed {{b|carbide}} hammer",
+          "tile": "Items/sw_cudgel_3.bmp",
+          "mainColour": "&b",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Cudgel4": {
         "id": "Cudgel4",
         "render": {
@@ -46957,11 +47356,59 @@
           "Melee"
         ]
       },
+      "Cudgel4th": {
+        "id": "Cudgel4th",
+        "render": {
+          "displayName": "willowy two-handed {{B|carbide}} folding hammer",
+          "tile": "Items/sw_cudgel_3.bmp",
+          "mainColour": "&B",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Cudgel5": {
+        "id": "Cudgel5",
+        "render": {
+          "displayName": "willowy {{K|fullerite}} maul",
+          "tile": "Items/sw_cudgel_4.bmp",
+          "mainColour": "&K",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Cudgel5th": {
+        "id": "Cudgel5th",
+        "render": {
+          "displayName": "willowy two-handed {{K|fullerite}} maul",
+          "tile": "Items/sw_cudgel_5.bmp",
+          "mainColour": "&K",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Cudgel6": {
         "id": "Cudgel6",
         "render": {
           "displayName": "{{K|{{crysteel|crysteel}} mace}}",
           "tile": "Items/sw_cudgel_6.bmp",
+          "mainColour": "&g",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Cudgel6th": {
+        "id": "Cudgel6th",
+        "render": {
+          "displayName": "willowy {{K|{{crysteel|crysteel}} warhammer}}",
+          "tile": "Items/sw_cudgel_7.bmp",
           "mainColour": "&g",
           "detailColour": "K"
         },
@@ -46981,6 +47428,18 @@
           "Melee"
         ]
       },
+      "Cudgel7th": {
+        "id": "Cudgel7th",
+        "render": {
+          "displayName": "willowy {{K|flawless {{crysteel|crysteel}} warhammer}}",
+          "tile": "Items/sw_cudgel_7.bmp",
+          "mainColour": "&G",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Cudgel8": {
         "id": "Cudgel8",
         "render": {
@@ -46992,6 +47451,31 @@
         "semanticTags": [
           "Melee",
           "Historical"
+        ]
+      },
+      "Cudgel8th": {
+        "id": "Cudgel8th",
+        "render": {
+          "displayName": "willowy {{zetachrome|zetachrome}} warhammer",
+          "tile": "Items/sw_cudgel_9.bmp",
+          "mainColour": "&m",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee",
+          "Historical"
+        ]
+      },
+      "Maghammer": {
+        "id": "Maghammer",
+        "render": {
+          "displayName": "willowy {{c-C-Y-W alternation|maghammer}}",
+          "tile": "Items/sw_cudgel_13.bmp",
+          "mainColour": "&C",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
         ]
       },
       "Stun Rod": {
@@ -47331,6 +47815,18 @@
           "Melee"
         ]
       },
+      "Steel Battle Axeth": {
+        "id": "Steel Battle Axeth",
+        "render": {
+          "displayName": "willowy two-handed {{Y|steel}} battle axe",
+          "tile": "Items/sw_axe_2.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Steel Hand Axe": {
         "id": "Steel Hand Axe",
         "render": {
@@ -47367,6 +47863,30 @@
           "Melee"
         ]
       },
+      "Battle Axe3": {
+        "id": "Battle Axe3",
+        "render": {
+          "displayName": "willowy {{b|carbide}} battle axe",
+          "tile": "Items/sw_axe_3.bmp",
+          "mainColour": "&b",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Battle Axe3th": {
+        "id": "Battle Axe3th",
+        "render": {
+          "displayName": "willowy two-handed {{b|carbide}} battle axe",
+          "tile": "Items/sw_axe_4.bmp",
+          "mainColour": "&b",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Battle Axe4": {
         "id": "Battle Axe4",
         "render": {
@@ -47379,11 +47899,59 @@
           "Melee"
         ]
       },
+      "Battle Axe4th": {
+        "id": "Battle Axe4th",
+        "render": {
+          "displayName": "willowy two-handed {{B|folded carbide}} battle axe",
+          "tile": "Items/sw_axe_4.bmp",
+          "mainColour": "&B",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Battle Axe5": {
+        "id": "Battle Axe5",
+        "render": {
+          "displayName": "willowy {{K|fullerite}} battle axe",
+          "tile": "Items/sw_axe_3.bmp",
+          "mainColour": "&K",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Battle Axe5th": {
+        "id": "Battle Axe5th",
+        "render": {
+          "displayName": "willowy {{K|fullerite}} two-handed axe",
+          "tile": "Items/sw_axe_2.bmp",
+          "mainColour": "&K",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Battle Axe6": {
         "id": "Battle Axe6",
         "render": {
           "displayName": "{{K|{{crysteel|crysteel}} battle axe}}",
           "tile": "Items/sw_axe_5.bmp",
+          "mainColour": "&g",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Battle Axe6th": {
+        "id": "Battle Axe6th",
+        "render": {
+          "displayName": "willowy {{K|{{crysteel|crysteel}} halberd}}",
+          "tile": "Items/sw_axe_6.bmp",
           "mainColour": "&g",
           "detailColour": "K"
         },
@@ -47403,11 +47971,36 @@
           "Melee"
         ]
       },
+      "Battle Axe7th": {
+        "id": "Battle Axe7th",
+        "render": {
+          "displayName": "willowy {{K|flawless {{crysteel|crysteel}} halberd}}",
+          "tile": "Items/sw_axe_6.bmp",
+          "mainColour": "&G",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Battle Axe8": {
         "id": "Battle Axe8",
         "render": {
           "displayName": "{{zetachrome|zetachrome}} battle axe",
           "tile": "Items/sw_axe_7.bmp",
+          "mainColour": "&m",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee",
+          "Historical"
+        ]
+      },
+      "Battle Axe8th": {
+        "id": "Battle Axe8th",
+        "render": {
+          "displayName": "willowy {{zetachrome|zetachrome}} halberd",
+          "tile": "Items/sw_axe_8.bmp",
           "mainColour": "&m",
           "detailColour": "y"
         },
@@ -47453,11 +48046,35 @@
           "Contemporary"
         ]
       },
+      "Two-Handed Sword": {
+        "id": "Two-Handed Sword",
+        "render": {
+          "displayName": "willowy {{w|bronze}} two-handed sword",
+          "tile": "Items/sw_longblade_2.bmp",
+          "mainColour": "&w",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee",
+          "Contemporary"
+        ]
+      },
       "Long Sword2": {
         "id": "Long Sword2",
         "render": {
           "displayName": "iron long sword",
           "tile": "Items/sw_longblade_1.bmp",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Long Sword2th": {
+        "id": "Long Sword2th",
+        "render": {
+          "displayName": "willowy two-handed iron long sword",
+          "tile": "Items/sw_longblade_2.bmp",
           "detailColour": "y"
         },
         "semanticTags": [
@@ -47476,12 +48093,84 @@
           "Melee"
         ]
       },
+      "Steel Long Swordth": {
+        "id": "Steel Long Swordth",
+        "render": {
+          "displayName": "willowy two-handed {{Y|steel}} long sword",
+          "tile": "Items/sw_longblade_2.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Long Sword3": {
+        "id": "Long Sword3",
+        "render": {
+          "displayName": "willowy {{b|carbide}} long sword",
+          "tile": "Items/sw_longblade_14.bmp",
+          "mainColour": "&b",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Long Sword3th": {
+        "id": "Long Sword3th",
+        "render": {
+          "displayName": "willowy two-handed {{b|carbide}} long sword",
+          "tile": "Items/sw_longblade_4.bmp",
+          "mainColour": "&b",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Long Sword4": {
         "id": "Long Sword4",
         "render": {
           "displayName": "{{B|folded carbide}} long sword",
           "tile": "Items/sw_longblade_14.bmp",
           "mainColour": "&B",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Long Sword4th": {
+        "id": "Long Sword4th",
+        "render": {
+          "displayName": "willowy two-handed {{B|folded carbide}} long sword",
+          "tile": "Items/sw_longblade_4.bmp",
+          "mainColour": "&B",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Long Sword5": {
+        "id": "Long Sword5",
+        "render": {
+          "displayName": "willowy {{K|fullerite}} long sword",
+          "tile": "Items/sw_longblade_14.bmp",
+          "mainColour": "&K",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Long Sword5th": {
+        "id": "Long Sword5th",
+        "render": {
+          "displayName": "willowy two-handed {{K|fullerite}} long sword",
+          "tile": "Items/sw_longblade_4.bmp",
+          "mainColour": "&K",
           "detailColour": "y"
         },
         "semanticTags": [
@@ -47500,11 +48189,35 @@
           "Melee"
         ]
       },
+      "Long Sword6th": {
+        "id": "Long Sword6th",
+        "render": {
+          "displayName": "willowy {{K|{{crysteel|crysteel}} great sword}}",
+          "tile": "Items/sw_longblade_6.bmp",
+          "mainColour": "&g",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
       "Long Sword7": {
         "id": "Long Sword7",
         "render": {
           "displayName": "{{K|flawless {{crysteel|crysteel}} long sword}}",
           "tile": "Items/sw_longblade_5.bmp",
+          "mainColour": "&G",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Melee"
+        ]
+      },
+      "Long Sword7th": {
+        "id": "Long Sword7th",
+        "render": {
+          "displayName": "willowy {{K|flawless {{crysteel|crysteel}} great sword}}",
+          "tile": "Items/sw_longblade_6.bmp",
           "mainColour": "&G",
           "detailColour": "K"
         },
@@ -47543,6 +48256,19 @@
         "render": {
           "displayName": "{{zetachrome|zetachrome}} long sword",
           "tile": "Items/sw_longblade_7.bmp",
+          "mainColour": "&m",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Melee",
+          "Historical"
+        ]
+      },
+      "Long Sword8th": {
+        "id": "Long Sword8th",
+        "render": {
+          "displayName": "willowy two-handed {{zetachrome|zetachrome}} long sword",
+          "tile": "Items/sw_longblade_8.bmp",
           "mainColour": "&m",
           "detailColour": "y"
         },
@@ -47646,6 +48372,104 @@
         "semanticTags": [
           "Melee",
           "Missile"
+        ]
+      },
+      "Desert Rifle": {
+        "id": "Desert Rifle",
+        "render": {
+          "displayName": "willowy Issachar rifle",
+          "tile": "Items/sw_rifle.bmp",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Missile",
+          "Contemporary"
+        ]
+      },
+      "Carbine": {
+        "id": "Carbine",
+        "render": {
+          "displayName": "willowy carbine",
+          "tile": "Items/sw_carbine.bmp",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Missile"
+        ]
+      },
+      "Chain Pistol": {
+        "id": "Chain Pistol",
+        "render": {
+          "displayName": "willowy chain pistol",
+          "tile": "Items/sw_chain_pistol.bmp",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Missile"
+        ]
+      },
+      "Sniper Rifle": {
+        "id": "Sniper Rifle",
+        "render": {
+          "displayName": "willowy sniper rifle",
+          "tile": "Items/sw_sniper_rifle.bmp",
+          "mainColour": "&y",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Missile"
+        ]
+      },
+      "Laser Rifle": {
+        "id": "Laser Rifle",
+        "render": {
+          "displayName": "willowy {{C|laser}} rifle",
+          "tile": "Items/sw_techrifle_1.bmp",
+          "mainColour": "&C",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Missile",
+          "Historical"
+        ]
+      },
+      "Eigenrifle": {
+        "id": "Eigenrifle",
+        "render": {
+          "displayName": "willowy eigenrifle",
+          "tile": "Items/sw_techrifle_2.bmp",
+          "mainColour": "&b",
+          "detailColour": "B"
+        },
+        "semanticTags": [
+          "Missile",
+          "Historical"
+        ]
+      },
+      "Light Rail": {
+        "id": "Light Rail",
+        "render": {
+          "displayName": "willowy {{W|light}} rail",
+          "tile": "Items/sw_techrifle_3.bmp",
+          "mainColour": "&w",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Missile",
+          "Historical"
+        ]
+      },
+      "Spaser Rifle": {
+        "id": "Spaser Rifle",
+        "render": {
+          "displayName": "willowy {{spaser|spaser}} rifle",
+          "tile": "Items/sw_techrifle_4.bmp",
+          "mainColour": "&K",
+          "detailColour": "G"
+        },
+        "semanticTags": [
+          "Missile",
+          "Historical"
         ]
       },
       "Phase Cannon": {
@@ -47840,6 +48664,18 @@
           "Missile"
         ]
       },
+      "Grenade Launcher": {
+        "id": "Grenade Launcher",
+        "render": {
+          "displayName": "willowy grenade launcher",
+          "tile": "Items/sw_techcannon_1.bmp",
+          "mainColour": "&c",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Missile"
+        ]
+      },
       "HE Missile": {
         "id": "HE Missile",
         "render": {
@@ -47977,6 +48813,19 @@
           "Historical"
         ]
       },
+      "Eigenpistol": {
+        "id": "Eigenpistol",
+        "render": {
+          "displayName": "willowy eigenpistol",
+          "tile": "Items/sw_techpistol_2.bmp",
+          "mainColour": "&b",
+          "detailColour": "B"
+        },
+        "semanticTags": [
+          "Missile",
+          "Historical"
+        ]
+      },
       "Arc Winder": {
         "id": "Arc Winder",
         "render": {
@@ -47999,6 +48848,58 @@
         },
         "semanticTags": [
           "Missile"
+        ]
+      },
+      "Hand Rail": {
+        "id": "Hand Rail",
+        "render": {
+          "displayName": "willowy {{W|hand}} rail",
+          "tile": "Items/sw_techpistol_3.bmp",
+          "mainColour": "&w",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Missile",
+          "Historical"
+        ]
+      },
+      "Di-Thermo Beam": {
+        "id": "Di-Thermo Beam",
+        "render": {
+          "displayName": "willowy {{R|di-thermo}} beam",
+          "tile": "Items/sw_techpistol_7.bmp",
+          "mainColour": "&R",
+          "detailColour": "C"
+        },
+        "semanticTags": [
+          "Missile",
+          "Cold",
+          "Heat"
+        ]
+      },
+      "Blood-Gradient Hand Vacuum": {
+        "id": "Blood-Gradient Hand Vacuum",
+        "render": {
+          "displayName": "willowy blood-gradient hand vacuum",
+          "tile": "Items/sw_hand_vacuum.bmp",
+          "mainColour": "&K",
+          "detailColour": "r"
+        },
+        "semanticTags": [
+          "Missile"
+        ]
+      },
+      "Spaser Pistol": {
+        "id": "Spaser Pistol",
+        "render": {
+          "displayName": "willowy {{spaser|spaser}} pistol",
+          "tile": "Items/sw_techpistol_4.bmp",
+          "mainColour": "&K",
+          "detailColour": "G"
+        },
+        "semanticTags": [
+          "Missile",
+          "Historical"
         ]
       },
       "Space Inverter": {
@@ -48063,6 +48964,32 @@
           "Missile"
         ]
       },
+      "Pump Shotgun": {
+        "id": "Pump Shotgun",
+        "render": {
+          "displayName": "willowy pump shotgun",
+          "tile": "Items/sw_shotgun_2.bmp",
+          "mainColour": "&K",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Missile",
+          "Contemporary"
+        ]
+      },
+      "Combat Shotgun": {
+        "id": "Combat Shotgun",
+        "render": {
+          "displayName": "willowy combat shotgun",
+          "tile": "Items/sw_shotgun_1.bmp",
+          "mainColour": "&w",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Missile",
+          "Contemporary"
+        ]
+      },
       "Ruin of House Isner": {
         "id": "Ruin of House Isner",
         "render": {
@@ -48094,6 +49021,19 @@
           "displayName": "throwing axe",
           "tile": "Items/sw_throwing_axe.bmp",
           "mainColour": "&w",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Thrown",
+          "Contemporary"
+        ]
+      },
+      "CastNet": {
+        "id": "CastNet",
+        "render": {
+          "displayName": "willowy cast net",
+          "tile": "Items/sw_net.bmp",
+          "mainColour": "&Y",
           "detailColour": "y"
         },
         "semanticTags": [
@@ -48866,6 +49806,18 @@
           "Protection"
         ]
       },
+      "Furs": {
+        "id": "Furs",
+        "render": {
+          "displayName": "willowy furs",
+          "tile": "Items/sw_cloak_panther.bmp",
+          "mainColour": "&w",
+          "detailColour": "Y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Woven Tunic": {
         "id": "Woven Tunic",
         "render": {
@@ -48950,6 +49902,55 @@
           "Protection"
         ]
       },
+      "Bark Armor": {
+        "id": "Bark Armor",
+        "render": {
+          "displayName": "willowy bark armor",
+          "tile": "Items/sw_armor1.bmp",
+          "mainColour": "&w",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Leather Armor": {
+        "id": "Leather Armor",
+        "render": {
+          "displayName": "willowy leather armor",
+          "tile": "Items/sw_leather_armor.bmp",
+          "mainColour": "&w",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Vine-Weave Tunic": {
+        "id": "Vine-Weave Tunic",
+        "render": {
+          "displayName": "willowy {{y-g-g-y-y sequence|vine-weave}} tunic",
+          "tile": "Items/sw_chainmail.bmp",
+          "mainColour": "&g",
+          "detailColour": "G"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Studded Leather Armor": {
+        "id": "Studded Leather Armor",
+        "render": {
+          "displayName": "willowy studded leather armor",
+          "tile": "Items/sw_leather_armor.bmp",
+          "mainColour": "&w",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection",
+          "Contemporary"
+        ]
+      },
       "Pocketed Vest": {
         "id": "Pocketed Vest",
         "render": {
@@ -48994,6 +49995,18 @@
           "Protection"
         ]
       },
+      "Ring Mail": {
+        "id": "Ring Mail",
+        "render": {
+          "displayName": "willowy ring mail",
+          "tile": "Items/sw_armor2.bmp",
+          "mainColour": "&y",
+          "detailColour": "Y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Elastyne Skin Suit": {
         "id": "Elastyne Skin Suit",
         "render": {
@@ -49001,6 +50014,17 @@
           "tile": "Items/sw_skinsuit.bmp",
           "mainColour": "&K",
           "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Patchwork Coat": {
+        "id": "Patchwork Coat",
+        "render": {
+          "displayName": "willowy {{patchwork|patchwork}} coat",
+          "tile": "Items/sw_chainmail.bmp",
+          "mainColour": "&W"
         },
         "semanticTags": [
           "Protection"
@@ -49022,6 +50046,76 @@
           "displayName": "flexivest",
           "tile": "Items/sw_flexisuit.bmp",
           "mainColour": "&y",
+          "detailColour": "C"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Rubber Suit": {
+        "id": "Rubber Suit",
+        "render": {
+          "displayName": "willowy {{w|rubber suit}}",
+          "tile": "Items/sw_flexisuit.bmp",
+          "mainColour": "&w",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Plastifer Jerkin": {
+        "id": "Plastifer Jerkin",
+        "render": {
+          "displayName": "willowy {{plastifer|plastifer}} jerkin",
+          "tile": "Items/sw_chainmail.bmp",
+          "mainColour": "&y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Plastifer Chem Vest": {
+        "id": "Plastifer Chem Vest",
+        "render": {
+          "displayName": "willowy {{plastifer|plastifer}} {{G|chem}} vest",
+          "tile": "Items/sw_vest.bmp",
+          "mainColour": "&y",
+          "detailColour": "G"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Leafy Vest": {
+        "id": "Leafy Vest",
+        "render": {
+          "displayName": "willowy {{leafy|leafy}} vest",
+          "tile": "Items/sw_chainmail.bmp",
+          "mainColour": "&g"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Nanoweave Vest": {
+        "id": "Nanoweave Vest",
+        "render": {
+          "displayName": "willowy nanoweave vest",
+          "tile": "Items/sw_flexisuit.bmp",
+          "mainColour": "&K",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Gas Tumbler": {
+        "id": "Gas Tumbler",
+        "render": {
+          "displayName": "willowy gas tumbler",
+          "tile": "Items/sw_gas_tumbler.bmp",
+          "mainColour": "&c",
           "detailColour": "C"
         },
         "semanticTags": [
@@ -49114,6 +50208,31 @@
           "Protection"
         ]
       },
+      "Mechanical Wings": {
+        "id": "Mechanical Wings",
+        "render": {
+          "displayName": "willowy mechanical wings",
+          "tile": "Items/sw_mechanical_wings.bmp",
+          "mainColour": "&w",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection",
+          "Flight"
+        ]
+      },
+      "Nylon Bodypack": {
+        "id": "Nylon Bodypack",
+        "render": {
+          "displayName": "willowy nylon bodypack",
+          "tile": "Items/sw_backpack.bmp",
+          "mainColour": "&w",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Grassy Yurtmat": {
         "id": "Grassy Yurtmat",
         "render": {
@@ -49121,6 +50240,18 @@
           "tile": "Items/sw_yurtmat.bmp",
           "mainColour": "&g",
           "detailColour": "G"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Ape Fur Cloak": {
+        "id": "Ape Fur Cloak",
+        "render": {
+          "displayName": "willowy {{Y|ape fur}} cloak",
+          "tile": "Items/sw_cloak.bmp",
+          "mainColour": "&y",
+          "detailColour": "Y"
         },
         "semanticTags": [
           "Protection"
@@ -49163,12 +50294,49 @@
           "Protection"
         ]
       },
+      "Ironweave Cloak": {
+        "id": "Ironweave Cloak",
+        "render": {
+          "displayName": "willowy ironweave cloak",
+          "tile": "Items/sw_cloak.bmp",
+          "mainColour": "&y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Praetorian's Cloak": {
         "id": "Praetorian's Cloak",
         "render": {
           "displayName": "{{w|Praetorian's}} cloak",
           "tile": "Items/sw_burnoose.bmp",
           "mainColour": "&b",
+          "detailColour": "Y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Gyrocopter Backpack": {
+        "id": "Gyrocopter Backpack",
+        "render": {
+          "displayName": "willowy {{b-B-Y-Y-Y-Y-Y-Y-B-b alternation|gyrocopter}} backpack",
+          "tile": "Items/sw_gyrocopter_backpack.bmp",
+          "mainColour": "&B",
+          "detailColour": "C"
+        },
+        "semanticTags": [
+          "Protection",
+          "Flight"
+        ]
+      },
+      "Banner of the Holy Rhombus": {
+        "id": "Banner of the Holy Rhombus",
+        "render": {
+          "displayName": "willowy banner of the {{r|Holy Rhombus}}",
+          "tile": "Items/sw_templar_banner.bmp",
+          "mainColour": "&r",
           "detailColour": "Y"
         },
         "semanticTags": [
@@ -49188,12 +50356,72 @@
           "Travel"
         ]
       },
+      "Quartzfur Cloak": {
+        "id": "Quartzfur Cloak",
+        "render": {
+          "displayName": "willowy {{Y|quartzfur}} cloak",
+          "tile": "Items/sw_quartz_fur_cloak.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Strength Exo": {
+        "id": "Strength Exo",
+        "render": {
+          "displayName": "willowy {{W-W-W-W-W-R sequence|powered}} {{K-y-K-K-K-K-K-K-K-K sequence|exoskeleton}}",
+          "tile": "Items/sw_exoskeleton.bmp",
+          "mainColour": "&c",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Rainboweave Cloak": {
         "id": "Rainboweave Cloak",
         "render": {
           "displayName": "{{rainbow|rainboweave}} cloak",
           "tile": "Items/sw_cloak_fancy.bmp",
           "mainColour": "&m",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Ogre Fur Cloak": {
+        "id": "Ogre Fur Cloak",
+        "render": {
+          "displayName": "willowy {{W|ogre fur}} cloak",
+          "tile": "Items/sw_cloak.bmp",
+          "mainColour": "&w",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Kaleidocera Cape": {
+        "id": "Kaleidocera Cape",
+        "render": {
+          "displayName": "willowy {{kaleidoslug|kaleidocera}} cape",
+          "tile": "Items/sw_cera_cape.bmp",
+          "mainColour": "&m",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Palladium Mesh Tabard": {
+        "id": "Palladium Mesh Tabard",
+        "render": {
+          "displayName": "willowy {{palladium mesh|palladium mesh}} tabard",
+          "tile": "Items/sw_mesh_tabard.bmp",
+          "mainColour": "&c",
           "detailColour": "W"
         },
         "semanticTags": [
@@ -49273,6 +50501,18 @@
           "Protection"
         ]
       },
+      "Steel Helmet": {
+        "id": "Steel Helmet",
+        "render": {
+          "displayName": "willowy {{Y|steel}} helmet",
+          "tile": "Items/sw_metal_helmet.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Elastyne Skull Cap": {
         "id": "Elastyne Skull Cap",
         "render": {
@@ -49280,6 +50520,18 @@
           "tile": "Items/sw_skullcap.bmp",
           "mainColour": "&K",
           "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Electric Snail Shell": {
+        "id": "Electric Snail Shell",
+        "render": {
+          "displayName": "willowy electric snail shell",
+          "tile": "Items/sw_snail_shell.bmp",
+          "mainColour": "&B",
+          "detailColour": "W"
         },
         "semanticTags": [
           "Protection"
@@ -49308,6 +50560,41 @@
         "semanticTags": [
           "Protection",
           "Scholarly"
+        ]
+      },
+      "Chain Coif": {
+        "id": "Chain Coif",
+        "render": {
+          "displayName": "willowy chain coif",
+          "tile": "Items/sw_chain_helmet.bmp",
+          "mainColour": "&y",
+          "detailColour": "Y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Fork-Horned Helmet 3": {
+        "id": "Fork-Horned Helmet 3",
+        "render": {
+          "displayName": "willowy fork-{{horned|horned}} helm",
+          "tile": "Items/sw_forked_horned_helm.bmp",
+          "mainColour": "&g",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Headlamp": {
+        "id": "Headlamp",
+        "render": {
+          "displayName": "willowy headlamp",
+          "tile": "Items/sw_headlamp.bmp",
+          "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection"
         ]
       },
       "Miner's Helmet": {
@@ -49346,6 +50633,66 @@
           "Protection"
         ]
       },
+      "Ganglionic Teleprojector": {
+        "id": "Ganglionic Teleprojector",
+        "render": {
+          "displayName": "willowy ganglionic teleprojector",
+          "tile": "Items/sw_teleprojector.bmp",
+          "mainColour": "&c",
+          "detailColour": "m"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Quartzfur Hat": {
+        "id": "Quartzfur Hat",
+        "render": {
+          "displayName": "willowy {{Y|quartzfur}} hat",
+          "tile": "Items/sw_quartz_fur_hat.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Crysteel Coronet": {
+        "id": "Crysteel Coronet",
+        "render": {
+          "displayName": "willowy {{K|{{crysteel|crysteel}} coronet}}",
+          "tile": "Items/sw_helm_hightier1.bmp",
+          "mainColour": "&g",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Ogre Fur Hat": {
+        "id": "Ogre Fur Hat",
+        "render": {
+          "displayName": "willowy {{W|ogre fur}} hat",
+          "tile": "Items/sw_apefur_hat.bmp",
+          "mainColour": "&W",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Flawless Crysteel Coronet": {
+        "id": "Flawless Crysteel Coronet",
+        "render": {
+          "displayName": "willowy {{K|flawless {{crysteel|crysteel}} coronet}}",
+          "tile": "Items/sw_helm_hightier1.bmp",
+          "mainColour": "&G",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Psychic Meridian": {
         "id": "Psychic Meridian",
         "render": {
@@ -49358,6 +50705,31 @@
           "Protection"
         ]
       },
+      "Enigma Cap": {
+        "id": "Enigma Cap",
+        "render": {
+          "displayName": "willowy {{B|enigma}} cap",
+          "tile": "Items/sw_enigma_cap.bmp",
+          "mainColour": "&W",
+          "detailColour": "B"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Zetachrome Apex": {
+        "id": "Zetachrome Apex",
+        "render": {
+          "displayName": "willowy {{zetachrome|zetachrome}} apex",
+          "tile": "Items/sw_helm_hightier2.bmp",
+          "mainColour": "&C",
+          "detailColour": "m"
+        },
+        "semanticTags": [
+          "Protection",
+          "Historical"
+        ]
+      },
       "Mental Aggregator": {
         "id": "Mental Aggregator",
         "render": {
@@ -49365,6 +50737,18 @@
           "tile": "Items/sw_mental_aggregator.bmp",
           "mainColour": "&c",
           "detailColour": "m"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Psychodyne Helmet": {
+        "id": "Psychodyne Helmet",
+        "render": {
+          "displayName": "willowy psychodyne helmet",
+          "tile": "Items/sw_psychodyne_helmet.bmp",
+          "mainColour": "&b",
+          "detailColour": "B"
         },
         "semanticTags": [
           "Protection"
@@ -49454,6 +50838,18 @@
           "Protection"
         ]
       },
+      "Night-vision Goggles": {
+        "id": "Night-vision Goggles",
+        "render": {
+          "displayName": "willowy night-vision goggles",
+          "tile": "Items/sw_goggles.bmp",
+          "mainColour": "&K",
+          "detailColour": "G"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Vinewood Sap Mask": {
         "id": "Vinewood Sap Mask",
         "render": {
@@ -49461,6 +50857,18 @@
           "tile": "Items/sw_gas_mask.bmp",
           "mainColour": "&W",
           "detailColour": "w"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Gas Mask": {
+        "id": "Gas Mask",
+        "render": {
+          "displayName": "willowy gas mask",
+          "tile": "Items/sw_gas_mask.bmp",
+          "mainColour": "&G",
+          "detailColour": "K"
         },
         "semanticTags": [
           "Protection"
@@ -49523,6 +50931,18 @@
           "tile": "Items/sw_visor.bmp",
           "mainColour": "&c",
           "detailColour": "W"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "VISAGE": {
+        "id": "VISAGE",
+        "render": {
+          "displayName": "willowy {{visage|VISAGE}}",
+          "tile": "Items/sw_visage.bmp",
+          "mainColour": "&R",
+          "detailColour": "y"
         },
         "semanticTags": [
           "Protection"
@@ -49799,6 +51219,18 @@
           "Protection"
         ]
       },
+      "Transkinetic Cuffs": {
+        "id": "Transkinetic Cuffs",
+        "render": {
+          "displayName": "willowy {{transkinetic|transkinetic}} cuffs",
+          "tile": "Items/sw_cuffs.bmp",
+          "mainColour": "&c",
+          "detailColour": "R"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Boar-skin gloves": {
         "id": "Boar-skin gloves",
         "render": {
@@ -49818,6 +51250,18 @@
           "tile": "Items/sw_leather_gloves.bmp",
           "mainColour": "&w",
           "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Steel Gauntlets": {
+        "id": "Steel Gauntlets",
+        "render": {
+          "displayName": "willowy {{Y|steel}} gauntlets",
+          "tile": "Items/sw_metal_gloves.bmp",
+          "mainColour": "&y",
+          "detailColour": "Y"
         },
         "semanticTags": [
           "Protection"
@@ -49859,6 +51303,30 @@
           "Protection"
         ]
       },
+      "Chain Gauntlets": {
+        "id": "Chain Gauntlets",
+        "render": {
+          "displayName": "willowy chain gauntlets",
+          "tile": "Items/sw_gauntlets_chain.bmp",
+          "mainColour": "&y",
+          "detailColour": "Y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Carbide Gauntlets": {
+        "id": "Carbide Gauntlets",
+        "render": {
+          "displayName": "willowy {{b|carbide}} gauntlets",
+          "tile": "Items/sw_metal_gloves.bmp",
+          "mainColour": "&b",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Plastifer Gloves": {
         "id": "Plastifer Gloves",
         "render": {
@@ -49871,6 +51339,66 @@
           "Protection"
         ]
       },
+      "Quartzfur Gloves": {
+        "id": "Quartzfur Gloves",
+        "render": {
+          "displayName": "willowy {{Y|quartzfur}} gloves",
+          "tile": "Items/sw_quartz_fur_gloves.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Crysteel Gauntlets": {
+        "id": "Crysteel Gauntlets",
+        "render": {
+          "displayName": "willowy {{K|{{crysteel|crysteel}} gauntlets}}",
+          "tile": "Items/sw_gauntlets_hightier1.bmp",
+          "mainColour": "&g",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Ogre Fur Gloves": {
+        "id": "Ogre Fur Gloves",
+        "render": {
+          "displayName": "willowy {{W|ogre fur}} gloves",
+          "tile": "Items/sw_leather_gloves.bmp",
+          "mainColour": "&W",
+          "detailColour": "w"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Flawless Crysteel Gauntlets": {
+        "id": "Flawless Crysteel Gauntlets",
+        "render": {
+          "displayName": "willowy {{K|flawless {{crysteel|crysteel}} gauntlets}}",
+          "tile": "Items/sw_gauntlets_hightier1.bmp",
+          "mainColour": "&G",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Kaleidocera Muffs": {
+        "id": "Kaleidocera Muffs",
+        "render": {
+          "displayName": "willowy {{kaleidoslug|kaleidocera}} muffs",
+          "tile": "Items/sw_cera_muffs.bmp",
+          "mainColour": "&m",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Precision Nanon Fingers": {
         "id": "Precision Nanon Fingers",
         "render": {
@@ -49878,6 +51406,31 @@
           "tile": "Items/sw_nanon_fingers.bmp",
           "mainColour": "&Y",
           "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Zetachrome Gloves": {
+        "id": "Zetachrome Gloves",
+        "render": {
+          "displayName": "willowy {{zetachrome|zetachrome}} gloves",
+          "tile": "Items/sw_gauntlets_hightier2.bmp",
+          "mainColour": "&C",
+          "detailColour": "m"
+        },
+        "semanticTags": [
+          "Protection",
+          "Historical"
+        ]
+      },
+      "Leyline Puppeteers": {
+        "id": "Leyline Puppeteers",
+        "render": {
+          "displayName": "willowy {{psymeridian|leyline puppeteers}}",
+          "tile": "Items/sw_puppeteers.bmp",
+          "mainColour": "&K",
+          "detailColour": "m"
         },
         "semanticTags": [
           "Protection"
@@ -49956,6 +51509,30 @@
           "Contemporary"
         ]
       },
+      "Chain Boots": {
+        "id": "Chain Boots",
+        "render": {
+          "displayName": "willowy chain boots",
+          "tile": "Items/sw_chain_boots.bmp",
+          "mainColour": "&y",
+          "detailColour": "Y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Steel Boots": {
+        "id": "Steel Boots",
+        "render": {
+          "displayName": "willowy {{Y|steel}} boots",
+          "tile": "Items/sw_metal_boots.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Elastyne Slippers": {
         "id": "Elastyne Slippers",
         "render": {
@@ -49967,6 +51544,43 @@
         "semanticTags": [
           "Protection",
           "Movement"
+        ]
+      },
+      "Carbide Boots": {
+        "id": "Carbide Boots",
+        "render": {
+          "displayName": "willowy {{b|carbide}} boots",
+          "tile": "Items/sw_boots_midtier_metal.bmp",
+          "mainColour": "&b",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Spring Boots": {
+        "id": "Spring Boots",
+        "render": {
+          "displayName": "willowy bounding boots",
+          "tile": "Items/sw_boots_tech.bmp",
+          "mainColour": "&C",
+          "detailColour": "c"
+        },
+        "semanticTags": [
+          "Protection",
+          "Movement"
+        ]
+      },
+      "Grease Boots": {
+        "id": "Grease Boots",
+        "render": {
+          "displayName": "willowy greased steel boots",
+          "tile": "Items/sw_metal_boots.bmp",
+          "mainColour": "&Y",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
         ]
       },
       "Plastifer Sneakers": {
@@ -50006,6 +51620,56 @@
           "Protection"
         ]
       },
+      "Rocket Skates": {
+        "id": "Rocket Skates",
+        "render": {
+          "displayName": "willowy {{rocket|rocket}} {{K|skates}}",
+          "tile": "Items/sw_rocketskates.bmp",
+          "mainColour": "&K",
+          "detailColour": "R"
+        },
+        "semanticTags": [
+          "Protection",
+          "Movement"
+        ]
+      },
+      "Crysteel Boots": {
+        "id": "Crysteel Boots",
+        "render": {
+          "displayName": "willowy {{K|{{crysteel|crysteel}} boots}}",
+          "tile": "Items/sw_boots_hightier1.bmp",
+          "mainColour": "&g",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Ninefold Boots": {
+        "id": "Ninefold Boots",
+        "render": {
+          "displayName": "willowy {{ninefold|ninefold}} boots",
+          "tile": "Items/sw_tech_boots.bmp",
+          "mainColour": "&b",
+          "detailColour": "B"
+        },
+        "semanticTags": [
+          "Protection",
+          "Travel"
+        ]
+      },
+      "Flawless Crysteel Boots": {
+        "id": "Flawless Crysteel Boots",
+        "render": {
+          "displayName": "willowy {{K|flawless {{crysteel|crysteel}} boots}}",
+          "tile": "Items/sw_boots_hightier1.bmp",
+          "mainColour": "&G",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "3D Cobblers": {
         "id": "3D Cobblers",
         "render": {
@@ -50029,6 +51693,31 @@
         "semanticTags": [
           "Protection",
           "Flight"
+        ]
+      },
+      "Kaleidocera Krakows": {
+        "id": "Kaleidocera Krakows",
+        "render": {
+          "displayName": "willowy {{kaleidoslug|kaleidocera}} krakows",
+          "tile": "Items/sw_cera_krakows.bmp",
+          "mainColour": "&m",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Zetachrome Pumps": {
+        "id": "Zetachrome Pumps",
+        "render": {
+          "displayName": "willowy {{zetachrome|zetachrome}} pumps",
+          "tile": "Items/sw_boots_hightier2.bmp",
+          "mainColour": "&C",
+          "detailColour": "m"
+        },
+        "semanticTags": [
+          "Protection",
+          "Historical"
         ]
       },
       "Jeweled Sandals": {
@@ -50114,6 +51803,19 @@
           "tile": "Items/sw_point_defense_drone.bmp",
           "mainColour": "&c",
           "detailColour": "R"
+        },
+        "semanticTags": [
+          "Protection",
+          "Floating"
+        ]
+      },
+      "Chiral Rings": {
+        "id": "Chiral Rings",
+        "render": {
+          "displayName": "willowy {{chiral|chiral rings}}",
+          "tile": "Items/sw_chiral_rings.bmp",
+          "mainColour": "&y",
+          "detailColour": "m"
         },
         "semanticTags": [
           "Protection",
@@ -50222,6 +51924,102 @@
           "Protection"
         ]
       },
+      "Iron Buckler": {
+        "id": "Iron Buckler",
+        "render": {
+          "displayName": "willowy iron buckler",
+          "tile": "Items/sw_buckler.bmp",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Steel Buckler": {
+        "id": "Steel Buckler",
+        "render": {
+          "displayName": "willowy {{Y|steel}} buckler",
+          "tile": "Items/sw_buckler3.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection",
+          "Contemporary"
+        ]
+      },
+      "Steel Shield": {
+        "id": "Steel Shield",
+        "render": {
+          "displayName": "willowy {{Y|steel}} shield",
+          "tile": "Items/sw_shield5.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Carbide Shield": {
+        "id": "Carbide Shield",
+        "render": {
+          "displayName": "willowy {{b|carbide}} shield",
+          "tile": "Items/sw_shield4.bmp",
+          "mainColour": "&y",
+          "detailColour": "b"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Fullerite Shield": {
+        "id": "Fullerite Shield",
+        "render": {
+          "displayName": "willowy {{K|fullerite}} aegis",
+          "tile": "Items/sw_shield_templar.bmp",
+          "mainColour": "&y",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Crysteel Shield": {
+        "id": "Crysteel Shield",
+        "render": {
+          "displayName": "willowy {{K|{{crysteel|crysteel}} aegis}}",
+          "tile": "Items/sw_shield5.bmp",
+          "mainColour": "&g",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Flawless Crysteel Shield": {
+        "id": "Flawless Crysteel Shield",
+        "render": {
+          "displayName": "willowy {{K|flawless {{crysteel|crysteel}} aegis}}",
+          "tile": "Items/sw_shield5.bmp",
+          "mainColour": "&G",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Clay Pot": {
+        "id": "Clay Pot",
+        "render": {
+          "displayName": "willowy clay pot",
+          "tile": "Items/sw_clay_pot.bmp",
+          "mainColour": "&w",
+          "detailColour": "r"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
       "Tread Guard": {
         "id": "Tread Guard",
         "render": {
@@ -50278,6 +52076,18 @@
           "tile": "Items/sw_mask_mummer.bmp",
           "mainColour": "&y",
           "detailColour": "C"
+        },
+        "semanticTags": [
+          "Protection"
+        ]
+      },
+      "Blackboard": {
+        "id": "Blackboard",
+        "render": {
+          "displayName": "willowy burnished {{K|fullerite}} shield",
+          "tile": "Items/sw_shield1.bmp",
+          "mainColour": "&y",
+          "detailColour": "K"
         },
         "semanticTags": [
           "Protection"
@@ -50456,6 +52266,18 @@
         "semanticTags": [
           "Scholarly",
           "Contemporary"
+        ]
+      },
+      "EyelessCrabShell": {
+        "id": "EyelessCrabShell",
+        "render": {
+          "displayName": "willowy {{Y|eyeless crab shell}}",
+          "tile": "Items/sw_crab_shield.bmp",
+          "mainColour": "&Y",
+          "detailColour": "y"
+        },
+        "semanticTags": [
+          "Protection"
         ]
       },
       "SalthopperMandible": {
@@ -52369,6 +54191,19 @@
           "Contemporary"
         ]
       },
+      "Nanopneumatic Jackhammer": {
+        "id": "Nanopneumatic Jackhammer",
+        "render": {
+          "displayName": "willowy nanopneumatic jackhammer",
+          "tile": "Items/sw_jackhammer.bmp",
+          "mainColour": "&C",
+          "detailColour": "K"
+        },
+        "semanticTags": [
+          "Melee",
+          "Tool"
+        ]
+      },
       "Tattoo Gun": {
         "id": "Tattoo Gun",
         "render": {
@@ -52388,6 +54223,18 @@
           "tile": "Items/sw_phylactery.bmp",
           "mainColour": "&w",
           "detailColour": "c"
+        },
+        "semanticTags": [
+          "Tool"
+        ]
+      },
+      "Neuro Animator": {
+        "id": "Neuro Animator",
+        "render": {
+          "displayName": "willowy {{nanoneuro|nano-neuro}} {{Y|animator}}",
+          "tile": "Items/sw_animator.bmp",
+          "mainColour": "&r",
+          "detailColour": "G"
         },
         "semanticTags": [
           "Tool"
@@ -53036,6 +54883,18 @@
           "tile": "Items/sw_plastic_tree.bmp",
           "mainColour": "&G",
           "detailColour": "w"
+        },
+        "semanticTags": [
+          "Trinket"
+        ]
+      },
+      "Small Sphere of Negative Weight": {
+        "id": "Small Sphere of Negative Weight",
+        "render": {
+          "displayName": "willowy small sphere of negative weight",
+          "tile": "Items/sw_sphere_negative_weight.bmp",
+          "mainColour": "&K",
+          "detailColour": "y"
         },
         "semanticTags": [
           "Trinket"

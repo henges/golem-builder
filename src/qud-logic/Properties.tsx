@@ -329,10 +329,11 @@ export const GetValidHamsaEffectsForObj = (selected: ExportObjectHamsa, hamsas: 
 export const CreateHamsaListElement = ({name, granters, effects, allGranters, showModal, setSelection, isSelected}: HamsaListElementProps) => {
 
     const base: SelectableListItem = {name: name, isSelected: isSelected};
-    const granterHamsaEffects = granters.map(g => GetValidHamsaEffectsForObj(allGranters[g], effects));
-    const nonGuaranteeableGranters = granterHamsaEffects.filter(g => g.length !== 1);
-    const guaranteedGranters = granterHamsaEffects.filter(g => g.length === 1);
-    const granterRenders = granters.map(g => allGranters[g]);
+    const grantersWithHamsaEffects = granters.map(g => ([g, GetValidHamsaEffectsForObj(allGranters[g], effects)] as const));
+    grantersWithHamsaEffects.sort(([_k1, v1], [_k2, v2]) => v1.length - v2.length);
+    const nonGuaranteeableGranters = grantersWithHamsaEffects.map(([_k,v]) => v).filter(g => g.length !== 1);
+    const guaranteedGranters = grantersWithHamsaEffects.map(([_k,v]) => v).filter(g => g.length === 1);
+    const granterRenders = grantersWithHamsaEffects.map(([k]) => allGranters[k]);
 
     if (granters.length === guaranteedGranters.length) {
         if (granters.length === 1) {

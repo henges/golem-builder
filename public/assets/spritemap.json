@@ -2743,1168 +2743,1508 @@
     "x": 4,
     "y": 34
   },
-  "Items/sw_bedroll.bmp": {
+  "Items/sw_catchbasin.bmp": {
     "x": 5,
+    "y": 34
+  },
+  "Items/sw_bedroll.bmp": {
+    "x": 6,
     "y": 34
   },
   "Items/sw_shawl.bmp": {
-    "x": 6,
+    "x": 7,
     "y": 34
   },
   "Tiles/sw_chest.bmp": {
-    "x": 7,
+    "x": 8,
     "y": 34
   },
   "Items/sw_bones_5.bmp": {
-    "x": 8,
+    "x": 9,
     "y": 34
   },
   "Items/sw_medlocker.bmp": {
-    "x": 9,
+    "x": 10,
     "y": 34
   },
   "Items/sw_weapons_rack.bmp": {
-    "x": 10,
+    "x": 11,
     "y": 34
   },
   "Items/sw_jug2.bmp": {
-    "x": 11,
+    "x": 12,
     "y": 34
   },
   "Items/sw_bottle_wide.bmp": {
-    "x": 12,
+    "x": 13,
+    "y": 34
+  },
+  "Items/sw_jug3.bmp": {
+    "x": 14,
+    "y": 34
+  },
+  "Items/sw_jug4.bmp": {
+    "x": 15,
+    "y": 34
+  },
+  "Items/sw_jug5.bmp": {
+    "x": 16,
+    "y": 34
+  },
+  "Items/sw_vase2.bmp": {
+    "x": 17,
+    "y": 34
+  },
+  "Items/sw_vase_long_broken.bmp": {
+    "x": 18,
+    "y": 34
+  },
+  "Items/sw_hookah.bmp": {
+    "x": 19,
     "y": 34
   },
   "Items/sw_sign_apple.bmp": {
-    "x": 13,
-    "y": 34
+    "x": 0,
+    "y": 35
   },
   "Items/sw_mine.bmp": {
-    "x": 14,
-    "y": 34
+    "x": 1,
+    "y": 35
   },
   "Items/sw_cudgel_10.bmp": {
-    "x": 15,
-    "y": 34
+    "x": 2,
+    "y": 35
   },
   "Items/wrench.bmp": {
-    "x": 16,
-    "y": 34
+    "x": 3,
+    "y": 35
   },
   "Items/pestle.bmp": {
-    "x": 17,
-    "y": 34
+    "x": 4,
+    "y": 35
   },
   "Items/sw_cudgel_11.bmp": {
-    "x": 18,
-    "y": 34
-  },
-  "Items/sw_cudgel_2.bmp": {
-    "x": 19,
-    "y": 34
+    "x": 5,
+    "y": 35
   },
   "Items/sw_cudgel_1.bmp": {
-    "x": 0,
+    "x": 6,
+    "y": 35
+  },
+  "Items/sw_cudgel_2.bmp": {
+    "x": 7,
+    "y": 35
+  },
+  "Items/sw_cudgel_3.bmp": {
+    "x": 8,
     "y": 35
   },
   "Items/sw_shell_1.bmp": {
-    "x": 1,
+    "x": 9,
+    "y": 35
+  },
+  "Items/sw_cudgel_12.bmp": {
+    "x": 10,
+    "y": 35
+  },
+  "Items/sw_cudgel_4.bmp": {
+    "x": 11,
+    "y": 35
+  },
+  "Items/sw_cudgel_5.bmp": {
+    "x": 12,
     "y": 35
   },
   "Items/sw_cudgel_6.bmp": {
-    "x": 2,
+    "x": 13,
+    "y": 35
+  },
+  "Items/sw_cudgel_7.bmp": {
+    "x": 14,
+    "y": 35
+  },
+  "Items/sw_cudgel_13.bmp": {
+    "x": 15,
     "y": 35
   },
   "Items/sw_rod_1.bmp": {
-    "x": 3,
+    "x": 16,
     "y": 35
   },
   "Items/sw_baton_siphon.bmp": {
-    "x": 4,
+    "x": 17,
     "y": 35
   },
   "Items/sw_shortblade_1.bmp": {
-    "x": 5,
+    "x": 18,
     "y": 35
   },
   "Items/sw_shortblade_9.bmp": {
-    "x": 6,
+    "x": 19,
     "y": 35
   },
   "Items/sw_shortblade_5.bmp": {
-    "x": 7,
-    "y": 35
+    "x": 0,
+    "y": 36
   },
   "Items/sw_shortblade_12.bmp": {
-    "x": 8,
-    "y": 35
+    "x": 1,
+    "y": 36
   },
   "Items/sw_shortblade_10.bmp": {
-    "x": 9,
-    "y": 35
+    "x": 2,
+    "y": 36
   },
   "Items/sw_shortblade_3.bmp": {
-    "x": 10,
-    "y": 35
+    "x": 3,
+    "y": 36
   },
   "Items/sw_shortblade_11.bmp": {
-    "x": 11,
-    "y": 35
+    "x": 4,
+    "y": 36
   },
   "Items/sw_shortblade_8.bmp": {
-    "x": 12,
-    "y": 35
+    "x": 5,
+    "y": 36
   },
   "Items/sw_shortblade_7.bmp": {
-    "x": 13,
-    "y": 35
+    "x": 6,
+    "y": 36
   },
   "Items/sw_longblade_9.bmp": {
-    "x": 14,
-    "y": 35
+    "x": 7,
+    "y": 36
   },
   "Items/sw_axe_1.bmp": {
-    "x": 15,
-    "y": 35
+    "x": 8,
+    "y": 36
   },
   "Items/sw_axe_9.bmp": {
-    "x": 16,
-    "y": 35
+    "x": 9,
+    "y": 36
   },
   "Items/sw_axe_10.bmp": {
-    "x": 17,
-    "y": 35
+    "x": 10,
+    "y": 36
+  },
+  "Items/sw_axe_2.bmp": {
+    "x": 11,
+    "y": 36
   },
   "Items/sw_axe_3.bmp": {
-    "x": 18,
-    "y": 35
+    "x": 12,
+    "y": 36
+  },
+  "Items/sw_axe_4.bmp": {
+    "x": 13,
+    "y": 36
   },
   "Items/sw_axe_5.bmp": {
-    "x": 19,
-    "y": 35
+    "x": 14,
+    "y": 36
+  },
+  "Items/sw_axe_6.bmp": {
+    "x": 15,
+    "y": 36
   },
   "Items/sw_whip_1.bmp": {
-    "x": 0,
+    "x": 16,
     "y": 36
   },
   "Items/sw_longblade_1.bmp": {
-    "x": 1,
+    "x": 17,
+    "y": 36
+  },
+  "Items/sw_longblade_2.bmp": {
+    "x": 18,
     "y": 36
   },
   "Items/sw_longblade_14.bmp": {
-    "x": 2,
-    "y": 36
-  },
-  "Items/sw_longblade_5.bmp": {
-    "x": 3,
-    "y": 36
-  },
-  "Items/sw_sharpened_polyp.bmp": {
-    "x": 4,
-    "y": 36
-  },
-  "Items/sw_kopesh.bmp": {
-    "x": 5,
-    "y": 36
-  },
-  "Items/sw_longblade_10.bmp": {
-    "x": 6,
-    "y": 36
-  },
-  "Items/sw_axe_11.bmp": {
-    "x": 7,
-    "y": 36
-  },
-  "Items/sw_longblade_12.bmp": {
-    "x": 8,
-    "y": 36
-  },
-  "Items/sw_bullet.bmp": {
-    "x": 9,
-    "y": 36
-  },
-  "Items/sw_techrifle_5.bmp": {
-    "x": 10,
-    "y": 36
-  },
-  "Items/sw_bow_1.bmp": {
-    "x": 11,
-    "y": 36
-  },
-  "Items/sw_bow_2.bmp": {
-    "x": 12,
-    "y": 36
-  },
-  "Items/sw_bow_4.bmp": {
-    "x": 13,
-    "y": 36
-  },
-  "Items/sw_bow_3.bmp": {
-    "x": 14,
-    "y": 36
-  },
-  "Items/sw_arrow.bmp": {
-    "x": 15,
-    "y": 36
-  },
-  "Items/sw_rocket.bmp": {
-    "x": 16,
-    "y": 36
-  },
-  "Items/sw_flamethrower.bmp": {
-    "x": 17,
-    "y": 36
-  },
-  "Items/sw_pump.bmp": {
-    "x": 18,
-    "y": 36
-  },
-  "Items/sw_mortar_tube.bmp": {
     "x": 19,
     "y": 36
   },
-  "Items/sw_techcannon_3.bmp": {
+  "Items/sw_longblade_4.bmp": {
     "x": 0,
     "y": 37
   },
-  "Items/sw_revolver.bmp": {
+  "Items/sw_longblade_5.bmp": {
     "x": 1,
     "y": 37
   },
-  "Items/sw_autopistol.bmp": {
+  "Items/sw_longblade_6.bmp": {
     "x": 2,
     "y": 37
   },
-  "Items/sw_grappling_gun.bmp": {
+  "Items/sw_sharpened_polyp.bmp": {
     "x": 3,
     "y": 37
   },
-  "Items/sw_techpistol_1.bmp": {
+  "Items/sw_kopesh.bmp": {
     "x": 4,
     "y": 37
   },
-  "Items/sw_techpistol_6.bmp": {
+  "Items/sw_longblade_10.bmp": {
     "x": 5,
     "y": 37
   },
-  "Items/sw_techpistol_5.bmp": {
+  "Items/sw_axe_11.bmp": {
     "x": 6,
     "y": 37
   },
-  "Items/sw_techpistol_8.bmp": {
+  "Items/sw_longblade_12.bmp": {
     "x": 7,
     "y": 37
   },
-  "Items/sw_fleshgun.bmp": {
+  "Items/sw_bullet.bmp": {
     "x": 8,
     "y": 37
   },
-  "Items/sw_shotgun_shell.bmp": {
+  "Items/sw_rifle.bmp": {
     "x": 9,
     "y": 37
   },
-  "Items/sw_geomagnetic_disc.bmp": {
+  "Items/sw_carbine.bmp": {
     "x": 10,
     "y": 37
   },
-  "Items/sw_throwing_axe.bmp": {
+  "Items/sw_chain_pistol.bmp": {
     "x": 11,
     "y": 37
   },
-  "Items/sw_grenade_mki.bmp": {
+  "Items/sw_sniper_rifle.bmp": {
     "x": 12,
     "y": 37
   },
-  "Items/sw_grenade_mkii.bmp": {
+  "Items/sw_techrifle_1.bmp": {
     "x": 13,
     "y": 37
   },
-  "Items/sw_grenade_mkiii.bmp": {
+  "Items/sw_techrifle_2.bmp": {
     "x": 14,
     "y": 37
   },
-  "Items/sw_robes1.bmp": {
+  "Items/sw_techrifle_3.bmp": {
     "x": 15,
     "y": 37
   },
-  "Items/sw_chainmail.bmp": {
+  "Items/sw_techrifle_4.bmp": {
     "x": 16,
     "y": 37
   },
-  "Items/sw_kilt.bmp": {
+  "Items/sw_techrifle_5.bmp": {
     "x": 17,
     "y": 37
   },
-  "Items/sw_apron.bmp": {
+  "Items/sw_bow_1.bmp": {
     "x": 18,
     "y": 37
   },
-  "Items/sw_overalls.bmp": {
+  "Items/sw_bow_2.bmp": {
     "x": 19,
     "y": 37
   },
-  "Items/sw_vest.bmp": {
+  "Items/sw_bow_4.bmp": {
     "x": 0,
     "y": 38
+  },
+  "Items/sw_bow_3.bmp": {
+    "x": 1,
+    "y": 38
+  },
+  "Items/sw_arrow.bmp": {
+    "x": 2,
+    "y": 38
+  },
+  "Items/sw_techcannon_1.bmp": {
+    "x": 3,
+    "y": 38
+  },
+  "Items/sw_rocket.bmp": {
+    "x": 4,
+    "y": 38
+  },
+  "Items/sw_flamethrower.bmp": {
+    "x": 5,
+    "y": 38
+  },
+  "Items/sw_pump.bmp": {
+    "x": 6,
+    "y": 38
+  },
+  "Items/sw_mortar_tube.bmp": {
+    "x": 7,
+    "y": 38
+  },
+  "Items/sw_techcannon_3.bmp": {
+    "x": 8,
+    "y": 38
+  },
+  "Items/sw_revolver.bmp": {
+    "x": 9,
+    "y": 38
+  },
+  "Items/sw_autopistol.bmp": {
+    "x": 10,
+    "y": 38
+  },
+  "Items/sw_grappling_gun.bmp": {
+    "x": 11,
+    "y": 38
+  },
+  "Items/sw_techpistol_1.bmp": {
+    "x": 12,
+    "y": 38
+  },
+  "Items/sw_techpistol_2.bmp": {
+    "x": 13,
+    "y": 38
+  },
+  "Items/sw_techpistol_6.bmp": {
+    "x": 14,
+    "y": 38
+  },
+  "Items/sw_techpistol_5.bmp": {
+    "x": 15,
+    "y": 38
+  },
+  "Items/sw_techpistol_3.bmp": {
+    "x": 16,
+    "y": 38
+  },
+  "Items/sw_techpistol_7.bmp": {
+    "x": 17,
+    "y": 38
+  },
+  "Items/sw_hand_vacuum.bmp": {
+    "x": 18,
+    "y": 38
+  },
+  "Items/sw_techpistol_4.bmp": {
+    "x": 19,
+    "y": 38
+  },
+  "Items/sw_techpistol_8.bmp": {
+    "x": 0,
+    "y": 39
+  },
+  "Items/sw_fleshgun.bmp": {
+    "x": 1,
+    "y": 39
+  },
+  "Items/sw_shotgun_shell.bmp": {
+    "x": 2,
+    "y": 39
+  },
+  "Items/sw_shotgun_2.bmp": {
+    "x": 3,
+    "y": 39
+  },
+  "Items/sw_shotgun_1.bmp": {
+    "x": 4,
+    "y": 39
+  },
+  "Items/sw_geomagnetic_disc.bmp": {
+    "x": 5,
+    "y": 39
+  },
+  "Items/sw_throwing_axe.bmp": {
+    "x": 6,
+    "y": 39
+  },
+  "Items/sw_net.bmp": {
+    "x": 7,
+    "y": 39
+  },
+  "Items/sw_grenade_mki.bmp": {
+    "x": 8,
+    "y": 39
+  },
+  "Items/sw_grenade_mkii.bmp": {
+    "x": 9,
+    "y": 39
+  },
+  "Items/sw_grenade_mkiii.bmp": {
+    "x": 10,
+    "y": 39
+  },
+  "Items/sw_robes1.bmp": {
+    "x": 11,
+    "y": 39
+  },
+  "Items/sw_cloak_panther.bmp": {
+    "x": 12,
+    "y": 39
+  },
+  "Items/sw_chainmail.bmp": {
+    "x": 13,
+    "y": 39
+  },
+  "Items/sw_kilt.bmp": {
+    "x": 14,
+    "y": 39
+  },
+  "Items/sw_apron.bmp": {
+    "x": 15,
+    "y": 39
+  },
+  "Items/sw_overalls.bmp": {
+    "x": 16,
+    "y": 39
+  },
+  "Items/sw_armor1.bmp": {
+    "x": 17,
+    "y": 39
+  },
+  "Items/sw_leather_armor.bmp": {
+    "x": 18,
+    "y": 39
+  },
+  "Items/sw_vest.bmp": {
+    "x": 19,
+    "y": 39
+  },
+  "Items/sw_armor2.bmp": {
+    "x": 0,
+    "y": 40
   },
   "Items/sw_skinsuit.bmp": {
     "x": 1,
-    "y": 38
+    "y": 40
   },
   "Items/sw_flexisuit.bmp": {
     "x": 2,
-    "y": 38
+    "y": 40
+  },
+  "Items/sw_gas_tumbler.bmp": {
+    "x": 3,
+    "y": 40
   },
   "Items/sw_burnoose.bmp": {
-    "x": 3,
-    "y": 38
+    "x": 4,
+    "y": 40
   },
   "Items/sw_braid.bmp": {
-    "x": 4,
-    "y": 38
+    "x": 5,
+    "y": 40
   },
   "Items/sw_cloak.bmp": {
-    "x": 5,
-    "y": 38
-  },
-  "Items/sw_cloak_panther.bmp": {
     "x": 6,
-    "y": 38
+    "y": 40
   },
   "Items/sw_banner.bmp": {
     "x": 7,
-    "y": 38
+    "y": 40
+  },
+  "Items/sw_mechanical_wings.bmp": {
+    "x": 8,
+    "y": 40
+  },
+  "Items/sw_backpack.bmp": {
+    "x": 9,
+    "y": 40
   },
   "Items/sw_yurtmat.bmp": {
-    "x": 8,
-    "y": 38
+    "x": 10,
+    "y": 40
   },
   "Items/sw_beehive.bmp": {
-    "x": 9,
-    "y": 38
+    "x": 11,
+    "y": 40
   },
   "Items/sw_cloak_fancy.bmp": {
-    "x": 10,
-    "y": 38
+    "x": 12,
+    "y": 40
   },
   "Items/sw_molly_netting.bmp": {
-    "x": 11,
-    "y": 38
+    "x": 13,
+    "y": 40
+  },
+  "Items/sw_gyrocopter_backpack.bmp": {
+    "x": 14,
+    "y": 40
+  },
+  "Items/sw_templar_banner.bmp": {
+    "x": 15,
+    "y": 40
+  },
+  "Items/sw_quartz_fur_cloak.bmp": {
+    "x": 16,
+    "y": 40
+  },
+  "Items/sw_exoskeleton.bmp": {
+    "x": 17,
+    "y": 40
+  },
+  "Items/sw_cera_cape.bmp": {
+    "x": 18,
+    "y": 40
+  },
+  "Items/sw_mesh_tabard.bmp": {
+    "x": 19,
+    "y": 40
   },
   "Items/sw_wreath.bmp": {
-    "x": 12,
-    "y": 38
+    "x": 0,
+    "y": 41
   },
   "Items/sw_hat.bmp": {
-    "x": 13,
-    "y": 38
+    "x": 1,
+    "y": 41
   },
   "Items/sw_gentling_cone.bmp": {
-    "x": 14,
-    "y": 38
+    "x": 2,
+    "y": 41
   },
   "Items/sw_cap.bmp": {
-    "x": 15,
-    "y": 38
+    "x": 3,
+    "y": 41
   },
   "Items/sw_hood.bmp": {
-    "x": 16,
-    "y": 38
+    "x": 4,
+    "y": 41
   },
   "Items/sw_knollworm_skull.bmp": {
-    "x": 17,
-    "y": 38
+    "x": 5,
+    "y": 41
+  },
+  "Items/sw_metal_helmet.bmp": {
+    "x": 6,
+    "y": 41
   },
   "Items/sw_skullcap.bmp": {
-    "x": 18,
-    "y": 38
+    "x": 7,
+    "y": 41
+  },
+  "Items/sw_snail_shell.bmp": {
+    "x": 8,
+    "y": 41
   },
   "Items/sw_apefur_hat.bmp": {
-    "x": 19,
-    "y": 38
+    "x": 9,
+    "y": 41
   },
   "Items/sw_square_cap.bmp": {
-    "x": 0,
-    "y": 39
+    "x": 10,
+    "y": 41
+  },
+  "Items/sw_chain_helmet.bmp": {
+    "x": 11,
+    "y": 41
+  },
+  "Items/sw_forked_horned_helm.bmp": {
+    "x": 12,
+    "y": 41
+  },
+  "Items/sw_headlamp.bmp": {
+    "x": 13,
+    "y": 41
   },
   "Items/sw_miners_helmet.bmp": {
-    "x": 1,
-    "y": 39
+    "x": 14,
+    "y": 41
   },
   "Items/sw_bonnet.bmp": {
-    "x": 2,
-    "y": 39
+    "x": 15,
+    "y": 41
   },
   "Items/sw_leafy_helm.bmp": {
-    "x": 3,
-    "y": 39
+    "x": 16,
+    "y": 41
+  },
+  "Items/sw_teleprojector.bmp": {
+    "x": 17,
+    "y": 41
+  },
+  "Items/sw_quartz_fur_hat.bmp": {
+    "x": 18,
+    "y": 41
+  },
+  "Items/sw_helm_hightier1.bmp": {
+    "x": 19,
+    "y": 41
+  },
+  "Items/sw_enigma_cap.bmp": {
+    "x": 0,
+    "y": 42
+  },
+  "Items/sw_helm_hightier2.bmp": {
+    "x": 1,
+    "y": 42
   },
   "Items/sw_mental_aggregator.bmp": {
-    "x": 4,
-    "y": 39
+    "x": 2,
+    "y": 42
+  },
+  "Items/sw_psychodyne_helmet.bmp": {
+    "x": 3,
+    "y": 42
   },
   "Items/sw_veil.bmp": {
-    "x": 5,
-    "y": 39
+    "x": 4,
+    "y": 42
   },
   "Items/sw_mask.bmp": {
-    "x": 6,
-    "y": 39
+    "x": 5,
+    "y": 42
   },
   "Items/sw_mask3.bmp": {
-    "x": 7,
-    "y": 39
+    "x": 6,
+    "y": 42
   },
   "Items/sw_mask2.bmp": {
-    "x": 8,
-    "y": 39
+    "x": 7,
+    "y": 42
   },
   "Items/sw_gentlingmask.bmp": {
-    "x": 9,
-    "y": 39
+    "x": 8,
+    "y": 42
   },
   "Items/sw_goggles.bmp": {
-    "x": 10,
-    "y": 39
+    "x": 9,
+    "y": 42
   },
   "Items/sw_shades.bmp": {
-    "x": 11,
-    "y": 39
+    "x": 10,
+    "y": 42
   },
   "Items/sw_gas_mask.bmp": {
-    "x": 12,
-    "y": 39
+    "x": 11,
+    "y": 42
   },
   "Items/sw_monocle.bmp": {
-    "x": 13,
-    "y": 39
+    "x": 12,
+    "y": 42
   },
   "Items/sw_spectacles.bmp": {
-    "x": 14,
-    "y": 39
+    "x": 13,
+    "y": 42
   },
   "Items/sw_poly_rings.bmp": {
-    "x": 15,
-    "y": 39
+    "x": 14,
+    "y": 42
   },
   "Items/sw_dream_rondure.bmp": {
-    "x": 16,
-    "y": 39
+    "x": 15,
+    "y": 42
   },
   "Items/sw_visor.bmp": {
+    "x": 16,
+    "y": 42
+  },
+  "Items/sw_visage.bmp": {
     "x": 17,
-    "y": 39
+    "y": 42
   },
   "Items/sw_interpolators.bmp": {
     "x": 18,
-    "y": 39
+    "y": 42
   },
   "Items/sw_dazzle_cheek.bmp": {
     "x": 19,
-    "y": 39
+    "y": 42
   },
   "Items/sw_necklace.bmp": {
     "x": 0,
-    "y": 40
+    "y": 43
   },
   "Items/sw_neckring.bmp": {
     "x": 1,
-    "y": 40
+    "y": 43
   },
   "Items/sw_cuff.bmp": {
     "x": 2,
-    "y": 40
+    "y": 43
   },
   "Items/sw_bracelet_tech.bmp": {
     "x": 3,
-    "y": 40
+    "y": 43
   },
   "Items/sw_armlet.bmp": {
     "x": 4,
-    "y": 40
+    "y": 43
   },
   "Items/sw_leather_bracers.bmp": {
     "x": 5,
-    "y": 40
+    "y": 43
   },
   "Items/sw_cuff_tech.bmp": {
     "x": 6,
-    "y": 40
+    "y": 43
   },
   "Items/sw_slip_ring.bmp": {
     "x": 7,
-    "y": 40
+    "y": 43
   },
   "Items/sw_tri_bracelet.bmp": {
     "x": 8,
-    "y": 40
+    "y": 43
+  },
+  "Items/sw_cuffs.bmp": {
+    "x": 9,
+    "y": 43
   },
   "Items/sw_leather_gloves.bmp": {
-    "x": 9,
-    "y": 40
+    "x": 10,
+    "y": 43
+  },
+  "Items/sw_metal_gloves.bmp": {
+    "x": 11,
+    "y": 43
   },
   "Items/sw_artifact_gloves.bmp": {
-    "x": 10,
-    "y": 40
+    "x": 12,
+    "y": 43
   },
   "Items/sw_gloves_skintight.bmp": {
-    "x": 11,
-    "y": 40
+    "x": 13,
+    "y": 43
+  },
+  "Items/sw_gauntlets_chain.bmp": {
+    "x": 14,
+    "y": 43
+  },
+  "Items/sw_quartz_fur_gloves.bmp": {
+    "x": 15,
+    "y": 43
+  },
+  "Items/sw_gauntlets_hightier1.bmp": {
+    "x": 16,
+    "y": 43
+  },
+  "Items/sw_cera_muffs.bmp": {
+    "x": 17,
+    "y": 43
   },
   "Items/sw_nanon_fingers.bmp": {
-    "x": 12,
-    "y": 40
+    "x": 18,
+    "y": 43
+  },
+  "Items/sw_gauntlets_hightier2.bmp": {
+    "x": 19,
+    "y": 43
+  },
+  "Items/sw_puppeteers.bmp": {
+    "x": 0,
+    "y": 44
   },
   "Items/sw_shoes.bmp": {
-    "x": 13,
-    "y": 40
+    "x": 1,
+    "y": 44
   },
   "Items/sw_sandals.bmp": {
-    "x": 14,
-    "y": 40
+    "x": 2,
+    "y": 44
   },
   "Items/sw_crocassins.bmp": {
-    "x": 15,
-    "y": 40
+    "x": 3,
+    "y": 44
   },
   "Items/sw_leather_boots.bmp": {
-    "x": 16,
-    "y": 40
+    "x": 4,
+    "y": 44
   },
   "Items/sw_metal_boots.bmp": {
-    "x": 17,
-    "y": 40
+    "x": 5,
+    "y": 44
+  },
+  "Items/sw_chain_boots.bmp": {
+    "x": 6,
+    "y": 44
   },
   "Items/sw_slippers.bmp": {
-    "x": 18,
-    "y": 40
+    "x": 7,
+    "y": 44
   },
-  "Items/sw_cobblers.bmp": {
-    "x": 19,
-    "y": 40
+  "Items/sw_boots_midtier_metal.bmp": {
+    "x": 8,
+    "y": 44
   },
   "Items/sw_boots_tech.bmp": {
-    "x": 0,
-    "y": 41
+    "x": 9,
+    "y": 44
+  },
+  "Items/sw_cobblers.bmp": {
+    "x": 10,
+    "y": 44
+  },
+  "Items/sw_rocketskates.bmp": {
+    "x": 11,
+    "y": 44
+  },
+  "Items/sw_boots_hightier1.bmp": {
+    "x": 12,
+    "y": 44
+  },
+  "Items/sw_tech_boots.bmp": {
+    "x": 13,
+    "y": 44
+  },
+  "Items/sw_cera_krakows.bmp": {
+    "x": 14,
+    "y": 44
+  },
+  "Items/sw_boots_hightier2.bmp": {
+    "x": 15,
+    "y": 44
   },
   "Items/sw_lens.bmp": {
-    "x": 1,
-    "y": 41
+    "x": 16,
+    "y": 44
   },
   "Items/sw_symbiotic_firefly.bmp": {
-    "x": 2,
-    "y": 41
+    "x": 17,
+    "y": 44
   },
   "Items/sw_mote.bmp": {
-    "x": 3,
-    "y": 41
+    "x": 18,
+    "y": 44
   },
   "Items/sw_glowsphere.bmp": {
-    "x": 4,
-    "y": 41
+    "x": 19,
+    "y": 44
   },
   "Items/sw_point_defense_drone.bmp": {
-    "x": 5,
-    "y": 41
+    "x": 0,
+    "y": 45
+  },
+  "Items/sw_chiral_rings.bmp": {
+    "x": 1,
+    "y": 45
   },
   "Items/sw_black_mote.bmp": {
-    "x": 6,
-    "y": 41
+    "x": 2,
+    "y": 45
   },
   "Items/light_circle.bmp": {
-    "x": 7,
-    "y": 41
+    "x": 3,
+    "y": 45
   },
   "Items/sw_buckler.bmp": {
+    "x": 4,
+    "y": 45
+  },
+  "Items/sw_buckler3.bmp": {
+    "x": 5,
+    "y": 45
+  },
+  "Items/sw_shield5.bmp": {
+    "x": 6,
+    "y": 45
+  },
+  "Items/sw_shield4.bmp": {
+    "x": 7,
+    "y": 45
+  },
+  "Items/sw_shield_templar.bmp": {
     "x": 8,
-    "y": 41
+    "y": 45
+  },
+  "Items/sw_clay_pot.bmp": {
+    "x": 9,
+    "y": 45
   },
   "Items/sw_treadguards.bmp": {
-    "x": 9,
-    "y": 41
+    "x": 10,
+    "y": 45
   },
   "Items/sw_buckler2.bmp": {
-    "x": 10,
-    "y": 41
+    "x": 11,
+    "y": 45
   },
   "Items/sw_kindrish.bmp": {
-    "x": 11,
-    "y": 41
+    "x": 12,
+    "y": 45
   },
   "Items/sw_bracelet_simple.bmp": {
-    "x": 12,
-    "y": 41
+    "x": 13,
+    "y": 45
   },
   "Items/sw_mask_mummer.bmp": {
-    "x": 13,
-    "y": 41
+    "x": 14,
+    "y": 45
+  },
+  "Items/sw_shield1.bmp": {
+    "x": 15,
+    "y": 45
   },
   "Items/sw_prism.bmp": {
-    "x": 14,
-    "y": 41
+    "x": 16,
+    "y": 45
   },
   "Items/sw_chime_headpiece.bmp": {
-    "x": 15,
-    "y": 41
+    "x": 17,
+    "y": 45
   },
   "Items/sw_chime_dagger.bmp": {
-    "x": 16,
-    "y": 41
+    "x": 18,
+    "y": 45
   },
   "Items/sw_kah_loop.bmp": {
-    "x": 17,
-    "y": 41
+    "x": 19,
+    "y": 45
   },
   "Items/sw_mask_kesil.bmp": {
-    "x": 18,
-    "y": 41
+    "x": 0,
+    "y": 46
   },
   "Items/sw_mask_shemesh.bmp": {
-    "x": 19,
-    "y": 41
+    "x": 1,
+    "y": 46
   },
   "Items/sw_mask_earth.bmp": {
-    "x": 0,
-    "y": 42
+    "x": 2,
+    "y": 46
   },
   "Items/sw_mask_levant.bmp": {
-    "x": 1,
-    "y": 42
+    "x": 3,
+    "y": 46
   },
   "Items/sw_mask_olive.bmp": {
-    "x": 2,
-    "y": 42
+    "x": 4,
+    "y": 46
   },
   "Items/sw_mask_null.bmp": {
-    "x": 3,
-    "y": 42
+    "x": 5,
+    "y": 46
   },
   "Items/sw_repulsive_device.bmp": {
-    "x": 4,
-    "y": 42
+    "x": 6,
+    "y": 46
   },
   "Items/sw_motherpearl.bmp": {
-    "x": 5,
-    "y": 42
+    "x": 7,
+    "y": 46
   },
   "Items/sw_injector.bmp": {
-    "x": 6,
-    "y": 42
+    "x": 8,
+    "y": 46
   },
   "Items/sw_book_1.bmp": {
-    "x": 7,
-    "y": 42
+    "x": 9,
+    "y": 46
+  },
+  "Items/sw_crab_shield.bmp": {
+    "x": 10,
+    "y": 46
   },
   "Items/sw_longblade_13.bmp": {
-    "x": 8,
-    "y": 42
+    "x": 11,
+    "y": 46
   },
   "Items/sw_bones_1.bmp": {
-    "x": 9,
-    "y": 42
+    "x": 12,
+    "y": 46
   },
   "Items/sw_bones_4.bmp": {
-    "x": 10,
-    "y": 42
+    "x": 13,
+    "y": 46
   },
   "Items/sw_scanningmodule.bmp": {
-    "x": 11,
-    "y": 42
+    "x": 14,
+    "y": 46
   },
   "Items/sw_comminterlock.bmp": {
-    "x": 12,
-    "y": 42
+    "x": 15,
+    "y": 46
   },
   "Items/sw_cherubic.bmp": {
-    "x": 13,
-    "y": 42
+    "x": 16,
+    "y": 46
   },
   "Items/sw_electromagsensor.bmp": {
-    "x": 14,
-    "y": 42
+    "x": 17,
+    "y": 46
   },
   "Items/sw_cyber_navigation_system.bmp": {
-    "x": 15,
-    "y": 42
+    "x": 18,
+    "y": 46
   },
   "Items/sw_tibular_hydrojets.bmp": {
-    "x": 16,
-    "y": 42
+    "x": 19,
+    "y": 46
   },
   "Items/sw_skin_glitter.bmp": {
-    "x": 17,
-    "y": 42
+    "x": 0,
+    "y": 47
   },
   "Items/sw_skillsoft.bmp": {
-    "x": 18,
-    "y": 42
+    "x": 1,
+    "y": 47
   },
   "Items/sw_dermalinsulation.bmp": {
-    "x": 19,
-    "y": 42
+    "x": 2,
+    "y": 47
   },
   "Items/night_vision_implant.bmp": {
-    "x": 0,
-    "y": 43
+    "x": 3,
+    "y": 47
   },
   "Items/sw_hypertendons.bmp": {
-    "x": 1,
-    "y": 43
+    "x": 4,
+    "y": 47
   },
   "Items/sw_parabolic.bmp": {
-    "x": 2,
-    "y": 43
+    "x": 5,
+    "y": 47
   },
   "Items/sw_transparent.bmp": {
-    "x": 3,
-    "y": 43
+    "x": 6,
+    "y": 47
   },
   "Items/sw_armlocks.bmp": {
-    "x": 4,
-    "y": 43
+    "x": 7,
+    "y": 47
   },
   "Items/sw_flexors.bmp": {
-    "x": 5,
-    "y": 43
+    "x": 8,
+    "y": 47
   },
   "Items/sw_carbidehand.bmp": {
-    "x": 6,
-    "y": 43
+    "x": 9,
+    "y": 47
   },
   "Items/sw_axions.bmp": {
-    "x": 7,
-    "y": 43
+    "x": 10,
+    "y": 47
   },
   "Items/sw_nocturnal.bmp": {
-    "x": 8,
-    "y": 43
+    "x": 11,
+    "y": 47
   },
   "Items/sw_aircurrent.bmp": {
-    "x": 9,
-    "y": 43
+    "x": 12,
+    "y": 47
   },
   "Items/sw_cyber_reactive_cranial_plating.bmp": {
-    "x": 10,
-    "y": 43
+    "x": 13,
+    "y": 47
   },
   "Items/sw_cyber_phase_harmonic_modulator.bmp": {
-    "x": 11,
-    "y": 43
+    "x": 14,
+    "y": 47
   },
   "Items/sw_cyber_fire_suppression_system.bmp": {
-    "x": 12,
-    "y": 43
+    "x": 15,
+    "y": 47
   },
   "Items/sw_cyber_anchor_spikes.bmp": {
-    "x": 13,
-    "y": 43
+    "x": 16,
+    "y": 47
   },
   "Items/sw_schemasoft.bmp": {
-    "x": 14,
-    "y": 43
+    "x": 17,
+    "y": 47
   },
   "Items/sw_grounding_shunts.bmp": {
-    "x": 15,
-    "y": 43
+    "x": 18,
+    "y": 47
   },
   "Items/sw_bionichands.bmp": {
-    "x": 16,
-    "y": 43
+    "x": 19,
+    "y": 47
   },
   "Items/sw_ultratendons.bmp": {
-    "x": 17,
-    "y": 43
+    "x": 0,
+    "y": 48
   },
   "Items/sw_beautiful.bmp": {
-    "x": 18,
-    "y": 43
+    "x": 1,
+    "y": 48
   },
   "Items/sw_dopamine.bmp": {
-    "x": 19,
-    "y": 43
+    "x": 2,
+    "y": 48
   },
   "Items/sw_bionicheart.bmp": {
-    "x": 0,
-    "y": 44
+    "x": 3,
+    "y": 48
   },
   "Items/sw_gianthands.bmp": {
-    "x": 1,
-    "y": 44
+    "x": 4,
+    "y": 48
   },
   "Items/sw_cyber_medassist_module.bmp": {
-    "x": 2,
-    "y": 44
+    "x": 5,
+    "y": 48
   },
   "Items/sw_electrodeposits.bmp": {
-    "x": 3,
-    "y": 44
+    "x": 6,
+    "y": 48
   },
   "Items/sw_security.bmp": {
-    "x": 4,
-    "y": 44
+    "x": 7,
+    "y": 48
   },
   "Items/sw_intravenous.bmp": {
-    "x": 5,
-    "y": 44
+    "x": 8,
+    "y": 48
   },
   "Items/sw_highgrade.bmp": {
-    "x": 6,
-    "y": 44
+    "x": 9,
+    "y": 48
   },
   "Items/sw_matter.bmp": {
-    "x": 7,
-    "y": 44
+    "x": 10,
+    "y": 48
   },
   "Items/sw_custom.bmp": {
-    "x": 8,
-    "y": 44
+    "x": 11,
+    "y": 48
   },
   "Items/sw_cyber_equipment_rack.bmp": {
-    "x": 9,
-    "y": 44
+    "x": 12,
+    "y": 48
   },
   "Items/sw_cyberliver.bmp": {
-    "x": 10,
-    "y": 44
+    "x": 13,
+    "y": 48
   },
   "Items/sw_cyber_anomaly_fumigator.bmp": {
-    "x": 11,
-    "y": 44
+    "x": 14,
+    "y": 48
   },
   "Items/sw_cyber_reactive_trauma_plate.bmp": {
-    "x": 12,
-    "y": 44
+    "x": 15,
+    "y": 48
   },
   "Items/sw_cyber_onboard_recoiler.bmp": {
-    "x": 13,
-    "y": 44
+    "x": 16,
+    "y": 48
   },
   "Items/implant_phase_adaptive_scope.bmp": {
-    "x": 14,
-    "y": 44
+    "x": 17,
+    "y": 48
   },
   "Items/implant_precision_force_lathe.bmp": {
-    "x": 15,
-    "y": 44
+    "x": 18,
+    "y": 48
   },
   "Items/force_knife.bmp": {
-    "x": 16,
-    "y": 44
+    "x": 19,
+    "y": 48
   },
   "Items/sw_cyber_micromanipulator_array.bmp": {
-    "x": 17,
-    "y": 44
+    "x": 0,
+    "y": 49
   },
   "Items/sw_cyber_penetrating_radar.bmp": {
-    "x": 18,
-    "y": 44
+    "x": 1,
+    "y": 49
   },
   "Items/sw_cyber_biodynamic_power_plant.bmp": {
-    "x": 19,
-    "y": 44
+    "x": 2,
+    "y": 49
   },
   "Items/sw_stasis_projector.bmp": {
-    "x": 0,
-    "y": 45
+    "x": 3,
+    "y": 49
   },
   "Items/implant_holographic_visage.bmp": {
-    "x": 1,
-    "y": 45
+    "x": 4,
+    "y": 49
   },
   "Items/sw_multiscanner.bmp": {
-    "x": 2,
-    "y": 45
+    "x": 5,
+    "y": 49
   },
   "Items/sw_social_coprocessor.bmp": {
-    "x": 3,
-    "y": 45
+    "x": 6,
+    "y": 49
   },
   "Items/implant_stasis_entangler.bmp": {
-    "x": 4,
-    "y": 45
+    "x": 7,
+    "y": 49
   },
   "Items/sw_cyber_high_fidelity_matter_recompositer.bmp": {
-    "x": 5,
-    "y": 45
+    "x": 8,
+    "y": 49
   },
   "Items/sw_credit_wedge.bmp": {
-    "x": 6,
-    "y": 45
+    "x": 9,
+    "y": 49
   },
   "Items/sw_unfurled_scroll2.bmp": {
-    "x": 7,
-    "y": 45
+    "x": 10,
+    "y": 49
   },
   "Items/sw_paper.bmp": {
-    "x": 8,
-    "y": 45
+    "x": 11,
+    "y": 49
   },
   "Items/sw_unfurled_scroll1.bmp": {
-    "x": 9,
-    "y": 45
+    "x": 12,
+    "y": 49
   },
   "Items/sw_scroll2.bmp": {
-    "x": 10,
-    "y": 45
+    "x": 13,
+    "y": 49
   },
   "Items/sw_book_2.bmp": {
-    "x": 11,
-    "y": 45
+    "x": 14,
+    "y": 49
   },
   "Items/sw_book_4.bmp": {
-    "x": 12,
-    "y": 45
+    "x": 15,
+    "y": 49
   },
   "Items/sw_book_3.bmp": {
-    "x": 13,
-    "y": 45
+    "x": 16,
+    "y": 49
   },
   "Items/sw_scroll1.bmp": {
-    "x": 14,
-    "y": 45
+    "x": 17,
+    "y": 49
   },
   "Items/sw_data_disc.bmp": {
-    "x": 15,
-    "y": 45
+    "x": 18,
+    "y": 49
   },
   "Items/sw_cell_chem.bmp": {
-    "x": 16,
-    "y": 45
+    "x": 19,
+    "y": 49
   },
   "Items/sw_cell_fidget.bmp": {
-    "x": 17,
-    "y": 45
+    "x": 0,
+    "y": 50
   },
   "Items/sw_cell_solar.bmp": {
-    "x": 18,
-    "y": 45
+    "x": 1,
+    "y": 50
   },
   "Items/sw_cell_nuclear.bmp": {
-    "x": 19,
-    "y": 45
+    "x": 2,
+    "y": 50
   },
   "Items/sw_cell_antimatter.bmp": {
-    "x": 0,
-    "y": 46
+    "x": 3,
+    "y": 50
   },
   "Items/sw_cell_liquid.bmp": {
-    "x": 1,
-    "y": 46
+    "x": 4,
+    "y": 50
   },
   "Items/sw_torch.png": {
-    "x": 2,
-    "y": 46
+    "x": 5,
+    "y": 50
   },
   "Items/sw_bandage.bmp": {
-    "x": 3,
-    "y": 46
+    "x": 6,
+    "y": 50
   },
   "Items/bit11.bmp": {
-    "x": 4,
-    "y": 46
+    "x": 7,
+    "y": 50
   },
   "Items/bit1.bmp": {
-    "x": 5,
-    "y": 46
+    "x": 8,
+    "y": 50
   },
   "Items/bit2.bmp": {
-    "x": 6,
-    "y": 46
+    "x": 9,
+    "y": 50
   },
   "Items/bit3.bmp": {
-    "x": 7,
-    "y": 46
+    "x": 10,
+    "y": 50
   },
   "Items/bit4.bmp": {
-    "x": 8,
-    "y": 46
+    "x": 11,
+    "y": 50
   },
   "Items/bit5.bmp": {
-    "x": 9,
-    "y": 46
+    "x": 12,
+    "y": 50
   },
   "Items/bit6.bmp": {
-    "x": 10,
-    "y": 46
+    "x": 13,
+    "y": 50
   },
   "Items/bit7.bmp": {
-    "x": 11,
-    "y": 46
+    "x": 14,
+    "y": 50
   },
   "Items/bit8.bmp": {
-    "x": 12,
-    "y": 46
+    "x": 15,
+    "y": 50
   },
   "Items/sw_gadget.bmp": {
-    "x": 13,
-    "y": 46
+    "x": 16,
+    "y": 50
   },
   "Items/sw_toolbox.bmp": {
-    "x": 14,
-    "y": 46
+    "x": 17,
+    "y": 50
   },
   "Items/sw_toolbox_large.bmp": {
-    "x": 15,
-    "y": 46
+    "x": 18,
+    "y": 50
   },
   "Items/sw_pickaxe.bmp": {
-    "x": 16,
-    "y": 46
+    "x": 19,
+    "y": 50
+  },
+  "Items/sw_jackhammer.bmp": {
+    "x": 0,
+    "y": 51
   },
   "Items/sw_tattoo_gun.bmp": {
-    "x": 17,
-    "y": 46
+    "x": 1,
+    "y": 51
   },
   "Items/sw_phylactery.bmp": {
-    "x": 18,
-    "y": 46
+    "x": 2,
+    "y": 51
+  },
+  "Items/sw_animator.bmp": {
+    "x": 3,
+    "y": 51
   },
   "Items/sw_scrambler.bmp": {
-    "x": 19,
-    "y": 46
+    "x": 4,
+    "y": 51
   },
   "Items/sw_recoiler.bmp": {
-    "x": 0,
-    "y": 47
+    "x": 5,
+    "y": 51
   },
   "Items/sw_spray.bmp": {
-    "x": 1,
-    "y": 47
+    "x": 6,
+    "y": 51
   },
   "Items/sw_pellet.bmp": {
-    "x": 2,
-    "y": 47
+    "x": 7,
+    "y": 51
   },
   "Items/sw_magnet.bmp": {
-    "x": 3,
-    "y": 47
+    "x": 8,
+    "y": 51
   },
   "Items/sw_ingot.bmp": {
-    "x": 4,
-    "y": 47
+    "x": 9,
+    "y": 51
   },
   "Items/sw_grave_goods_1.bmp": {
-    "x": 5,
-    "y": 47
+    "x": 10,
+    "y": 51
   },
   "Items/sw_nugget.bmp": {
-    "x": 6,
-    "y": 47
+    "x": 11,
+    "y": 51
   },
   "Items/sw_rough_gemstone.bmp": {
-    "x": 7,
-    "y": 47
+    "x": 12,
+    "y": 51
   },
   "Items/sw_gem.bmp": {
-    "x": 8,
-    "y": 47
+    "x": 13,
+    "y": 51
   },
   "Items/figurine.png": {
-    "x": 9,
-    "y": 47
+    "x": 14,
+    "y": 51
   },
   "Items/sw_crayons.bmp": {
-    "x": 10,
-    "y": 47
+    "x": 15,
+    "y": 51
   },
   "Items/salt_mill.bmp": {
-    "x": 11,
-    "y": 47
+    "x": 16,
+    "y": 51
   },
   "Items/spiral_wand.bmp": {
-    "x": 12,
-    "y": 47
+    "x": 17,
+    "y": 51
   },
   "Items/bubble_level.bmp": {
-    "x": 13,
-    "y": 47
+    "x": 18,
+    "y": 51
   },
   "Items/sw_folding_chair.bmp": {
-    "x": 14,
-    "y": 47
+    "x": 19,
+    "y": 51
   },
   "Items/sw_plastic_tree.bmp": {
-    "x": 15,
-    "y": 47
+    "x": 0,
+    "y": 52
+  },
+  "Items/sw_sphere_negative_weight.bmp": {
+    "x": 1,
+    "y": 52
   },
   "Items/sw_curio.bmp": {
-    "x": 16,
-    "y": 47
+    "x": 2,
+    "y": 52
   },
   "Items/sw_camel_bladder.bmp": {
-    "x": 17,
-    "y": 47
-  },
-  "Items/sw_jug5.bmp": {
-    "x": 18,
-    "y": 47
+    "x": 3,
+    "y": 52
   },
   "Items/sw_gourd.bmp": {
-    "x": 19,
-    "y": 47
+    "x": 4,
+    "y": 52
   },
   "Items/sw_entropic_cyst.bmp": {
-    "x": 0,
-    "y": 48
+    "x": 5,
+    "y": 52
   },
   "Items/ms_vial_tech.bmp": {
-    "x": 1,
-    "y": 48
+    "x": 6,
+    "y": 52
   },
   "Items/sw_security_card.bmp": {
-    "x": 2,
-    "y": 48
+    "x": 7,
+    "y": 52
   },
   "Items/sw_key.bmp": {
-    "x": 3,
-    "y": 48
+    "x": 8,
+    "y": 52
   },
   "Items/sw_hurdygurdy.bmp": {
-    "x": 4,
-    "y": 48
+    "x": 9,
+    "y": 52
   },
   "Items/sw_copper_wire.bmp": {
-    "x": 5,
-    "y": 48
+    "x": 10,
+    "y": 52
   },
   "Tiles/Tile-7-3.png": {
-    "x": 6,
-    "y": 48
+    "x": 11,
+    "y": 52
   },
   "Items/sw_bouquet_1.bmp": {
-    "x": 7,
-    "y": 48
+    "x": 12,
+    "y": 52
   },
   "Terrain/sw_flowers_bunched_1.bmp": {
-    "x": 8,
-    "y": 48
+    "x": 13,
+    "y": 52
   },
   "Terrain/sw_flowers_crystal_1.bmp": {
-    "x": 9,
-    "y": 48
+    "x": 14,
+    "y": 52
   },
   "Items/sw_patch_fur.bmp": {
-    "x": 10,
-    "y": 48
+    "x": 15,
+    "y": 52
   },
   "Items/sw_splintered_haft.bmp": {
-    "x": 11,
-    "y": 48
+    "x": 16,
+    "y": 52
   },
   "Items/sw_severed_tongue.bmp": {
-    "x": 12,
-    "y": 48
+    "x": 17,
+    "y": 52
   },
   "Items/sw_leatherworking_hammer.bmp": {
-    "x": 13,
-    "y": 48
+    "x": 18,
+    "y": 52
   },
   "Items/sw_broken_arrow.bmp": {
-    "x": 14,
-    "y": 48
+    "x": 19,
+    "y": 52
   },
   "Items/sw_leatherworking_tools.bmp": {
-    "x": 15,
-    "y": 48
+    "x": 0,
+    "y": 53
   }
 }
