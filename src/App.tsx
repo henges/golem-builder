@@ -5,7 +5,7 @@ import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement, FormatGameObjectUnitDescription, GetSelectionEffectKey, hamsaVariants, splitByPredicate } from "./qud-logic/Properties";
-import { applyQudShader } from "./Colours";
+import { applyQudShader, stripQudMarkup } from "./Colours";
 import { SourcePicker, SourcePickerContent } from "./SourcePicker";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
@@ -14,7 +14,7 @@ import { ExportObjectHamsa } from "./ExportTypes";
 
 function App() {
 
-  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, hamsaSelectionSourceId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections, _getSelections] = useGolemStore(useShallow(
+  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, hamsaSelectionSourceId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections, getSelections] = useGolemStore(useShallow(
     (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.atzmusSelectionSourceId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.hamsaSelectionSourceId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections, s.getSelections]));
 
   const [column2ListItems, setColumn2ListItems] = useState<string>("empty");
@@ -208,10 +208,32 @@ function App() {
 
   const inputColumnItems: SelectableListItem[] = Object.keys(lists).map(k => ({name: getListName[k] ? getListName[k]() : k, onSelect: () => {setIsOpen(false); setColumn2ListItems(k)}, isSelected: column2ListItems === k}))
 
-  // const logState = () => {
-
-  //   console.log(_getSelections())
-  // }
+  const logState = () => {
+    
+    const selections = getSelections();
+    const s: string[] = [];
+    if (selections.bodySelectionId) {
+      s.push(`Body: ${golemData.bodies[selections.bodySelectionId].body.render.displayName}`);
+    }
+    if (selections.catalystSelectionId) {
+      s.push(`Catalyst: ${selections.catalystSelectionId}`);
+    }
+    if (selections.atzmusSelectionEffectId) {
+      s.push(`Atzmus: effect: ${selections.atzmusSelectionEffectId}, source: ${stripQudMarkup(golemData.atzmuses.granters[selections.atzmusSelectionSourceId].render.displayName)}`)
+    }
+    if (selections.weaponSelectionId) {
+      s.push(`Armament: ${stripQudMarkup(golemData.weapons[selections.weaponSelectionId].render.displayName)}`);
+    }
+    if (selections.incantationSelectionId) {
+      s.push(`Incantation: effect: ${selections.incantationSelectionId}`)
+    }
+    if (selections.hamsaSelectionEffectId) {
+      s.push(`Hamsa: effect: ${selections.hamsaSelectionEffectId}, source: ${stripQudMarkup(golemData.hamsas.sources[selections.hamsaSelectionSourceId].render.displayName)}`)
+    }
+    const str = s.join("\n");
+    navigator.clipboard.writeText(str);
+    console.log(str);
+  }
   const isCollapsibleEnabled = useBreakpointValue({ base: true, md: false });
   const [isOpen, setIsOpen] = useState(true);
   const toggleCollapse = () => setIsOpen(!isOpen);
@@ -246,6 +268,7 @@ function App() {
                             items={inputColumnItems}
                           />
                           <VStack marginTop="auto">
+                            <Button variant={"outline"} onClick={logState}>Copy selections to clipboard</Button>
                             <Button variant={"outline"} onClick={resetSelections}>Reset</Button>
                             <Button variant={"outline"} onClick={toggleCollapse}>Close</Button>
                           </VStack>
@@ -261,9 +284,10 @@ function App() {
                       overflow="auto"
                       items={inputColumnItems}
                     />
-                    <Center marginTop="auto">
+                    <VStack marginTop="auto">
+                      <Button variant={"outline"} onClick={logState}>Copy selections to clipboard</Button>
                       <Button variant={"outline"} onClick={resetSelections}>Reset</Button>
-                    </Center>
+                    </VStack>
                   </VStack>
                 </GridItem>
                 )}

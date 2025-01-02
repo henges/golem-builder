@@ -93,13 +93,13 @@ export type GameObjectMutationUnit = BaseGameObjectUnit & {
 
 export type GameObjectPartUnit = BaseGameObjectUnit & {
     UnitType: "GameObjectPartUnit"
-    Part: object
+    Part: Part
     Description: string
 }
 
 export type Part = {
     PartType: string
-    Props: object
+    Props: Record<string, unknown>
 }
 
 export type GameObjectPlaceholderUnit = BaseGameObjectUnit & {

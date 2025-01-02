@@ -149,33 +149,45 @@ export const isDetailColor = (c: Color): boolean => {
 
 const simpleMarkupRegexp = /^\{\{(?<shader>\w+)\|(?<text>\w+)\}\}$/;
 
-export const applyQudShader = (s: string): React.ReactNode => {
+export const applyQudShader = (s: string, skip?: boolean): React.ReactNode => {
     const simpleMatch = s.match(simpleMarkupRegexp);
     if (simpleMatch) {
-        return applyMarkupInner(newMarkupTextNode(simpleMatch.groups!["text"]), simpleMatch.groups!["shader"]);
+        return applyMarkupInner(newMarkupTextNode(simpleMatch.groups!["text"]), simpleMatch.groups!["shader"], skip);
     }
 
     const markup = parseMarkup(s);
-    return applyMarkup(markup);
-    return s;
+    return applyMarkup(markup, skip);
 }
 
-export const applyMarkup = (root: MarkupControlNode): React.ReactNode => {
+export const stripQudMarkup = (s: string): string => {
 
-    return root.children.map(n => applyMarkupInner(n, null)).flat(20);
+    const el = applyQudShader(s, true);
+    if (!el) {
+        return ""
+    }
+    const strs = el as string[]
+    return strs.join("");
 }
 
-const applyMarkupInner = (node: MarkupNode, action: string | null): React.ReactNode => {
+export const applyMarkup = (root: MarkupControlNode, skip?: boolean): React.ReactNode => {
+
+    return root.children.map(n => applyMarkupInner(n, null, skip)).flat(20);
+}
+
+const applyMarkupInner = (node: MarkupNode, action: string | null, skip?: boolean): React.ReactNode => {
 
     switch (node.type) {
         case "TEXT": {
+            if (skip) {
+                return [node.text];
+            }
             if (action !== null) {
                 return [applyAction(node.text, action)];
             }
             return [node.text];
         }
         case "CONTROL": {
-            return node.children.map(n => applyMarkupInner(n, node.action))
+            return node.children.map(n => applyMarkupInner(n, node.action, skip))
         }
     }
 }
@@ -205,7 +217,7 @@ const applyAction = (text: string, action: string) => {
     if (!act) {
         const dynamicAction = getDynamicAction(action);
         if (!dynamicAction) {
-            console.log(`No matching action found for ${action}`);
+            console.log(`No matching action found for ${action} (text: ${text})`);
             return text;
         }
         

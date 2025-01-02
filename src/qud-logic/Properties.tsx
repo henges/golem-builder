@@ -140,7 +140,6 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
     const appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(FormatGameObjectUnitDescription(s));
 
     for (const unit of units) {
-        console.log(unit);
         switch (unit.UnitType) {
             case "GameObjectAttributeUnit": {
                 const stat = FindStat(props, unit.Attribute);
@@ -206,13 +205,30 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
                 appendDescription(unit.UnitDescription);
                 break;
             }
+            case "GameObjectPartUnit": {
+                switch (unit.Part.PartType) {
+                    case "CarryBonus": {
+                        if (unit.Part.Props['Style'] === "Percent") {
+                            props.specialProperties.carryCapacityIncrease += parseInt(unit.Part.Props['Amount'] as string)
+                        } else {
+                            appendDescription(unit.UnitDescription);
+                            // ???
+                        }
+                        break;
+                    }
+                    default: {
+                        appendDescription(unit.UnitDescription);
+                        break;
+                    }
+                }
+                break;
+            }
             // these use the default
             case "GameObjectBaetylUnit":
             case "GameObjectCloneUnit":
             case "GameObjectCyberneticsUnit":
             case "GameObjectGolemQuestRandomUnit":
             case "GameObjectMetachromeUnit": 
-            case "GameObjectPartUnit": // TODO implement this one
             case "GameObjectSecretUnit":
             case "GameObjectSkillUnit": // TODO implement this one
             case "GameObjectTieredArmorUnit":
