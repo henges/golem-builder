@@ -1,6 +1,6 @@
 import React from "react";
 import {Text} from '@chakra-ui/react';
-import { QudShader, textShaders } from "./ShaderData";
+import { IsQudShaderType, QudShader, QudShaderTypes, textShaders } from "./ShaderData";
 
 export type Color = {
     r: number;
@@ -180,11 +180,36 @@ const applyMarkupInner = (node: MarkupNode, action: string | null): React.ReactN
     }
 }
 
+const getDynamicAction = (action: string) => {
+
+    const split = action.split(' ', 2);
+    if (split.length !== 2) {
+        return undefined;
+    }
+    const [patternStr, type] = split as [string, string];
+    if (!patternStr || !type || !IsQudShaderType(type)) {
+        return undefined;
+    }
+    const pattern = patternStr.split("-");
+    if (pattern.length === 0) {
+        return undefined;
+    }
+
+    return (s: string) => {
+        return shaderAction(s, {name: "dynamic", type: type, pattern: pattern})
+    }
+}
+
 const applyAction = (text: string, action: string) => {
     const act = qudColorActionMap[action];
-    if (!act){
-        console.log(`No matching action found for ${action}`);
-        return text;
+    if (!act) {
+        const dynamicAction = getDynamicAction(action);
+        if (!dynamicAction) {
+            console.log(`No matching action found for ${action}`);
+            return text;
+        }
+        
+        return dynamicAction(text);
     }
     return act(text);
 }

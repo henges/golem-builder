@@ -133,10 +133,11 @@ function App() {
       .map(([k, b]) => CreateHamsaListElement({name: k, granters: b.sources, effects: exportData.Hamsas, showModal: (a) => {
         setSourcePickerTitle("Select a hamsa source");
         setSourcePickerContents(a.map(([e, effects]) => ({id: e.id, render: e.render, more: () => {
+          console.log(e.id)
 
-          console.log(e, effects);
           const items = effects
             .map(([_k, v]) => v)
+            .filter(d => d.length > 0)
             .flatMap(gous => gous.map(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "))
             .filter(d => d.length > 0);
           return (

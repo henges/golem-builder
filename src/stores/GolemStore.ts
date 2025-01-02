@@ -84,7 +84,7 @@ const atzmusGrantsToGameObjectUnits = (grants: string[] | ExportMutation[]): Con
 const hamsaSelectionToGameObjectUnits = (selected: ExportObjectHamsa, hamsas: Effects): ConditionalGameObjectUnitGroup => {
     
     const units = GetValidHamsaEffectsForObj(selected, hamsas);
-    return {certain: units.length === 1, units: units};
+    return {certain: units.length === 1, units: units.flatMap(([_k, v]) => v)};
 }
 
 const defaultSelectionState = () => ({

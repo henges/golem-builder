@@ -140,6 +140,7 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
     const appendDescription = (s: string) => !skipPushDescription && props.stringProperties.push(FormatGameObjectUnitDescription(s));
 
     for (const unit of units) {
+        console.log(unit);
         switch (unit.UnitType) {
             case "GameObjectAttributeUnit": {
                 const stat = FindStat(props, unit.Attribute);
