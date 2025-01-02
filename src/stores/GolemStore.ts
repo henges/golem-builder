@@ -20,6 +20,7 @@ const load = async () => {
 
 export type GolemSelectionStore = GolemSelections & {
     setBodySelection: (s: string) => void
+    setBodyVariantId: (id: number) => void
     setCatalystSelection: (s: string) => void
     setAtzmusSelection: (effect: string, source: string) => void
     setWeaponSelection: (s: string) => void
@@ -32,7 +33,8 @@ export type GolemSelectionStore = GolemSelections & {
 export type GolemSelections = {
     bodySelectionId: string
     bodySelection: GolemBody | undefined
-    bodyVariant: number
+    bodyVariant: string[]
+    bodyVariantId: number
     catalystSelectionId: string
     catalystSelection: GameObjectUnit[]
     atzmusSelectionEffectId: string
@@ -87,10 +89,11 @@ const hamsaSelectionToGameObjectUnits = (selected: ExportObjectHamsa, hamsas: Ef
     return {certain: units.length === 1, units: units.flatMap(([_k, v]) => v)};
 }
 
-const defaultSelectionState = () => ({
+const defaultSelectionState = (): GolemSelections => ({
     bodySelectionId: "",
     bodySelection: undefined,
-    bodyVariant: 0,
+    bodyVariantId: -1,
+    bodyVariant: [],
     catalystSelectionId: "",
     catalystSelection: [],
     atzmusSelectionEffectId: "",
@@ -113,7 +116,20 @@ export const useGolemStore = create<GolemStore>((set, get) => {
             if (!get().ready) {
                 return;
             }
-            set({bodySelectionId: s, bodySelection: get().processedData.bodies[s]})
+            const variants = get().processedData.bodies[s].patterns;
+            let bodyVariantId = -1, bodyVariant: string[] = [];
+            if (variants.length === 1) {
+                bodyVariantId = 0;
+                bodyVariant = [...variants[0]];
+            }
+
+            set({bodySelectionId: s, bodySelection: get().processedData.bodies[s], bodyVariantId: bodyVariantId, bodyVariant: bodyVariant})
+        },
+        setBodyVariantId: (id: number) => {
+            if (!get().ready) {
+                return;
+            }
+            set({bodyVariantId: id, bodyVariant: [...get().processedData.bodies[get().bodySelectionId].patterns[id]]})
         },
         setCatalystSelection: (s) => {
             if (!get().ready) {
@@ -152,6 +168,7 @@ export const useGolemStore = create<GolemStore>((set, get) => {
                 bodySelectionId: state.bodySelectionId,
                 bodySelection: state.bodySelection,
                 bodyVariant: state.bodyVariant,
+                bodyVariantId: state.bodyVariantId,
                 catalystSelectionId: state.catalystSelectionId,
                 catalystSelection: state.catalystSelection,
                 atzmusSelectionEffectId: state.atzmusSelectionEffectId,

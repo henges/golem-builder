@@ -5,6 +5,10 @@ export interface QudObjectProperties {
     physics: QudPhysics
     attributes: QudAttributes
     resistances: QudResistances
+    anatomy: {
+        metachromeLimbs: Record<string, number>
+        randomMetachromedCount: number
+    }
     specialProperties: QudSpecialProperties
     mutations: ExportMutation[]
     skills: QudShortSkill[]
@@ -23,6 +27,10 @@ export const DefaultQudObjectProperties = (): QudObjectProperties => {
             ma: DefaultStat(),
             xp: DefaultStat(),
             xpValue: DefaultStat(),
+        },
+        anatomy: {
+            metachromeLimbs: {},
+            randomMetachromedCount: 0
         },
         attributes: {
             strength: DefaultStat(),

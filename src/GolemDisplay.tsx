@@ -1,8 +1,8 @@
-import { VStack, Text, HStack, Grid } from "@chakra-ui/react";
+import { VStack, Text, HStack, Grid, Center, useBreakpointValue } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
-import { ApplyConditionalGameObjectUnits, ApplyGameObjectUnits, ApplyGolemBodySelection, ApplyStandardModifiers, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
+import { ApplyConditionalGameObjectUnits, ApplyGameObjectUnits, ApplyGolemBodySelection, ApplyStandardModifiers, ApplyVariant, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { GolemBody } from "./ExportTypes";
@@ -11,13 +11,14 @@ import { ConditionalGameObjectUnitGroup, GameObjectUnit } from "./qud-logic/Game
 
 export const GolemDisplay = () => {
 
-    const [bodySelection, catalystSelection, atzmusSelection, weaponSelection, incantationSelection, hamsaSelection] = useGolemStore(useShallow(s => 
-        [s.bodySelection, s.catalystSelection, s.atzmusSelection, s.weaponSelection, s.incantationSelection, s.hamsaSelection]));
+    const [bodySelection, bodyVariant, catalystSelection, atzmusSelection, weaponSelection, incantationSelection, hamsaSelection] = useGolemStore(useShallow(s => 
+        [s.bodySelection, s.bodyVariant, s.catalystSelection, s.atzmusSelection, s.weaponSelection, s.incantationSelection, s.hamsaSelection]));
 
-    const computeStatsFromSelections = (b: GolemBody, catalyst: GameObjectUnit[], atzmus: ConditionalGameObjectUnitGroup, weapon: GameObjectUnit[], incantation: GameObjectUnit[], hamsa: ConditionalGameObjectUnitGroup) => {
+    const computeStatsFromSelections = (b: GolemBody, variant: string[], catalyst: GameObjectUnit[], atzmus: ConditionalGameObjectUnitGroup, weapon: GameObjectUnit[], incantation: GameObjectUnit[], hamsa: ConditionalGameObjectUnitGroup) => {
         const ret = ComputeQudObjectProperties(b.body);
         ApplyGolemBodySelection(ret);
         ApplyStandardModifiers(ret);
+        ApplyVariant(ret, variant);
         ApplyGameObjectUnits(ret, catalyst);
         ApplyConditionalGameObjectUnits(ret, atzmus);
         ApplyGameObjectUnits(ret, weapon);
@@ -25,13 +26,14 @@ export const GolemDisplay = () => {
         ApplyConditionalGameObjectUnits(ret, hamsa);
         return ret;
     }
+    const smallScreen = useBreakpointValue({ base: true, md: false });
 
     const stats = useMemo(() => {
         if (!bodySelection) {
             return null;
         }
-        return computeStatsFromSelections(bodySelection, catalystSelection, atzmusSelection, weaponSelection, incantationSelection, hamsaSelection);
-    }, [bodySelection, catalystSelection, atzmusSelection, weaponSelection, incantationSelection, hamsaSelection]);
+        return computeStatsFromSelections(bodySelection, bodyVariant, catalystSelection, atzmusSelection, weaponSelection, incantationSelection, hamsaSelection);
+    }, [bodySelection, bodyVariant, catalystSelection, atzmusSelection, weaponSelection, incantationSelection, hamsaSelection]);
 
     const getBodyRender = () => {
         if (bodySelection) {
@@ -81,7 +83,9 @@ export const GolemDisplay = () => {
             <QudSpriteRenderer sprite={getBodyRender()} minH={"96px"}/>
             <Text>{getBodyRender().displayName}</Text>
             {statDisplay}
-            {GetBodySpecialPropertiesElement(stats || undefined)}
+            <Center textAlign={"center"} paddingX={smallScreen ? "" : "16"}>
+                {GetBodySpecialPropertiesElement(stats || undefined)}
+            </Center>
             <GolemVariantSelection/>
         </VStack>
     )

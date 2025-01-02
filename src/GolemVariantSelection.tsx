@@ -7,11 +7,14 @@ import { Tooltip } from "./components/ui/tooltip";
 import { applyQudShader } from "./Colours";
 import { Pluralise } from "./helpers";
 
-
 export const GolemVariantSelection = () => {
 
-    const [bodySelection] = useGolemStore(useShallow(s => [s.bodySelection]));
+    const [bodySelection, _bodySelectionId, bodyVariantId, setBodyVariantId] = useGolemStore(useShallow(s => [s.bodySelection, s.bodySelectionId, s.bodyVariantId, s.setBodyVariantId]));
     const smallScreen = useBreakpointValue({ base: true, md: false });
+
+    const onSelect = (id: number) => {
+        setBodyVariantId(id);
+    }
 
     const parseLimbPattern = (p: string[]) => {
         if (p.length === 1 && p[0] === "*RANDOM*") {
@@ -97,24 +100,31 @@ export const GolemVariantSelection = () => {
         return dedupe(providers.filter(o => !o.render.displayName.startsWith("[") && !invalidSelections[o.render.displayName]), o => o.render.displayName);
     }
 
-    const singlePatternDisplay = (p: string[], providers: ExportObject[]) => {
+    const singlePatternDisplay = (id: number, p: string[], providers: ExportObject[], selected: number, onSelect: (id: number) => void) => {
 
         return (
-            <VStack>
-                {parseLimbPattern(p)}
-                {chunkArray(filterAndDeduplicateInvalidSelections(providers), 4).map(modelRow)}
-            </VStack>
-        )
+          <VStack
+            borderRadius={"md"}
+            minW="100%"
+            as="button"
+            _hover={{ bg: selected === id ? "gray.500" : "gray.700" }}
+            bg={selected === id ? "gray.500" : "none"}
+            padding={2}
+            onClick={() => onSelect(id)}
+          >
+            {parseLimbPattern(p)}
+            {chunkArray(
+              filterAndDeduplicateInvalidSelections(providers),
+              4
+            ).map(modelRow)}
+          </VStack>
+        );
     }
 
-    const bodyTypeDisplay = (b: GolemBody) => {
+    const bodyTypeDisplay = (b: GolemBody, selected: number, onSelect: (id: number) => void) => {
 
         if (b.patterns.length === 1) {
-            return (
-                <VStack>
-                    {singlePatternDisplay(b.patterns[0], b.models)}
-                </VStack>
-            )
+            return singlePatternDisplay(0, b.patterns[0], b.models, selected, onSelect);
         } else {
             const patternToModels = Object.entries(b.patternMap).reduce((agg: ExportObject[][], [k,v]) => {
                 const model = b.models.find(e => e.id === k);
@@ -125,12 +135,12 @@ export const GolemVariantSelection = () => {
                 return agg;
             }, b.patterns.map(_ => [])); // create a 2d array with same length as # of patterns
             return <Grid templateColumns={ `repeat(${smallScreen ? 1: 2}, 1fr)`} gap="8">
-                {b.patterns.map((p, i) => <GridItem>{singlePatternDisplay(p, patternToModels[i])}</GridItem>)}
+                {b.patterns.map((p, i) => <GridItem>{singlePatternDisplay(i, p, patternToModels[i], selected, onSelect)}</GridItem>)}
             </Grid>
         }
     }
 
     return <>
-        {!bodySelection ? null : bodyTypeDisplay(bodySelection)}
+        {!bodySelection ? null : bodyTypeDisplay(bodySelection, bodyVariantId, onSelect)}
     </>
 }

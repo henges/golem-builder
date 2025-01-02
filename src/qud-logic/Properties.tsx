@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, VStack } from "@chakra-ui/react";
 import { AtzmusEffect, ExportGolem, ExportMutation, ExportObjectAtzmus, ExportObjectHamsa, ExportObjectWeapon } from "../ExportTypes";
 import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat, IncrementPercent } from "./Stat";
@@ -13,7 +13,7 @@ import { QudInlineSprite } from "../QudInlineSprite";
 const BodyHasSpecialProperties = (g: QudObjectProperties) => {
     return g.mutations.length > 0 || g.skills.length > 0 || 
         g.specialProperties.mentalShield || g.specialProperties.saveImmunities.length > 0 || g.specialProperties.carryCapacityIncrease > 0 ||
-        g.specialProperties.refractLightChance > 0 || g.stringProperties.length > 0;
+        g.specialProperties.refractLightChance > 0 || g.stringProperties.length > 0 || g.anatomy.metachromeLimbs;
 }
 
 const FormatMutation = (m: ExportMutation) => {
@@ -73,6 +73,25 @@ export const ApplyGolemBodySelection = (props: QudObjectProperties) => {
     BoostStat(props.attributes.toughness, 2);
 }
 
+export const ApplyVariant = (props: QudObjectProperties, variant: string[]) => {
+
+    if (!variant || variant.length === 0) {
+        return;
+    }
+
+    for (const k of variant) {
+        AddMetachromeLimb(props, k);
+    }
+}
+
+export const AddMetachromeLimb = (props: QudObjectProperties, limb: string) => {
+    if (!props.anatomy.metachromeLimbs[limb]) {
+        props.anatomy.metachromeLimbs[limb] = 1;
+    } else {
+        props.anatomy.metachromeLimbs[limb]++;
+    }
+}
+
 export const WeaponToGameObjectUnits = (weapon: ExportObjectWeapon): GameObjectUnit[] => {
 
     return [{
@@ -80,11 +99,14 @@ export const WeaponToGameObjectUnits = (weapon: ExportObjectWeapon): GameObjectU
         UnitType: "GameObjectSkillUnit",
         Skill: weapon.skill,
         Power: "*",
-    }, {
-        UnitDescription: `Has {{metachrome|metachrome}} limbs`,
-        UnitType: "GameObjectMetachromeUnit",
-        Skill: weapon.skill,
-    }]
+    }, 
+    // Technically true but we do this in a different way
+    // {
+    //     UnitDescription: `Has {{metachrome|metachrome}} limbs`,
+    //     UnitType: "GameObjectMetachromeUnit",
+    //     Skill: weapon.skill,
+    // }
+]
 }
 
 export const ApplyStandardModifiers = (props: QudObjectProperties) => {
@@ -156,10 +178,18 @@ export const ApplyGameObjectUnits = (props: QudObjectProperties, units: GameObje
             }
             case "GameObjectBodyPartUnit": {
                 let name = unit.Type;
-                if (name === "Random") {
-                    name = "random"
-                };
-                appendDescription(`Extra ${name} slot`);
+                if (unit.Metachromed) {
+                    if (name === "Random") {
+                        props.anatomy.randomMetachromedCount++
+                    } else {
+                        AddMetachromeLimb(props, name);
+                    }
+                } else {
+                    if (name === "Random") {
+                        name = "random"
+                    };
+                    appendDescription(`Extra ${name} slot`);
+                }
                 break;
             }
             case "GameObjectExperienceUnit": {
@@ -497,6 +527,28 @@ export const BuildGolemBody = (g?: ExportGolem) => {
     return props;
 }
 
+const MetachromeLimbsDisplay = (g: QudObjectProperties) => {
+
+    if (Object.keys(g.anatomy.metachromeLimbs).length === 0) {
+        return null;
+    }
+    const randomCount = g.anatomy.randomMetachromedCount;
+    const limbCount = Object.values(g.anatomy.metachromeLimbs).reduce((agg, count) => agg+count, 0) + randomCount;
+    const unknownQuantity = g.anatomy.metachromeLimbs["*RANDOM*"] ? 1 : 0;
+    
+    const typeList = Object.entries(g.anatomy.metachromeLimbs).map(([k, v]) => {
+        if (k === "*RANDOM*") {
+            return "all limbs of one type chosen at random"
+        }
+        return `${v} ${Pluralise(k, v)}`;
+    });
+    if (randomCount > 0) {
+        typeList.push(`${randomCount} of a type chosen at random`)
+    }
+
+    return <Text>{applyQudShader(`${limbCount}${unknownQuantity > 0 ? "+" : ""} {{metachrome|metachrome}} ${Pluralise("limb", limbCount+unknownQuantity)} (${typeList.join(", ")})`)}</Text>
+}
+
 export const GetBodySpecialPropertiesElement = (g?: QudObjectProperties) => {
 
     if (!g) {
@@ -509,6 +561,7 @@ export const GetBodySpecialPropertiesElement = (g?: QudObjectProperties) => {
     }
     return (
     <Box>
+        {MetachromeLimbsDisplay(g)}
         {g.mutations.length === 0 ? null : 
             <Text>Mutations: {g.mutations.map(m => FormatMutation(m)).join(", ")}</Text>
         }
