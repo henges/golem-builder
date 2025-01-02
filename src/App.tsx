@@ -202,8 +202,12 @@ function App() {
   const [isOpen, setIsOpen] = useState(true);
   const toggleCollapse = () => setIsOpen(!isOpen);
 
+  // return (
+  //   <Container h="100%">hello</Container>
+  // )
+
   return (
-    <Container h={"100vh"} p="2" pt="2" /*display={"grid"}*/>
+    <Container h={"100%"} p="2" pt="2" /*display={"grid"}*/>
       <Grid h="100%" templateRows={`repeat(${isCollapsibleEnabled ? 10 : 9}, 1fr)`}>
         <GridItem h="100%" rowSpan={9}>
           <Grid maxW="100%" h="100%" templateColumns={`repeat(${isCollapsibleEnabled ? 4 : 5}, 1fr)`} gap="3">
@@ -214,8 +218,8 @@ function App() {
                         position="absolute"
                         top="0"
                         left="0"
-                        width="100vw"
-                        height="100vh"
+                        width="100%"
+                        height="100%"
                         bg="black"
                         zIndex="overlay"
                         p="4"
@@ -249,7 +253,7 @@ function App() {
                   </VStack>
                 </GridItem>
                 )}
-            <GridItem colSpan={2} overflow="auto">
+            <GridItem colSpan={2} overflow="auto" h="100%">
               <SelectableList overflow="auto" items={lists[column2ListItems] || []}/>
             </GridItem>
             <GridItem colSpan={2} display="flex" overflow="auto">
