@@ -1,4 +1,4 @@
-import { VStack, Text, HStack, Grid, Center, useBreakpointValue } from "@chakra-ui/react";
+import { VStack, Text, Center, useBreakpointValue, Table, Box } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
@@ -8,6 +8,7 @@ import { useShallow } from "zustand/shallow";
 import { GolemBody } from "./ExportTypes";
 import { GolemVariantSelection } from "./GolemVariantSelection";
 import { ConditionalGameObjectUnitGroup, GameObjectUnit } from "./qud-logic/GameObjectUnit";
+import { QudObjectProperties } from "./qud-logic/QudTypes";
 
 export const GolemDisplay = () => {
 
@@ -42,39 +43,91 @@ export const GolemDisplay = () => {
         return {displayName: "golem oddity", tile: "Creatures/sw_golem_oddity.png", mainColour: "Y", detailColour: "K"};
     }
 
+    type TableElement = {
+        icon?: string
+        cellColour?: string
+        name: string
+        value: string
+    }
+
+    const physicsTableData = (stats: QudObjectProperties): TableElement[][] => {
+
+        const data = [
+            {icon: "♥", name: "HP", value: FormatStat(stats.physics.hp)},
+            {icon: "◆", name: "AV", value: FormatStat(stats.physics.av)},
+            {icon: "○", name: "DV", value: FormatStat(stats.physics.dv)},
+            {name: "MA", value: FormatStat(stats.physics.ma)},
+            {name: "QN", value: FormatStat(stats.physics.quickness)},
+            {name: "MV", value: FormatMoveSpeed(stats.physics.moveSpeed)}
+        ]
+
+        return [
+            [data[0], data[1]],
+            [data[2], data[3]], 
+            [data[4], data[5]],
+        ]
+    }
+
+    const attrsTableData = (stats: QudObjectProperties) => {
+        const data = [
+            {name: "STR", value: FormatStat(stats.attributes.strength)},
+            {name: "AGI", value: FormatStat(stats.attributes.agility)},
+            {name: "TOU", value: FormatStat(stats.attributes.toughness)},
+            {name: "INT", value: FormatStat(stats.attributes.intelligence)},
+            {name: "WIL", value: FormatStat(stats.attributes.willpower)},
+            {name: "EGO", value: FormatStat(stats.attributes.ego)},
+        ];
+
+        return [
+            [data[0], data[1]],
+            [data[2], data[3]], 
+            [data[4], data[5]],
+        ];
+    }
+
+    const resistsTableData = (stats: QudObjectProperties) => {
+        const data = [
+            {name: "HR", value: FormatStat(stats.resistances.heat)},
+            {name: "CR", value: FormatStat(stats.resistances.cold)},
+            {name: "AR", value: FormatStat(stats.resistances.acid)},
+            {name: "ER", value: FormatStat(stats.resistances.electric)},
+        ];
+
+        return [
+            [data[0], data[1]],
+            [data[2], data[3]], 
+        ];
+    }
+
+    const StatsTable = ({data}: {data: TableElement[][]}) => {
+
+        return (
+            <Table.Root size="sm" showColumnBorder striped>
+                <Table.Body>
+                    {data.map((row, i) => (
+                    <Table.Row key={i} >
+                        {row.map(elem => (
+                            <>
+                            <Table.Cell textAlign={"right"}>{elem.icon ? elem.icon+" ":""}{elem.name}</Table.Cell>
+                            <Table.Cell textAlign={"center"}>{elem.value}</Table.Cell>
+                            </>
+                        ))}
+                    </Table.Row>
+                    ))}
+                </Table.Body>
+            </Table.Root>
+        );
+    }
+
     const statDisplay = stats === null ? null : (
     <>
         <VStack>
             <Text>Level: {FormatStat(stats.physics.level)}</Text>
-            <Grid templateColumns={"repeat(3, 1fr)"} templateRows={"repeat(2, 1fr)"} textAlign={"left"}>
-            {/* <HStack> */}
-                <Text>♥ HP: {FormatStat(stats.physics.hp)}</Text>
-                {/* <Text>♥ HP: {FormatStat(stats.physics.hp)}</Text> */}
-                <Text>◆ AV: {FormatStat(stats.physics.av)}</Text>
-                <Text>○ DV: {FormatStat(stats.physics.dv)}</Text>
-                <Text>MA: {FormatStat(stats.physics.ma)}</Text>
-                <Text>QN: {FormatStat(stats.physics.quickness)}</Text>
-                <Text>MV: {FormatMoveSpeed(stats.physics.moveSpeed)}</Text>
-            {/* </HStack> */}
-            </Grid>
-            <HStack>
-                <Text>STR: {FormatStat(stats.attributes.strength)}</Text>
-                <Text>AGI: {FormatStat(stats.attributes.agility)}</Text>
-                <Text>TOU: {FormatStat(stats.attributes.toughness)}</Text>
-            </HStack>
-            <HStack>
-                <Text>INT: {FormatStat(stats.attributes.intelligence)}</Text>
-                <Text>WIL: {FormatStat(stats.attributes.willpower)}</Text>
-                <Text>EGO: {FormatStat(stats.attributes.ego)}</Text>
-            </HStack>
-            <HStack>
-                <Text>HR: {FormatStat(stats.resistances.heat)}</Text>
-                <Text>CR: {FormatStat(stats.resistances.cold)}</Text>
-            </HStack>
-            <HStack>
-                <Text>AR: {FormatStat(stats.resistances.acid)}</Text>
-                <Text>ER: {FormatStat(stats.resistances.electric)}</Text>
-            </HStack>
+            <Box display="flex" flexDir={"column"} gap={4}>
+                <StatsTable data={physicsTableData(stats)}></StatsTable>
+                <StatsTable data={attrsTableData(stats)}></StatsTable>
+                <StatsTable data={resistsTableData(stats)}></StatsTable>
+            </Box>
         </VStack>
     </>)
 
