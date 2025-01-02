@@ -1,5 +1,5 @@
 import { VStack, Text, Center, useBreakpointValue, Table, Box } from "@chakra-ui/react";
-import { useMemo } from "react";
+import { ComponentProps, useMemo } from "react";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { FormatMoveSpeed, FormatStat } from "./qud-logic/Stat";
 import { ApplyConditionalGameObjectUnits, ApplyGameObjectUnits, ApplyGolemBodySelection, ApplyStandardModifiers, ApplyVariant, ComputeQudObjectProperties, GetBodySpecialPropertiesElement } from "./qud-logic/Properties";
@@ -99,10 +99,10 @@ export const GolemDisplay = () => {
         ];
     }
 
-    const StatsTable = ({data}: {data: TableElement[][]}) => {
+    const StatsTable = ({data, ...props}: {data: TableElement[][]} & ComponentProps<typeof Table.Root>) => {
 
         return (
-            <Table.Root size="sm" showColumnBorder striped>
+            <Table.Root whiteSpace={"nowrap"} maxW={"min-content"} size="sm" showColumnBorder striped {...props}>
                 <Table.Body>
                     {data.map((row, i) => (
                     <Table.Row key={i} >
@@ -123,10 +123,12 @@ export const GolemDisplay = () => {
     <>
         <VStack>
             <Text>Level: {FormatStat(stats.physics.level)}</Text>
-            <Box display="flex" flexDir={"column"} gap={4}>
+            <Box display="flex" gap={4} flexDir={"column"} alignItems={"center"}>
                 <StatsTable data={physicsTableData(stats)}></StatsTable>
-                <StatsTable data={attrsTableData(stats)}></StatsTable>
-                <StatsTable data={resistsTableData(stats)}></StatsTable>
+                <Box display="flex" flexWrap={"wrap"} gap={4} alignItems={"center"} justifyContent={"center"}>
+                    <StatsTable data={attrsTableData(stats)}></StatsTable>
+                    <StatsTable data={resistsTableData(stats)}></StatsTable>
+                </Box>
             </Box>
         </VStack>
     </>)
