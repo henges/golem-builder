@@ -361,7 +361,7 @@ export const GetValidHamsaEffectsForObj = (selected: ExportObjectHamsa, hamsas: 
         } else {
             return [t, gous] as HamsaSourceEffect;
         }
-    }).filter(([t, gous]) => gous.length > 0);
+    }).filter(([_t, gous]) => gous.length > 0);
 }
 
 export const CreateHamsaListElement = ({name, granters, effects, showModal, setSelection, isSelected}: HamsaListElementProps) => {
