@@ -19,11 +19,16 @@ function App() {
     (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.atzmusSelectionSourceId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.hamsaSelectionSourceId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections, s.getSelections]));
 
   const [column2ListItems, setColumn2ListItems] = useState<string>("empty");
-  const ref = useRef<HTMLDivElement>(null);
+  const column2Ref = useRef<HTMLDivElement>(null);
+  const column3Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    ref.current?.scrollTo(0, 0);
-  }, [column2ListItems])
+    column2Ref.current?.scrollTo(0, 0);
+  }, [column2ListItems]);
+
+  useEffect(() => {
+    // column3Ref.current?.scrollTo(0, 0);
+  }, [bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, hamsaSelectionSourceId]);
 
   const bodyListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(golemData.bodies)
@@ -303,10 +308,10 @@ function App() {
                   </VStack>
                 </GridItem>
                 )}
-            <GridItem ref={ref} colSpan={2} overflow="auto" h="100%">
+            <GridItem ref={column2Ref} colSpan={2} overflow="auto" h="100%">
               <SelectableList items={lists[column2ListItems] || []}/>
             </GridItem>
-            <GridItem colSpan={2} display="flex" overflow="auto">
+            <GridItem ref={column3Ref} colSpan={2} display="flex" overflow="auto">
               <GolemDisplay/>
             </GridItem>
           </Grid>
