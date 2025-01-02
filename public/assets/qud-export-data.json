@@ -1251,7 +1251,16 @@
         "UnitDescription": "+1 AV per fungal infection\n+4 to all resists per fungal infection"
       }
     ],
-    "Cybernetics": [],
+    "Cybernetics": [
+      {
+        "Blueprint": "*blueprint*",
+        "Slot": null,
+        "LicenseStat": "Toughness",
+        "Removable": false,
+        "UnitType": "GameObjectCyberneticsUnit",
+        "UnitDescription": "Cybernetic implant installed"
+      }
+    ],
     "Scholarly": [
       {
         "Attribute": "SP",
