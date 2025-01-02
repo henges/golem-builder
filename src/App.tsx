@@ -1,6 +1,6 @@
 import { Box, Button, Center, Container, Grid, GridItem, List, ListItem, Text, useBreakpointValue, VStack } from "@chakra-ui/react"
 import { SelectableList, SelectableListItem } from "./SelectableList"
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
@@ -19,6 +19,11 @@ function App() {
     (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.atzmusSelectionSourceId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.hamsaSelectionSourceId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections, s.getSelections]));
 
   const [column2ListItems, setColumn2ListItems] = useState<string>("empty");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    ref.current?.scrollTo(0, 0);
+  }, [column2ListItems])
 
   const bodyListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(golemData.bodies)
@@ -298,11 +303,11 @@ function App() {
                   </VStack>
                 </GridItem>
                 )}
-            <GridItem colSpan={2} overflow="auto" h="100%">
-              <SelectableList overflow="auto" items={lists[column2ListItems] || []}/>
+            <GridItem ref={ref} colSpan={2} overflow="auto" h="100%">
+              <SelectableList items={lists[column2ListItems] || []}/>
             </GridItem>
             <GridItem colSpan={2} display="flex" overflow="auto">
-                <GolemDisplay/>
+              <GolemDisplay/>
             </GridItem>
           </Grid>
         </GridItem>

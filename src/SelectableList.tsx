@@ -1,5 +1,5 @@
 import { Box, List } from "@chakra-ui/react"
-import React, { useState } from "react"
+import React, { ComponentProps, useState } from "react"
 import { LuSquare, LuSquareCheck } from "react-icons/lu"
 
 export interface SelectableListItem {
@@ -9,11 +9,11 @@ export interface SelectableListItem {
     isSelected?: boolean;
 }
 
-export interface SelectableListProps extends List.RootProps {
+export interface SelectableListProps extends ComponentProps<typeof List.Root> {
     items: SelectableListItem[]
 }
 
-export const SelectableList = ({items, ...listProps}: SelectableListProps) => {
+export const SelectableList = React.forwardRef<HTMLUListElement, SelectableListProps>(({items, ...listProps}, ref) => {
 
     const [selectedItem, setSelectedItem] = useState<SelectableListItem | null>(null);
 
@@ -28,7 +28,7 @@ export const SelectableList = ({items, ...listProps}: SelectableListProps) => {
     }
 
     return (
-        <List.Root variant={"plain"} {...listProps}>
+        <List.Root variant={"plain"} ref={ref} {...listProps}>
             {items.map((li, i) => {
                 return (
                     <List.Item key={i} _hover={{bg: "red.700"}} 
@@ -49,5 +49,4 @@ export const SelectableList = ({items, ...listProps}: SelectableListProps) => {
             })}
         </List.Root>
     )
-
-}
+})
