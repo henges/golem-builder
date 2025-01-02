@@ -11,6 +11,7 @@ import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
 import { QudInlineSprite } from "./QudInlineSprite";
 import { ExportObjectHamsa } from "./ExportTypes";
+import { Liquid } from "./ExportData";
 
 function App() {
 
@@ -32,11 +33,17 @@ function App() {
         }));
   }, [ready, golemData, bodySelectionId]);
 
+  const spriteTilePath = "Liquids/Water/deep-00000000.png";
+
+  const liquidRender = (l: Liquid) => {
+    return <QudInlineSprite sprite={{displayName: `3 drams of ${l.name}`, mainColour: l.colors[0], detailColour: l.colors[1], tile: spriteTilePath}}/>
+  }
+
   const catalystListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(exportData.Catalysts)
       .map(([k, b]) => (
         {
-          name: applyQudShader(exportData.Liquids[k].name), 
+          name: liquidRender(exportData.Liquids[k]), 
           more: b.map(e => (<Text>{e.UnitDescription}</Text>)),
           onSelect: () => {
             setCatalystSelection(k);
@@ -169,7 +176,7 @@ function App() {
         return "catalyst"
       }
       return <>
-        catalyst {"("}{applyQudShader(exportData.Liquids[catalystSelectionId].name)}{")"}
+        catalyst {"( "}{liquidRender(exportData.Liquids[catalystSelectionId])}{")"}
         </>
     },
     "atzmus": () => {

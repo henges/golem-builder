@@ -4,7 +4,7 @@
       "id": "acid",
       "name": "{{G|acid}}",
       "colors": [
-        "G",
+        "&G",
         "g"
       ]
     },
@@ -12,7 +12,7 @@
       "id": "algae",
       "name": "{{g|algae}}",
       "colors": [
-        "g",
+        "&g",
         "C"
       ]
     },
@@ -20,23 +20,23 @@
       "id": "asphalt",
       "name": "{{K|asphalt}}",
       "colors": [
-        "K",
-        "y"
+        "&k",
+        "K"
       ]
     },
     "blood": {
       "id": "blood",
       "name": "{{r|blood}}",
       "colors": [
-        "r",
-        "K"
+        "&r",
+        "k"
       ]
     },
     "brainbrine": {
       "id": "brainbrine",
       "name": "{{brainbrine|brain brine}}",
       "colors": [
-        "g",
+        "&g",
         "W"
       ]
     },
@@ -44,7 +44,7 @@
       "id": "cider",
       "name": "{{cider|cider}}",
       "colors": [
-        "w",
+        "&w",
         "r"
       ]
     },
@@ -52,39 +52,39 @@
       "id": "cloning",
       "name": "{{cloning|cloning draught}}",
       "colors": [
-        "Y",
-        "M"
+        "&M",
+        "Y"
       ]
     },
     "convalessence": {
       "id": "convalessence",
       "name": "{{C|convalessence}}",
       "colors": [
-        "C",
-        "Y"
+        "&Y",
+        "C"
       ]
     },
     "gel": {
       "id": "gel",
       "name": "{{Y|gel}}",
       "colors": [
-        "Y",
-        "y"
+        "&y",
+        "Y"
       ]
     },
     "goo": {
       "id": "goo",
       "name": "{{G|green goo}}",
       "colors": [
-        "G",
-        "Y"
+        "&Y",
+        "G"
       ]
     },
     "honey": {
       "id": "honey",
       "name": "{{w|honey}}",
       "colors": [
-        "w",
+        "&w",
         "W"
       ]
     },
@@ -92,48 +92,47 @@
       "id": "ink",
       "name": "{{K|ink}}",
       "colors": [
-        "K",
-        "y"
+        "&y",
+        "k"
       ]
     },
     "lava": {
       "id": "lava",
       "name": "{{lava|lava}}",
       "colors": [
-        "R",
-        "r",
-        "W"
+        "&W",
+        "R"
       ]
     },
     "neutronflux": {
       "id": "neutronflux",
       "name": "{{neutronic|neutron}} {{Y|flux}}",
       "colors": [
-        "y",
-        "Y"
+        "&Y",
+        "y"
       ]
     },
     "oil": {
       "id": "oil",
       "name": "{{K|oil}}",
       "colors": [
-        "K",
-        "Y"
+        "&Y",
+        "k"
       ]
     },
     "ooze": {
       "id": "ooze",
       "name": "{{K|black ooze}}",
       "colors": [
-        "K",
-        "y"
+        "&y",
+        "k"
       ]
     },
     "proteangunk": {
       "id": "proteangunk",
       "name": "{{c|primordial soup}}",
       "colors": [
-        "c",
+        "&c",
         "C"
       ]
     },
@@ -141,24 +140,23 @@
       "id": "putrid",
       "name": "{{putrid|putrescence}}",
       "colors": [
-        "K",
-        "g",
-        "w"
+        "&g",
+        "K"
       ]
     },
     "salt": {
       "id": "salt",
       "name": "{{Y|salt}}",
       "colors": [
-        "y",
-        "Y"
+        "&Y",
+        "y"
       ]
     },
     "sap": {
       "id": "sap",
       "name": "{{W|sap}}",
       "colors": [
-        "W",
+        "&W",
         "Y"
       ]
     },
@@ -166,50 +164,47 @@
       "id": "slime",
       "name": "{{slimy|slime}}",
       "colors": [
-        "g",
-        "w"
+        "&w",
+        "g"
       ]
     },
     "sludge": {
       "id": "sludge",
       "name": "{{w|brown sludge}}",
       "colors": [
-        "w",
-        "Y"
+        "&Y",
+        "w"
       ]
     },
     "sunslag": {
       "id": "sunslag",
       "name": "{{sunslag|sunslag}}",
       "colors": [
-        "Y",
-        "W",
-        "R"
+        "&Y",
+        "W"
       ]
     },
     "warmstatic": {
       "id": "warmstatic",
       "name": "{{Y|warm static}}",
       "colors": [
-        "Y",
-        "y",
-        "K"
+        "&y",
+        "Y"
       ]
     },
     "water": {
       "id": "water",
       "name": "{{B|water}}",
       "colors": [
-        "B",
-        "y",
-        "Y",
-        "b"
+        "&b",
+        "B"
       ]
     },
     "wax": {
       "id": "wax",
       "name": "{{Y|molten wax}}",
       "colors": [
+        "&y",
         "Y"
       ]
     },
@@ -217,7 +212,7 @@
       "id": "wine",
       "name": "{{m|wine}}",
       "colors": [
-        "m",
+        "&m",
         "r"
       ]
     }

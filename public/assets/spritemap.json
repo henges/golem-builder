@@ -4246,5 +4246,9 @@
   "Items/sw_leatherworking_tools.bmp": {
     "x": 0,
     "y": 53
+  },
+  "Liquids/Water/deep-00000000.png": {
+    "x": 1,
+    "y": 53
   }
 }
