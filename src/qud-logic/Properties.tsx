@@ -347,20 +347,21 @@ export interface HamsaListElementProps {
     isSelected: boolean;
 }
 
-export type HamsaSourceEffects = [string, GameObjectUnit[]][];
+export type HamsaSourceEffect = [string, GameObjectUnit[]];
+
+export type HamsaSourceEffects = HamsaSourceEffect[];
 
 export type HamsaSourceWithEffects = [ExportObjectHamsa, HamsaSourceEffects];
 
 export const GetValidHamsaEffectsForObj = (selected: ExportObjectHamsa, hamsas: Effects): HamsaSourceEffects => {
 
     return selected.semanticTags.map(t => [t, hamsas[t] || []] as const).map(([t, gous]) => {
-
         if (hamsaVariants[t] && hamsaVariants[t].sourcePredicate(selected)) {
-            return hamsaVariants[t].buildVariant(gous);
+            return hamsaVariants[t].buildVariant(gous) as HamsaSourceEffect;
         } else {
-            return [t, gous]
+            return [t, gous] as HamsaSourceEffect;
         }
-    });
+    }).filter(([t, gous]) => gous.length > 0);
 }
 
 export const CreateHamsaListElement = ({name, granters, effects, showModal, setSelection, isSelected}: HamsaListElementProps) => {

@@ -133,8 +133,6 @@ function App() {
       .map(([k, b]) => CreateHamsaListElement({name: k, granters: b.sources, effects: exportData.Hamsas, showModal: (a) => {
         setSourcePickerTitle("Select a hamsa source");
         setSourcePickerContents(a.map(([e, effects]) => ({id: e.id, render: e.render, more: () => {
-          console.log(e.id)
-
           const items = effects
             .map(([_k, v]) => v)
             .filter(d => d.length > 0)
