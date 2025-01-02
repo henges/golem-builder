@@ -529,11 +529,14 @@ export const BuildGolemBody = (g?: ExportGolem) => {
 
 const MetachromeLimbsDisplay = (g: QudObjectProperties) => {
 
-    if (Object.keys(g.anatomy.metachromeLimbs).length === 0) {
-        return null;
-    }
+    // if (Object.keys(g.anatomy.metachromeLimbs).length === 0) {
+    //     return null;
+    // }
     const randomCount = g.anatomy.randomMetachromedCount;
     const limbCount = Object.values(g.anatomy.metachromeLimbs).reduce((agg, count) => agg+count, 0) + randomCount;
+    if (limbCount === 0) {
+        return null;
+    }
     const unknownQuantity = g.anatomy.metachromeLimbs["*RANDOM*"] ? 1 : 0;
     
     const typeList = Object.entries(g.anatomy.metachromeLimbs).map(([k, v]) => {
@@ -543,7 +546,7 @@ const MetachromeLimbsDisplay = (g: QudObjectProperties) => {
         return `${v} ${Pluralise(k, v)}`;
     });
     if (randomCount > 0) {
-        typeList.push(`${randomCount} of a type chosen at random`)
+        typeList.push(`${randomCount} extra limbs chosen at random`)
     }
 
     return <Text>{applyQudShader(`${limbCount}${unknownQuantity > 0 ? "+" : ""} {{metachrome|metachrome}} ${Pluralise("limb", limbCount+unknownQuantity)} (${typeList.join(", ")})`)}</Text>
