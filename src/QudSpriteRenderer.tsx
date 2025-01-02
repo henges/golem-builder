@@ -2,13 +2,15 @@ import { ComponentProps, useEffect, useMemo, useState } from "react"
 import { modifyImage } from "./helpers";
 import { Image } from "@chakra-ui/react";
 import { ExportRender } from "./ExportTypes";
-import { parseQudColourString, isMainColor, isDetailColor } from "./Colours";
+import { isMainColor, isDetailColor, resolveQudColourString, getQudColour } from "./Colours";
 import { useImageStore } from "./stores/ImageStore";
 import { useShallow } from "zustand/shallow";
 
 export interface QudSpriteRendererProps extends ComponentProps<typeof Image> {
     sprite: ExportRender
 }
+
+const blobCache: Record<string, string> = {};
 
 export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) => {
 
@@ -26,7 +28,14 @@ export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) =>
         // console.time(perfId)
 
         // console.log(`Colour string for sprite ${sprite.tile}: main ${sprite.mainColour}, detail ${sprite.detailColour}`)
-        const [main, detail] = parseQudColourString(sprite.mainColour, sprite.detailColour);
+        const [mainString, detailString] = resolveQudColourString(sprite.mainColour, sprite.detailColour);
+        const cacheKey = `${sprite.tile}~${mainString}~${detailString}`;
+        if (blobCache[cacheKey]) {
+            // console.log(`Cache hit for ${cacheKey}`)
+            return blobCache[cacheKey];
+        }
+
+        const [main, detail] = [getQudColour(mainString), getQudColour(detailString)];
         // console.log(`Resolved colours for sprite ${sprite.tile}: main ${formatColor(main)}, detail ${formatColor(detail)}`)
         const imgData = await getImageData(sprite.tile);
 
@@ -38,6 +47,7 @@ export const QudSpriteRenderer = ({sprite, ...props}: QudSpriteRendererProps) =>
             }
             return {r: 32, g: 32, b: 32, a: 0}
         });
+        blobCache[cacheKey] = res;
 
         // console.timeEnd(perfId);
         return res;

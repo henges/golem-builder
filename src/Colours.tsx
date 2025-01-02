@@ -114,6 +114,21 @@ export const qudColorMap = Object.entries(qudHexColorMap).reduce((agg: Record<st
     return agg;
 },{});
 
+export const resolveQudColourString = (mainColour: string, detailColour?: string): [string, string] => {
+    
+    let [_, main, detail] = mainColour?.match(/&(\w)(?:\^(\w))?/) || [undefined, "Y", "K"];
+    [main, detail] = [main || "Y", detail || "K"];
+
+    if (detailColour) {
+        return [main, detailColour]
+    }
+    return [main, detail];
+} 
+
+export const getQudColour = (colourString: string) => {
+    return qudColorMap[colourString];
+}
+
 export const parseQudColourString = (mainColour: string, detailColour?: string): [Color, Color] => {
 
     let [_, main, detail] = mainColour?.match(/&(\w)(?:\^(\w))?/) || [undefined, "Y", "K"];
