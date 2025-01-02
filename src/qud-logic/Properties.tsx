@@ -311,33 +311,68 @@ export const CreateAtzmusListElement = ({name, effect, granters, showModal, setS
 }
 
 
+export type HamsaVariant = {
+    sourcePredicate: (o: ExportObjectHamsa) => boolean
+    buildVariant: (gous: GameObjectUnit[]) => [string, GameObjectUnit[]]
+}
+
+export const hamsaVariants: Record<string, HamsaVariant> = {'Protection': {
+    sourcePredicate: (o: ExportObjectHamsa) => o.dvGtAv,
+    buildVariant: (gous: GameObjectUnit[]) => ["Protection_DV", gous.map(g => {
+        return g.UnitType !== "GameObjectAttributeUnit" ? g : {...g, UnitType: "GameObjectAttributeUnit", Attribute: "DV", UnitDescription: "+6 DV"}
+    })]
+}}
+
+export const splitByPredicate = <T,>(objs: T[], pred: (o: T) => boolean): [T[], T[]] => {
+
+    const yes = [];
+    const no = [];
+    for (const obj of objs) {
+        if (pred(obj)) {
+            yes.push(obj);
+        } else {
+            no.push(obj);
+        }
+    }
+    return [yes, no] as const;
+}
+
 export interface HamsaListElementProps {
     name: string
-    granters: string[]
-    effects: Effects,
-    allGranters: Record<string, ExportObjectHamsa>
-    showModal: (a: ExportObjectHamsa[]) => void;
+    granters: ExportObjectHamsa[]
+    effects: Effects
+    showModal: (a: HamsaSourceWithEffects[]) => void;
     setSelection: (a: string) => void;
     isSelected: boolean;
 }
 
-export const GetValidHamsaEffectsForObj = (selected: ExportObjectHamsa, hamsas: Effects) => {
+export type HamsaSourceEffects = [string, GameObjectUnit[]][];
 
-    return selected.semanticTags.map(t => hamsas[t]).flat().filter(t => t !== undefined);
+export type HamsaSourceWithEffects = [ExportObjectHamsa, HamsaSourceEffects];
+
+export const GetValidHamsaEffectsForObj = (selected: ExportObjectHamsa, hamsas: Effects): HamsaSourceEffects => {
+
+    return selected.semanticTags.map(t => [t, hamsas[t] || []] as const).map(([t, gous]) => {
+
+        if (hamsaVariants[t] && hamsaVariants[t].sourcePredicate(selected)) {
+            return hamsaVariants[t].buildVariant(gous);
+        } else {
+            return [t, gous]
+        }
+    });
 }
 
-export const CreateHamsaListElement = ({name, granters, effects, allGranters, showModal, setSelection, isSelected}: HamsaListElementProps) => {
+export const CreateHamsaListElement = ({name, granters, effects, showModal, setSelection, isSelected}: HamsaListElementProps) => {
 
     const base: SelectableListItem = {name: name, isSelected: isSelected};
-    const grantersWithHamsaEffects = granters.map(g => ([g, GetValidHamsaEffectsForObj(allGranters[g], effects)] as const));
+    const grantersWithHamsaEffects = granters.map(g => ([g, GetValidHamsaEffectsForObj(g, effects)] as HamsaSourceWithEffects));
     grantersWithHamsaEffects.sort(([_k1, v1], [_k2, v2]) => v1.length - v2.length);
     const nonGuaranteeableGranters = grantersWithHamsaEffects.map(([_k,v]) => v).filter(g => g.length !== 1);
     const guaranteedGranters = grantersWithHamsaEffects.map(([_k,v]) => v).filter(g => g.length === 1);
-    const granterRenders = grantersWithHamsaEffects.map(([k]) => allGranters[k]);
 
     if (granters.length === guaranteedGranters.length) {
         if (granters.length === 1) {
-            const granter = granterRenders[0];
+            const granter = grantersWithHamsaEffects[0][0];
             base.onSelect = () => {setSelection(granter.id)}
             base.more = (<Box>
                     <Text>{applyQudShader(`{{g|Guaranteed}}`)},{" "}
@@ -346,15 +381,15 @@ export const CreateHamsaListElement = ({name, granters, effects, allGranters, sh
             return base;
         }
 
-        base.onSelect = () => {showModal(granterRenders)};
+        base.onSelect = () => {showModal(grantersWithHamsaEffects)};
         base.more = (<Box>
             <Text>{applyQudShader(`{{g|Guaranteed}}`)},{" "}
-                {applyQudShader(`{{O|${granterRenders.length} possible ${Pluralise("source", granterRenders.length)}}}`)}</Text>
+                {applyQudShader(`{{O|${grantersWithHamsaEffects.length} possible ${Pluralise("source", grantersWithHamsaEffects.length)}}}`)}</Text>
         </Box>)
         return base;
     } else if (granters.length === nonGuaranteeableGranters.length) {
         if (granters.length === 1) {
-            const granter = granterRenders[0];
+            const granter = grantersWithHamsaEffects[0][0];
             base.onSelect = () => {setSelection(granter.id)}
             base.more = (<Box>
                 <Text>{applyQudShader(`{{r|Can't be guaranteed}}`)},{" "} 
@@ -362,18 +397,18 @@ export const CreateHamsaListElement = ({name, granters, effects, allGranters, sh
             </Box>)
             return base;
         }
-        base.onSelect = () => {showModal(granterRenders)};
+        base.onSelect = () => {showModal(grantersWithHamsaEffects)};
         base.more = (<Box>
             <Text>{applyQudShader(`{{r|Can't be guaranteed}}`)},{" "} 
-                {applyQudShader(`{{O|${granterRenders.length} possible ${Pluralise("source", granterRenders.length)}}}`)}</Text>
+                {applyQudShader(`{{O|${grantersWithHamsaEffects.length} possible ${Pluralise("source", grantersWithHamsaEffects.length)}}}`)}</Text>
             </Box>)
         return base;
     }
 
-    base.onSelect = () => {showModal(granterRenders)};
+    base.onSelect = () => {showModal(grantersWithHamsaEffects)};
     base.more = (<Box>
         {<Text>{applyQudShader(`{{g|Can be guaranteed}}`)}</Text>}
-        {<Text>{applyQudShader(`{{O|${granterRenders.length} possible ${Pluralise("source", granterRenders.length)}}}`)}</Text>}
+        {<Text>{applyQudShader(`{{O|${grantersWithHamsaEffects.length} possible ${Pluralise("source", grantersWithHamsaEffects.length)}}}`)}</Text>}
     </Box>)
     return base;
 }

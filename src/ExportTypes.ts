@@ -12,6 +12,7 @@ export type ExportHamsaData = {
 }
 
 export type ExportObjectHamsa = ExportObject & {
+    dvGtAv: boolean
     semanticTags: string[]
 }
 

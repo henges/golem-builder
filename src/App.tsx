@@ -4,12 +4,13 @@ import React, { useMemo, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
 import { useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
-import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement, FormatGameObjectUnitDescription, GetSelectionEffectKey } from "./qud-logic/Properties";
+import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement, FormatGameObjectUnitDescription, GetSelectionEffectKey, hamsaVariants, splitByPredicate } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
 import { SourcePicker, SourcePickerContent } from "./SourcePicker";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
 import { QudInlineSprite } from "./QudInlineSprite";
+import { ExportObjectHamsa } from "./ExportTypes";
 
 function App() {
 
@@ -104,9 +105,21 @@ function App() {
 
   const hamsaListItems = useMemo<SelectableListItem[]>(() => {
     const effectsById = Object.entries(exportData.Hamsas)
-      .filter(([k, b]) => b.length > 0 && golemData.hamsas.tagToSource[k]?.length > 0)
-      .reduce((agg: Record<string, {effects: GameObjectUnit[], sources: string[]}>, [k, b]) => {
-        const sources = golemData.hamsas.tagToSource[k];
+      .flatMap(([k,b]) => {
+        if (b.length === 0 || !golemData.hamsas.tagToSource[k] || !golemData.hamsas.tagToSource[k].length) {
+          return [];
+        }
+        const sources = golemData.hamsas.tagToSource[k].map(s => golemData.hamsas.sources[s]);
+
+        if (hamsaVariants[k]) {
+          const variant = hamsaVariants[k];
+          const [variantSources, nonVariantSources] = splitByPredicate(sources, s => variant.sourcePredicate(s));
+
+          return [[k,b, nonVariantSources], [...hamsaVariants[k].buildVariant(b), variantSources]] as const;
+        }
+        return [[k,b,sources]] as const;
+      })
+      .reduce((agg: Record<string, {effects: GameObjectUnit[], sources: ExportObjectHamsa[]}>, [_k, b, sources]) => {
         const key = GetSelectionEffectKey(b);
         if (!agg[key]) {
           agg[key] = {effects: [...b], sources: []};
@@ -117,11 +130,13 @@ function App() {
 
     return Object.entries(effectsById)
       .sort(([k1, _1], [k2, _2]) => k1.localeCompare(k2))
-      .map(([k, b]) => CreateHamsaListElement({name: k, effects: exportData.Hamsas, granters: b.sources, allGranters: golemData.hamsas.sources, showModal: (a) => {
+      .map(([k, b]) => CreateHamsaListElement({name: k, granters: b.sources, effects: exportData.Hamsas, showModal: (a) => {
         setSourcePickerTitle("Select a hamsa source");
-        setSourcePickerContents(a.map(e => ({id: e.id, render: e.render, more: () => {
-          const items = e.semanticTags
-            .map(t => exportData.Hamsas[t] || [])
+        setSourcePickerContents(a.map(([e, effects]) => ({id: e.id, render: e.render, more: () => {
+
+          console.log(e, effects);
+          const items = effects
+            .map(([_k, v]) => v)
             .flatMap(gous => gous.map(gou => FormatGameObjectUnitDescription(gou.UnitDescription)).join(", "))
             .filter(d => d.length > 0);
           return (
