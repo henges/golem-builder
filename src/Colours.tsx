@@ -1,6 +1,6 @@
 import React from "react";
 import {Text} from '@chakra-ui/react';
-import { IsQudShaderType, QudShader, QudShaderTypes, textShaders } from "./ShaderData";
+import { IsQudShaderType, QudShader, textShaders } from "./ShaderData";
 
 export type Color = {
     r: number;
