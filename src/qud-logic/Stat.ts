@@ -143,6 +143,12 @@ export const FormatStat = (s: Stat): string => {
         case "RANGE": return `${s.low}-${s.high}`;
     }
 }
+export const FormatModifier = (s: Modifier): string => {
+    switch (s.type) {
+        case "VALUE": return `${s.value >= 0 ? "+":"-"}${s.value}`;
+        case "RANGE": return `${s.low >= 0 ? "+":"-"}${s.low}-${s.high >= 0 ? "+":"-"}${s.high}`;
+    }
+}
 
 export const ProcessStat = (level: number, stat: StatDefinition): Stat => {
 
