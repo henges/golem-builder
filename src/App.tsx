@@ -12,6 +12,7 @@ import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
 import { QudInlineSprite } from "./QudInlineSprite";
 import { ExportObjectHamsa } from "./ExportTypes";
 import { Liquid } from "./ExportData";
+import { LuCircle } from "react-icons/lu";
 
 function App() {
 
@@ -267,6 +268,16 @@ function App() {
     </>
   }
 
+  const selectionsList = () => (
+    <SelectableList
+      width="100%"
+      overflow="auto"
+      items={inputColumnItems}
+      listIconSelected={<LuCircle fill="green"/>}
+      listIconUnselected={<LuCircle/>}
+    />
+  )
+
   return (
     <Container h={"100%"} p="2" pt="2" /*display={"grid"}*/>
       <Grid h="100%" templateRows={`repeat(${isCollapsibleEnabled ? 10 : 9}, 1fr)`}>
@@ -287,11 +298,7 @@ function App() {
                         overflow="auto"
                       >
                         <VStack width="100%" h="100%">
-                          <SelectableList
-                            width="100%"
-                            overflow="auto"
-                            items={inputColumnItems}
-                          />
+                          {selectionsList()}
                           <VStack marginTop="auto">
                             {controlButtons()}
                             <Button variant={"outline"} onClick={toggleCollapse}>Close</Button>
@@ -303,11 +310,7 @@ function App() {
                 ) : (
                 <GridItem overflow="auto">
                   <VStack width="100%" overflow="auto" h="100%">
-                    <SelectableList
-                      width="100%"
-                      overflow="auto"
-                      items={inputColumnItems}
-                    />
+                    {selectionsList()}
                     <VStack marginTop="auto">
                       {controlButtons()}
                     </VStack>

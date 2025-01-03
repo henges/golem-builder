@@ -10,10 +10,12 @@ export interface SelectableListItem {
 }
 
 export interface SelectableListProps extends ComponentProps<typeof List.Root> {
+    listIconUnselected?: React.ReactNode
+    listIconSelected?: React.ReactNode
     items: SelectableListItem[]
 }
 
-export const SelectableList = React.forwardRef<HTMLUListElement, SelectableListProps>(({items, ...listProps}, ref) => {
+export const SelectableList = React.forwardRef<HTMLUListElement, SelectableListProps>(({items, listIconSelected, listIconUnselected, ...listProps}, ref) => {
 
     const [selectedItem, setSelectedItem] = useState<SelectableListItem | null>(null);
 
@@ -31,13 +33,13 @@ export const SelectableList = React.forwardRef<HTMLUListElement, SelectableListP
         <List.Root variant={"plain"} ref={ref} {...listProps}>
             {items.map((li, i) => {
                 return (
-                    <List.Item key={i} _hover={{bg: "red.700"}} 
+                    <List.Item key={i} _hover={{bg: "red.700"}} px={1} 
                         _active={{ bg: "blue.900" }}
                         _focus={{ bg: "green.800" }}
                         bg={(li.isSelected !== undefined ? li.isSelected : li === selectedItem) ? "blue.900" : undefined }
                         onClick={() => onClick(li)}>
                         <List.Indicator asChild color="green.500">
-                            {(li.isSelected !== undefined ? li.isSelected : li === selectedItem) ? <LuSquareCheck/> : <LuSquare/>}
+                            {(li.isSelected !== undefined ? li.isSelected : li === selectedItem) ? listIconSelected || <LuSquareCheck/> : listIconUnselected || <LuSquare/>}
                         </List.Indicator>
                         <Box>
                             {li.name}
