@@ -55,6 +55,20 @@ export type GolemSelectionIds = {
     hamsaSelectionSourceId: string
 }
 
+export const GolemSelectionIdsEqual = (a: GolemSelectionIds, b: GolemSelectionIds) => {
+
+    return a.bodySelectionId === b.bodySelectionId &&
+        a.bodyVariantId === b.bodyVariantId &&
+        a.catalystSelectionId === b.catalystSelectionId &&
+        a.atzmusSelectionEffectId === b.atzmusSelectionEffectId &&
+        a.atzmusSelectionSourceId === b.atzmusSelectionSourceId &&
+        a.weaponSelectionId === b.weaponSelectionId &&
+        a.incantationSelectionEffectId === b.incantationSelectionEffectId &&
+        a.incantationSelectionSourceId === b.incantationSelectionSourceId &&
+        a.hamsaSelectionEffectId === b.hamsaSelectionEffectId &&
+        a.hamsaSelectionSourceId === b.hamsaSelectionSourceId;
+}
+
 type GolemStore = GolemSelectionStore & {
     ready: boolean,
     processedData: GolemData
@@ -95,7 +109,7 @@ const hamsaSelectionToGameObjectUnits = (selected: ExportObjectHamsa, hamsas: Ef
     return {certain: units.length === 1, units: units.flatMap(([_k, v]) => v)};
 }
 
-const newSelectionIdsState = (): GolemSelectionIds => ({
+export const NewSelectionIdsState = (): GolemSelectionIds => ({
     bodySelectionId: "",
     bodyVariantId: -1,
     catalystSelectionId: "",
@@ -109,7 +123,7 @@ const newSelectionIdsState = (): GolemSelectionIds => ({
 })
 
 const newSelectionState = (): GolemSelections => ({
-    ...newSelectionIdsState(),
+    ...NewSelectionIdsState(),
     bodySelection: undefined,
     bodyVariant: [],
     catalystSelection: [],
@@ -206,7 +220,7 @@ export const useGolemStore = create<GolemStore>((set, get) => {
         },
         setSelectionIds: (s) => {
             console.log(s);
-            const update = Object.assign(newSelectionIdsState(), s);
+            const update = Object.assign(NewSelectionIdsState(), s);
             const state = get();
             state.setBodySelection(update.bodySelectionId);
             state.setBodyVariantId(update.bodyVariantId);

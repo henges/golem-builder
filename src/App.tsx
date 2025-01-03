@@ -2,7 +2,7 @@ import { Box, Button, Center, Container, Grid, GridItem, List, ListItem, Text, u
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
-import { GolemSelectionIds, useGolemStore } from "./stores/GolemStore";
+import { GolemSelectionIds, GolemSelectionIdsEqual, NewSelectionIdsState, useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement, FormatGameObjectUnitDescription, GetSelectionEffectKey, hamsaVariants, splitByPredicate } from "./qud-logic/Properties";
 import { applyQudShader } from "./Colours";
@@ -16,8 +16,8 @@ import { LuCircle } from "react-icons/lu";
 
 function App() {
 
-  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionEffectId, hamsaSelectionEffectId, hamsaSelectionSourceId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections, _getSelections, getSelectionIds, setSelectionIds] = useGolemStore(useShallow(
-    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.atzmusSelectionSourceId, s.weaponSelectionId, s.incantationSelectionEffectId, s.hamsaSelectionEffectId, s.hamsaSelectionSourceId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections, s.getSelections, s.getSelectionIds, s.setSelectionIds]));
+  const [ready, golemData, exportData, bodySelectionId, bodyVariantId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionEffectId, hamsaSelectionEffectId, hamsaSelectionSourceId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections, _getSelections, getSelectionIds, setSelectionIds] = useGolemStore(useShallow(
+    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.bodyVariantId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.atzmusSelectionSourceId, s.weaponSelectionId, s.incantationSelectionEffectId, s.hamsaSelectionEffectId, s.hamsaSelectionSourceId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections, s.getSelections, s.getSelectionIds, s.setSelectionIds]));
 
   const [column2ListItems, setColumn2ListItems] = useState<string>("empty");
   const column2Ref = useRef<HTMLDivElement>(null);
@@ -289,6 +289,8 @@ function App() {
 
   const inputColumnItems: SelectableListItem[] = Object.keys(lists).map(k => ({name: getListName[k] ? getListName[k]() : k, onSelect: () => {setIsOpen(false); setColumn2ListItems(k)}, isSelected: column2ListItems === k}))
 
+  const lastUrl = useRef<string>(window.location.href);
+
   const logState = () => {
     
     // const selections = getSelections();
@@ -314,23 +316,41 @@ function App() {
     // const str = s.join("\n");
     // console.log(str);
 
+    // const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}${window.location.search}`;
+    const p = window.location.href;
+    navigator.clipboard.writeText(p);
+    if (lastUrl.current !== p) {
+      lastUrl.current = p;
+      history.pushState({}, '', p);
+    }
+    showCopiedText();
+  }
+
+  const reconcileCurrentURL = () => {
     const ids = getSelectionIds();
+    if (GolemSelectionIdsEqual(ids, NewSelectionIdsState())) {
+      return;
+    }
     const serial = getIdsSerialised(ids);
 
     const b64Enc = encodeURIComponent(btoa(JSON.stringify(serial)));
     const qp = `?load=${b64Enc}`
-    const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}${qp}`;
-    navigator.clipboard.writeText(url);
-    if (window.location.search !== qp) {
-      history.pushState({}, '', qp);
+    if (!window.location.search) {
+      history.pushState({}, '', qp)
+    } else if (window.location.search !== qp) {
+      history.replaceState({}, '', qp);
     }
-    showCopiedText();
   }
+
+  useEffect(() => {
+    reconcileCurrentURL();
+  }, [bodySelectionId, bodyVariantId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionEffectId, hamsaSelectionEffectId, hamsaSelectionSourceId])
+
   const isCollapsibleEnabled = useBreakpointValue({ base: true, md: false });
   const [isOpen, setIsOpen] = useState(true);
   const toggleCollapse = () => setIsOpen(!isOpen);
 
-  const copyButtonDefaultText = "Copy shareable URL"
+  const copyButtonDefaultText = "Copy URL"
   const [copyURLButtonText, setCopyURLButtonText] = useState(copyButtonDefaultText)
   const showCopiedText = () => {
 
