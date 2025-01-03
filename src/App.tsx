@@ -259,6 +259,14 @@ function App() {
   //   <Container h="100%">hello</Container>
   // )
 
+  const controlButtons = () => {
+    return <>
+      
+      <Button variant={"outline"} whiteSpace={"wrap"} onClick={logState}>Copy selections to clipboard</Button>
+      <Button variant={"outline"} onClick={resetSelections}>Reset</Button>
+    </>
+  }
+
   return (
     <Container h={"100%"} p="2" pt="2" /*display={"grid"}*/>
       <Grid h="100%" templateRows={`repeat(${isCollapsibleEnabled ? 10 : 9}, 1fr)`}>
@@ -285,8 +293,7 @@ function App() {
                             items={inputColumnItems}
                           />
                           <VStack marginTop="auto">
-                            <Button variant={"outline"} onClick={logState}>Copy selections to clipboard</Button>
-                            <Button variant={"outline"} onClick={resetSelections}>Reset</Button>
+                            {controlButtons()}
                             <Button variant={"outline"} onClick={toggleCollapse}>Close</Button>
                           </VStack>
                         </VStack>
@@ -302,8 +309,7 @@ function App() {
                       items={inputColumnItems}
                     />
                     <VStack marginTop="auto">
-                      <Button variant={"outline"} onClick={logState}>Copy selections to clipboard</Button>
-                      <Button variant={"outline"} onClick={resetSelections}>Reset</Button>
+                      {controlButtons()}
                     </VStack>
                   </VStack>
                 </GridItem>
