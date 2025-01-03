@@ -72,26 +72,15 @@ function App() {
     if (!ready) {
       return;
     }
-    const listener = (event: PopStateEvent) => {
-      console.log(event.state)
-      if (!event.state.cmd) {
+    const listener = (_: PopStateEvent) => {
+      console.log(window.location.href);
+      const params = new URLSearchParams(window.location.search);
+      const load = params.get("load");
+      if (load) {
+        loadGolem(load);
+      } else {
         resetSelections();
         return;
-      }
-
-      if (event.state.cmd) {
-        const cmd = event.state.cmd as string;
-        if (cmd === "reset") {
-          resetSelections();
-          return;
-        }
-        if (cmd === "load") {
-          const data = event.state.data as string;
-          if (!data) {
-            return;
-          }
-          loadGolem(decodeURIComponent(data));
-        }
       }
     }; 
     addEventListener("popstate", listener);
@@ -333,7 +322,7 @@ function App() {
     const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}${qp}`;
     navigator.clipboard.writeText(url);
     if (window.location.search !== qp) {
-      history.pushState({cmd: "load", data: b64Enc}, '', qp);
+      history.pushState({}, '', qp);
     }
     showCopiedText();
   }
@@ -359,7 +348,7 @@ function App() {
     return <>
       
       <Button variant={"outline"} whiteSpace={"wrap"} onClick={logState}>{copyURLButtonText}</Button>
-      <Button variant={"outline"} onClick={() => {if (window.location.search) {history.pushState({cmd: "reset"}, '', './')}; resetSelections()}}>Reset</Button>
+      <Button variant={"outline"} onClick={() => {if (window.location.search) {history.pushState({}, '', './')}; resetSelections()}}>Reset</Button>
     </>
   }
 
