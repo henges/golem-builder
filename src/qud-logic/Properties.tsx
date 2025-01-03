@@ -4,7 +4,7 @@ import { DefaultQudObjectProperties, QudObjectProperties } from "./QudTypes";
 import { GetModified, BoostStat, GetModifier, GetStatAverage, IncrementStat, NewValueStat, ProcessStat, Stat, IncrementPercent } from "./Stat";
 import { ConditionalGameObjectUnitGroup, GameObjectUnit } from "./GameObjectUnit";
 import { applyQudShader } from "../Colours";
-import { Pluralise } from "../helpers";
+import { Pluralise, PluraliseSlot } from "../helpers";
 import { QudSpriteRenderer } from "../QudSpriteRenderer";
 import { SelectableListItem } from "../SelectableList";
 import { Effects } from "../ExportData";
@@ -60,6 +60,9 @@ export const ComputeQudObjectProperties = (body: ExportGolem): QudObjectProperti
         }
     }
 
+    for (const limb of body.anatomy) {
+        AddNonMetachromeLimb(ret, limb.type);
+    }
     ret.mutations.push(...body.mutations.map(m => structuredClone(m)));
     ret.skills.push(...body.skills);
     ret.specialProperties = structuredClone(body.specialProperties);
@@ -81,6 +84,14 @@ export const ApplyVariant = (props: QudObjectProperties, variant: string[]) => {
 
     for (const k of variant) {
         AddMetachromeLimb(props, k);
+    }
+}
+
+export const AddNonMetachromeLimb = (props: QudObjectProperties, limb: string) => {
+    if (!props.anatomy.limbs[limb]) {
+        props.anatomy.limbs[limb] = 1;
+    } else {
+        props.anatomy.limbs[limb]++;
     }
 }
 
@@ -527,6 +538,62 @@ export const BuildGolemBody = (g?: ExportGolem) => {
     return props;
 }
 
+const normalLimbCounts: Record<string, number> = {
+    "Floating Nearby": 1,
+    "Face": 1,
+    // "Head": 1,
+    // "Back": 1,
+    "Arm": 2,
+    "Hand": 2,
+    // "Hands": 1,
+    "Thrown Weapon": 1,
+    "Missile Weapon": 2
+}
+
+const joinLast = (s: string[], sep: string, last: string) => {
+
+    let ret = "";
+    for (let i = 0; i < s.length; i++) {
+        const isFirst = i === 0
+        const isLast = i === s.length - 1
+        if (!isFirst) {
+            if (s.length === 2) {
+                ret += " "
+            } else {
+                ret += sep;
+            }
+        }
+        if (isLast && s.length > 1) {
+            ret += last+" "
+        }
+        ret += s[i];
+    }
+    return ret;
+}
+
+const LimbsDisplay = (g: QudObjectProperties) => {
+
+    // const bodyPlan = Object.entries(g.anatomy.limbs).map(([k,v]) => `${v} ${Pluralise(k, v)}`).join(", ");
+    const good: string[] = [];
+    const bad: string[] = [];
+    for (const [k,v] of Object.entries(normalLimbCounts)) {
+        if (!g.anatomy.limbs[k]) {
+            bad.push(`${k}`)
+        } else if (g.anatomy.limbs[k] !== v) {
+            good.push(`${g.anatomy.limbs[k]} ${PluraliseSlot(k, g.anatomy.limbs[k])}`)
+        }
+    }
+    const final = [];
+    if (good.length) {
+        final.push(`{{g|${joinLast(good, ", ", "and")}}}`)
+    }
+    if (bad.length) {
+        final.push(`{{r|No ${joinLast(bad, ", ", "or")} slots}}`)
+    }
+
+    return final.map(a => (<Text>{applyQudShader(a)}</Text>))
+}
+
 const MetachromeLimbsDisplay = (g: QudObjectProperties) => {
 
     // if (Object.keys(g.anatomy.metachromeLimbs).length === 0) {
@@ -564,6 +631,7 @@ export const GetBodySpecialPropertiesElement = (g?: QudObjectProperties) => {
     }
     return (
     <Box>
+        {LimbsDisplay(g)}
         {MetachromeLimbsDisplay(g)}
         {g.mutations.length === 0 ? null : 
             <Text>Mutations: {g.mutations.map(m => FormatMutation(m)).join(", ")}</Text>

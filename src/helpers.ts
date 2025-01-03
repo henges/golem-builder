@@ -1,11 +1,22 @@
 import { Color } from "./Colours";
 
 export const Pluralise = (s: string, count: number) => {
+  if ((s === "Foot" && count !== 1) || s === "Feet") {
+    return "Feet"
+  }
+  return s+(count!==1?"s":"");
+}
 
-    if (s === "Foot" && count > 1) {
-        return "Feet"
+
+export const PluraliseSlot = (s: string, count: number) => {
+
+  if (count > 1) {
+    switch(s) {
+      case "Floating Nearby": return "Floating Nearby slots"
     }
-    return s+(count>1?"s":"");
+  }
+  
+  return Pluralise(s, count);
 }
 
 export const loadAndModifyImage = async (

@@ -6,6 +6,7 @@ export interface QudObjectProperties {
     attributes: QudAttributes
     resistances: QudResistances
     anatomy: {
+        limbs: Record<string, number>
         metachromeLimbs: Record<string, number>
         randomMetachromedCount: number
     }
@@ -29,6 +30,7 @@ export const DefaultQudObjectProperties = (): QudObjectProperties => {
             xpValue: DefaultStat(),
         },
         anatomy: {
+            limbs: {},
             metachromeLimbs: {},
             randomMetachromedCount: 0
         },
