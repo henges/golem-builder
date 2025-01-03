@@ -2,10 +2,10 @@ import { Box, Button, Center, Container, Grid, GridItem, List, ListItem, Text, u
 import { SelectableList, SelectableListItem } from "./SelectableList"
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { GolemDisplay } from "./GolemDisplay";
-import { useGolemStore } from "./stores/GolemStore";
+import { GolemSelectionIds, useGolemStore } from "./stores/GolemStore";
 import { useShallow } from "zustand/shallow";
 import { BuildGolemBody, GetBodySpecialPropertiesElement, CreateAtzmusListElement, WeaponToGameObjectUnits, CreateHamsaListElement, FormatGameObjectUnitDescription, GetSelectionEffectKey, hamsaVariants, splitByPredicate } from "./qud-logic/Properties";
-import { applyQudShader, stripQudMarkup } from "./Colours";
+import { applyQudShader } from "./Colours";
 import { SourcePicker, SourcePickerContent } from "./SourcePicker";
 import { QudSpriteRenderer } from "./QudSpriteRenderer";
 import { GameObjectUnit } from "./qud-logic/GameObjectUnit";
@@ -16,8 +16,8 @@ import { LuCircle } from "react-icons/lu";
 
 function App() {
 
-  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, hamsaSelectionSourceId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections, getSelections] = useGolemStore(useShallow(
-    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.atzmusSelectionSourceId, s.weaponSelectionId, s.incantationSelectionId, s.hamsaSelectionEffectId, s.hamsaSelectionSourceId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections, s.getSelections]));
+  const [ready, golemData, exportData, bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionEffectId, hamsaSelectionEffectId, hamsaSelectionSourceId, setBodySelection, setCatalystSelection, setAtzmusSelection, setWeaponSelection, setIncantationSelection, setHamsaSelection, resetSelections, _getSelections, getSelectionIds, setSelectionIds] = useGolemStore(useShallow(
+    (s) => [s.ready, s.processedData, s.exportData, s.bodySelectionId, s.catalystSelectionId, s.atzmusSelectionEffectId, s.atzmusSelectionSourceId, s.weaponSelectionId, s.incantationSelectionEffectId, s.hamsaSelectionEffectId, s.hamsaSelectionSourceId, s.setBodySelection, s.setCatalystSelection, s.setAtzmusSelection, s.setWeaponSelection, s.setIncantationSelection, s.setHamsaSelection, s.resetSelections, s.getSelections, s.getSelectionIds, s.setSelectionIds]));
 
   const [column2ListItems, setColumn2ListItems] = useState<string>("empty");
   const column2Ref = useRef<HTMLDivElement>(null);
@@ -27,9 +27,83 @@ function App() {
     column2Ref.current?.scrollTo(0, 0);
   }, [column2ListItems]);
 
+  const loadGolem = (b64string: string) => {
+
+    const restore = JSON.parse(atob(b64string)) as Record<string, string | number>;
+    const loaded = getSelectionIds();
+    const ret: Record<string, string | number> = {};
+    const keys = Object.keys(loaded) as Array<keyof GolemSelectionIds>;
+    for (const k of keys) {
+      const idKey = getIdKeySerialised(k);
+      ret[k] = restore[idKey];
+    }
+
+    setSelectionIds(ret);
+  }
+
+  const getIdKeySerialised = (k: string) => {
+    return [...k].filter((v, i) => i === 0 || v.toUpperCase() === v).map(v => v.toLowerCase()).join("");
+  }
+
+  const getIdsSerialised = (ids: GolemSelectionIds) => {
+
+    const ret: Record<string, unknown> = {};
+    for (const [k,v] of Object.entries(ids)) {
+      ret[getIdKeySerialised(k)] = v;
+    }
+
+    return ret;
+  }
+
+  useEffect(() => {
+    if (!ready) {
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const load = params.get("load");
+    if (load) {
+      loadGolem(load);
+    }
+  }, [ready]);
+
+  useEffect(() => {
+
+    if (!ready) {
+      return;
+    }
+    const listener = (event: PopStateEvent) => {
+      console.log(event.state)
+      if (!event.state.cmd) {
+        resetSelections();
+        return;
+      }
+
+      if (event.state.cmd) {
+        const cmd = event.state.cmd as string;
+        if (cmd === "reset") {
+          resetSelections();
+          return;
+        }
+        if (cmd === "load") {
+          const data = event.state.data as string;
+          if (!data) {
+            return;
+          }
+          loadGolem(decodeURIComponent(data));
+        }
+      }
+    }; 
+    addEventListener("popstate", listener);
+
+    return () => {
+      removeEventListener("popstate", listener)
+    }
+  }, [ready])
+
   useEffect(() => {
     // column3Ref.current?.scrollTo(0, 0);
-  }, [bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionId, hamsaSelectionEffectId, hamsaSelectionSourceId]);
+  }, [bodySelectionId, catalystSelectionId, atzmusSelectionEffectId, atzmusSelectionSourceId, weaponSelectionId, incantationSelectionEffectId, hamsaSelectionEffectId, hamsaSelectionSourceId]);
 
   const bodyListItems = useMemo<SelectableListItem[]>(() => {
     return Object.entries(golemData.bodies)
@@ -117,9 +191,9 @@ function App() {
           onSelect: () => {
             setIncantationSelection(k, b.muralCategories[0]);
           },
-          isSelected: incantationSelectionId === k
+          isSelected: incantationSelectionEffectId === k
         }));
-  }, [ready, golemData, exportData, incantationSelectionId]);
+  }, [ready, golemData, exportData, incantationSelectionEffectId]);
 
   const hamsaListItems = useMemo<SelectableListItem[]>(() => {
     const effectsById = Object.entries(exportData.Hamsas)
@@ -207,11 +281,11 @@ function App() {
         </>
     },
     "incantation": () => {
-      if (!incantationSelectionId) {
+      if (!incantationSelectionEffectId) {
         return "incantation"
       }
       return <>
-        incantation {"("}{incantationSelectionId}{")"}
+        incantation {"("}{incantationSelectionEffectId}{")"}
         </>
     },
     "hamsa": () => {
@@ -228,33 +302,54 @@ function App() {
 
   const logState = () => {
     
-    const selections = getSelections();
-    const s: string[] = [];
-    if (selections.bodySelectionId) {
-      s.push(`Body: ${golemData.bodies[selections.bodySelectionId].body.render.displayName}`);
+    // const selections = getSelections();
+    // const s: string[] = [];
+    // if (selections.bodySelectionId) {
+    //   s.push(`Body: ${golemData.bodies[selections.bodySelectionId].body.render.displayName}`);
+    // }
+    // if (selections.catalystSelectionId) {
+    //   s.push(`Catalyst: ${selections.catalystSelectionId}`);
+    // }
+    // if (selections.atzmusSelectionEffectId) {
+    //   s.push(`Atzmus: effect: ${selections.atzmusSelectionEffectId}, source: ${stripQudMarkup(golemData.atzmuses.granters[selections.atzmusSelectionSourceId].render.displayName)}`)
+    // }
+    // if (selections.weaponSelectionId) {
+    //   s.push(`Armament: ${stripQudMarkup(golemData.weapons[selections.weaponSelectionId].render.displayName)}`);
+    // }
+    // if (selections.incantationSelectionEffectId) {
+    //   s.push(`Incantation: effect: ${selections.incantationSelectionEffectId}`)
+    // }
+    // if (selections.hamsaSelectionEffectId) {
+    //   s.push(`Hamsa: effect: ${selections.hamsaSelectionEffectId}, source: ${stripQudMarkup(golemData.hamsas.sources[selections.hamsaSelectionSourceId].render.displayName)}`)
+    // }
+    // const str = s.join("\n");
+    // console.log(str);
+
+    const ids = getSelectionIds();
+    const serial = getIdsSerialised(ids);
+
+    const b64Enc = encodeURIComponent(btoa(JSON.stringify(serial)));
+    const qp = `?load=${b64Enc}`
+    const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}${qp}`;
+    navigator.clipboard.writeText(url);
+    if (window.location.search !== qp) {
+      history.pushState({cmd: "load", data: b64Enc}, '', qp);
     }
-    if (selections.catalystSelectionId) {
-      s.push(`Catalyst: ${selections.catalystSelectionId}`);
-    }
-    if (selections.atzmusSelectionEffectId) {
-      s.push(`Atzmus: effect: ${selections.atzmusSelectionEffectId}, source: ${stripQudMarkup(golemData.atzmuses.granters[selections.atzmusSelectionSourceId].render.displayName)}`)
-    }
-    if (selections.weaponSelectionId) {
-      s.push(`Armament: ${stripQudMarkup(golemData.weapons[selections.weaponSelectionId].render.displayName)}`);
-    }
-    if (selections.incantationSelectionId) {
-      s.push(`Incantation: effect: ${selections.incantationSelectionId}`)
-    }
-    if (selections.hamsaSelectionEffectId) {
-      s.push(`Hamsa: effect: ${selections.hamsaSelectionEffectId}, source: ${stripQudMarkup(golemData.hamsas.sources[selections.hamsaSelectionSourceId].render.displayName)}`)
-    }
-    const str = s.join("\n");
-    navigator.clipboard.writeText(str);
-    console.log(str);
+    showCopiedText();
   }
   const isCollapsibleEnabled = useBreakpointValue({ base: true, md: false });
   const [isOpen, setIsOpen] = useState(true);
   const toggleCollapse = () => setIsOpen(!isOpen);
+
+  const copyButtonDefaultText = "Copy shareable URL"
+  const [copyURLButtonText, setCopyURLButtonText] = useState(copyButtonDefaultText)
+  const showCopiedText = () => {
+
+    setCopyURLButtonText("Copied!")
+    setTimeout(() => {
+      setCopyURLButtonText(copyButtonDefaultText);
+    }, 1500);
+  }
 
   // return (
   //   <Container h="100%">hello</Container>
@@ -263,8 +358,8 @@ function App() {
   const controlButtons = () => {
     return <>
       
-      <Button variant={"outline"} whiteSpace={"wrap"} onClick={logState}>Copy selections to clipboard</Button>
-      <Button variant={"outline"} onClick={resetSelections}>Reset</Button>
+      <Button variant={"outline"} whiteSpace={"wrap"} onClick={logState}>{copyURLButtonText}</Button>
+      <Button variant={"outline"} onClick={() => {if (window.location.search) {history.pushState({cmd: "reset"}, '', './')}; resetSelections()}}>Reset</Button>
     </>
   }
 

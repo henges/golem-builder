@@ -28,25 +28,31 @@ export type GolemSelectionStore = GolemSelections & {
     setHamsaSelection: (effect: string, source: string) => void
     resetSelections: () => void
     getSelections: () => GolemSelections
+    getSelectionIds: () => GolemSelectionIds
+    setSelectionIds: (s: Record<string, GolemSelectionIds[keyof GolemSelectionIds]>) => void
 }
 
-export type GolemSelections = {
-    bodySelectionId: string
+export type GolemSelections = GolemSelectionIds & {
     bodySelection: GolemBody | undefined
     bodyVariant: string[]
+    catalystSelection: GameObjectUnit[]
+    atzmusSelection: ConditionalGameObjectUnitGroup
+    weaponSelection: GameObjectUnit[]
+    incantationSelection: GameObjectUnit[]
+    hamsaSelection: ConditionalGameObjectUnitGroup
+}
+
+export type GolemSelectionIds = {
+    bodySelectionId: string
     bodyVariantId: number
     catalystSelectionId: string
-    catalystSelection: GameObjectUnit[]
     atzmusSelectionEffectId: string
     atzmusSelectionSourceId: string
-    atzmusSelection: ConditionalGameObjectUnitGroup
     weaponSelectionId: string
-    weaponSelection: GameObjectUnit[]
-    incantationSelectionId: string
-    incantationSelection: GameObjectUnit[]
+    incantationSelectionEffectId: string
+    incantationSelectionSourceId: string
     hamsaSelectionEffectId: string
     hamsaSelectionSourceId: string
-    hamsaSelection: ConditionalGameObjectUnitGroup
 }
 
 type GolemStore = GolemSelectionStore & {
@@ -89,29 +95,34 @@ const hamsaSelectionToGameObjectUnits = (selected: ExportObjectHamsa, hamsas: Ef
     return {certain: units.length === 1, units: units.flatMap(([_k, v]) => v)};
 }
 
-const defaultSelectionState = (): GolemSelections => ({
+const newSelectionIdsState = (): GolemSelectionIds => ({
     bodySelectionId: "",
-    bodySelection: undefined,
     bodyVariantId: -1,
-    bodyVariant: [],
     catalystSelectionId: "",
-    catalystSelection: [],
     atzmusSelectionEffectId: "",
     atzmusSelectionSourceId: "",
-    atzmusSelection: {certain: false, units: []},
     weaponSelectionId: "",
-    weaponSelection: [],
-    incantationSelectionId: "",
-    incantationSelection: [],
+    incantationSelectionEffectId: "",
+    incantationSelectionSourceId: "",
     hamsaSelectionEffectId: "",
     hamsaSelectionSourceId: "",
+})
+
+const newSelectionState = (): GolemSelections => ({
+    ...newSelectionIdsState(),
+    bodySelection: undefined,
+    bodyVariant: [],
+    catalystSelection: [],
+    atzmusSelection: {certain: false, units: []},
+    weaponSelection: [],
+    incantationSelection: [],
     hamsaSelection: {certain: false, units: []}
 });
 
 export const useGolemStore = create<GolemStore>((set, get) => {
     load().then(([p, e]) => set({ready: true, processedData: p, exportData: e}));
     return {
-        ...defaultSelectionState(),
+        ...newSelectionState(),
         setBodySelection: (s) => {
             if (!get().ready) {
                 return;
@@ -123,65 +134,87 @@ export const useGolemStore = create<GolemStore>((set, get) => {
                 bodyVariant = [...variants[0]];
             }
 
-            set({bodySelectionId: s, bodySelection: get().processedData.bodies[s], bodyVariantId: bodyVariantId, bodyVariant: bodyVariant})
+            set({bodySelectionId: s, bodySelection: s === "" ? undefined : get().processedData.bodies[s], bodyVariantId: bodyVariantId, bodyVariant: bodyVariant})
         },
         setBodyVariantId: (id: number) => {
             if (!get().ready) {
                 return;
             }
-            set({bodyVariantId: id, bodyVariant: [...get().processedData.bodies[get().bodySelectionId].patterns[id]]})
+            set({bodyVariantId: id, bodyVariant: id === -1 ? [] : [...get().processedData.bodies[get().bodySelectionId].patterns[id]]})
         },
         setCatalystSelection: (s) => {
             if (!get().ready) {
                 return;
             }
-            set({catalystSelectionId: s, catalystSelection: get().exportData.Catalysts[s]})
+            set({catalystSelectionId: s, catalystSelection: s === "" ? [] : get().exportData.Catalysts[s]})
         },
         setAtzmusSelection: (effect: string, source: string) => {
             if (!get().ready) {
                 return;
             }
-            set({atzmusSelectionEffectId: effect, atzmusSelectionSourceId: source, atzmusSelection: atzmusGrantsToGameObjectUnits(get().processedData.atzmuses.granters[source].grants)})
+            set({atzmusSelectionEffectId: effect, atzmusSelectionSourceId: source, atzmusSelection: effect === "" ?  {certain: false, units: []} : atzmusGrantsToGameObjectUnits(get().processedData.atzmuses.granters[source].grants)})
         },
         setWeaponSelection: (s) => {
             if (!get().ready) {
                 return;
             }
-            set({weaponSelectionId: s, weaponSelection: WeaponToGameObjectUnits(get().processedData.weapons[s])})
+            set({weaponSelectionId: s, weaponSelection: s === "" ? [] : WeaponToGameObjectUnits(get().processedData.weapons[s])})
         },
         setIncantationSelection: (effect: string, category: string) => {
             if (!get().ready) {
                 return;
             }
-            set({incantationSelectionId: effect, incantationSelection: get().exportData.Incantations[category]})
+            set({incantationSelectionEffectId: effect, incantationSelectionSourceId: category, incantationSelection: effect === "" ? [] : get().exportData.Incantations[category]})
         },
         setHamsaSelection: (effect: string, source: string) => {
             if (!get().ready) {
                 return;
             }
-            set({hamsaSelectionEffectId: effect, hamsaSelectionSourceId: source, hamsaSelection: hamsaSelectionToGameObjectUnits(get().processedData.hamsas.sources[source], get().exportData.Hamsas)})
+            set({hamsaSelectionEffectId: effect, hamsaSelectionSourceId: source, hamsaSelection: effect === "" ? {certain: false, units: []} :  hamsaSelectionToGameObjectUnits(get().processedData.hamsas.sources[source], get().exportData.Hamsas)})
         },
-        resetSelections: () => {set({...defaultSelectionState()})},
-        getSelections: () => {
+        resetSelections: () => {set({...newSelectionState()})},
+        load: (s: Partial<GolemSelectionIds>) => {
+            set({...s})
+        },
+        getSelectionIds: () => {
             const state = get(); 
             return {
                 bodySelectionId: state.bodySelectionId,
-                bodySelection: state.bodySelection,
-                bodyVariant: state.bodyVariant,
                 bodyVariantId: state.bodyVariantId,
                 catalystSelectionId: state.catalystSelectionId,
-                catalystSelection: state.catalystSelection,
                 atzmusSelectionEffectId: state.atzmusSelectionEffectId,
                 atzmusSelectionSourceId: state.atzmusSelectionSourceId,
-                atzmusSelection: state.atzmusSelection,
                 weaponSelectionId: state.weaponSelectionId,
-                weaponSelection: state.weaponSelection,
-                incantationSelectionId: state.incantationSelectionId,
-                incantationSelection: state.incantationSelection,
+                incantationSelectionEffectId: state.incantationSelectionEffectId,
+                incantationSelectionSourceId: state.incantationSelectionSourceId,
                 hamsaSelectionEffectId: state.hamsaSelectionEffectId,
                 hamsaSelectionSourceId: state.hamsaSelectionSourceId,
+            }
+        },
+        getSelections: () => {
+            const state = get(); 
+            return {
+                ...state.getSelectionIds(),
+                bodySelection: state.bodySelection,
+                bodyVariant: state.bodyVariant,
+                catalystSelection: state.catalystSelection,
+                atzmusSelection: state.atzmusSelection,
+                weaponSelection: state.weaponSelection,
+                incantationSelection: state.incantationSelection,
                 hamsaSelection: state.hamsaSelection,
             }
+        },
+        setSelectionIds: (s) => {
+            console.log(s);
+            const update = Object.assign(newSelectionIdsState(), s);
+            const state = get();
+            state.setBodySelection(update.bodySelectionId);
+            state.setBodyVariantId(update.bodyVariantId);
+            state.setCatalystSelection(update.catalystSelectionId);
+            state.setAtzmusSelection(update.atzmusSelectionEffectId, update.atzmusSelectionSourceId);
+            state.setWeaponSelection(update.weaponSelectionId);
+            state.setIncantationSelection(update.incantationSelectionEffectId, update.incantationSelectionSourceId);
+            state.setHamsaSelection(update.hamsaSelectionEffectId, update.hamsaSelectionSourceId);
         },
         ready: false,
         processedData: {bodies: {}, mutations: {}, atzmuses: {effects: {}, granters: {}}, weapons: {}, muralCategories: {}, hamsas: {tagToSource: {}, sources: {}}},

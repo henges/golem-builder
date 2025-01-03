@@ -105,6 +105,10 @@ export const AddMetachromeLimb = (props: QudObjectProperties, limb: string) => {
 
 export const WeaponToGameObjectUnits = (weapon: ExportObjectWeapon): GameObjectUnit[] => {
 
+    if (!weapon) {
+        return [];
+    }
+
     return [{
         UnitDescription: `Has every ${weapon.skill} skill`,
         UnitType: "GameObjectSkillUnit",
