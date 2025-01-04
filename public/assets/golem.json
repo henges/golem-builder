@@ -30282,6 +30282,10 @@
         "grantersByLevel": {
           "1": [
             {
+              "id": "Dervish of the Sightless Way",
+              "certain": true
+            },
+            {
               "id": "Cyclopean Gibbon",
               "certain": false
             },
@@ -30315,12 +30319,6 @@
               "id": "Asphodelyte",
               "certain": false
             }
-          ],
-          "-2": [
-            {
-              "id": "Dervish of the Sightless Way",
-              "certain": true
-            }
           ]
         },
         "anyCertainSource": true,
@@ -30328,8 +30326,7 @@
           "1": true,
           "4": true,
           "8": false,
-          "10": false,
-          "-2": true
+          "10": false
         }
       },
       "Stunning Force": {
